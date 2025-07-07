@@ -1,0 +1,126 @@
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light background for better contrast */
+            color: #111827;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 12px; /* Slightly more rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: transform 0.3s ease; /* Animation on hover */
+        }
+        .container:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+        h1 {
+            font-size: 2.5rem; /* Larger title */
+            margin-bottom: 20px;
+            text-align: center; /* Center the title */
+            color: #1f2937; /* Darker color for the title */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #374151; /* Darker label color */
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px; /* Increased padding for better touch targets */
+            margin-bottom: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s; /* Transition for border color */
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #3b82f6; /* Blue border on focus */
+            outline: none; /* Remove default outline */
+        }
+        .profile-picture {
+            width: 100px; /* Fixed width */
+            height: 100px; /* Fixed height */
+            border-radius: 50%;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            margin-bottom: 10px;
+            transition: transform 0.3s; /* Animation for image hover */
+            cursor: pointer; /* Pointer cursor for clickable image */
+        }
+        .profile-picture-container {
+            margin-bottom: 20px;
+            text-align: center; /* Center the profile picture */
+        }
+        .profile-picture-container:hover .profile-picture {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+        .change-picture-button,
+        .remove-button {
+            display: none; /* Initially hidden */
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Transition for button */
+            margin-left: 10px; /* Space between buttons */
+        }
+        .change-picture-button {
+            background-color: #3b82f6; /* Blue background */
+            color: white;
+        }
+        .change-picture-button:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+        .remove-button {
+            background-color: #ef4444; /* Red background */
+            color: white;
+        }
+        .remove-button:hover {
+            background-color: #dc2626; /* Darker red on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+        .button-container {
+            display: flex; /* Use flexbox for button alignment */
+            justify-content: space-between; /* Space between buttons */
+            margin-top: 20px; /* Space above the button container */
+        }
+        .save-button {
+            padding: 12px 20px;
+            background-color: #3b82f6; /* Blue background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Transition for button */
+            width: 48%; /* Adjust width for two buttons */
+        }
+        .save-button:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+        .back-button {
+            padding: 12px 20px;
+            background-color: #e5e7eb; /* Light gray background */
+            color: #111827; /* Dark text */
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Transition for button */
+            width: 48%; /* Adjust width for two buttons */
+        }
+        .back-button:hover {
+            background-color: #d1d5db; /* Darker gray on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }

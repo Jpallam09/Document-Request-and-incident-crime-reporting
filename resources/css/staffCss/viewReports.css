@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header styles */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Status styles */
+.status-Completed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Action button styles */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-view {
+    background-color: #007BFF;
+}
+
+.btn-action {
+    background-color: #28A745;
+}
+
+.btn-view:hover {
+    background-color: #0056b3;
+}
+
+.btn-action:hover {
+    background-color: #218838;
+}
+
+/* No reports found message */
+tbody tr td[colspan="5"] {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}

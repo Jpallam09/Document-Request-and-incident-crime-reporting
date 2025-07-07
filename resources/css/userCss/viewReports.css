@@ -1,0 +1,235 @@
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --danger: #dc2626;
+    --danger-light: #ef4444;
+    --secondary: #4b5563;
+    --light-bg: #f9fafb;
+    --border: #e5e7eb;
+    --text-dark: #111827;
+    --text-medium: #374151;
+    --text-light: #6b7280;
+    --white: #ffffff;
+}
+
+/* General Page Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.btn-back {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: var(--primary-light);
+}
+
+/* Report Card */
+.report-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: var(--white);
+}
+
+/* Report Header */
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.report-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.report-header span {
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+/* Description Section */
+.description-box {
+    padding: 1rem;
+    background-color: var(--light-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Attachments Section */
+.attachments-section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.attachments-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.thumbnail {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Action Buttons */
+.action-buttons {
+    margin-top: 2rem;
+}
+
+.btn-primary,
+.btn-danger {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-right: 0.75rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-light);
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    background-color: var(--white);
+}
+
+.caption {
+    margin-top: 0.75rem;
+    color: #e5e7eb;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Navigation and Close Buttons */
+.close,
+.prev,
+.next {
+    position: absolute;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    z-index: 10000;
+}
+
+.close:hover,
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.close {
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.prev {
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
