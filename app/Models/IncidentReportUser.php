@@ -16,5 +16,9 @@ class IncidentReportUser extends Model
     'is_actioned',
 ];
 
+public function images()
+{
+    return $this->hasMany(IncidentReportImage::class);
+}
     use HasFactory;
 }

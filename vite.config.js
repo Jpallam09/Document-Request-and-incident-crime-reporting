@@ -22,7 +22,9 @@ export default defineConfig({
                     'resources/css/userCss/viewReports.css',
                     'resources/css/userCss/editReports.css',
 
-
+                    //authJs
+                    'resources/js/authJs/login.js',
+                    'resources/js/authJs/register.js',
 
                     //userjs
                     'resources/js/userJs/userIncidentReporting.js',

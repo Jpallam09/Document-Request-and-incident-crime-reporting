@@ -61,52 +61,57 @@
       </article>
 
     </section>
-
     <section id="report" class="report-form-section" aria-label="Incident report form">
-      <h2>Report an Incident</h2>
-      <p>Please provide detailed information below to help us address the issue swiftly.</p>
+  <h2>Report an Incident</h2>
+  <p>Please provide detailed information below to help us address the issue swiftly.</p>
 
-      <!-- Report -->
-        <form class="report-form" action="{{ route('user.report.userIncidentReporting.store') }}"
-        method="POST" enctype="multipart/form-data">
-            @csrf
+  <form action="{{ route('user.report.userIncidentReporting.store') }}"
+  method="POST" enctype="multipart/form-data">
+      @csrf
 
-        <div>
-          <label for="incidentTitle">Incident Title</label>
-          <input type="text" id="incident-title" name="report_title"
-          placeholder="Brief title describing the report" required aria-required="true" value="{{ old('report_title')}}"/>
-        </div>
+      <div>
+        <label for="incident-title">Incident Title</label>
+        <input type="text" id="incident-title" name="report_title"
+        placeholder="Brief title describing the report"
+        required aria-required="true" value="{{ old('report_title') }}">
+      </div>
 
-        <div>
-          <label for="incidentDate">Date of Incident</label>
-          <input type="date" id="incident-date" name="report_date" required aria-required="true" value="{{ old('report_date')}}"/>
-        </div>
+      <div>
+        <label for="incident-date">Date of Incident</label>
+        <input type="date" id="incident-date" name="report_date"
+        required aria-required="true" value="{{ old('report_date') }}">
+      </div>
 
-        <div>
-          <label for="incidentType">Report Type</label>
-          <select id="incident-type" name="report_type" required aria-required="true">
-            <option value="" disabled selected>Select type</option>
-            <option value="Safety">Safety</option>
-            <option value="Security">Security</option>
-            <option value="Operational">Operational</option>
-            <option value="Environmental">Environmental</option>
-          </select>
-        </div>
+      <div>
+        <label for="incident-type">Report Type</label>
+        <select id="incident-type" name="report_type" required aria-required="true">
+          <option value="" disabled selected>Select type</option>
+          <option value="Safety">Safety</option>
+          <option value="Security">Security</option>
+          <option value="Operational">Operational</option>
+          <option value="Environmental">Environmental</option>
+        </select>
+      </div>
 
-        <div>
-          <label for="incidentDescription">Description</label>
-          <textarea id="incidentDescription" name="report_description" placeholder="Detailed description of the incident"
-          required aria-required="true"></textarea>
-        </div>
+      <div>
+        <label for="incidentDescription">Description</label>
+        <textarea id="incidentDescription" name="report_description"
+        placeholder="Detailed description of the incident"
+        required aria-required="true">{{ old('report_description') }}</textarea>
+      </div>
 
-        <div>
-          <label for="incidentImage">Upload Photo (optional)</label>
-          <input type="file" id="incident-image" name="report_image" accept="image/*" aria-describedby="image-help" />
-          <small id="image-help" style="color: var(--color-text-muted); font-size: 0.85rem;">Supported formats: JPG, PNG, GIF.</small>
-        </div>
+      <div>
+        <label for="incident-image">Upload Photos (optional)</label>
+        <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple>
+        <small style="color: var(--color-text-muted); font-size: 0.85rem;">
+          Supported formats: JPG, PNG, GIF. Max: 5 images.
+        </small>
+      </div>
 
-        <button type="submit" aria-label="Submit Incident Report">Submit Report</button>
-      </form>
+      <button type="submit" aria-label="Submit Incident Report">Submit Report</button>
+  </form>
+</section>
+
     </section>
   </main>
   <footer>

@@ -23,12 +23,6 @@
     @endif
 
     @isset($report)
-        @php
-            $images = is_array($report->report_image)
-                ? $report->report_image
-                : (json_decode($report->report_image, true) ?? [$report->report_image]);
-        @endphp
-
         <div class="report-card">
             <div class="report-header">
                 <div>
@@ -52,24 +46,24 @@
             </div>
 
             <div class="attachments-section mb-6">
-            <h3>Report Images</h3>
-            @if (!empty($images) && count(array_filter($images)))
-                <div class="attachments-grid">
-                    @foreach ($images as $index => $image)
-                        <div class="border rounded-md overflow-hidden">
-                            <img src="{{ asset('storage/' . $image) }}"
-                                data-full="{{ asset('storage/' . $image) }}"
-                                alt="Attachment {{ $index + 1 }}"
-                                class="thumbnail"
-                                style="cursor: pointer; max-width: 150px;"
-                                onclick="openImageModal({{ $index }})">
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <p class="text-sm text-gray-500">No attachments provided.</p>
-            @endif
-        </div>
+                <h3>Report Images</h3>
+                @if ($report->images->count())
+                    <div class="attachments-grid">
+                        @foreach ($report->images as $index => $image)
+                            <div class="border rounded-md overflow-hidden">
+                                <img src="{{ asset('storage/' . $image->file_path) }}"
+                                     data-full="{{ asset('storage/' . $image->file_path) }}"
+                                     alt="Attachment {{ $index + 1 }}"
+                                     class="thumbnail"
+                                     style="cursor: pointer; max-width: 150px;"
+                                     onclick="openImageModal({{ $index }})">
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500">No attachments provided.</p>
+                @endif
+            </div>
 
             <div class="action-buttons">
                 <a href="{{ route('user.report.userIncidentReporting.edit', $report->id) }}" class="btn-primary">

@@ -6,6 +6,7 @@ use App\Models\IncidentReportUser;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class IncidentReportUserController extends Controller
 {
@@ -14,10 +15,12 @@ class IncidentReportUserController extends Controller
      */
     public function dashboard(): View
     {
-        $reports = IncidentReportUser::latest()->get();
+        $reports = IncidentReportUser::where('user_id', auth()->id())
+            ->latest()
+            ->get();
+
         return view('user.report.userDashboardReporting', compact('reports'));
     }
-
     /**
      * Display the details of a single report.
      */
@@ -32,11 +35,15 @@ class IncidentReportUserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(): View
     {
-        $reports = IncidentReportUser::latest()->get();
+        $reports = IncidentReportUser::where('user_id', auth()->id())
+            ->latest()
+            ->get();
         return view('user.report.userIncidentReporting', compact('reports'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,27 +55,39 @@ class IncidentReportUserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'report_title'       => 'required|string|min:5|max:150',
-            'report_date'        => 'required|date',
-            'report_type'        => 'required|in:Safety,Security,Operational,Environmental',
-            'report_description' => 'required|string|min:10',
-            'report_image'       => 'nullable|image|max:2048',
-        ]);
+     */public function store(Request $request)
+{
+    $validated = $request->validate([
+        'report_title' => 'required|string|max:255',
+        'report_date' => 'required|date',
+        'report_type' => 'required|string',
+        'report_description' => 'required|string',
+        'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+    ]);
 
-        if ($request->hasFile('report_image')) {
-            $validated['report_image'] = $request
-                ->file('report_image')
-                ->store('incident_images', 'public');
+    $report = new IncidentReportUser();
+    $report->report_title = $validated['report_title'];
+    $report->report_date = $validated['report_date'];
+    $report->report_type = $validated['report_type'];
+    $report->report_description = $validated['report_description'];
+    $report->user_id = auth()->id(); // or set this as needed
+    $report->save();
+
+    // Handle images
+    if ($request->hasFile('report_image')) {
+        foreach ($request->file('report_image') as $image) {
+            $path = $image->store('incident_images', 'public');
+
+            // Save to another table if needed, or store in a JSON column
+            $report->images()->create(['file_path' => $path]);
         }
-
-        IncidentReportUser::create($validated);
-
-        return redirect()->back()->with('success', 'Report submitted successfully.');
     }
+
+    return redirect()->route('user.report.userIncidentReporting.index')
+                     ->with('success', 'Incident report submitted successfully.');
+}
+
+
 
     /**
      * Display the specified resource (single-report fallback via resource route).

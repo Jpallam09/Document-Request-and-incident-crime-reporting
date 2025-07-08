@@ -311,6 +311,56 @@
       outline: 3px solid var(--color-button-hover);
     }
 
+    /* Image Preview Grid for Multiple Uploads */
+.preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0.75rem;
+}
+
+.preview-item {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Remove button */
+.remove-image {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 22px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s ease;
+}
+
+.remove-image:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
     footer {
       max-width: var(--max-width);
       margin: 4rem auto 2rem;
@@ -325,6 +375,25 @@
       outline-offset: 3px;
       outline: 3px solid var(--color-button-bg);
     }
+    .drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  background-color: #f9fafb;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.drop-zone.drag-over {
+  background-color: #e0e7ff;
+  border-color: #2563eb;
+  color: #1e40af;
+}
+
 
     @media (max-width: 600px) {
       .hero h1 {
