@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User; // Make sure this is imported
 
 class LoginController extends Controller
 {
@@ -24,21 +26,48 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Optional: role-based redirection
+            /** @var User $user */
+            $user = Auth::user(); // Explicit cast for Intelephense
+            $user->load('roles'); // Now no more "undefined method" warning
+
+            // Admin
+            if ($user->hasRole('incident_reporting', 'admin')) {
+                return redirect()->intended(route('reporting.admin.dashboard'));
+            }
+
+            // Staff
+            if ($user->hasRole('incident_reporting', 'staff')) {
+                return redirect()->intended(route('reporting.staff.dashboard'));
+            }
+
+            // Admin
+            if ($user->hasRole('document_request', 'admin')) {
+                return redirect()->intended(route('request.admin.adminDashboard'));
+            }
+
+            // Staff
+            if ($user->hasRole('document_request', 'staff')) {
+                return redirect()->intended(route('request.staff.staffDashboard'));
+            }
+
+            // Default: Normal User
             return redirect()->intended(route('user.report.userDashboardReporting'));
         }
 
+        // FAILED LOGIN
         return back()->withErrors([
-            'email' => 'Invalid email or password.',
+            'email' => 'Invalid credentials. Please try again.',
         ])->onlyInput('email');
     }
 
-    // Optional: Logout method
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('user.report.userDashboardReporting');
-    }
+    // Handle logout
+public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('login');//redirect to login route
+}
+
+
 }

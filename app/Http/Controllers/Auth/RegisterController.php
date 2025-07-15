@@ -11,37 +11,47 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    // Show registration form
     public function showRegistrationForm()
     {
-        return view('auth.register'); // make sure this matches your Blade path
+        return view('auth.register'); // resources/views/auth/register.blade.php
     }
 
+    // Handle registration
     public function register(Request $request)
     {
+        // Validate input
         $validator = Validator::make($request->all(), [
-            'first_name'            => 'required|string|max:255',
-            'last_name'             => 'required|string|max:255',
-            'email'                 => 'required|email|unique:users,email',
-            'phone'                 => 'nullable|string|max:20',
-            'password'              => 'required|string|min:8|confirmed',
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email|unique:users,email',
+            'phone'      => 'nullable|string|max:20',
+            'password'   => 'required|string|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Create the user
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
-            'name'       => $request->first_name . ' ' . $request->last_name,
+            'user_name'  => $request->first_name . ' ' . $request->last_name,
             'email'      => $request->email,
             'phone'      => $request->phone,
-            'role'       => 'user', // or choose based on logic
             'password'   => Hash::make($request->password),
         ]);
 
-        Auth::login($user); // Automatically log in the user
+        // Assign default roles for both systems
+        $user->roles()->createMany([
+            ['app' => 'incident_reporting', 'role' => 'user'],
+            ['app' => 'document_request',   'role' => 'user'],
+        ]);
 
-        return redirect()->route('login');
+        // Log them in
+        Auth::login($user);
+
+        return redirect()->route('user.userMainDashboard');
     }
 }
