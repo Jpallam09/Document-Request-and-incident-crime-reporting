@@ -49,7 +49,7 @@
           <h2 class="card-title">Document Request</h2>
           <p class="card-description">Submit and manage your document requests.</p>
         </a>
-        <a href="../Incident-reporting/Pages/User/user-dashboard.php" class="card" role="listitem" tabindex="0" aria-label="Go to Incident Report">
+        <a href="{{ route('user.report.userIncidentReporting.create') }}" class="card" role="listitem" tabindex="0" aria-label="Go to Incident Report">
           <span class="material-icons card-icon" aria-hidden="true">report_problem</span>
           <h2 class="card-title">Incident Report</h2>
           <p class="card-description">Report and track incidents efficiently.</p>

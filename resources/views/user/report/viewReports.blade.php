@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Incident Report Details</title>
-    @vite('resources/css/userCss/viewReports.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    @vite('resources/css/userCss/editReports.css')
     @vite('resources/js/userJs/viewReports.js')
 </head>
-
 <body>
 <div class="container">
 
+    <!-- Header -->
     <div class="header">
-        <h1>Your Report Details</h1>
-        <a href="{{ route('user.report.userDashboardReporting') }}" class="btn-back">
-            &larr; Back to List
+        <h1>Report Details</h1>
+        <a href="{{ route('user.report.userDashboardReporting') }}" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to List
         </a>
     </div>
 
@@ -24,36 +25,41 @@
 
     @isset($report)
         <div class="report-card">
+
+            <!-- Report Header (readonly info layout) -->
             <div class="report-header">
-                <div>
-                    <h2 class="report-title">{{ $report->report_title }}</h2>
-                    <div class="report-date">
-                        Date:
-                        <span class="font-medium">
-                            {{ \Carbon\Carbon::parse($report->report_date)->format('F d, Y') }}
-                        </span>
-                    </div>
+                <div class="info-box" style="flex: 1;">
+                    <strong>{{ $report->report_title }}</strong>
                 </div>
-                <div class="report-type">
-                    <span class="report-type-badge">
-                        {{ $report->report_type }}
-                    </span>
+
+                <div class="info-box">
+                    <i class="fa-regular fa-calendar-alt"></i>
+                    {{ \Carbon\Carbon::parse($report->report_date)->format('F d, Y') }}
+                </div>
+
+                <div class="info-box highlight" style="flex: 0 0 auto;">
+                    <i class="fa-solid fa-tag"></i> {{ $report->report_type }}
                 </div>
             </div>
 
-            <div class="description-box">
-                {{ $report->report_description }}
+            <!-- Description -->
+            <div class="description-section">
+                <h3>Description</h3>
+                <div class="description-box">
+                    {{ $report->report_description }}
+                </div>
             </div>
 
+            <!-- Attachments -->
             <div class="attachments-section">
-                <h3>Report Images</h3>
+                <h3><i class="fa-solid fa-paperclip"></i> Report Images</h3>
+
                 @if ($report->images->count())
                     <div class="attachments-grid">
                         @foreach ($report->images as $index => $image)
                             <div>
                                 <img
                                     src="{{ asset('storage/' . $image->file_path) }}"
-                                    data-full="{{ asset('storage/' . $image->file_path) }}"
                                     alt="Attachment {{ $index + 1 }}"
                                     class="thumbnail"
                                     onclick="openImageModal({{ $index }})">
@@ -61,30 +67,35 @@
                         @endforeach
                     </div>
                 @else
-                    <p class="text-sm text-gray-500">No attachments provided.</p>
+                    <p class="text-light">No attachments provided.</p>
                 @endif
             </div>
 
+            <!-- Action Buttons -->
             <div class="action-buttons">
-                <a href="{{ route('user.report.userIncidentReporting.edit', $report->id) }}" class="btn-primary">
-                    Edit Report
-                </a>
+                <!-- Edit Button -->
+                <form action="{{ route('user.report.userIncidentReporting.edit', $report->id) }}" method="GET" style="display: inline;">
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                </form>
 
-                <form method="POST" action="{{ route('user.report.userIncidentReporting.destroy', $report->id) }}">
+                <!-- Delete Button -->
+                <form method="POST" action="{{ route('user.report.userIncidentReporting.destroy', $report->id) }}" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn-danger"
-                            onclick="return confirm('Are you sure you want to delete this report?');">
-                        Delete Report
+                    <button type="submit" class="btn-danger" onclick="return confirm('Delete this report?');">
+                        <i class="fa-solid fa-trash"></i> Delete
                     </button>
                 </form>
             </div>
+
         </div>
     @else
         <p class="text-red-600">Report not found or data is missing.</p>
     @endisset
 
-    <!-- Modal -->
+    <!-- Image Modal -->
     <div id="imageModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <span class="prev" onclick="changeImage(-1)">&#10094;</span>
@@ -92,6 +103,7 @@
         <img id="expandedImg" class="modal-content" />
         <div id="caption" class="caption"></div>
     </div>
+
 </div>
 </body>
 </html>
