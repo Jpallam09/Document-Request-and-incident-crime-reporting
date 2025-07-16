@@ -12,7 +12,7 @@ class IncidentReportImage extends Model
      */
     protected $fillable = [
         'incident_report_user_id',  // Foreign key linking to the incident report
-        'image_path',               // Storage path of the uploaded image
+        'file_path',               // Storage path of the uploaded image
         'image_name',               // Original filename of the uploaded image
         'image_size',               // Size of the image in bytes (optional for future use)
         'image_type',               // MIME type of the image (e.g., image/png)

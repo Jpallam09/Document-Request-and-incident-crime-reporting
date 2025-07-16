@@ -159,16 +159,128 @@
   background-color: var(--primary-light);
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: var(--text-light);
+/* ============================
+   Image Preview Grid + Modal
+=============================== */
+
+/* Preview Grid Layout */
+.preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
+/* Each Thumbnail Container */
+.preview-item {
+  position: relative;
+}
+
+/* Image Thumbnail */
+.preview-item img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.preview-item img:hover {
+  transform: scale(1.05);
+}
+
+/* Remove Image Button */
+.remove-image {
+  position: absolute;
+  top: -0.45rem;
+  right: -0.45rem;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Drop Zone Styling */
+.drop-zone {
+  border: 2px dashed var(--primary);
+  padding: 1rem;
+  text-align: center;
+  border-radius: var(--radius);
+  background: #fefefe;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 1rem;
+}
+.drop-zone.drag-over {
+  background-color: #e7f0ff;
+  border-color: var(--primary-dark);
+}
+
+/* Image Modal */
+.image-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(17, 17, 17, 0.85);
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  outline: 3px solid white;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+.close-modal:hover {
+  color: var(--primary-light);
+}
+
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 0.5rem;
+  z-index: 10000;
+}
+.modal-prev { left: 1rem; }
+.modal-next { right: 1rem; }
+.modal-prev:hover,
+.modal-next:hover { color: var(--primary-light); }
+
+
 /* ============================
-   RESPONSIVE DESIGN
+   Responsive Design
 =============================== */
 @media (max-width: 768px) {
   .layout {
@@ -182,5 +294,15 @@ footer {
 
   .features {
     grid-template-columns: 1fr;
+  }
+
+  .preview-item img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .modal-content {
+    max-width: 95%;
+    max-height: 75%;
   }
 }

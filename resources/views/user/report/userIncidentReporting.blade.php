@@ -95,11 +95,17 @@
                       required aria-required="true">{{ old('report_description') }}</textarea>
           </div>
 
-          <div>
-            <label for="incident-image">Upload Photos (optional)</label>
-            <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple>
-            <small class="upload-guidance">Supported formats: JPG, PNG, GIF. Max: 5 images.</small>
-          </div>
+            <div>
+                <label for="incident-image">Attach Images (Max: 5)</label>
+                <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple>
+                <small class="upload-guidance">Click or drag images to attach. Maximum of 5.</small>
+            </div>
+
+            <!-- Image Modal -->
+            <div id="imageModal" class="image-modal" aria-modal="true" role="dialog">
+            <span id="closeModal" class="close-modal" aria-label="Close">&times;</span>
+            <img id="modalImage" class="modal-content" alt="Enlarged preview">
+            </div>
 
           <button type="submit" aria-label="Submit Incident Report">Submit Report</button>
         </form>

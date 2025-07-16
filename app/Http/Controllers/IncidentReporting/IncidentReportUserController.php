@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use App\Models\IncidentReporting\IncidentReportImage;
 
 class IncidentReportUserController extends Controller
 {
@@ -80,7 +81,9 @@ class IncidentReportUserController extends Controller
             $path = $image->store('incident_images', 'public');
 
             // Save to another table if needed, or store in a JSON column
-            $report->images()->create(['file_path' => $path]);
+            $report->images()->create([
+                    'file_path' => $path,
+            ]);
         }
     }
 
@@ -88,7 +91,10 @@ class IncidentReportUserController extends Controller
                      ->with('success', 'Incident report submitted successfully.');
 }
 
-
+    public function images()
+    {
+        return $this->hasMany(IncidentReportImage::class);
+    }
 
     /**
      * Display the specified resource (single-report fallback via resource route).
