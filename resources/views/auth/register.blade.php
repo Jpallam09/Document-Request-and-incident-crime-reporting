@@ -20,7 +20,7 @@
   <main>
     <section class="registration-card" role="region" aria-labelledby="reg-heading">
       <h2 id="reg-heading">Create Your Account</h2>
-      <form action="{{ route('register') }}" method="POST" novalidate>
+      <form action="{{ route('register.post') }}" method="POST" novalidate>
         @csrf
         <label for="userName">Username</label>
         <input type="text" id="username" name="user_name" placeholder="Choose a username" autocomplete="username" required minlength="3"

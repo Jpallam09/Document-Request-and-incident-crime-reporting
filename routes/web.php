@@ -13,14 +13,17 @@ Route::get('/', function () {
 
 // ------------------ AUTH ROUTES ------------------
 Route::prefix("auth")->group(function () {
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register'); // ✅ FIXED: Now GET
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+
     Route::get('/index', function () {
-    return view('auth.index');
+        return view('auth.index');
     })->name("index");
 });
+
 
 // ------------------ GLOBAL LOGOUT ROUTE ------------------
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
