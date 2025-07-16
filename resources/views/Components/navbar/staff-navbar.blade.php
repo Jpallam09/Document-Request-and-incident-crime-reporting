@@ -1,37 +1,47 @@
 <nav class="navbar">
-    <div class="navbar-brand">Staff Panel</div>
+    {{-- Hamburger button (mobile only, toggles sidebar via external JS) --}}
+    <button id="sidebarToggle"
+            class="navbar__burger"
+            aria-label="Toggle sidebar"
+            aria-expanded="false">
+        ☰
+    </button>
 
-    <ul class="navbar-menu">
-        <!-- Navigation Links -->
-        <li>
-            <a href="{{ route('staffDashboard') }}" class="{{ request()->routeIs('staffDashboard') ? 'active' : '' }}">Dashboard</a>
-        </li>
-        <li>
-            <a href="{{ route('staffReportView') }}" class="{{ request()->routeIs('staffReportView') ? 'active' : '' }}">Reports lists</a>
-        </li>
-        <li>
-            <a href="{{ route('staffDeletionRequests') }}" class="{{ request()->routeIs('staffDeletionRequests') ? 'active' : '' }}">Delete Requests</a>
-        </li>
-        <li>
-            <a href="{{ route('staffUpdateRequests') }}" class="{{ request()->routeIs('staffUpdateRequests') ? 'active' : '' }}">Edit Requests</a>
-        </li>
+    <div class="navbar__brand">Staff Panel</div>
 
-        <!-- Notification Dropdown -->
-        <li class="dropdown-wrapper notification">
-            <a href="#" class="dropdown-toggle" title="Notifications">🔔 <span class="badge">0</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">New report submitted</a></li>
-                <li><a href="#">1 update request</a></li>
-            </ul>
+    <ul class="navbar__menu">
+        {{-- Notifications Dropdown --}}
+        <li class="navbar__item dropdown">
+            <details>
+                <summary aria-haspopup="true" aria-label="Notifications" class="dropdown__toggle">
+                    🔔 <span class="dropdown__badge">0</span>
+                </summary>
+                <ul class="dropdown__menu" role="menu">
+                    <li><a href="#" class="dropdown__item">New report submitted</a></li>
+                    <li><a href="#" class="dropdown__item">1 update request</a></li>
+                </ul>
+            </details>
         </li>
 
-        <!-- Settings Dropdown -->
-        <li class="dropdown-wrapper">
-            <a href="#" class="dropdown-toggle" title="Settings">⚙️</a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Logout</a></li>
-                <li><a href="#">Random Link</a></li>
-            </ul>
+        {{-- Settings Dropdown --}}
+        <li class="navbar__item dropdown">
+            <details>
+                <summary aria-haspopup="true" aria-label="Settings" class="dropdown__toggle">
+                    ⚙️
+                </summary>
+                <ul class="dropdown__menu" role="menu">
+                    <li>
+                        {{-- Logout form --}}
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown__item">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown__item">Profile</a>
+                    </li>
+                </ul>
+            </details>
         </li>
     </ul>
 </nav>

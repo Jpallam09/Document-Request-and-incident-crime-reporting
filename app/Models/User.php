@@ -11,41 +11,58 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'name', // optional, depending on your use
-        'email',
-        'phone',
-        'role',
-        'password',
-    ];
-
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    'first_name',
+    'last_name',
+    'user_name',
+    'email',
+    'phone',
+    'role',
+    'password',
+];
+    /* ------------------------------- RELATIONSHIPS ------------------------ */
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * One account ⇢ many app‑specific roles.
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function incidentReports()
+{
+    return $this->hasMany(\App\Models\IncidentReporting\IncidentReportUser::class);
+}
 
+public function isReportingStaff(): bool
+{
+    return $this->hasRole('incident_reporting', 'staff');
+}
 
+public function isReportingAdmin(): bool
+{
+    return $this->hasRole('incident_reporting', 'admin');
+}
+public function isDocumentStaff(): bool {
+    return $this->hasRole('document_request', 'staff');
+}
+
+public function isDocumentAdmin(): bool {
+    return $this->hasRole('document_request', 'admin');
+}
+
+    public function roles()
+    {
+        return $this->hasMany(UserRole::class);
+    }
+      /* --------------------------------- HELPERS ---------------------------- */
+
+    /**
+     * Quickly check: does this user have *exactly* `$role` in `$app`?
+     *
+    * @param  string  $app   'incident_reporting' | 'document_request'
+    * @param  string  $role  'user' | 'staff' | 'admin'
+     */
+    public function hasRole(string $app, string $role): bool{
+        return $this->roles()
+            ->where('app', $app)
+            ->where('role', $role)
+            ->exists();
+    }
 }

@@ -8,7 +8,7 @@ imageInput.insertAdjacentElement('afterend', previewContainer);
 
 // Create drop zone
 const dropZone = document.createElement('div');
-dropZone.textContent = 'Drag and drop images here';
+dropZone.textContent = 'Add images here';
 dropZone.className = 'drop-zone';
 imageInput.parentNode.insertBefore(dropZone, imageInput);
 imageInput.style.display = 'none';

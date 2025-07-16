@@ -7,6 +7,14 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+        /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        \App\Console\Commands\ClearUserData::class, // Clear Seeder for user data
+    ];
     /**
      * Define the application's command schedule.
      *

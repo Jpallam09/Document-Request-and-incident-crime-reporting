@@ -1,0 +1,88 @@
+/* ============================
+   DASHBOARD PAGE LAYOUT
+============================ */
+
+/* Parent layout: sidebar + main content */
+.layout {
+  display: flex;
+  flex-direction: row;
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Main content beside sidebar */
+.page-content {
+  margin-top: 0;
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+  background: #f4f4f4;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* ============================
+   DASHBOARD GRID (force grid)
+============================ */
+#dashboard {
+  display: grid !important; /* prevent flex override */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ============================
+   WIDGET CARD
+============================ */
+.widget {
+  background: var(--bg-white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.widget:hover {
+  transform: translateY(-0.2rem);
+}
+
+.widget h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.widget p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--primary);
+}
+
+/* ============================
+   COLORED TOP BORDERS
+============================ */
+#totalReportsWidget              { border-top: 0.3rem solid #007bff; }
+#pendingDeletionRequestsWidget   { border-top: 0.3rem solid #dc3545; }
+#pendingUpdateRequestsWidget     { border-top: 0.3rem solid #ffc107; }
+#inProgressWidget                { border-top: 0.3rem solid #17a2b8; }
+#finishedWidget                  { border-top: 0.3rem solid #28a745; }
+
+/* ============================
+   RESPONSIVE BREAKPOINTS
+============================ */
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .page-content {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  #dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}

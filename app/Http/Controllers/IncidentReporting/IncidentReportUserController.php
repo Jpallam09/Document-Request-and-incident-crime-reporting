@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\IncidentReporting;
 
-use App\Models\IncidentReportUser;
+use App\Http\Controllers\Controller;
+use App\Models\IncidentReporting\IncidentReportUser;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -110,11 +111,49 @@ class IncidentReportUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, IncidentReportUser $incidentReportUser): RedirectResponse
-    {
-        // Placeholder update logic
-        return redirect()->back()->with('message', 'Update functionality not implemented yet.');
+  public function update(Request $request, IncidentReportUser $incidentReportUser)
+{
+    $validated = $request->validate([
+        'report_title' => 'required|string|max:255',
+        'report_date' => 'required|date',
+        'report_type' => 'required|string',
+        'report_description' => 'required|string',
+        'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'remove_images' => 'array|nullable',
+        'remove_images.*' => 'integer|exists:incident_report_images,id',
+    ]);
+
+    // Update main fields
+    $incidentReportUser->update([
+        'report_title' => $validated['report_title'],
+        'report_date' => $validated['report_date'],
+        'report_type' => $validated['report_type'],
+        'report_description' => $validated['report_description'],
+    ]);
+
+    // Remove selected images
+    if ($request->filled('remove_images')) {
+        foreach ($request->remove_images as $imageId) {
+            $image = $incidentReportUser->images()->find($imageId);
+            if ($image) {
+                Storage::disk('public')->delete($image->file_path);
+                $image->delete();
+            }
+        }
     }
+
+    // Upload new images
+    if ($request->hasFile('report_image')) {
+        foreach ($request->file('report_image') as $image) {
+            $path = $image->store('incident_images', 'public');
+            $incidentReportUser->images()->create(['file_path' => $path]);
+        }
+    }
+
+    return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id)
+        ->with('success', 'Report updated successfully.');
+}
+
 
     /**
      * Remove the specified resource from storage.
