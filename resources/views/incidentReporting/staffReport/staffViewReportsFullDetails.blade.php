@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff - Report Details</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     @vite('resources/css/staffCss/staffViewReportsFullDetails.css')
     @vite('resources/js/staffJs/staffViewReportsFullDetails.js')
-    @vite('resources/css/componentsCss/navbarCss/navbar.css')
+    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/js/componentsJs/navbar.js')
 </head>
 
 <body>
-    @include('components.navbar.staff-navbar')
-    @include('components.sidebar.staff-sidebar')
-
     <main class="layout">
+        @include('components.navbar.Shared-navbar')
         <section class="page-content">
             <div class="report-details-container">
                 <h1 class="report-title">Noise Complaint</h1>

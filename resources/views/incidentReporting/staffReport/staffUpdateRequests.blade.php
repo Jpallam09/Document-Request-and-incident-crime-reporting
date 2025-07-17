@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff - Update Requests</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     @vite('resources/css/staffCss/staffUpdateRequests.css')
     @vite('resources/js/staffJs/staffUpdateRequests.js')
-    @vite('resources/css/componentsCss/navbarCss/navbar.css')
+    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/js/componentsJs/navbar.js')
 </head>
 
 <body>
-    {{-- Reusable staff navbar --}}
-    @include('components.navbar.staff-navbar')
-    @include('components.sidebar.staff-sidebar')
-
     <main class="layout">
+        @include('components.navbar.Shared-navbar')
         <section class="page-content">
             <h1>Edit Requests</h1>
 

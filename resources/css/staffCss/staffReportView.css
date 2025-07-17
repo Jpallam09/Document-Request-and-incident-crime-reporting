@@ -25,7 +25,13 @@ body {
 
 /* remove default top margin on first heading */
 .page-content h1 {
-  margin: 0 0 1rem 0;
+  margin-top: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding-bottom: 0.75rem; /* ↓ slightly tighter */
+  line-height: 1.2;         /* ↓ tighter spacing */
+  border-bottom: 2px solid #e5e7eb;
 }
 
 /* ===== Table Styles ===== */

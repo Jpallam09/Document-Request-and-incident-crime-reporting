@@ -28,9 +28,11 @@
 
                         //componentsCss
                         'resources/css/componentsCss/navbarCss/navbar.css',
+                        'resources/css/componentsCss/navbarCss/Shared-navbar.css',
 
                         //componentsJs
                         'resources/js/componentsJs/navbar.js',
+                        'resources/js/componentsJs/Shared-navbar.js',
 
                         //authJs
                         'resources/js/authJs/login.js',
