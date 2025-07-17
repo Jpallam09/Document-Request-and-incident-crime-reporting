@@ -29,11 +29,11 @@ class IncidentReportStaffController extends Controller
     /**
      * Show a single report.
      */
-    public function viewSingle($id)
+    public function staffViewReportsFullDetails($id)
     {
         $report = IncidentReportUser::with('images', 'user')->findOrFail($id);
 
-        return view('incidentReporting.staffReport.staffDashboard', compact('report'));
+        return view('incidentReporting.staffReport.staffViewReportsFullDetails', compact('report'));
     }
     /**
      * Show deletion requests.

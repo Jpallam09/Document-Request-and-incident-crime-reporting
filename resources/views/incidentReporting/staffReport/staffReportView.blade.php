@@ -22,36 +22,28 @@
                             <th>#</th>
                             <th>User</th>
                             <th>Report Title</th>
-                            <th>Reason</th>
-                            <th>Date Requested</th>
+                            <th>Type</th>
+                            <th>Date Submitted</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Sample rows -->
-                        <tr>
-                            <td>1</td>
-                            <td>john_doe</td>
-                            <td>Noise Complaint</td>
-                            <td>User accidentally submitted wrong report</td>
-                            <td>2025-07-09</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td>
-                                <button class="btn-view">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>jane_smith</td>
-                            <td>Duplicate Report</td>
-                            <td>Report already submitted earlier</td>
-                            <td>2025-07-08</td>
-                            <td><span class="status approved">Approved</span></td>
-                            <td>
-                                <button class="btn-view">View</button>
-                            </td>
-                        </tr>
+                        @foreach ($reports as $index => $report)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $report->user->name ?? 'Unknown' }}</td>
+                                <td>{{ $report->report_title }}</td>
+                                <td>{{ $report->report_type }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->report_date)->format('M d, Y') }}</td>
+                                <td>{{ $report->is_actioned ? 'Resolved' : 'Open' }}</td>
+                                <td>
+                                    <button type="button" class="btn-view" onclick="window.location='{{ route('reporting.staff.staffViewReportsFullDetails', $report->id) }}'">
+                                        View
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

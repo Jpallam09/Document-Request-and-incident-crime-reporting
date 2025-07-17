@@ -13,35 +13,70 @@
 <body>
     <main class="layout">
         @include('components.navbar.Shared-navbar')
+
         <section class="page-content">
             <div class="report-details-container">
-                <h1 class="report-title">Noise Complaint</h1>
 
-                <div class="report-meta">
-                    <p><strong>Type:</strong> Environmental</p>
-                    <p><strong>Date Submitted:</strong> 2025-07-08</p>
-                    <p><strong>Submitted by:</strong> john_doe</p>
+                <!-- Header and Back Button -->
+                <div class="header">
+                    <h1 class="report-title">{{ $report->report_title }}</h1>
+                    <a href="{{ route('reporting.staff.staffReportView') }}" class="back-link">
+                        <i class="fa-solid fa-arrow-left"></i> Back to List
+                    </a>
                 </div>
 
+                <!-- Report Meta Info -->
+                <div class="report-meta">
+                    <p><strong>Type:</strong> {{ $report->report_type }}</p>
+                    <p><strong>Date Submitted:</strong> {{ $report->created_at->format('Y-m-d') }}</p>
+                    <p><strong>Submitted by:</strong> {{ $report->user->username ?? 'Unknown' }}</p>
+                </div>
+
+                <!-- Description -->
                 <div class="report-description">
                     <h3>Description</h3>
-                    <p>
-                        There was loud construction noise at 3 AM near the residential building.
-                        The noise lasted for over 2 hours and caused sleep disturbances.
-                    </p>
+                    <p>{{ $report->report_description }}</p>
                 </div>
 
+                <!-- Images -->
                 <div class="report-images">
                     <h3>Attached Images</h3>
+                    <div class="image-grid">
+                        @if ($report->images->count())
+                            <div class="attachments-grid">
+                                @foreach ($report->images as $index => $image)
+                                    <div>
+                                        <img
+                                            src="{{ asset('storage/' . $image->file_path) }}"
+                                            alt="Attachment {{ $index + 1 }}"
+                                            class="thumbnail"
+                                            onclick="openImageModal({{ $index }})">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-light">No attachments provided.</p>
+                        @endif
+                    </div>
 
                     <!-- Modal Viewer -->
                     <div id="imageModal" class="image-modal">
+                        <span class="close-modal" onclick="closeModal()">&times;</span>
                         <span class="prev" onclick="changeImage(-1)">&#10094;</span>
                         <span class="next" onclick="changeImage(1)">&#10095;</span>
                         <img id="expandedImg" class="modal-img" src="" alt="Zoomed Image">
                         <div id="caption" class="caption-text"></div>
                     </div>
                 </div>
+
+                <!-- Track Report Button -->
+                <form action="#" method="POST" style="margin-top: 2rem;">
+                    @csrf
+                    <button type="submit" class="track-btn">
+                        <i class="fa-solid fa-check"></i> Track Report
+                    </button>
+                </form>
+
             </div>
         </section>
     </main>

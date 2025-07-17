@@ -14,7 +14,7 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
         ->group(function () {
     Route::get('/dashboard', [IncidentReportStaffController::class, 'dashboard'])->name('dashboard');
     Route::get('/staffReportView', [IncidentReportStaffController::class, 'staffReportView'])->name('staffReportView');
-    Route::get('/viewReports/{id}', [IncidentReportStaffController::class, 'viewSingle'])->name('viewSingle');
+    Route::get('/staffViewReportsFullDetails/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])->name('staffViewReportsFullDetails');
     Route::get('/staffDeletionRequests', [IncidentReportStaffController::class, 'staffDeletionRequests'])->name('staffDeletionRequests');
     Route::get('/staffUpdateRequests', [IncidentReportStaffController::class, 'staffUpdateRequests'])
     ->name('staffUpdateRequests');
