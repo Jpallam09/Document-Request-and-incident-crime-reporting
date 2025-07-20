@@ -4,17 +4,16 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>User Dashboard – Incident Reports</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   @vite('resources/css/userCss/userDashboardReporting.css')
-  @vite('resources/css/componentsCss/navbarCss/navbar.css')
+  @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
   @vite('resources/js/componentsJs/navbar.js')
 </head>
 
 <body>
-  @include('components.navbar.user-navbar')
-  @include('components.sidebar.user-sidebar')
 
   <main class="layout">
+      @include('components.navbar.user-navbar')
     <section class="page-content">
       <section class="hero" aria-labelledby="dashboard-title">
         <h1 id="dashboard-title">Your Report Lists</h1>

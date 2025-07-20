@@ -17,6 +17,11 @@
     </div>
   </nav>
 
+    @if ($errors->any())
+        <div style="color: red;">
+            {{ $errors->first() }}
+        </div>
+    @endif
   <main>
     <section class="registration-card" role="region" aria-labelledby="reg-heading">
       <h2 id="reg-heading">Create Your Account</h2>

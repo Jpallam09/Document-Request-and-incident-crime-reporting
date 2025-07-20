@@ -7,91 +7,105 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     @vite('resources/css/userCss/editReports.css')
     @vite('resources/js/userJs/editReports.js')
+    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
+    @vite('resources/js/componentsJs/navbar.js')
 </head>
 <body>
-    <div class="container">
+    <div class="layout">
+        <div class="container">
+            @include('components.navbar.user-navbar')
 
-        <!-- Header -->
-        <div class="header">
-            <h1>Update Your Report</h1>
-            <a href="#" onclick="window.history.back()" class="back-link">
-                <i class="fas fa-arrow-left"></i>
-                Back to List
-            </a>
-        </div>
+            <!-- Header -->
+            <div class="header">
+                <h1>Edit Your Report</h1>
+                <a href="#" onclick="window.history.back()" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to List
+                </a>
+            </div>
 
-        <!-- Report Card -->
-        <div class="report-card">
-            <div class="report-header">
-                <div>
-                    <input type="text" id="reportTitle" value="" placeholder="Report Title">
-                    <div>
-                        Incident Date:
-                        <input type="date" id="incidentDate" value="">
+            {{-- Edit request form --}}
+            <form id="editRequestForm"
+                  action="{{ route('user.report.requestUpdate', $report->id) }}"
+                  method="POST"
+                  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="report-card">
+                    <div class="report-header">
+                        <div>
+                            <input type="text" id="title" name="title"
+                                   placeholder="{{ $report->report_title ?? 'Report Title' }}" required>
+                            <div>
+                                Incident Date:
+                                <input type="date" id="incidentDate" name="incident_date"
+                                       value="{{ $report->report_date }}" required>
+                            </div>
+                        </div>
+                        <div>
+                            <select id="incidentType" name="incident_type" required>
+                                <option disabled selected>Select a type</option>
+                                <option value="Safety" {{ $report->incident_type === 'Safety' ? 'selected' : '' }}>Safety</option>
+                                <option value="Operational" {{ $report->incident_type === 'Operational' ? 'selected' : '' }}>Operational</option>
+                                <option value="Security" {{ $report->incident_type === 'Security' ? 'selected' : '' }}>Security</option>
+                                <option value="Environmental" {{ $report->incident_type === 'Environmental' ? 'selected' : '' }}>Environmental</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="description-section">
+                        <h3>Description</h3>
+                        <textarea id="incidentDescription" name="incident_description" required>{{ old('incident_description', $report->report_description) }}</textarea>
+                    </div>
+
+                    <!-- Attachments -->
+                    <div class="attachments-section">
+                        <h3>Attachments</h3>
+                        <div class="attachments-grid" id="attachmentsGrid">
+                            @foreach($report->images as $image)
+                                <div class="attachment-item">
+                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Expanded Attachment" id="expandedImg" class="attachment-thumb">
+                                    <button type="button" class="delete-btn" onclick="removeExistingImage({{ $image->id }}, this)">
+                                        &times;
+                                    </button>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="upload-section">
+                            <label for="requested_image">Add New Image</label>
+                            <input type="file" name="requested_image[]" id="requested_image" accept="image/*" multiple>
+                            {{-- Removed duplicate <label for="imageInput"> --}}
+                            <span id="fileName"></span>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <select id="incidentType">
-                        <option value="Safety">Safety</option>
-                        <option value="Operational">Operational</option>
-                        <option value="Security">Security</option>
-                        <option value="Environmental">Environmental</option>
-                    </select>
-                </div>
-            </div>
 
-            <!-- Description -->
-            <div class="description-section">
-                <h3>Description</h3>
-                <textarea id="incidentDescription" placeholder="Enter full description..."></textarea>
-            </div>
+                <!-- Action Buttons -->
+                <button type="submit" class="btn-primary" id="updateReportBtn">
+                    <i class="fas fa-check-circle"></i>
+                    Update Report
+                </button>
+            </form>
 
-            <!-- Attachments -->
-            <div class="attachments-section">
-                <h3>Attachments</h3>
-                <div class="attachments-grid" id="attachmentsGrid">
-                    <!-- JS will insert thumbnails here -->
-                </div>
-
-                <div class="upload-section">
-                    <label for="newImage">Add New Image</label>
-                    <input type="file" id="newImage" accept="image/*" hidden>
-                    <label for="newImage" class="upload-btn">Select File</label>
-                    <span id="fileName">No file selected</span>
-                    <button onclick="addImage()" class="upload-image-btn">
-                        <i class="fas fa-upload"></i>
-                        Upload Image
-                    </button>
-                </div>
-            </div>
+            {{-- Discard button --}}
+            <form action="{{ route('user.report.discardUpdate', $report->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to discard this request?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Discard Request</button>
+            </form>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-            <button class="btn-primary" id="updateReportBtn">
-                <i class="fas fa-check-circle"></i>
-                Update Report
-            </button>
-
-            <button onclick="window.history.back()" class="btn-secondary">
-                <i class="fas fa-times-circle"></i>
-                Discard Edit
-            </button>
-
-            <button onclick="confirmDelete()" class="btn-danger">
-                <i class="fas fa-trash"></i>
-                Delete Report
-            </button>
+        <!-- Modal Viewer -->
+        <div id="imageModal" class="image-modal">
+            <span class="close" id="modalCloseBtn">&times;</span>
+            <img class="modal-content" id="modalImage" />
+            <div id="caption"></div>
+            <span class="prev" id="modalPrevBtn">&#10094;</span>
+            <span class="next" id="modalNextBtn">&#10095;</span>
         </div>
-    </div>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
-        <span class="next" onclick="changeImage(1)">&#10095;</span>
-        <img id="expandedImg" class="modal-content">
-        <div id="caption" class="caption"></div>
     </div>
 </body>
 </html>

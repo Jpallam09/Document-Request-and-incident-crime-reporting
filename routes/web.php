@@ -38,12 +38,16 @@ Route::prefix('user/report')
     ->name("userDashboardReporting");
     Route::resource('userIncidentReporting', IncidentReportUserController::class);
     Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])->name('viewReports');
+    //editRequest
+    Route::put('requestUpdate/{id}', [IncidentReportUserController::class, 'requestUpdate'])
+    ->name('requestUpdate');
+    //Discard Edit
+    Route::delete('/discardUpdate/{id}', [IncidentReportUserController::class, 'discardUpdateRequest'])
+    ->name('discardUpdate');
+    // edit
+    Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])->name('user.report.edit');
     });
 
-// ------------------ STATIC VIEWS ------------------
-    Route::get('/editReports', function () {
-    return view('user.report.editReports');
-    })->name("editReports");
 
     Route::get('/userProfileReporting', function () {
     return view('user.report.userProfileReporting');

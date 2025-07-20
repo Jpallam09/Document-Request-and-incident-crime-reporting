@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     @vite('resources/css/userCss/editReports.css')
     @vite('resources/js/userJs/viewReports.js')
+    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
+    @vite('resources/js/componentsJs/navbar.js')
 </head>
 <body>
 <div class="container">
+      @include('components.navbar.user-navbar')
 
-    <!-- Header -->
     <div class="header">
         <h1>Report Details</h1>
         <a href="{{ route('user.report.userDashboardReporting') }}" class="back-link">
@@ -76,8 +78,7 @@
                 <!-- Edit Button -->
                 <form action="{{ route('user.report.userIncidentReporting.edit', $report->id) }}" method="GET" style="display: inline;">
                     <button type="submit" class="btn-primary">
-                        <i class="fa-solid fa-pen"></i> Edit
-                    </button>
+                    <i class="fa-solid fa-pen"></i> Request Edit </button>
                 </form>
 
                 <!-- Delete Button -->
@@ -85,8 +86,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn-danger" onclick="return confirm('Delete this report?');">
-                        <i class="fa-solid fa-trash"></i> Delete
-                    </button>
+                        <i class="fa-solid fa-trash"></i>Request Delete</button>
                 </form>
             </div>
 
@@ -94,16 +94,14 @@
     @else
         <p class="text-red-600">Report not found or data is missing.</p>
     @endisset
-
     <!-- Image Modal -->
-    <div id="imageModal" class="modal">
+    <div id="imageModal" class="image-modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <span class="prev" onclick="changeImage(-1)">&#10094;</span>
         <span class="next" onclick="changeImage(1)">&#10095;</span>
         <img id="expandedImg" class="modal-content" />
         <div id="caption" class="caption"></div>
     </div>
-
 </div>
 </body>
 </html>

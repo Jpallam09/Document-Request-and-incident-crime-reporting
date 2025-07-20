@@ -20,7 +20,7 @@
                 <table class="report-table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>id</th>
                             <th>User</th>
                             <th>Report Title</th>
                             <th>Reason</th>
@@ -30,20 +30,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Sample row -->
+                    @foreach ($reports as $index => $report)
                         <tr>
-                            <td>1</td>
-                            <td>john_doe</td>
+                            <td>{{$index + 1}}</td>
+                            <td>{{$report ->user-> user_name?? 'unkown'}}</td>
                             <td>Noise Complaint</td>
                             <td>User accidentally submitted wrong report</td>
                             <td>2025-07-09</td>
                             <td><span class="status pending">Pending</span></td>
                             <td>
                                 <button class="btn-view">View Report</button>
-                                <button class="btn-approve">Approve</button>
-                                <button class="btn-reject">Reject</button>
+                                {{-- <button class="btn-approve">Approve</button>
+                                <button class="btn-reject">Reject</button> --}}
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

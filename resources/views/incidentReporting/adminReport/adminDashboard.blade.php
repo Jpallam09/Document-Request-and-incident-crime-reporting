@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff Dashboard</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     @vite('resources/css/staffCss/staffDashboard.css')
-    @vite('resources/css/componentsCss/navbarCss/navbar.css')
+    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/js/componentsJs/navbar.js')
 </head>
 
 <body>
-    @include('components.navbar.admin-navbar')
-    @include('components.sidebar.staff-sidebar')
-
     <main class="layout">
+        @include('components.navbar.Shared-navbar')
         <section class="page-content">
-            <h1 style="margin-top: 0;">Main Dashboard</h1> {{-- Removed large margin here --}}
+            <h1 style="margin-top: 0;">Admin Main Dashboard</h1> {{-- Removed large margin here --}}
 
             <!-- 🟦 Grid wrapper for widgets -->
             <section id="dashboard">

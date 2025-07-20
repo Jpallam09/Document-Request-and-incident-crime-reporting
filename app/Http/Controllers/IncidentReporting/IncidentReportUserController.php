@@ -9,6 +9,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Models\IncidentReporting\IncidentReportImage;
+use App\Models\IncidentReporting\EditRequest;
+use Illuminate\Support\Arr;
 
 class IncidentReportUserController extends Controller
 {
@@ -109,10 +111,68 @@ class IncidentReportUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(IncidentReportUser $incidentReportUser): View
+    public function edit($id)
     {
-        return view('user.report.editReports', compact('incidentReportUser'));
+        $report = IncidentReportUser::with('images')->findOrFail($id);
+
+        // Make sure the current logged-in user owns this report
+        if (auth()->id() !== $report->user_id) {
+            abort(403);
+        }
+        return view('user.report.editReports', compact('report'));
     }
+    /**
+     * Request an edit to the report.
+     */
+public function requestUpdate(Request $request, $id)
+{
+    // Validate form fields
+    $request->validate([
+        'title' => 'required|string',
+        'incident_date' => 'required|date',
+        'incident_type' => 'required|string',
+        'incident_description' => 'required|string',
+        'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    // Prepare image paths array
+    $imagePaths = [];
+
+    // Handle image uploads (if any)
+    if ($request->hasFile('requested_image')) {
+        foreach ($request->file('requested_image') as $image) {
+            $path = $image->store('edit_request_images', 'public');
+            $imagePaths[] = $path; // Add each path to array
+        }
+    }
+
+    // Create the edit request record
+    EditRequest::create([
+        'incident_report_id' => $id,
+        'requested_by' => auth()->id(),
+        'requested_title' => $request->input('title'),
+        'requested_description' => $request->input('incident_description'),
+        'requested_type' => $request->input('incident_type'),
+        'requested_image' => $imagePaths, // Save as JSON
+        'status' => 'pending',
+        'requested_at' => now(),
+    ]);
+
+    return back()->with('success', 'Update request sent successfully.');
+}
+
+public function discardUpdateRequest($id)
+{
+    $editRequest = EditRequest::where('incident_report_id', $id)
+        ->where('requested_by', auth()->id())
+        ->where('status', 'pending') // Only allow discarding if still pending
+        ->firstOrFail();
+
+    $editRequest->delete();
+
+    return back()->with('success', 'Your edit request has been discarded.');
+}
+
 
     /**
      * Update the specified resource in storage.

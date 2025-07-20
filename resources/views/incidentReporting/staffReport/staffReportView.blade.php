@@ -32,11 +32,11 @@
                         @foreach ($reports as $index => $report)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $report->user->name ?? 'Unknown' }}</td>
+                                <td>{{ $report->user->user_name?? 'Unknown' }}</td>
                                 <td>{{ $report->report_title }}</td>
                                 <td>{{ $report->report_type }}</td>
                                 <td>{{ \Carbon\Carbon::parse($report->report_date)->format('M d, Y') }}</td>
-                                <td>{{ $report->is_actioned ? 'Resolved' : 'Open' }}</td>
+                                <td>{{ $report->is_actioned ? 'Resolved' : 'Pending' }}</td>
                                 <td>
                                     <button type="button" class="btn-view" onclick="window.location='{{ route('reporting.staff.staffViewReportsFullDetails', $report->id) }}'">
                                         View

@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Main Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   @vite('resources/css/authCss/userMainDashboard.css')
-  @vite('resources/css/componentsCss/navbarCss/navbar.css')
+  @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css'))
   @vite('resources/js/componentsJs/navbar.js')
 </head>
 <body>

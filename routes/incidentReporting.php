@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IncidentReporting\IncidentReportUserController;
 use App\Http\Controllers\IncidentReporting\IncidentReportStaffController;
 use App\Http\Controllers\IncidentReporting\IncidentReportAdminController;
+use App\Http\Controllers\IncidentReporting\EditRequestController;
 
 Route::prefix('incidentReporting')->middleware('auth')->group(function () {
 
@@ -16,9 +16,8 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
     Route::get('/staffReportView', [IncidentReportStaffController::class, 'staffReportView'])->name('staffReportView');
     Route::get('/staffViewReportsFullDetails/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])->name('staffViewReportsFullDetails');
     Route::get('/staffDeletionRequests', [IncidentReportStaffController::class, 'staffDeletionRequests'])->name('staffDeletionRequests');
-    Route::get('/staffUpdateRequests', [IncidentReportStaffController::class, 'staffUpdateRequests'])
-    ->name('staffUpdateRequests');
-
+    // Route to view edit requests
+    Route::get('/staffUpdateRequests', [EditRequestController::class, 'index'])->name('staffUpdateRequests');
     });
 
 // Admin ROUTES

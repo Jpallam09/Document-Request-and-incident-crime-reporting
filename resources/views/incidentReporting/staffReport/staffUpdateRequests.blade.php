@@ -23,27 +23,29 @@
                             <th>#</th>
                             <th>User</th>
                             <th>Original Title</th>
-                            <th>Requested Change</th>
+                            <th>Requested Title</th>
+                            <th>Requested Description</th>
                             <th>Date Requested</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Sample row for now -->
+                    @foreach ($requests as $index => $request)
                         <tr>
-                            <td>1</td>
-                            <td>jane_doe</td>
-                            <td>Leaking Pipe</td>
-                            <td>Wants to update the location and description</td>
-                            <td>2025-07-09</td>
-                            <td><span class="status pending">Pending</span></td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $request->user->user_name ?? 'Unknown' }}</td>
+                            <td>{{ $request->report->report_title ?? 'No Title' }}</td>
+                            <td>{{ $request->requested_title ?? '—' }}</td>
+                            <td>{{ $request->requested_description ?? '—' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($request->requested_at)->format('M d, Y') }}</td>
+                            <td>{{ ucfirst($request->status) }}</td>
                             <td>
-                                <button class="btn-view">View Request</button>
-                                <button class="btn-approve">Approve</button>
-                                <button class="btn-reject">Reject</button>
+                                <button class="btn-view" data-request-id="{{ $request->id }}">View</button>
+                                {{-- Future: Approve / Reject buttons can go here --}}
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

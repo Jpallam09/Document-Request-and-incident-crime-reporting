@@ -12,6 +12,8 @@
 
     --font-base: 'Segoe UI', Roboto, sans-serif;
     --max-width: 65rem;
+    --header-height: 3rem;
+    --sidebar-width: 16rem;
 }
 
 /* Base */
@@ -26,11 +28,17 @@ body {
 
 .container {
     max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 2rem;
+    margin-left: var(--sidebar-width);
+    padding: 1rem 2rem 2rem 2rem;
     background-color: white;
     border-radius: 0.75rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  min-height: calc(100vh - var(--header-height));
 }
 
 /* Header */
@@ -278,53 +286,130 @@ body {
     transform: translateY(-2px);
 }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
+/* Image Grid & Thumbnails */
+.attachments-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.modal-content {
-    max-width: 80%;
-    max-height: 80%;
-    display: block;
-    margin: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    background-color: white;
+.attachment-item {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
-.modal .close,
-.modal .prev,
-.modal .next {
-    position: absolute;
-    font-size: 2.5rem;
-    color: white;
-    cursor: pointer;
-    user-select: none;
+.attachment-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.modal .close {
-    top: 1rem;
-    right: 2rem;
+.attachment-thumb:hover {
+  transform: scale(1.05);
 }
 
-.modal .prev {
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
+.delete-btn {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 1.8rem;
+  height: 1.8rem;
+  cursor: pointer;
+  line-height: 1.5rem;
 }
 
-.modal .next {
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
+/* Modal Viewer */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 5rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  text-align: center;
 }
+
+.image-modal .modal-content {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 1px #000000;
+  margin-top: 1rem;
+  transition: transform 0.3s;
+}
+
+/* Modal Navigation + Close Buttons */
+.image-modal .close,
+.image-modal .prev,
+.image-modal .next {
+  position: absolute;
+  color: white;
+  font-size: 1.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  transition: background-color 0.2s ease;
+}
+
+.image-modal .close {
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2rem;
+}
+
+.image-modal .prev {
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+}
+
+.image-modal .next {
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+}
+
+.image-modal .close:hover,
+.image-modal .prev:hover,
+.image-modal .next:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .attachment-item {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .image-modal .modal-content {
+    max-height: 60vh;
+  }
+}
+
+/* Keep the rest of your navigation and close styles */
 
 .caption {
     text-align: center;
