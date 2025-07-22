@@ -153,7 +153,7 @@ public function requestUpdate(Request $request, $id)
         'requested_title' => $request->input('title'),
         'requested_description' => $request->input('incident_description'),
         'requested_type' => $request->input('incident_type'),
-        'requested_image' => $imagePaths, // Save as JSON
+        'requested_image' => json_encode($imagePaths), // Save as JSON
         'status' => 'pending',
         'requested_at' => now(),
     ]);

@@ -3,14 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
        UPDATE REQUEST TABLE ACTIONS
     ============================ */
 
-    // View Request
+    // View Request – removed alert logic to use modal instead
     document.querySelectorAll(".btn-view").forEach(button => {
         button.addEventListener("click", () => {
-            const row = button.closest("tr");
-            const reportTitle = row.children[2].textContent;
-            const changeRequest = row.children[3].textContent;
-
-            alert(`View Request:\n\nTitle: ${reportTitle}\nChange: ${changeRequest}`);
+            // Modal is triggered via inline onclick="openRequestModal(this)"
+            // So no logic needed here anymore
         });
     });
 

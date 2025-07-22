@@ -18,7 +18,15 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
     Route::get('/staffDeletionRequests', [IncidentReportStaffController::class, 'staffDeletionRequests'])->name('staffDeletionRequests');
     // Route to view edit requests
     Route::get('/staffUpdateRequests', [EditRequestController::class, 'index'])->name('staffUpdateRequests');
-    });
+    // Route to view a specific edit request
+    Route::get('/edit-request/{id}', [EditRequestController::class, 'show'])->name('editRequest.show');
+        // Accept edit requests
+     Route::post('/edit-request/{id}/accept', [EditRequestController::class, 'accept'])
+    ->name('updateRequest.accept');
+    //reject edit requests
+    Route::post('/edit-request/{id}/reject', [EditRequestController::class, 'reject'])
+    ->name('updateRequest.reject');
+    }); 
 
 // Admin ROUTES
 Route::prefix('adminReporting')

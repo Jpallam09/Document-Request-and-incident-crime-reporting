@@ -18,11 +18,17 @@ return new class extends Migration {
                   ->constrained('users')
                   ->onDelete('cascade');
 
+            // Add this under requested_by
+            $table->foreignId('reviewed_by')
+                  ->nullable()->constrained('users')   
+                  ->onDelete('set null');
+
             // Fields that may be changed
             $table->string('requested_title', 150)->nullable();
             $table->text('requested_description')->nullable();
             $table->enum('requested_type', ['Safety', 'Security', 'Operational', 'Environmental'])->nullable();
             $table->json('requested_image')->nullable();
+
             // Request tracking
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamp('requested_at')->nullable();
