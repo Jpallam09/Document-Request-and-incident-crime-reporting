@@ -4,6 +4,7 @@ namespace App\Http\Controllers\IncidentReporting;
 
 use App\Http\Controllers\Controller;
 use App\Models\IncidentReporting\EditRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EditRequestController extends Controller
 {
@@ -17,33 +18,39 @@ class EditRequestController extends Controller
         return view('incidentReporting.staffReport.staffUpdateRequests', compact('requests'));
     }
 
-public function accept($id)
-{
-    $editRequest = EditRequest::findOrFail($id);
-    $editRequest->status = 'approved'; // ✅ wrapped in quotes — correct
-    $editRequest->reviewed_by = auth()->id();
-    $editRequest->reviewed_at = now(); // ✅ add this line
-    $editRequest->save();
+    public function accept($id)
+    {
+        $editRequest = EditRequest::findOrFail($id);
 
-    return back()->with('success', 'Edit request accepted.');
-}
-    public function reject($id)
-{
-    // Find the edit request by ID
-    $editRequest = EditRequest::findOrFail($id);
+        if ($editRequest->status !== 'pending') {
+            Alert::toast('This request has already been processed.', 'error')->autoClose(3000);
+            return back();
+        }
 
-    // Optional: Check if the request is still pending
-    if ($editRequest->status !== 'pending') {
-        return back()->with('error', 'This request has already been processed.');
+        $editRequest->status = 'accepted';
+        $editRequest->reviewed_by = auth()->id();
+        $editRequest->reviewed_at = now();
+        $editRequest->save();
+
+        Alert::toast('Edit request accepted successfully.', 'success')->autoClose(3000);
+        return back();
     }
 
-    // Mark it as rejected
-    $editRequest->status = 'rejected';
-    $editRequest->reviewed_by = auth()->id(); // Optional: who rejected it
-    $editRequest->reviewed_at = now();        // Optional: when it was rejected
-    $editRequest->save();
+    public function reject($id)
+    {
+        $editRequest = EditRequest::findOrFail($id);
 
-    return back()->with('success', 'Edit request rejected successfully.');
-}
+        if ($editRequest->status !== 'pending') {
+            Alert::toast('This request has already been processed.', 'error')->autoClose(3000);
+            return back();
+        }
 
+        $editRequest->status = 'rejected';
+        $editRequest->reviewed_by = auth()->id();
+        $editRequest->reviewed_at = now();
+        $editRequest->save();
+
+        Alert::toast('Edit request rejected.', 'error')->autoClose(3000);
+        return back();
+    }
 }
