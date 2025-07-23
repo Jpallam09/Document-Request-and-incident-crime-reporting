@@ -17,7 +17,10 @@ class RegisterController extends Controller
         return view('auth.register'); // resources/views/auth/register.blade.php
     }
 
-    // Handle registration
+    /**
+     * Handle registration
+     * @param \Illuminate\Http\Request $request
+     */
     public function register(Request $request)
     {
         // Validate input
@@ -35,12 +38,12 @@ class RegisterController extends Controller
 
         // Create the user
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name'  => $request->last_name,
-            'user_name'  => $request->first_name . ' ' . $request->last_name,
-            'email'      => $request->email,
-            'phone'      => $request->phone,
-            'password'   => Hash::make($request->password),
+            'first_name' => $request->input('first_name'),
+            'last_name'  => $request->input('last_name'),
+            'user_name'  => $request->input('first_name') . ' ' . $request->input('last_name'),
+            'email'      => $request->input('email'),
+            'phone'      => $request->input('phone'),
+            'password'   => Hash::make($request->input('password')),
         ]);
 
         // Assign default roles for both systems
