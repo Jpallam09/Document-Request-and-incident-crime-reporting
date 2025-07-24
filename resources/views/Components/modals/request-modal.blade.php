@@ -47,11 +47,22 @@
                         <div><strong>Type:</strong> {{ $request->requested_type ?? '—' }}</div>
                         <div><strong>Description:</strong><br>{{ $request->requested_description ?? '—' }}</div>
                         <div class="edit-images-label"><strong>Requested Images:</strong></div>
-                        <div class="edit-request-attachments">
-                            @foreach (json_decode($request->requested_images ?? '[]', true) as $image)
-                                <img src="{{ asset('storage/' . $image) }}" class="edit-thumbnail"
-                                    alt="Requested Image">
-                            @endforeach
+                        <div class="edit-request-attachments horizontal">
+                            @php
+                                // Safe check: decode only if it's a string
+                                $images = is_string($request->requested_image)
+                                    ? json_decode($request->requested_image, true)
+                                    : $request->requested_image;
+                            @endphp
+
+                            @if (!empty($images))
+                                <div class="edit-request-attachments horizontal">
+                                    @foreach ($images as $image)
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Edit Request Image"
+                                            class="edit-thumbnail">
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -60,20 +71,19 @@
             <!-- Footer -->
             <div class="edit-request-footer">
                 <!-- Accept Button inside Modal -->
-                <form method="POST"
-                    action="{{ route('reporting.staff.updateRequest.accept', ['id' => $editRequest->id]) }}"
+                {{-- <form method="POST" action="{{ route('updateRequest.accept', ['id' => $editRequest->id]) }}"
                     class="form-accept">
                     @csrf
                     <button type="submit" class="btn-accept">Accept</button>
-                </form>
+                </form> --}}
 
                 <!-- Reject Button inside Modal -->
-                <form method="POST"
+                {{-- <form method="POST"
                     action="{{ route('reporting.staff.updateRequest.reject', ['id' => $editRequest->id]) }}"
                     class="form-reject">
                     @csrf
                     <button type="submit" class="btn-reject">Reject</button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

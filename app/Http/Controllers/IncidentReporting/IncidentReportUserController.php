@@ -142,7 +142,7 @@ public function requestUpdate(Request $request, $id)
     if ($request->hasFile('requested_image')) {
         foreach ($request->file('requested_image') as $image) {
             $path = $image->store('edit_request_images', 'public');
-            $imagePaths[] = $path; // Add each path to array
+            $imagePaths[] = $path;
         }
     }
 
@@ -153,7 +153,7 @@ public function requestUpdate(Request $request, $id)
         'requested_title' => $request->input('title'),
         'requested_description' => $request->input('incident_description'),
         'requested_type' => $request->input('incident_type'),
-        'requested_image' => json_encode($imagePaths), // Save as JSON
+        'requested_image' => $imagePaths, // ← Just pass the array directly
         'status' => 'pending',
         'requested_at' => now(),
     ]);
