@@ -18,23 +18,52 @@ class EditRequestController extends Controller
         return view('incidentReporting.staffReport.staffUpdateRequests', compact('requests'));
     }
 
+    /**
+     * Accept an edit request
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function accept($id)
     {
-        $editRequest = EditRequest::findOrFail($id);
+        /** @var EditRequest $editRequest */
+        $editRequest = EditRequest::with('report')->findOrFail($id);
 
         if ($editRequest->status !== 'pending') {
             Alert::toast('This request has already been processed.', 'error')->autoClose(3000);
             return back();
         }
 
+        $report = $editRequest->report;
+
+        // Apply requested changes to the report
+        $report->title = $editRequest->requested_title;
+        $report->date = $editRequest->requested_at;
+        $report->type = $editRequest->requested_type;
+        $report->description = $editRequest->requested_description;
+
+        // Handle requested images (optional, if you support image editing)
+        if (is_array($editRequest->requested_image)) {
+            $report->images()->delete(); // Clear previous images first
+
+            foreach ($editRequest->requested_image as $imagePath) {
+                $report->images()->create([
+                    'image_path' => $imagePath,
+                ]);
+            }
+        }
+        $report->save();
+
+        // Mark edit request as accepted
         $editRequest->status = 'accepted';
         $editRequest->reviewed_by = auth()->id();
         $editRequest->reviewed_at = now();
         $editRequest->save();
 
-        Alert::toast('Edit request accepted successfully.', 'success')->autoClose(3000);
+        Alert::toast('Edit request accepted and applied successfully.', 'success')->autoClose(3000);
         return back();
     }
+
 
     public function reject($id)
     {

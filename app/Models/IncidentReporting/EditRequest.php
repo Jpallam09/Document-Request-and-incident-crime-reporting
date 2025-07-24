@@ -7,10 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
 /**
+ * @property int $id
+ * @property int $incident_report_id
+ * @property int $requested_by
+ * @property string|null $requested_title
+ * @property string|null $requested_description
+ * @property string|null $requested_type
+ * @property array|null $requested_image
  * @property string $status
+ * @property \Illuminate\Support\Carbon $requested_at
  * @property int|null $reviewed_by
  * @property \Illuminate\Support\Carbon|null $reviewed_at
+ *
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\User|null $reviewer
+ * @property-read \App\Models\IncidentReporting\IncidentReportUser $report
  */
+
 class EditRequest extends Model
 {
     use HasFactory;

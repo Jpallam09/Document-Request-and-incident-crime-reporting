@@ -32,30 +32,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle Accept Button
+  // ✅ Accept Button with SweetAlert
   acceptButtons.forEach(button => {
     button.addEventListener('click', () => {
       const requestId = getRequestIdFromModal(button);
-      if (requestId && confirm('Are you sure you want to accept this edit request?')) {
-        window.location.href = `/staff/update-request/accept/${requestId}`;
-      }
+      if (!requestId) return;
+
+      Swal.fire({
+        title: 'Accept Edit Request?',
+        text: "This action will approve the requested changes.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#2563eb',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Accept',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = `/staff/update-request/accept/${requestId}`;
+        }
+      });
     });
   });
 
-    // Handle Reject Button
-rejectButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const requestId = getRequestIdFromModal(button);
-    if (requestId && confirm('Are you sure you want to reject this edit request?')) {
-      const form = document.querySelector(`#viewEditRequestModal-${requestId} .form-reject`);
-      if (form) {
-        form.submit(); // ✅ Submit POST request
-      }
-    }
+  // ✅ Reject Button with SweetAlert
+  rejectButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+    event.preventDefault();
+
+      const requestId = getRequestIdFromModal(button);
+      if (!requestId) return;
+
+      Swal.fire({
+        title: 'Reject Edit Request?',
+        text: "This will decline the requested changes.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#2563eb',
+        confirmButtonText: 'Yes, Reject',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const form = document.querySelector(`#viewEditRequestModal-${requestId} .form-reject`);
+          if (form) form.submit();
+        }
+      });
+    });
   });
-});
-
-
 
   // Helper: Get request ID from modal ID
   function getRequestIdFromModal(button) {
