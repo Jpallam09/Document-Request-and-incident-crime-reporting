@@ -59,39 +59,39 @@ class IncidentReportUserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */public function store(Request $request)
-{
-    $validated = $request->validate([
-        'report_title' => 'required|string|max:255',
-        'report_date' => 'required|date',
-        'report_type' => 'required|string',
-        'report_description' => 'required|string',
-        'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-    ]);
+     */ public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'report_title' => 'required|string|max:255',
+            'report_date' => 'required|date',
+            'report_type' => 'required|string',
+            'report_description' => 'required|string',
+            'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
 
-    $report = new IncidentReportUser();
-    $report->report_title = $validated['report_title'];
-    $report->report_date = $validated['report_date'];
-    $report->report_type = $validated['report_type'];
-    $report->report_description = $validated['report_description'];
-    $report->user_id = auth()->id(); // or set this as needed
-    $report->save();
+        $report = new IncidentReportUser();
+        $report->report_title = $validated['report_title'];
+        $report->report_date = $validated['report_date'];
+        $report->report_type = $validated['report_type'];
+        $report->report_description = $validated['report_description'];
+        $report->user_id = auth()->id(); // or set this as needed
+        $report->save();
 
-    // Handle images
-    if ($request->hasFile('report_image')) {
-        foreach ($request->file('report_image') as $image) {
-            $path = $image->store('incident_images', 'public');
+        // Handle images
+        if ($request->hasFile('report_image')) {
+            foreach ($request->file('report_image') as $image) {
+                $path = $image->store('incident_images', 'public');
 
-            // Save to another table if needed, or store in a JSON column
-            $report->images()->create([
+                // Save to another table if needed, or store in a JSON column
+                $report->images()->create([
                     'file_path' => $path,
-            ]);
+                ]);
+            }
         }
-    }
 
-    return redirect()->route('user.report.userIncidentReporting.index')
-                     ->with('success', 'Incident report submitted successfully.');
-}
+        return redirect()->route('user.report.userIncidentReporting.index')
+            ->with('success', 'Incident report submitted successfully.');
+    }
 
     public function images()
     {
@@ -124,101 +124,101 @@ class IncidentReportUserController extends Controller
     /**
      * Request an edit to the report.
      */
-public function requestUpdate(Request $request, $id)
-{
-    // Validate form fields
-    $request->validate([
-        'title' => 'required|string',
-        'incident_date' => 'required|date',
-        'incident_type' => 'required|string',
-        'incident_description' => 'required|string',
-        'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    public function requestUpdate(Request $request, $id)
+    {
+        // Validate form fields
+        $request->validate([
+            'title' => 'required|string',
+            'incident_date' => 'required|date',
+            'incident_type' => 'required|string',
+            'incident_description' => 'required|string',
+            'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    // Prepare image paths array
-    $imagePaths = [];
+        // Prepare image paths array
+        $imagePaths = [];
 
-    // Handle image uploads (if any)
-    if ($request->hasFile('requested_image')) {
-        foreach ($request->file('requested_image') as $image) {
-            $path = $image->store('edit_request_images', 'public');
-            $imagePaths[] = $path;
+        // Handle image uploads (if any)
+        if ($request->hasFile('requested_image')) {
+            foreach ($request->file('requested_image') as $image) {
+                $path = $image->store('edit_request_images', 'public');
+                $imagePaths[] = $path;
+            }
         }
+
+        // Create the edit request record
+        EditRequest::create([
+            'incident_report_id' => $id,
+            'requested_by' => auth()->id(),
+            'requested_title' => $request->input('title'),
+            'requested_description' => $request->input('incident_description'),
+            'requested_type' => $request->input('incident_type'),
+            'requested_image' => $imagePaths, // ← Just pass the array directly
+            'status' => 'pending',
+            'requested_at' => now(),
+        ]);
+
+        return back()->with('success', 'Update request sent successfully.');
     }
 
-    // Create the edit request record
-    EditRequest::create([
-        'incident_report_id' => $id,
-        'requested_by' => auth()->id(),
-        'requested_title' => $request->input('title'),
-        'requested_description' => $request->input('incident_description'),
-        'requested_type' => $request->input('incident_type'),
-        'requested_image' => $imagePaths, // ← Just pass the array directly
-        'status' => 'pending',
-        'requested_at' => now(),
-    ]);
+    public function discardUpdateRequest($id)
+    {
+        $editRequest = EditRequest::where('incident_report_id', $id)
+            ->where('requested_by', auth()->id())
+            ->where('status', 'pending') // Only allow discarding if still pending
+            ->firstOrFail();
 
-    return back()->with('success', 'Update request sent successfully.');
-}
+        $editRequest->delete();
 
-public function discardUpdateRequest($id)
-{
-    $editRequest = EditRequest::where('incident_report_id', $id)
-        ->where('requested_by', auth()->id())
-        ->where('status', 'pending') // Only allow discarding if still pending
-        ->firstOrFail();
-
-    $editRequest->delete();
-
-    return back()->with('success', 'Your edit request has been discarded.');
-}
+        return back()->with('success', 'Your edit request has been discarded.');
+    }
 
 
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, IncidentReportUser $incidentReportUser)
-{
-    $validated = $request->validate([
-        'report_title' => 'required|string|max:255',
-        'report_date' => 'required|date',
-        'report_type' => 'required|string',
-        'report_description' => 'required|string',
-        'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-        'remove_images' => 'array|nullable',
-        'remove_images.*' => 'integer|exists:incident_report_images,id',
-    ]);
+    public function update(Request $request, IncidentReportUser $incidentReportUser)
+    {
+        $validated = $request->validate([
+            'report_title' => 'required|string|max:255',
+            'report_date' => 'required|date',
+            'report_type' => 'required|string',
+            'report_description' => 'required|string',
+            'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'remove_images' => 'array|nullable',
+            'remove_images.*' => 'integer|exists:incident_report_images,id',
+        ]);
 
-    // Update main fields
-    $incidentReportUser->update([
-        'report_title' => $validated['report_title'],
-        'report_date' => $validated['report_date'],
-        'report_type' => $validated['report_type'],
-        'report_description' => $validated['report_description'],
-    ]);
+        // Update main fields
+        $incidentReportUser->update([
+            'report_title' => $validated['report_title'],
+            'report_date' => $validated['report_date'],
+            'report_type' => $validated['report_type'],
+            'report_description' => $validated['report_description'],
+        ]);
 
-    // Remove selected images
-    if ($request->filled('remove_images')) {
-        foreach ($request->remove_images as $imageId) {
-            $image = $incidentReportUser->images()->find($imageId);
-            if ($image) {
-                Storage::disk('public')->delete($image->file_path);
-                $image->delete();
+        // Remove selected images
+        if ($request->filled('remove_images')) {
+            foreach ($request->remove_images as $imageId) {
+                $image = $incidentReportUser->images()->find($imageId);
+                if ($image) {
+                    Storage::disk('public')->delete($image->file_path);
+                    $image->delete();
+                }
             }
         }
-    }
 
-    // Upload new images
-    if ($request->hasFile('report_image')) {
-        foreach ($request->file('report_image') as $image) {
-            $path = $image->store('incident_images', 'public');
-            $incidentReportUser->images()->create(['file_path' => $path]);
+        // Upload new images
+        if ($request->hasFile('report_image')) {
+            foreach ($request->file('report_image') as $image) {
+                $path = $image->store('incident_images', 'public');
+                $incidentReportUser->images()->create(['file_path' => $path]);
+            }
         }
-    }
 
-    return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id)
-        ->with('success', 'Report updated successfully.');
-}
+        return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id)
+            ->with('success', 'Report updated successfully.');
+    }
 
 
     /**

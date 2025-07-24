@@ -71,19 +71,17 @@
             <!-- Footer -->
             <div class="edit-request-footer">
                 <!-- Accept Button inside Modal -->
-                {{-- <form method="POST" action="{{ route('updateRequest.accept', ['id' => $editRequest->id]) }}"
-                    class="form-accept">
+                <form method="POST"
+                    action="{{ route('reporting.staff.updateRequest.accept', ['id' => $request->id]) }}">
                     @csrf
-                    <button type="submit" class="btn-accept">Accept</button>
-                </form> --}}
+                    <button type="submit">Accept</button>
+                </form>
 
-                <!-- Reject Button inside Modal -->
-                {{-- <form method="POST"
-                    action="{{ route('reporting.staff.updateRequest.reject', ['id' => $editRequest->id]) }}"
-                    class="form-reject">
+                <form method="POST"
+                    action="{{ route('reporting.staff.updateRequest.reject', ['id' => $request->id]) }}">
                     @csrf
-                    <button type="submit" class="btn-reject">Reject</button>
-                </form> --}}
+                    <button type="submit">Reject</button>
+                </form>
             </div>
         </div>
     </div>
