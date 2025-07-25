@@ -30,12 +30,17 @@ class IncidentReportUserController extends Controller
      */
     public function viewReport($id)
     {
-        $report = IncidentReportUser::find($id);
+        $report = IncidentReportUser::with(['editRequest']) // request
+            ->where('user_id', auth()->id())
+            ->find($id);
+
         if (!$report) {
             abort(404, 'Report not found.');
         }
+
         return view('user.report.viewReports', compact('report'));
     }
+
     /**
      * Display a listing of the resource.
      */

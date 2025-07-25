@@ -146,6 +146,37 @@ main {
   background-color: #fef3c7;
   color: #92400e;
 }
+.badge-request {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; /* pill shape like `.status` */
+  font-weight: 600;
+  font-size: 0.8rem;
+  display: inline-block;
+  white-space: nowrap; /* ✅ ONE LINE ONLY */
+  text-align: center;
+}
+
+/* Color variants */
+.badge-edit {
+  background-color: #3b82f6; /* blue */
+  color: white;
+}
+.badge-delete {
+  background-color: #ef4444; /* red */
+  color: white;
+}
+.badge-approved {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.badge-rejected {
+  background-color: #3b82f6;
+  color: #fef3c7;
+}
+.badge-none {
+  background-color: #e5e7eb; /* light gray */
+  color: #374151; /* darker text */
+}
 
 .btn-view {
   display: inline-block;

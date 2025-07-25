@@ -51,7 +51,7 @@ class EditRequestController extends Controller
                     'file_path' => $imagePath,
                 ]);
             }
-        }
+        }   
         $report->save();
 
         // Mark edit request as approved

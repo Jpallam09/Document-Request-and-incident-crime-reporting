@@ -37,4 +37,16 @@ class IncidentReportUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Edit request relationship
+    public function editRequest()
+    {
+        return $this->hasOne(EditRequest::class, 'incident_report_id');
+    }
+
+    // Delete request relationship
+    // public function deleteRequest()
+    // {
+    //     return $this->hasOne(DeleteRequest::class, 'incident_report_id');
+    // }
 }
