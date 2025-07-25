@@ -32,9 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ✅ Accept Button with SweetAlert
+  // ✅ Accept Button with SweetAlert (now matches reject logic)
   acceptButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault(); // 🔧 added to prevent default submission
+
       const requestId = getRequestIdFromModal(button);
       if (!requestId) return;
 
@@ -49,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cancelButtonText: 'Cancel'
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/staff/update-request/accept/${requestId}`;
+          const form = document.querySelector(`#viewEditRequestModal-${requestId} .form-accept`);
+          if (form) form.submit();
         }
       });
     });
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ✅ Reject Button with SweetAlert
   rejectButtons.forEach(button => {
     button.addEventListener('click', (event) => {
-    event.preventDefault();
+      event.preventDefault();
 
       const requestId = getRequestIdFromModal(button);
       if (!requestId) return;

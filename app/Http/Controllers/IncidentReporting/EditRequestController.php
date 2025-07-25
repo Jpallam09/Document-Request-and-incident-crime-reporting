@@ -37,25 +37,25 @@ class EditRequestController extends Controller
         $report = $editRequest->report;
 
         // Apply requested changes to the report
-        $report->title = $editRequest->requested_title;
-        $report->date = $editRequest->requested_at;
-        $report->type = $editRequest->requested_type;
-        $report->description = $editRequest->requested_description;
+        $report->report_title = $editRequest->requested_title;
+        $report->report_date = $editRequest->requested_at;
+        $report->report_type = $editRequest->requested_type;
+        $report->report_description = $editRequest->requested_description;
 
-        // Handle requested images (optional, if you support image editing)
+        // Handle requested images (optional, if you support image editing) 
         if (is_array($editRequest->requested_image)) {
             $report->images()->delete(); // Clear previous images first
 
             foreach ($editRequest->requested_image as $imagePath) {
                 $report->images()->create([
-                    'image_path' => $imagePath,
+                    'file_path' => $imagePath,
                 ]);
             }
         }
         $report->save();
 
-        // Mark edit request as accepted
-        $editRequest->status = 'accepted';
+        // Mark edit request as approved
+        $editRequest->status = 'approved';
         $editRequest->reviewed_by = auth()->id();
         $editRequest->reviewed_at = now();
         $editRequest->save();
