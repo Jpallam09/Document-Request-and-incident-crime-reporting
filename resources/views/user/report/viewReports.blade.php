@@ -124,5 +124,6 @@
         <div id="caption" class="caption"></div>
     </div>
 </div>
+@include('sweetalert::alert')
 </body>
 </html>

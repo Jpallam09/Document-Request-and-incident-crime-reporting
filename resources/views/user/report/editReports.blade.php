@@ -117,6 +117,7 @@
             <span class="next" id="modalNextBtn">&#10095;</span>
         </div>
     </div>
+    @include('sweetalert::alert')
 </body>
 
 </html>

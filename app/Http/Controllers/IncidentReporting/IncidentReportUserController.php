@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Models\IncidentReporting\IncidentReportImage;
 use App\Models\IncidentReporting\EditRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Arr;
 
 class IncidentReportUserController extends Controller
@@ -93,9 +94,8 @@ class IncidentReportUserController extends Controller
                 ]);
             }
         }
-
-        return redirect()->route('user.report.userIncidentReporting.index')
-            ->with('success', 'Incident report submitted successfully.');
+        Alert::success('Submitted', 'Incident report submitted successfully.');
+        return redirect()->route('user.report.userIncidentReporting.index');
     }
 
     public function images()
@@ -163,8 +163,8 @@ class IncidentReportUserController extends Controller
             'status' => 'pending',
             'requested_at' => now(),
         ]);
-
-        return back()->with('success', 'Update request sent successfully.');
+        Alert::success('Success', 'Update request sent successfully.');
+        return back();
     }
 
     public function discardUpdateRequest($id)
@@ -175,8 +175,8 @@ class IncidentReportUserController extends Controller
             ->firstOrFail();
 
         $editRequest->delete();
-
-        return back()->with('success', 'Your edit request has been discarded.');
+        Alert::success('Request Discarded', 'Your edit request has been discarded.');
+        return back();
     }
 
 
@@ -221,9 +221,8 @@ class IncidentReportUserController extends Controller
                 $incidentReportUser->images()->create(['file_path' => $path]);
             }
         }
-
-        return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id)
-            ->with('success', 'Report updated successfully.');
+        Alert::success('Updated', 'Report updated successfully.');
+        return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id);
     }
 
 

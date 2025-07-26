@@ -106,6 +106,8 @@
             </section>
         </section>
     </main>
+    @include('sweetalert::alert')
+
 </body>
 
 </html>
