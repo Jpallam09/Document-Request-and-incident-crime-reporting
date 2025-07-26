@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-      @include('components.navbar.user-navbar')
+    @include('components.navbar.user-navbar')
 
     <div class="header">
         <h1>Report Details</h1>
@@ -32,6 +32,24 @@
             <div class="report-header">
                 <div class="info-box" style="flex: 1;">
                     <strong>{{ $report->report_title }}</strong>
+
+                    <!-- ✅ Status Badge -->
+                    @if ($report->editRequest)
+                        @php
+                            $status = $report->editRequest->status;
+                        @endphp
+                        <span class="badge
+                            {{ $status === 'pending' ? 'badge-pending' : ($status === 'accepted' ? 'badge-accepted' : 'badge-rejected') }}">
+                            {{ ucfirst($status) }}
+                        </span>
+                    @endif
+
+                    <!-- ✅ Viewed Badge -->
+                    @if ($report->editRequest && $report->editRequest->is_viewed)
+                        <span class="badge badge-viewed">
+                            Viewed
+                        </span>
+                    @endif
                 </div>
 
                 <div class="info-box">
@@ -78,7 +96,8 @@
                 <!-- Edit Button -->
                 <form action="{{ route('user.report.userIncidentReporting.edit', $report->id) }}" method="GET" style="display: inline;">
                     <button type="submit" class="btn-primary">
-                    <i class="fa-solid fa-pen"></i> Request Edit </button>
+                        <i class="fa-solid fa-pen"></i> Request Edit
+                    </button>
                 </form>
 
                 <!-- Delete Button -->
@@ -86,7 +105,8 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn-danger" onclick="return confirm('Delete this report?');">
-                        <i class="fa-solid fa-trash"></i>Request Delete</button>
+                        <i class="fa-solid fa-trash"></i> Request Delete
+                    </button>
                 </form>
             </div>
 
@@ -94,6 +114,7 @@
     @else
         <p class="text-red-600">Report not found or data is missing.</p>
     @endisset
+
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal">
         <span class="close" onclick="closeModal()">&times;</span>

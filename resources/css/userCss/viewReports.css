@@ -47,6 +47,33 @@ body {
   margin: 0;
   color: var(--primary);
 }
+.badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.badge-pending {
+    background-color: #facc15; /* Yellow */
+    color: #000;
+}
+
+.badge-accepted {
+    background-color: #22c55e; /* Green */
+    color: #fff;
+}
+
+.badge-rejected {
+    background-color: #ef4444; /* Red */
+    color: #fff;
+}
+
+.badge-viewed {
+    background-color: #3b82f6; /* Blue */
+    color: #fff;
+}
 
 /* Back link (optional) */
 .back-link {
