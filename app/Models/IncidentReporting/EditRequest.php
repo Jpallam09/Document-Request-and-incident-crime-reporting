@@ -14,6 +14,7 @@ use App\Models\User;
  * @property string|null $requested_description
  * @property string|null $requested_type
  * @property array|null $requested_image
+ * @property string|null $requested_report_date
  * @property string $status
  * @property \Illuminate\Support\Carbon $requested_at
  * @property int|null $reviewed_by
@@ -35,6 +36,7 @@ class EditRequest extends Model
         'requested_description',
         'requested_type',
         'requested_image',
+        'requested_report_date',
         'status',
         'requested_at',
         'reviewed_at',

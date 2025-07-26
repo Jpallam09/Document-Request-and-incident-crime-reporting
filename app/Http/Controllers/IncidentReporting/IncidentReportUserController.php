@@ -134,7 +134,7 @@ class IncidentReportUserController extends Controller
         // Validate form fields
         $request->validate([
             'title' => 'required|string',
-            'incident_date' => 'required|date',
+            'requested_report_date' => 'required|date',
             'incident_type' => 'required|string',
             'incident_description' => 'required|string',
             'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -158,6 +158,7 @@ class IncidentReportUserController extends Controller
             'requested_title' => $request->input('title'),
             'requested_description' => $request->input('incident_description'),
             'requested_type' => $request->input('incident_type'),
+            'requested_report_date' => $request->input('requested_report_date'),
             'requested_image' => $imagePaths, // ← Just pass the array directly
             'status' => 'pending',
             'requested_at' => now(),

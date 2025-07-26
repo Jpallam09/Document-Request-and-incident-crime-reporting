@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/js/componentsJs/navbar.js')
 </head>
+
 <body>
     <div class="layout">
         <div class="container">
@@ -25,10 +27,8 @@
             </div>
 
             {{-- Edit request form --}}
-            <form id="editRequestForm"
-                  action="{{ route('user.report.requestUpdate', $report->id) }}"
-                  method="POST"
-                  enctype="multipart/form-data">
+            <form id="editRequestForm" action="{{ route('user.report.requestUpdate', $report->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -36,20 +36,26 @@
                     <div class="report-header">
                         <div>
                             <input type="text" id="title" name="title"
-                                   placeholder="{{ $report->report_title ?? 'Report Title' }}" required>
+                                placeholder="{{ $report->report_title ?? 'Report Title' }}" required>
                             <div>
                                 Incident Date:
-                                <input type="date" id="incidentDate" name="incident_date"
-                                       value="{{ $report->report_date }}" required>
+                                <input type="date" id="incidentDate" name="requested_report_date"
+                                    value="{{ $report->report_date }}" required>
                             </div>
                         </div>
                         <div>
                             <select id="incidentType" name="incident_type" required>
                                 <option disabled selected>Select a type</option>
-                                <option value="Safety" {{ $report->incident_type === 'Safety' ? 'selected' : '' }}>Safety</option>
-                                <option value="Operational" {{ $report->incident_type === 'Operational' ? 'selected' : '' }}>Operational</option>
-                                <option value="Security" {{ $report->incident_type === 'Security' ? 'selected' : '' }}>Security</option>
-                                <option value="Environmental" {{ $report->incident_type === 'Environmental' ? 'selected' : '' }}>Environmental</option>
+                                <option value="Safety" {{ $report->incident_type === 'Safety' ? 'selected' : '' }}>
+                                    Safety</option>
+                                <option value="Operational"
+                                    {{ $report->incident_type === 'Operational' ? 'selected' : '' }}>Operational
+                                </option>
+                                <option value="Security" {{ $report->incident_type === 'Security' ? 'selected' : '' }}>
+                                    Security</option>
+                                <option value="Environmental"
+                                    {{ $report->incident_type === 'Environmental' ? 'selected' : '' }}>Environmental
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -64,10 +70,12 @@
                     <div class="attachments-section">
                         <h3>Attachments</h3>
                         <div class="attachments-grid" id="attachmentsGrid">
-                            @foreach($report->images as $image)
+                            @foreach ($report->images as $image)
                                 <div class="attachment-item">
-                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Expanded Attachment" id="expandedImg" class="attachment-thumb">
-                                    <button type="button" class="delete-btn" onclick="removeExistingImage({{ $image->id }}, this)">
+                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Expanded Attachment"
+                                        id="expandedImg" class="attachment-thumb">
+                                    <button type="button" class="delete-btn"
+                                        onclick="removeExistingImage({{ $image->id }}, this)">
                                         &times;
                                     </button>
                                 </div>
@@ -76,7 +84,8 @@
 
                         <div class="upload-section">
                             <label for="requested_image">Add New Image</label>
-                            <input type="file" name="requested_image[]" id="requested_image" accept="image/*" multiple>
+                            <input type="file" name="requested_image[]" id="requested_image" accept="image/*"
+                                multiple>
                             {{-- Removed duplicate <label for="imageInput"> --}}
                             <span id="fileName"></span>
                         </div>
@@ -91,7 +100,8 @@
             </form>
 
             {{-- Discard button --}}
-            <form action="{{ route('user.report.discardUpdate', $report->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to discard this request?')">
+            <form action="{{ route('user.report.discardUpdate', $report->id) }}" method="POST"
+                onsubmit="return confirm('Are you sure you want to discard this request?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Discard Request</button>
@@ -108,4 +118,5 @@
         </div>
     </div>
 </body>
+
 </html>

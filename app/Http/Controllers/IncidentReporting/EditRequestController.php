@@ -38,11 +38,11 @@ class EditRequestController extends Controller
 
         // Apply requested changes to the report
         $report->report_title = $editRequest->requested_title;
-        $report->report_date = $editRequest->requested_at;
+        $report->report_date = $editRequest->requested_report_date;
         $report->report_type = $editRequest->requested_type;
         $report->report_description = $editRequest->requested_description;
 
-        // Handle requested images (optional, if you support image editing) 
+        // Handle requested images (optional, if you support image editing)
         if (is_array($editRequest->requested_image)) {
             $report->images()->delete(); // Clear previous images first
 
@@ -51,7 +51,7 @@ class EditRequestController extends Controller
                     'file_path' => $imagePath,
                 ]);
             }
-        }   
+        }
         $report->save();
 
         // Mark edit request as approved
