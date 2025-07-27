@@ -33,25 +33,25 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('user/report')
     ->as('user.report.')
     ->group(function () {
-    Route::middleware('auth')->group(function () {
-    Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'dashboard'])
-    ->name("userDashboardReporting");
-    Route::resource('userIncidentReporting', IncidentReportUserController::class);
-    Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])->name('viewReports');
-    //editRequest
-    Route::put('requestUpdate/{id}', [IncidentReportUserController::class, 'requestUpdate'])
-    ->name('requestUpdate');
-    //Discard Edit
-    Route::delete('/discardUpdate/{id}', [IncidentReportUserController::class, 'discardUpdateRequest'])
-    ->name('discardUpdate');
-    // edit
-    Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])->name('user.report.edit');
-    });
+        Route::middleware('auth')->group(function () {
+            Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'dashboard'])
+                ->name("userDashboardReporting");
+            Route::resource('userIncidentReporting', IncidentReportUserController::class);
+            Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])->name('viewReports');
+            //editRequest
+            Route::put('requestUpdate/{id}', [IncidentReportUserController::class, 'requestUpdate'])
+                ->name('requestUpdate');
+            //Discard Edit
+            Route::delete('/discardUpdate/{id}', [IncidentReportUserController::class, 'discardUpdateRequest'])
+                ->name('discardUpdate');
+            // edit
+            Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])->name('user.report.edit');
+        });
 
 
-    Route::get('/userProfileReporting', function () {
-    return view('user.report.userProfileReporting');
-    })->name("userProfileReporting");
+        Route::get('/userProfileReporting', function () {
+            return view('user.report.userProfileReporting');
+        })->name("userProfileReporting");
     });
 
 // ------------------ USER MAIN DASHBOARD ------------------
@@ -60,5 +60,5 @@ Route::get('user/userMainDashboard', function () {
 })->name("userMainDashboard");
 
 // ------------------ IMPORT ROUTE FILES ------------------
-require __DIR__.'/incidentReporting.php';
-require __DIR__.'/documentRequest.php';
+require __DIR__ . '/incidentReporting.php';
+require __DIR__ . '/documentRequest.php';

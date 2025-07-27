@@ -34,14 +34,6 @@ class IncidentReportStaffController extends Controller
 
         return view('incidentReporting.staffReport.staffViewReportsFullDetails', compact('report'));
     }
-    /**
-     * Show deletion requests.
-     */
-    public function staffDeletionRequests()
-    {
-        $reports = IncidentReportUser::latest()->get();
-        return view('incidentReporting.staffReport.staffDeletionRequests', compact('reports'));
-    }
 
     public function staffUpdateRequests()
     {
