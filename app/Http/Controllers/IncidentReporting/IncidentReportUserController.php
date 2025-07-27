@@ -20,9 +20,10 @@ class IncidentReportUserController extends Controller
      */
     public function dashboard(): View
     {
-        $reports = IncidentReportUser::where('user_id', auth()->id())
+        $reports = IncidentReportUser::where('user_id', auth()
+            ->id())
             ->latest()
-            ->get();
+            ->paginate(5);
 
         return view('user.report.userDashboardReporting', compact('reports'));
     }
@@ -32,7 +33,8 @@ class IncidentReportUserController extends Controller
     public function viewReport($id)
     {
         $report = IncidentReportUser::with(['editRequest']) // request
-            ->where('user_id', auth()->id())
+            ->where('user_id', auth()
+            ->id())
             ->find($id);
 
         if (!$report) {

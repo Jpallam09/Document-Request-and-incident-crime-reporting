@@ -17,7 +17,12 @@
 
 <body>
     <main class="layout">
-        @include('components.navbar.Shared-navbar')
+        <div class="navbar-wrapper">
+            <section>
+                @include('components.navbar.Shared-navbar')
+            </section>
+        </div>
+
         <section class="page-content">
             <h1>Edit Requests</h1>
 
@@ -39,41 +44,39 @@
                         @foreach ($requests as $index => $request)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-
-                                {{-- User name (with fallback) --}}
                                 <td>{{ $request->user->user_name ?? 'Unknown' }}</td>
-
-                                {{-- Original report title (with fallback) --}}
                                 <td>{{ $request->report->report_title ?? 'No Title' }}</td>
-
-                                {{-- Requested title & description --}}
                                 <td>{{ $request->requested_title ?? '—' }}</td>
                                 <td>{{ $request->requested_description ?? '—' }}</td>
-
-                                {{-- Requested at (safely parsed and formatted) --}}
                                 <td>
                                     {{ $request->requested_at ? \Carbon\Carbon::parse($request->requested_at)->format('M d, Y') : 'N/A' }}
                                 </td>
-
-                                {{-- Status --}}
                                 <td>{{ ucfirst($request->status) }}</td>
-
-                                {{-- Actions button --}}
                                 <td>
                                     <button class="btn-view-request" data-request-id="{{ $request->id }}">
                                         View Request
                                     </button>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <div class="pagination-wrapper">
+                {{ $requests->links('vendor.pagination.default') }}
+            </div>
         </section>
     </main>
-
-    @foreach ($requests as $request)
-        @include('components.modals.request-modal', ['report' => $request->report, 'request' => $request])
-    @endforeach
-
+    <div class="modal-wrapper">
+        <section>
+            @foreach ($requests as $request)
+                @include('components.modals.request-modal', [
+                    'report' => $request->report,
+                    'request' => $request,
+                ])
+            @endforeach
+        </section>
+    </div>
     @include('sweetalert::alert')
 </body>
 

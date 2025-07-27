@@ -37,7 +37,7 @@ body {
   color: #1f2937;
   padding-bottom: 0.75rem; /* ↓ slightly tighter */
   line-height: 1.2;         /* ↓ tighter spacing */
-  border-bottom: 2px solid #e5e7eb; 
+  border-bottom: 2px solid #e5e7eb;
 }
 
 
@@ -145,6 +145,53 @@ body {
 .btn-reject:disabled {
     background-color: #9ca3af;
     cursor: not-allowed;
+}
+
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.page-item {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.page-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  background-color: white;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-link:hover {
+  background-color: #ebf2ff;
+}
+
+.page-item.active .page-link {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+}
+
+.page-item.disabled .page-link {
+  color: #999;
+  background-color: #f5f5f5;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* ===== Responsive ===== */

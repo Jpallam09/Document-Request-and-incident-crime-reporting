@@ -12,8 +12,9 @@ class EditRequestController extends Controller
     public function index()
     {
         // Eager-load 'user' and 'report' relationships, return a collection
-        $requests = EditRequest::with(['user', 'report'])->latest()->get();
-
+        $requests = EditRequest::with(['user', 'report'])
+            ->latest()
+            ->paginate(10);
         // Pass the collection to the view — you’ll loop over it in the Blade file
         return view('incidentReporting.staffReport.staffUpdateRequests', compact('requests'));
     }

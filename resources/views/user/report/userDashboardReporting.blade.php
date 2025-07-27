@@ -13,8 +13,11 @@
 
 <body>
 
-    <main class="layout">
+    <section class="navbar">
         @include('components.navbar.user-navbar')
+    </section>
+
+    <main class="layout">
         <section class="page-content">
             <section class="hero" aria-labelledby="dashboard-title">
                 <h1 id="dashboard-title">Your Report Lists</h1>
@@ -103,11 +106,11 @@
                         </tbody>
                     </table>
                 </div>
-            </section>
-        </section>
+                <div class="pagination-wrapper">
+                    {{ $reports->links('vendor.pagination.default') }}
+                </div>
     </main>
     @include('sweetalert::alert')
-
 </body>
 
 </html>
