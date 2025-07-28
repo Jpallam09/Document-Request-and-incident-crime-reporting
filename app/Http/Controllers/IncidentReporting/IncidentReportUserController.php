@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\IncidentReporting\IncidentReportImage;
 use App\Models\IncidentReporting\EditRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use App\Models\IncidentReporting\DeleteRequest;
 use Illuminate\Support\Arr;
 
 class IncidentReportUserController extends Controller
@@ -33,8 +35,7 @@ class IncidentReportUserController extends Controller
     public function viewReport($id)
     {
         $report = IncidentReportUser::with(['editRequest']) // request
-            ->where('user_id', auth()
-            ->id())
+            ->where('user_id', auth()->id())
             ->find($id);
 
         if (!$report) {
@@ -47,7 +48,6 @@ class IncidentReportUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index(): View
     {
         $reports = IncidentReportUser::where('user_id', auth()->id())
@@ -228,12 +228,28 @@ class IncidentReportUserController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(IncidentReportUser $incidentReportUser): RedirectResponse
+    public function requestDelete(IncidentReportUser $incidentReportUser): RedirectResponse
     {
-        // Placeholder delete logic
-        return redirect()->back()->with('message', 'Delete functionality not implemented yet.');
+        // Ensure the report belongs to the currently authenticated user
+        if ($incidentReportUser->user_id !== Auth::id()) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        // Check if a delete request for this report already exists
+        $existingRequest = DeleteRequest::where('report_id', $incidentReportUser->id)->first();
+        if ($existingRequest) {
+            Alert::error('Unauthorized', 'You already sent a delete request.');
+            return redirect()->back();
+        }
+        // Create a new delete request
+        DeleteRequest::create([
+            'user_id' => Auth::id(),
+            'report_id' => $incidentReportUser->id,
+            'status' => 'pending',
+            'reason' => 'User requested to delete the report.', // optionally set a default or get from form
+            'requested_at' => now(),
+        ]);
+        Alert::success('Request Sent', 'Your delete request has been submitted.');
+        return redirect()->back();
     }
 }

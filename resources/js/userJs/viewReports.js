@@ -1,51 +1,87 @@
 let currentImageIndex = 0;
 let images = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-    images = document.querySelectorAll('.thumbnail');
+document.addEventListener("DOMContentLoaded", () => {
+    images = document.querySelectorAll(".thumbnail");
 
     window.openImageModal = function (index) {
         if (!images.length) return;
 
         currentImageIndex = index;
-        const modal = document.getElementById('imageModal');
+        const modal = document.getElementById("imageModal");
         const img = images[currentImageIndex];
 
-        document.getElementById('expandedImg').src = img.dataset.full || img.src;
-        document.getElementById('caption').textContent = img.alt || 'Image';
+        document.getElementById("expandedImg").src =
+            img.dataset.full || img.src;
+        document.getElementById("caption").textContent = img.alt || "Image";
         modal.style.display = "flex";
 
-        document.querySelector('.prev').style.display = images.length > 1 ? 'block' : 'none';
-        document.querySelector('.next').style.display = images.length > 1 ? 'block' : 'none';
+        document.querySelector(".prev").style.display =
+            images.length > 1 ? "block" : "none";
+        document.querySelector(".next").style.display =
+            images.length > 1 ? "block" : "none";
     };
 
     window.closeModal = function () {
-        document.getElementById('imageModal').style.display = "none";
+        document.getElementById("imageModal").style.display = "none";
     };
 
     window.changeImage = function (step) {
         if (!images.length) return;
 
-        currentImageIndex = (currentImageIndex + step + images.length) % images.length;
+        currentImageIndex =
+            (currentImageIndex + step + images.length) % images.length;
         const img = images[currentImageIndex];
 
-        document.getElementById('expandedImg').src = img.dataset.full || img.src;
-        document.getElementById('caption').textContent = img.alt || 'Image';
+        document.getElementById("expandedImg").src =
+            img.dataset.full || img.src;
+        document.getElementById("caption").textContent = img.alt || "Image";
     };
 
     window.onclick = function (event) {
-        const modal = document.getElementById('imageModal');
+        const modal = document.getElementById("imageModal");
         if (event.target === modal) {
             closeModal();
         }
     };
 
-    document.addEventListener('keydown', function (e) {
-        const modalOpen = document.getElementById('imageModal').style.display === 'flex';
+    document.addEventListener("keydown", function (e) {
+        const modalOpen =
+            document.getElementById("imageModal").style.display === "flex";
         if (!modalOpen) return;
 
-        if (e.key === 'ArrowRight') changeImage(1);
-        if (e.key === 'ArrowLeft') changeImage(-1);
-        if (e.key === 'Escape') closeModal();
+        if (e.key === "ArrowRight") changeImage(1);
+        if (e.key === "ArrowLeft") changeImage(-1);
+        if (e.key === "Escape") closeModal();
+    });
+
+    // ============================
+    // REQUEST DELETE – SWEETALERT
+    // ============================
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const deleteButtons = document.querySelectorAll(".btn-delete-request");
+
+        deleteButtons.forEach((button) => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault(); // Stop normal link behavior
+
+                const url = this.getAttribute("href");
+
+                Swal.fire({
+                    title: "Request Deletion?",
+                    text: "Are you sure you want to request deletion for this report?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, request it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
     });
 });

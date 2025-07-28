@@ -42,6 +42,6 @@ class DeleteRequest extends Model
 
     public function report()
     {
-        return $this->belongsTo(\App\Models\IncidentReporting\IncidentReportUser::class);
+        return $this->belongsTo(\App\Models\IncidentReporting\IncidentReportUser::class, 'report_id');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\IncidentReporting\IncidentReportUserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -13,11 +13,15 @@ Route::get('/', function () {
 
 // ------------------ AUTH ROUTES ------------------
 Route::prefix("auth")->group(function () {
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register'); // ✅ FIXED: Now GET
-    Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
+        ->name('register'); // ✅ FIXED: Now GET
+    Route::post('/register', [RegisterController::class, 'register'])
+        ->name('register.post');
 
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+    Route::get('/login', [LoginController::class, 'showLoginForm'])
+        ->name('login');
+    Route::post('/login', [LoginController::class, 'login'])
+        ->name('login.post');
 
     Route::get('/index', function () {
         return view('auth.index');
@@ -34,10 +38,14 @@ Route::prefix('user/report')
     ->as('user.report.')
     ->group(function () {
         Route::middleware('auth')->group(function () {
+            // User Dashboard for Incident Reporting
             Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'dashboard'])
                 ->name("userDashboardReporting");
+            // User Incident Reporting
             Route::resource('userIncidentReporting', IncidentReportUserController::class);
-            Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])->name('viewReports');
+            //viewReports table
+            Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])
+                ->name('viewReports');
             //editRequest
             Route::put('requestUpdate/{id}', [IncidentReportUserController::class, 'requestUpdate'])
                 ->name('requestUpdate');
@@ -45,13 +53,18 @@ Route::prefix('user/report')
             Route::delete('/discardUpdate/{id}', [IncidentReportUserController::class, 'discardUpdateRequest'])
                 ->name('discardUpdate');
             // edit
-            Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])->name('user.report.edit');
+            Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])
+                ->name('user.report.edit');
+            // delete Request
+            Route::delete('/requestDelete/{incidentReportUser}', [IncidentReportUserController::class, 'requestDelete'])
+                ->name('delete');
         });
 
 
         Route::get('/userProfileReporting', function () {
             return view('user.report.userProfileReporting');
-        })->name("userProfileReporting");
+        })
+            ->name("userProfileReporting");
     });
 
 // ------------------ USER MAIN DASHBOARD ------------------
