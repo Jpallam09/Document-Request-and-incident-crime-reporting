@@ -15,7 +15,8 @@ class DeleteRequestController extends Controller
      */
     public function index()
     {
-        $deleteRequests = DeleteRequest::with(['user'])
+        $deleteRequests = DeleteRequest::with(['user', 'report'])
+            ->whereIn('status', ['pending', 'rejected'])
             ->latest()
             ->paginate(10);
 
@@ -60,7 +61,7 @@ class DeleteRequestController extends Controller
 
     /**
      * Reject a delete request without deleting the report.
-     *
+     * @property \Illuminate\Support\Carbon|null $reviewed_at
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -68,10 +69,10 @@ class DeleteRequestController extends Controller
     {
         $deleteRequest = DeleteRequest::findOrFail($id);
         $deleteRequest->status = 'rejected';
+        $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 
         Alert::info('Rejected', 'The delete request has been rejected.');
         return redirect()->back();
     }
-
 }

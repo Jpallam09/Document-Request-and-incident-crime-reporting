@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * App\Models\IncidentReporting\DeleteRequest
- *
+ * @property \Illuminate\Support\Carbon|null $reviewed_at
  * @property int $id
  * @property int $user_id
  * @property int $report_id

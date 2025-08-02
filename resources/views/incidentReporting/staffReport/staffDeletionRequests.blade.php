@@ -29,7 +29,6 @@
                                 <th>Reason</th>
                                 <th>Date Requested</th>
                                 <th>Status</th>
-                                <th>Request</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -38,8 +37,9 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $request->user->user_name ?? 'Unknown' }}</td>
-                                    <td>{{ $request->report->title ?? 'Untitled' }}</td>
-                                    <td>{{ $request->reason }}</td>
+                                    <td>{{ $request->report_title }}</td>
+                                    <td>{{ $request->reason }}</td> 
+
                                     <td>{{ $request->created_at->format('Y-m-d') }}</td>
                                     <td>
                                         <span class="status {{ strtolower($request->status) }}">
