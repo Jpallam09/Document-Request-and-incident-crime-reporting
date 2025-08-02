@@ -222,7 +222,7 @@ class IncidentReportUserController extends Controller
         Alert::success('Updated', 'Report updated successfully.');
         return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id);
     }
-    //handles delte requests
+    //handles delete requests
     public function requestDelete(IncidentReportUser $incidentReportUser): RedirectResponse
     {
         // Ensure the report belongs to the currently authenticated user
@@ -250,7 +250,7 @@ class IncidentReportUserController extends Controller
             'report_date' => $incidentReportUser->report_date,
             'report_type' => $incidentReportUser->report_type,
             'report_description' => $incidentReportUser->report_description,
-            'requested_image' => $incidentReportUser->images->pluck('file_path')->toJson(), // ← Optional: include image paths
+            'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(), // ← Optional: include image paths
             'reason' => 'User requested to delete the report.',
             'status' => 'pending',
             'requested_at' => now(),

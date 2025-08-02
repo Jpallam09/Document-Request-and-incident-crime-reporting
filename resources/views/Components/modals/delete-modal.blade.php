@@ -17,16 +17,22 @@
             <p>{{ $request->reason }}</p>
         </div>
 
-        @if (!empty($request->requested_image) && is_array($request->requested_image))
+        @if (!empty($request->requested_image) && is_array($request->requested_image) && count($request->requested_image))
             <div class="modal-section">
                 <h3>Attached Images</h3>
                 <div class="image-preview-container">
                     @foreach ($request->requested_image as $img)
                         <img src="{{ asset('storage/' . $img) }}" alt="Requested Image">
                     @endforeach
-                </div>  
+                </div>
+            </div>
+        @else
+            <div class="modal-section">
+                <h3>Attached Images</h3>
+                <p>No images attached.</p>
             </div>
         @endif
+
 
         <div class="modal-actions">
             <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}">
