@@ -24,17 +24,17 @@
                     @foreach ($request->requested_image as $img)
                         <img src="{{ asset('storage/' . $img) }}" alt="Requested Image">
                     @endforeach
-                </div>
+                </div>  
             </div>
         @endif
 
         <div class="modal-actions">
-            <form method="POST" action="{{ route('staff.deleteRequest.accept', $request->id) }}">
+            <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}">
                 @csrf
                 <button type="submit" class="btn btn-accept">Accept</button>
             </form>
 
-            <form method="POST" action="{{ route('staff.deleteRequest.reject', $request->id) }}">
+            <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}">
                 @csrf
                 <button type="submit" class="btn btn-reject">Reject</button>
             </form>
