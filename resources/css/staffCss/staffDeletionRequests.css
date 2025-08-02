@@ -1,68 +1,67 @@
 :root {
-  --header-height: 3rem;
-  --sidebar-width: 16rem;
+    --header-height: 3rem;
+    --sidebar-width: 16rem;
 }
 
 /* ============================
    LAYOUT STRUCTURE
 ============================ */
 .layout {
-  display: flex;
-  flex-direction: row;
-  min-height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - var(--header-height));
 }
 
 .page-content {
-  flex: 1;
-  margin-left: var(--sidebar-width); /* fits beside sidebar */
-  padding: 1rem 2rem 2rem 2rem; /* reduced top padding */
-  background-color: #f4f4f4;
-  box-sizing: border-box;
+    flex: 1;
+    margin-left: var(--sidebar-width); /* fits beside sidebar */
+    padding: 1rem 2rem 2rem 2rem; /* reduced top padding */
+    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
 .page-content h1 {
-  margin-top: 0;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1f2937;
-  padding-bottom: 0.75rem; /* ↓ slightly tighter */
-  line-height: 1.2;         /* ↓ tighter spacing */
-  border-bottom: 2px solid #e5e7eb;
+    margin-top: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1f2937;
+    padding-bottom: 0.75rem; /* ↓ slightly tighter */
+    line-height: 1.2; /* ↓ tighter spacing */
+    border-bottom: 2px solid #e5e7eb;
 }
-
 
 /* ============================
    TABLE CONTAINER + TABLE
 ============================ */
 .table-container {
-  overflow-x: auto;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
 }
 
 .report-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
 }
 
 .report-table thead {
-  background-color: #2563eb;
-  color: white;
+    background-color: #2563eb;
+    color: white;
 }
 
 .report-table th,
 .report-table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .report-table tbody tr:hover {
-  background-color: #f1f5f9;
-  transition: background-color 0.2s ease-in-out;
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease-in-out;
 }
 
 /* ============================
@@ -72,81 +71,139 @@
 .btn-mark,
 .btn-approve,
 .btn-reject {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .btn-view {
-  background-color: #3b82f6;
-  color: white;
-  margin-right: 0.5rem;
+    background-color: #3b82f6;
+    color: white;
+    margin-right: 0.5rem;
 }
 
 .btn-view:hover {
-  background-color: #2563eb;
+    background-color: #2563eb;
 }
 
 .btn-mark {
-  background-color: #10b981;
-  color: white;
+    background-color: #10b981;
+    color: white;
 }
 
 .btn-mark:hover {
-  background-color: #059669;
+    background-color: #059669;
 }
 
 .btn-approve {
-  background-color: #10b981;
-  color: white;
-  margin-right: 0.5rem;
+    background-color: #10b981;
+    color: white;
+    margin-right: 0.5rem;
 }
 
 .btn-approve:hover {
-  background-color: #059669;
+    background-color: #059669;
 }
 
 .btn-reject {
-  background-color: #ef4444;
-  color: white;
+    background-color: #ef4444;
+    color: white;
 }
 
 .btn-reject:hover {
-  background-color: #dc2626;
+    background-color: #dc2626;
 }
 
 .btn-mark:disabled,
 .btn-approve:disabled,
 .btn-reject:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 600px;
+    width: 90%;
+}
+
+.modal-section {
+    margin-bottom: 1.5rem;
+}
+
+.image-preview-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.btn-accept {
+    background-color: #16a34a;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.btn-reject {
+    background-color: #dc2626;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
 }
 
 /* ============================
    RESPONSIVENESS
 ============================ */
 @media (max-width: 768px) {
-  .page-title {
-    font-size: 1.5rem;
-  }
+    .page-title {
+        font-size: 1.5rem;
+    }
 
-  .btn-view,
-  .btn-mark,
-  .btn-approve,
-  .btn-reject {
-    padding: 0.35rem 0.7rem;
-    font-size: 0.9rem;
-  }
+    .btn-view,
+    .btn-mark,
+    .btn-approve,
+    .btn-reject {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.9rem;
+    }
 
-  .page-content {
-    margin-left: 0;
-    padding: 1.5rem;
-  }
+    .page-content {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
 
-  .layout {
-    flex-direction: column;
-  }
+    .layout {
+        flex-direction: column;
+    }
 }

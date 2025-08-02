@@ -1,20 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // === DELETION REQUEST ACTION BUTTONS ===
-    document.querySelectorAll('.btn-view').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('View report logic here...');
-        });
+document.querySelectorAll('.openModalBtn').forEach(button => {
+    const modalId = button.getAttribute('data-modal');
+    const modal = document.getElementById(modalId);
+
+    button.addEventListener('click', () => {
+        modal.classList.remove('hidden');
     });
 
-    document.querySelectorAll('.btn-approve').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Approved!');
-        });
-    });
-
-    document.querySelectorAll('.btn-reject').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Rejected!');
-        });
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.classList.add('hidden');
     });
 });

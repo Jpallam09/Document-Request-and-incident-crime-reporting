@@ -10,7 +10,6 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', function () {
     return view('auth.index');
 });
-
 // ------------------ AUTH ROUTES ------------------
 Route::prefix("auth")->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
@@ -24,15 +23,13 @@ Route::prefix("auth")->group(function () {
         ->name('login.post');
 
     Route::get('/index', function () {
-        return view('auth.index');
-    })->name("index");
+        return view('auth.index');})
+        ->name("index");
 });
 
-
 // ------------------ GLOBAL LOGOUT ROUTE ------------------
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 // ------------------ USER INCIDENT REPORT ROUTES ------------------
 Route::prefix('user/report')
     ->as('user.report.')
@@ -41,7 +38,7 @@ Route::prefix('user/report')
             // User Dashboard for Incident Reporting
             Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'dashboard'])
                 ->name("userDashboardReporting");
-            // User Incident Reporting
+            // User Make report
             Route::resource('userIncidentReporting', IncidentReportUserController::class);
             //viewReports table
             Route::get('viewReports/{id}', [IncidentReportUserController::class, 'viewReport'])
@@ -59,19 +56,15 @@ Route::prefix('user/report')
             Route::delete('/requestDelete/{incidentReportUser}', [IncidentReportUserController::class, 'requestDelete'])
                 ->name('delete');
         });
-
-
         Route::get('/userProfileReporting', function () {
-            return view('user.report.userProfileReporting');
-        })
+            return view('user.report.userProfileReporting');})
             ->name("userProfileReporting");
     });
-
 // ------------------ USER MAIN DASHBOARD ------------------
 Route::get('user/userMainDashboard', function () {
     return view('user.userMainDashboard');
-})->name("userMainDashboard");
-
+})
+    ->name("userMainDashboard");
 // ------------------ IMPORT ROUTE FILES ------------------
 require __DIR__ . '/incidentReporting.php';
 require __DIR__ . '/documentRequest.php';

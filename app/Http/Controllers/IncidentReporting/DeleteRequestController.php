@@ -15,7 +15,7 @@ class DeleteRequestController extends Controller
      */
     public function index()
     {
-        $deleteRequests = DeleteRequest::with(['user', 'report'])
+        $deleteRequests = DeleteRequest::with(['user'])
             ->latest()
             ->paginate(10);
 
@@ -30,7 +30,7 @@ class DeleteRequestController extends Controller
      */
     public function view($id)
     {
-        $report = IncidentReportUser::with(['user', 'reportImages'])
+        $report = IncidentReportUser::with(['user', 'images'])
             ->findOrFail($id);
 
         return view('incidentReporting.staffReport.staffDeletionRequests', compact('report'));
@@ -73,4 +73,5 @@ class DeleteRequestController extends Controller
         Alert::info('Rejected', 'The delete request has been rejected.');
         return redirect()->back();
     }
+
 }

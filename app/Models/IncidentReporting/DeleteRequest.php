@@ -25,13 +25,20 @@ class DeleteRequest extends Model
     protected $fillable = [
         'user_id',
         'report_id',
+        'report_title',
+        'report_date',
+        'report_type',
+        'report_description',
+        'requested_image',
         'reason',
         'status',
         'requested_at',
+        'reviewed_at',
     ];
-
     protected $casts = [
+        'requested_image' => 'array',
         'requested_at' => 'datetime',
+        'reviewed_at' => 'datetime',
     ];
 
     // Relationships

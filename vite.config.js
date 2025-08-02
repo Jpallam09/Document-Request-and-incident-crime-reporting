@@ -33,7 +33,7 @@
 
                         //componentsJs
                         'resources/js/componentsJs/navbar.js',
-                        'resources/js/componentsJs/Shared-navbar.js',
+                        'resources/js/componentsJs/shared-navbar.js',
                         'resources/js/componentsJs/viewRequestModal.js',
 
                         //authJs
