@@ -69,24 +69,30 @@
             </div>
 
             <!-- Footer -->
-            <div class="edit-request-footer">
-                <!-- Accept Button inside Modal -->
-                <form method="POST"
-                    action="{{ route('reporting.staff.updateRequest.accept', ['id' => $request->id]) }}"
-                    class="form-accept">
-                    @csrf
-                    <button type="button" class="btn-accept">Accept</button>
-                </form>
+            @if ($request->status === 'pending')
+                <div class="edit-request-footer">
+                    <!-- Accept Button inside Modal -->
+                    <form method="POST"
+                        action="{{ route('reporting.staff.updateRequest.accept', ['id' => $request->id]) }}"
+                        class="form-accept">
+                        @csrf
+                        <button type="button" class="btn-accept">Accept</button>
+                    </form>
 
-                <!-- Reject Button -->
-                <form method="POST"
-                    action="{{ route('reporting.staff.updateRequest.reject', ['id' => $request->id]) }}"
-                    class="form-reject">
-                    @csrf
-                    <button type="button" class="btn-reject">Reject</button>
-                </form>
+                    <!-- Reject Button -->
+                    <form method="POST"
+                        action="{{ route('reporting.staff.updateRequest.reject', ['id' => $request->id]) }}"
+                        class="form-reject">
+                        @csrf
+                        <button type="button" class="btn-reject">Reject</button>
+                    </form>
+                </div>
+            @else
+                <div class="edit-request-footer">
+                    <span class="text-muted">Edit Request {{ ucfirst($request->status) }}</span>
+                </div>
+            @endif
 
-            </div>
         </div>
     </div>
 </div>

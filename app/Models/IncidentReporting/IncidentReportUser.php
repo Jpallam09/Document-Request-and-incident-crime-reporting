@@ -45,8 +45,8 @@ class IncidentReportUser extends Model
     }
 
     // Delete request relationship
-    // public function deleteRequest()
-    // {
-    //     return $this->hasOne(DeleteRequest::class, 'incident_report_id');
-    // }
+    public function deleteRequest()
+    {
+        return $this->hasOne(DeleteRequest::class, 'report_id');
+    }
 }

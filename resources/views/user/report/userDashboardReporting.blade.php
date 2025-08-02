@@ -82,13 +82,13 @@
                                             @elseif ($report->editRequest->status === 'rejected')
                                                 <span class="badge-request badge-rejected">Edit Request Rejected</span>
                                             @endif
-                                        @elseif ($report->deleteRequest)
-                                            @if ($report->deleteRequest->status === 'pending')
+                                        @elseif ($report->DeleteRequest)
+                                            @if ($report->DeleteRequest->status === 'pending')
                                                 <span class="badge-request badge-delete">Delete Request Sent</span>
-                                            @elseif ($report->deleteRequest->status === 'approved')
+                                            @elseif ($report->DeleteRequest->status === 'accepted')
                                                 <span class="badge-request badge-approved">Delete Request
                                                     Approved</span>
-                                            @elseif ($report->deleteRequest->status === 'rejected')
+                                            @elseif ($report->DeleteRequest->status === 'rejected')
                                                 <span class="badge-request badge-rejected">Delete Request
                                                     Rejected</span>
                                             @endif
