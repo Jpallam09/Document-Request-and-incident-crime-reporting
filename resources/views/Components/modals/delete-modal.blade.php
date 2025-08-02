@@ -33,17 +33,20 @@
             </div>
         @endif
 
+        @if ($request->status === 'pending')
+            <div class="modal-actions">
+                <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-accept">Accept</button>
+                </form>
 
-        <div class="modal-actions">
-            <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}">
-                @csrf
-                <button type="submit" class="btn btn-accept">Accept</button>
-            </form>
-
-            <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}">
-                @csrf
-                <button type="submit" class="btn btn-reject">Reject</button>
-            </form>
-        </div>
+                <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-reject">Reject</button>
+                </form>
+            </div>
+        @else
+            <span class="text-muted">Reviewed ({{ ucfirst($request->status) }})</span>
+        @endif
     </div>
 </div>

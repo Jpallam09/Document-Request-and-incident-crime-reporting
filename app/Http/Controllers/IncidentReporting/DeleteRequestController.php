@@ -46,28 +46,42 @@ class DeleteRequestController extends Controller
     public function accept($id)
     {
         $deleteRequest = DeleteRequest::findOrFail($id);
+
+        if ($deleteRequest->status !== 'pending') {
+            Alert::warning('Already Reviewed', 'This request was already ' . $deleteRequest->status . '.');
+            return redirect()->back();
+        }
+
         $report = $deleteRequest->report;
 
         if ($report) {
-            $report->delete(); // or use $report->forceDelete() if not using soft deletes
+            $report->delete();
         }
 
         $deleteRequest->status = 'accepted';
+        $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 
         Alert::success('Accepted', 'The delete request has been approved and the report deleted.');
         return redirect()->back();
     }
 
+
     /**
      * Reject a delete request without deleting the report.
-     * @property \Illuminate\Support\Carbon|null $reviewed_at
+     *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function reject($id)
     {
         $deleteRequest = DeleteRequest::findOrFail($id);
+
+        if ($deleteRequest->status !== 'pending') {
+            Alert::warning('Already Reviewed', 'This request was already ' . $deleteRequest->status . '.');
+            return redirect()->back();
+        }
+
         $deleteRequest->status = 'rejected';
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
