@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <title>Staff - Deletion Requests</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         @vite('resources/css/staffCss/staffDeletionRequests.css')
         @vite('resources/js/staffJs/staffDeletionRequest.js')
