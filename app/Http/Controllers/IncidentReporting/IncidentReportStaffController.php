@@ -15,10 +15,14 @@ class IncidentReportStaffController extends Controller
         // Get the total count of all pending delete requests
         $totalPendingDeleteRequests = \App\Models\IncidentReporting\DeleteRequest::where('status', 'pending')
             ->count();
+        // Get the all pending edit request 
+        $totalPendingEditRequests = \App\Models\IncidentReporting\EditRequest::where('status', 'pending')
+            ->count();
 
         // Pass it to the dashboard view
         return view('incidentReporting.staffReport.staffDashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
+            'totalPendingEditRequests' => $totalPendingEditRequests,
         ]);
     }
 

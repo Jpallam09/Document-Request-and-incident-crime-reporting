@@ -10,13 +10,17 @@ class EditRequestController extends Controller
 {
     // Show all edit requests for staff
     public function index()
-    {
+    {   
         // Eager-load 'user' and 'report' relationships, return a collection
-        $requests = EditRequest::with(['user', 'report'])
+        $editrequests = EditRequest::with(['user', 'report'])
+            ->whereIn('status', ['pending', 'rejected', 'approved'])
             ->latest()
             ->paginate(10);
+
         // Pass the collection to the view — you’ll loop over it in the Blade file
-        return view('incidentReporting.staffReport.staffUpdateRequests', compact('requests'));
+        return view('incidentReporting.staffReport.staffUpdateRequests', [
+            'requests'=> $editrequests,
+    ]);
     }
 
     /**

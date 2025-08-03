@@ -33,8 +33,8 @@
 
                 <section class="widget" id="pendingUpdateRequestsWidget">
                     <a href="" class="widget-link"  title="Click to view all edit request reports">
-                        <h2><i class="fas fa-edit"></i> Pending Update Requests</h2>
-                        <p id="pendingUpdatesCount">0</p>
+                        <h2><i class="fas fa-edit"></i> Pending Edit Requests</h2>
+                        <p id="pendingUpdatesCount">{{ $totalPendingEditRequests }}</p>
                     </a>
                 </section>
 
