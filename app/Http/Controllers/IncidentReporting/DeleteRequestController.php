@@ -15,12 +15,18 @@ class DeleteRequestController extends Controller
      */
     public function index()
     {
+        // Count only delete requests where status is 'pending'
+        $totalDeleteRequests = DeleteRequest::where('status', 'pending')->count();
+        // Fetch deletion requests with relationships and filtering
         $deleteRequests = DeleteRequest::with(['user', 'report'])
             ->whereIn('status', ['pending', 'rejected'])
             ->latest()
             ->paginate(10);
-
-        return view('incidentReporting.staffReport.staffDeletionRequests', compact('deleteRequests'));
+        // Get count of all delete requests
+        return view('incidentReporting.staffReport.staffDeletionRequests', [
+            'deleteRequests' => $deleteRequests,
+            'totalDeleteRequests' => $totalDeleteRequests,
+        ]);
     }
 
     /**
