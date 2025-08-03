@@ -4,6 +4,10 @@ namespace App\Http\Controllers\IncidentReporting;
 
 use App\Http\Controllers\Controller;
 use App\Models\IncidentReporting\IncidentReportUser;
+use App\Models\IncidentReporting\DeleteRequest;
+use App\Models\IncidentReporting\EditRequest;
+
+
 
 class IncidentReportStaffController extends Controller
 {
@@ -12,17 +16,20 @@ class IncidentReportStaffController extends Controller
      */
     public function dashboard()
     {
+        // Count all incident reports, regardless of status
+        $totalIncidentReports = IncidentReportUser::count();
         // Get the total count of all pending delete requests
-        $totalPendingDeleteRequests = \App\Models\IncidentReporting\DeleteRequest::where('status', 'pending')
+        $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')
             ->count();
         // Get the all pending edit request 
-        $totalPendingEditRequests = \App\Models\IncidentReporting\EditRequest::where('status', 'pending')
+        $totalPendingEditRequests =EditRequest::where('status', 'pending')
             ->count();
 
         // Pass it to the dashboard view
         return view('incidentReporting.staffReport.staffDashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
+            'totalIncidentReports' => $totalIncidentReports,
         ]);
     }
 

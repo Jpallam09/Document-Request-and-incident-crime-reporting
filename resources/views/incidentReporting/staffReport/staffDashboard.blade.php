@@ -20,7 +20,7 @@
                 <section class="widget" id="totalReportsWidget">
                     <a href=""  title="Click to view all reports" class="widget-link">
                         <h2><i class="fas fa-file-alt"></i> Total Reports</h2>
-                        <p id="totalReportsCount">0</p>
+                        <p id="totalReportsCount">{{ $totalIncidentReports }}</p>
                     </a>
                 </section>
 
