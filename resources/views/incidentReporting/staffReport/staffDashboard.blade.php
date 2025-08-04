@@ -63,7 +63,7 @@
                     <!-- Reports by Department Chart -->
                     <section class="chart-section" id="reportsByDepartmentChartSection">
                         <div class="chart-card">
-                            <h3><i class="fas fa-building"></i> Reports by Department</h3>
+                            <h3><i class="fas fa-building"></i>Reports by Barangay</h3>
                             <canvas id="reportsByDepartmentChart"></canvas>
                         </div>
                     </section>

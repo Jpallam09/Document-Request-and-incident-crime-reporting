@@ -64,6 +64,33 @@ class IncidentReportStaffController extends Controller
     }
 
     /**
+     * Get the Report Type Distribution Chart
+     */
+    public function getReportTypeChart(): JsonResponse
+    {
+        // Query to count number of reports per type
+        $rawCounts = DB::table('incident_report_users')
+            ->select('report_type', DB::raw('count(*) as total'))
+            ->groupBy('report_type')
+            ->pluck('total', 'report_type'); // result: ['Safety' => 10, 'Security' => 5, ...]
+
+        // Ensure all report types are always present, even if 0
+        $types = ['Safety', 'Security', 'Operational', 'Environmental'];
+        $labels = [];
+        $data = [];
+
+        foreach ($types as $type) {
+            $labels[] = $type;
+            $data[] = $rawCounts[$type] ?? 0;
+        }
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $data,
+        ]);
+    }
+
+    /**
      * View all submitted reports.
      */
     public function staffReportView()
