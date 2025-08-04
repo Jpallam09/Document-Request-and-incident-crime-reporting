@@ -48,6 +48,10 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             // Discard a delete request
             Route::post('/delete-request/{id}/reject', [DeleteRequestController::class, 'reject'])
                 ->name('staffDeletionRequests.reject');
+
+            //chart dashboard
+            Route::get('/monthlyTrend', [IncidentReportStaffController::class, 'getMonthlyReportTrend'])
+                ->name('monthlyTrend');
         });
 
     // Admin ROUTES
