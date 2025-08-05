@@ -1,20 +1,21 @@
 :root {
-  --primary:       #2563eb;
+  --primary:       #1e40af;
   --primary-light: #3b82f6;
   --danger:        #dc2626;
   --danger-light:  #ef4444;
   --bg-white:      #ffffff;
+  --bg-light:      #f9fafb; /* Light background for contrast */
   --text-dark:     #111827;
   --text-light:    #6b7280;
+  --text-accent:   #1e3a8a; /* Darker accent text color */
 
   --radius:        0.5rem;
   --shadow:        0 0.125rem 0.5rem rgba(0, 0, 0, .08);
-
   --header-height: 3rem;
   --sidebar-width: 16rem;
 }
 
-/* ===== RESET + BASE */
+/* ===== RESET + BASE ===== */
 *,
 *::before,
 *::after {
@@ -31,26 +32,26 @@ body {
   flex-direction: column;
 }
 
-/* ===== NAVBAR */
+/* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   height: var(--header-height);
-  padding-inline: 1.5rem;
-  background: var(--primary);
-  color: #fff;
+  background: var(--bg-white);
+  color: var(--text-dark);
   box-shadow: var(--shadow);
+  z-index: 90;
+  padding-inline: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transition: background 0.3s ease; /* Smooth background transition */
 }
 
-.navbar__brand {
-  font-size: 1.25rem;
-  font-weight: 600;
+.navbar:hover {
+  background: var(--bg-light); /* Change background on hover */
 }
 
 .navbar__menu {
@@ -62,20 +63,79 @@ body {
   padding: 0;
 }
 
-/* ===== DROPDOWNS */
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--primary);
+  color: #fff;
+  padding-top: var(--header-height);
+  box-shadow: var(--shadow);
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar__brand {
+  color: #fff;
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  font-size: 1.25rem; /* Increased font size for brand */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar__item {
+  margin: 0;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: background 0.2s ease, color 0.2s ease; /* Smooth color transition */
+}
+
+.sidebar__link:hover {
+  background: var(--primary-light);
+  color: #fff;
+}
+
+.sidebar__link.active {
+  background: var(--bg-white);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===== DROPDOWN ===== */
 .dropdown__toggle {
   cursor: pointer;
   display: flex;
   align-items: center;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  appearance: none;
+  outline: none;
+  list-style: none;
 }
 
-.dropdown__badge {
-  background: var(--danger);
-  border-radius: 9999px;
-  padding-inline: 0.5rem;
-  margin-left: 0.4rem;
-  font-size: 0.75rem;
-  color: #fff;
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
 .dropdown__menu {
@@ -89,7 +149,7 @@ body {
   padding: 0.5rem 0;
   list-style: none;
   margin: 0;
-  z-index: 10;
+  z-index: 999;
 }
 
 .dropdown__item,
@@ -97,66 +157,23 @@ body {
   display: block;
   width: 100%;
   padding: 0.6rem 1rem;
-  text-align: left;
   background: none;
   border: none;
   font: inherit;
   color: var(--text-dark);
+  text-align: left;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s; /* Smooth transition for dropdown items */
   cursor: pointer;
 }
 
 .dropdown__item:hover,
 .dropdown__menu button:hover {
-  background: var(--primary-light);
-  color: #fff;
+  background: #f3f4f6;
+  color: var(--primary);
 }
 
-/* ===== SIDEBAR */
-.sidebar {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  height: calc(100vh - var(--header-height));
-  width: var(--sidebar-width);
-  background: var(--bg-white);
-  border-right: 1px solid #e5e7eb;
-  box-shadow: var(--shadow);
-  overflow-y: auto;
-  z-index: 90;
-}
-
-.sidebar__nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar__item {
-  margin: 0;
-}
-
-.sidebar__link {
-  display: block;
-  width: 100%;
-  padding: 1rem 1.5rem;
-  color: var(--text-dark);
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.sidebar__link:hover {
-  background: var(--primary-light);
-  color: #fff;
-}
-
-.sidebar__link.active {
-  background: var(--primary);
-  color: #fff;
-}
-
-/* ===== PAGE LAYOUT */
+/* ===== LAYOUT CONTAINER ===== */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -165,45 +182,29 @@ body {
 .page-content {
   margin-left: var(--sidebar-width);
   padding: 2rem;
-  padding-top: var(--header-height); /* ✅ FIXED: Removed +1rem to eliminate large margin */
+  padding-top: var(--header-height);
   flex: 1;
   background: var(--bg-white);
   min-width: 0;
+  transition: padding 0.3s ease; /* Smooth padding transition */
 }
 
-/* ===== SIDEBAR OVERLAY */
-.sidebar-overlay {
-  display: none; /* completely removed responsiveness behavior */
-}
-
-/* ===== MODAL */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  right: 0;
-  max-width: 28rem;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-  background: var(--bg-white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transform: translateY(-50%);
-  z-index: 200;
-  padding-block: 2rem;
-}
-
-/* ===== RESPONSIVE - NO COLLAPSE */
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   .sidebar {
-    position: fixed;
-    width: var(--sidebar-width);
-    height: calc(100vh - var(--header-height));
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
   }
 
   .page-content {
-    margin-left: var(--sidebar-width);
-    padding: 1.5rem;
-    padding-top: 0;
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .navbar__menu {
+    gap: 0.75rem;
   }
 }

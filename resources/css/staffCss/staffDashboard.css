@@ -1,69 +1,80 @@
 :root {
-    --sidebar-width: 16rem;
-    --header-height: 4rem;
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --danger: #dc2626;
+    --warning: #f59e0b;
+    --success: #22c55e;
+    --indigo: #6366f1;
+    --orange: #f97316;
+
     --bg-white: #ffffff;
+    --bg-light: #f9fafb;
+    --bg-accent: #e0f2fe;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+    --text-accent: #1e3a8a;
+
     --radius: 0.75rem;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --primary: #2563eb;
-    --text-dark: #333;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
-/* --- Base Layout --- */
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: var(--text-dark);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.layout {
-    display: flex;
-    min-height: 100vh;
+.container-fluid {
+    background-color: transparent;
+}
+
+.page-title {
+    font-size: 2rem; /* Large readable size */
+    font-weight: 600; /* Semi-bold */
+    color: #1f2937; /* Neutral dark gray */
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+    line-height: 1.2;
 }
 
 .page-content {
     margin-left: var(--sidebar-width);
-    padding: 2rem;
-    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
 }
 
-.page-content h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: #1f2937;
+
+/* ===== Dashboard Title ===== */
+.dashboard-title {
+    font-size: 2rem; /* Large readable size */
+    font-weight: 600; /* Semi-bold */
+    color: #1f2937; /* Dark gray (neutral tone) */
+    margin: 0;
+    padding-bottom: 0.75rem;
     border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
-/* --- Dashboard Row Groups --- */
-.dashboard-row {
-    display: grid;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* --- Row 1: Widgets --- */
-.dashboard-row.widgets {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-/* --- Widget Box --- */
-.widget {
+/* ===== Widgets ===== */
+.widgets .widget {
     background: var(--bg-white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 1.5rem;
-    min-height: 9rem;
+    padding: 2rem;
+    min-height: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: transform 0.2s ease;
-    border-top: 4px solid transparent; /* Will be overridden below */
+    position: relative;
+    border-top: 4px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.widget:hover {
-    transform: translateY(-0.2rem);
-    cursor: pointer;
+.widgets .widget:hover {
+    transform: translateY(-0.4rem);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .widget a.widget-link {
@@ -74,76 +85,53 @@ body {
 }
 
 .widget h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
     color: var(--text-dark);
+    margin-bottom: 0.5rem;
 }
 
 .widget p {
-    font-size: 2rem;
+    font-size: 2.25rem;
     font-weight: bold;
     color: var(--primary);
     margin: 0;
 }
 
-/* --- Widget Top Border Colors --- */
+/* Widget Accent Borders */
 #totalReportsWidget {
-    border-top-color: #2563eb;
+    border-top-color: var(--primary);
 }
-
 #pendingDeletionRequestsWidget {
-    border-top-color: #dc3545;
+    border-top-color: var(--danger);
 }
-
 #pendingUpdateRequestsWidget {
-    border-top-color: #f59e0b;
+    border-top-color: var(--warning);
 }
 
-/* --- Row 2: Chart Layout --- */
-.dashboard-row.charts {
-    grid-template-columns: 3fr 1fr;
-}
-
-/* --- Row 3: Chart Layout --- */
-.dashboard-row.bottom {
-    grid-template-columns: 2fr 1fr;
-}
-
-/* --- Chart Sections (IDs and class names preserved) --- */
-.wide-chart,
-.narrow-chart,
-.chart-section {
-    display: flex;
-    flex-direction: column;
-}
-
-/* --- Chart Card Styling --- */
+/* ===== Chart Cards ===== */
 .chart-card {
     background: var(--bg-white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 1.25rem;
+    padding: 1.5rem;
+    min-height: 20rem;
     text-align: center;
-    height: 100%;
-    min-height: 18rem; /* fixed height like SB layout */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.chart-card {
-    min-height: 16rem;
-    padding: 1rem 1.25rem;
-}
-
-.chart-card canvas {
-    max-height: 10rem;
+.chart-card:hover {
+    transform: translateY(-0.4rem);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .chart-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    color: #1f2937;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,44 +139,70 @@ body {
 }
 
 .chart-card canvas {
+    max-height: 12rem;
     max-width: 100%;
-    height: auto;
 }
 
-/* --- Top Border Accent for Chart Cards --- */
+/* Section-Specific Accent Borders */
+#monthlyReportsChart,
 #monthlyTrendChartSection .chart-card {
-    border-top: 4px solid #2563eb;
+    border-top: 4px solid var(--primary);
 }
 
 #reportTypeDistributionSection .chart-card {
-    border-top: 4px solid #f97316;
-}
-
-#reportCompletionChartSection .chart-card {
-    border-top: 4px solid #22c55e;
+    border-top: 4px solid var(--orange);
 }
 
 #reportsByDepartmentChartSection .chart-card {
-    border-top: 4px solid #7c3aed;
+    border-top: 4px solid var(--indigo);
 }
 
-/* --- Responsive Tweaks --- */
-@media (max-width: 1024px) {
-    .dashboard-row.widgets {
-        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    }
+#reportCompletionChartSection .chart-card {
+    border-top: 4px solid var(--success);
+}
 
-    .dashboard-row.charts,
-    .dashboard-row.bottom {
-        grid-template-columns: 1fr;
+/* ===== Gradient Top Bar ===== */
+.widget::before,
+.chart-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-light), var(--success));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 1024px) {
+    .widget p {
+        font-size: 2rem;
     }
 
     .chart-card {
-        padding: 1.25rem;
         min-height: 18rem;
     }
 
-    .widget p {
+    .dashboard-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-title {
         font-size: 1.75rem;
+    }
+
+    .widget h2 {
+        font-size: 1.15rem;
+    }
+
+    .widget p {
+        font-size: 1.5rem;
+    }
+
+    .chart-card h3 {
+        font-size: 1.25rem;
     }
 }

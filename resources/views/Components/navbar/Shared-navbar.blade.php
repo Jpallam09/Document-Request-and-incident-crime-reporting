@@ -1,10 +1,6 @@
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="navbar__brand">
-        <span><i class="fas fa-shield-alt"></i> Incident Reporting</span>
-    </div>
-
-    <ul class="navbar__menu">
+<!-- Navbar (now just icons) -->
+<nav class="navbar d-flex justify-content-end align-items-center px-4 shadow-sm">
+    <ul class="navbar__menu d-flex align-items-center gap-3 mb-0 list-unstyled">
         <!-- Notification Dropdown -->
         <li class="navbar__item dropdown">
             <details>
@@ -43,36 +39,41 @@
     </ul>
 </nav>
 
-<!-- Layout Container -->
+<!-- Layout -->
 <div class="layout">
     <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-        <ul class="sidebar__nav">
+    <aside id="sidebar" class="sidebar py-3 px-2">
+        <div class="sidebar__brand d-flex align-items-center gap-2 px-3 mb-4">
+            <i class="fas fa-shield-alt fs-5"></i>
+            <span class="fw-semibold fs-6">Incident Reporting</span>
+        </div>
+
+        <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.dashboard') }}"
                    class="sidebar__link {{ request()->routeIs('reporting.staff.dashboard') ? 'active' : '' }}">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-chart-line me-2"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.staffReportView') }}"
                    class="sidebar__link {{ request()->routeIs('reporting.staff.staffReportView') ? 'active' : '' }}">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-file-alt me-2"></i>
                     <span>Reports List</span>
                 </a>
             </li>
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.staffDeletionRequests') }}"
                    class="sidebar__link {{ request()->routeIs('reporting.staff.staffDeletionRequests') ? 'active' : '' }}">
-                    <i class="fas fa-trash-alt"></i>
+                    <i class="fas fa-trash-alt me-2"></i>
                     <span>Delete Requests</span>
                 </a>
             </li>
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.staffUpdateRequests') }}"
                    class="sidebar__link {{ request()->routeIs('reporting.staff.staffUpdateRequests') ? 'active' : '' }}">
-                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-edit me-2"></i>
                     <span>Edit Requests</span>
                 </a>
             </li>

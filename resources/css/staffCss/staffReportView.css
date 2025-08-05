@@ -1,111 +1,107 @@
 /* ===== General Layout ===== */
 body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 /* ===== Layout & Content Area ===== */
 .layout {
-  display: flex;
-  flex-direction: row;
-  min-height: calc(100vh - var(--header-height));
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.page-title {
+    font-size: 2rem; /* Large readable size */
+    font-weight: 600; /* Semi-bold */
+    color: #1f2937; /* Dark gray (neutral tone) */
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+    line-height: 1.2;
 }
 
 .page-content {
-  flex: 1;
-  margin-left: var(--sidebar-width);
-  margin-top: 0;
-  padding: 2rem;
-  background-color: #f4f4f4;
-  box-sizing: border-box;
-  overflow-x: auto;
-}
-
-/* remove default top margin on first heading */
-.page-content h1 {
-  margin-top: 0;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1f2937;
-  padding-bottom: 0.75rem; /* ↓ slightly tighter */
-  line-height: 1.2;         /* ↓ tighter spacing */
-  border-bottom: 2px solid #e5e7eb;
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
 /* ===== Table Styles ===== */
 .table-container {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  width: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
 .report-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
 }
 
 .report-table thead {
-  background-color: #2563eb;
-  color: white;
+    background-color: #2563eb;
+    color: white;
 }
 
 .report-table th,
 .report-table td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .report-table tbody tr:hover {
-  background-color: #f1f5f9;
-  transition: background-color 0.2s ease-in-out;
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease-in-out;
 }
 
 /* ===== Button Styles ===== */
 .btn-view {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  background-color: #3b82f6;
-  color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: #3b82f6;
+    color: white;
 }
 
 .btn-view:hover {
-  background-color: #2563eb;
+    background-color: #2563eb;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .layout {
-    flex-direction: column;
-  }
+    .layout {
+        flex-direction: column;
+    }
 
-  .page-content {
-    margin-left: 0;
-    padding: 1.5rem;
-  }
+    .page-content {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
 
-  .page-content h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
+    .page-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
 
-  .table-container {
-    padding: 1rem;
-  }
+    .table-container {
+        padding: 1rem;
+    }
 
-  .btn-view {
-    padding: 0.35rem 0.7rem;
-    font-size: 0.9rem;
-  }
+    .btn-view {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.9rem;
+    }
 }

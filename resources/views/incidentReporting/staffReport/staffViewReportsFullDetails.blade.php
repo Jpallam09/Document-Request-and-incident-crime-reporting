@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff - Report Details</title>
+    <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     @vite('resources/css/staffCss/staffViewReportsFullDetails.css')
     @vite('resources/js/staffJs/staffViewReportsFullDetails.js')
@@ -80,5 +81,7 @@
             </div>
         </section>
     </main>
+    @include('sweetalert::alert')
+    <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

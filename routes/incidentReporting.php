@@ -52,6 +52,7 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             //chart dashboard
             Route::get('/monthlyTrend', [IncidentReportStaffController::class, 'getMonthlyReportTrend'])
                 ->name('monthlyTrend');
+            //chart Report Type Distribution
             Route::get('/reportType', [IncidentReportStaffController::class, 'getReportTypeChart'])
                 ->name('reportType');
         });

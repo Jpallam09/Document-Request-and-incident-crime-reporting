@@ -13,20 +13,29 @@ body {
     min-height: calc(100vh - var(--header-height));
 }
 
-.page-content {
-    flex: 1;
-    margin-left: var(--sidebar-width);
-    margin-top: 1.5rem;
-    padding: 2rem;
-    background-color: #f4f4f4;
-    box-sizing: border-box;
-    overflow-x: auto;
+.page-title {
+    font-size: 2rem;              /* Large readable size */
+    font-weight: 600;             /* Semi-bold */
+    color: #1f2937;               /* Dark gray (neutral tone) */
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb;
+    line-height: 1.2;
 }
+
 
 /* ===== Optional Page Title ===== */
 .page-title {
     margin: 0;
     padding-bottom: 1rem;
+}
+
+.page-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 /* ===== Remove Top Margin from h1 ===== */
