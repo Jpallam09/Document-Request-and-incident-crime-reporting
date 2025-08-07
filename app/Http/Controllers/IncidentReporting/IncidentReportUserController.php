@@ -34,7 +34,7 @@ class IncidentReportUserController extends Controller
      */
     public function viewReport($id)
     {
-        $report = IncidentReportUser::with(['editRequest']) // request
+        $report = IncidentReportUser::with(['editRequest', 'deleteRequest']) // request
             ->where('user_id', auth()->id())
             ->find($id);
 
@@ -121,12 +121,19 @@ class IncidentReportUserController extends Controller
      */
     public function edit($id)
     {
-        $report = IncidentReportUser::with('images')->findOrFail($id);
+        $report = IncidentReportUser::with(['images', 'editRequest'])->findOrFail($id);
 
         // Make sure the current logged-in user owns this report
         if (auth()->id() !== $report->user_id) {
             abort(403);
         }
+
+        // ⛔ Prevent access if there's a pending edit request
+        if ($report->editRequest && $report->editRequest->status === 'pending') {
+            Alert::error('Pending Request', 'You already have a pending edit request for this report.');
+            return redirect()->back();
+        }
+
         return view('user.report.editReports', compact('report'));
     }
     /**
@@ -134,6 +141,17 @@ class IncidentReportUserController extends Controller
      */
     public function requestUpdate(Request $request, $id)
     {
+        // Check if an edit request for this report already exists and is still pending
+        $existingEditRequest = EditRequest::where('incident_report_id', $id)
+            ->where('requested_by', auth()->id())
+            ->where('status', 'pending')
+            ->first();
+
+        if ($existingEditRequest) {
+            Alert::error('Duplicate Request', 'You already sent an edit request for this report.');
+            return redirect()->back();
+        }
+
         // Validate form fields
         $request->validate([
             'title' => 'required|string',
@@ -164,18 +182,6 @@ class IncidentReportUserController extends Controller
             'requested_at' => now(),
         ]);
         Alert::success('Success', 'Update request sent successfully.');
-        return back();
-    }
-
-    public function discardUpdateRequest($id)
-    {
-        $editRequest = EditRequest::where('incident_report_id', $id)
-            ->where('requested_by', auth()->id())
-            ->where('status', 'pending') // Only allow discarding if still pending
-            ->firstOrFail();
-
-        $editRequest->delete();
-        Alert::success('Request Discarded', 'Your edit request has been discarded.');
         return back();
     }
     /**

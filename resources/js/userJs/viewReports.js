@@ -55,33 +55,42 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape") closeModal();
     });
 
-    // ============================
-    // REQUEST DELETE – SWEETALERT
-    // ============================
+    // ✅ DELETE REQUEST BUTTON LOGIC
+    const deleteButtons = document.querySelectorAll(".btn-delete-request");
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const deleteButtons = document.querySelectorAll(".btn-delete-request");
+    deleteButtons.forEach((button) => {
+        button.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default form submission
 
-        deleteButtons.forEach((button) => {
-            button.addEventListener("click", function (e) {
-                e.preventDefault(); // Stop normal link behavior
+            const form = this.closest("form");
 
-                const url = this.getAttribute("href");
-
-                Swal.fire({
-                    title: "Request Deletion?",
-                    text: "Are you sure you want to request deletion for this report?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
-                    confirmButtonText: "Yes, request it!",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url;
-                    }
-                });
+            Swal.fire({
+                title: "Request Deletion?",
+                text: "Are you sure you want to request deletion for this report?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, request it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
             });
         });
     });
+
+    // ✅ EDIT REQUEST HANDLER
+    window.handleEditRequest = function (hasPendingRequest, editUrl) {
+        if (hasPendingRequest === true || hasPendingRequest === 'true') {
+            Swal.fire({
+                icon: 'info',
+                title: 'Pending Request',
+                text: 'You already have a pending edit request for this report.',
+                confirmButtonColor: '#2563eb'
+            });
+        } else {
+            window.location.href = editUrl;
+        }
+    };
 });

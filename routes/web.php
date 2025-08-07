@@ -46,9 +46,6 @@ Route::prefix('user/report')
             //editRequest
             Route::put('requestUpdate/{id}', [IncidentReportUserController::class, 'requestUpdate'])
                 ->name('requestUpdate');
-            //Discard Edit
-            Route::delete('/discardUpdate/{id}', [IncidentReportUserController::class, 'discardUpdateRequest'])
-                ->name('discardUpdate');
             // edit
             Route::get('/editReports/{id}', [IncidentReportUserController::class, 'edit'])
                 ->name('user.report.edit');

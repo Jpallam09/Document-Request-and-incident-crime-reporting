@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Incident Report Details</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @vite('resources/css/userCss/editReports.css')
     @vite('resources/js/userJs/editReports.js')
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
@@ -14,14 +16,14 @@
 </head>
 
 <body>
-    <div class="layout">
-        <div class="container">
-            @include('components.navbar.user-navbar')
+    <main class="layout d-flex">
+        @include('components.navbar.user-navbar')
 
+        <section class="page-content flex-grow-1 px-4">
             <!-- Header -->
-            <div class="header">
+            <div class="header d-flex justify-content-between align-items-center mb-4">
                 <h1>Edit Your Report</h1>
-                <a href="#" onclick="window.history.back()" class="back-link">
+                <a href="{{ route('user.report.viewReports', $report->id) }}" class="back-link">
                     <i class="fas fa-arrow-left"></i>
                     Back to List
                 </a>
@@ -50,13 +52,13 @@
                                 <option value="Safety" {{ $report->incident_type === 'Safety' ? 'selected' : '' }}>
                                     Safety</option>
                                 <option value="Operational"
-                                    {{ $report->incident_type === 'Operational' ? 'selected' : '' }}>Operational
-                                </option>
+                                    {{ $report->incident_type === 'Operational' ? 'selected' : '' }}>
+                                    Operational</option>
                                 <option value="Security" {{ $report->incident_type === 'Security' ? 'selected' : '' }}>
                                     Security</option>
                                 <option value="Environmental"
-                                    {{ $report->incident_type === 'Environmental' ? 'selected' : '' }}>Environmental
-                                </option>
+                                    {{ $report->incident_type === 'Environmental' ? 'selected' : '' }}>
+                                    Environmental</option>
                             </select>
                         </div>
                     </div>
@@ -87,37 +89,31 @@
                             <label for="requested_image">Add New Image</label>
                             <input type="file" name="requested_image[]" id="requested_image" accept="image/*"
                                 multiple>
-                            {{-- Removed duplicate <label for="imageInput"> --}}
                             <span id="fileName"></span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Action Buttons -->
-                <button type="submit" class="btn-primary" id="updateReportBtn">
-                    <i class="fas fa-check-circle"></i>
+                <button type="submit" class="btn btn-primary mb-2" id="updateReportBtn">
+                    <i class="fas fa-check-circle me-1"></i>
                     Update Report
                 </button>
             </form>
+            <!-- Cancel Editing Button -->
+            <button type="button" class="btn btn-danger w-auto" id="cancelEditButton"
+                data-url="{{ route('user.report.viewReports', $report->id) }}">
+                <i class="fas fa-times-circle me-1"></i>
+                Cancel Editing
+            </button>
+            <!-- Modal Viewer -->
+            <div id="imageModal" class="image-modal">
+                <span class="close" id="modalCloseBtn">&times;</span>
+                <img class="modal-content" id="modalImage" />
+                <div id="caption"></div>
+                <span class="prev" id="modalPrevBtn">&#10094;</span>
+                <span class="next" id="modalNextBtn">&#10095;</span>
+            </div>
+    </main>
 
-            {{-- Discard button --}}
-            <form action="{{ route('user.report.discardUpdate', $report->id) }}" method="POST"
-                onsubmit="return confirm('Are you sure you want to discard this request?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Discard Request</button>
-            </form>
-        </div>
-
-        <!-- Modal Viewer -->
-        <div id="imageModal" class="image-modal">
-            <span class="close" id="modalCloseBtn">&times;</span>
-            <img class="modal-content" id="modalImage" />
-            <div id="caption"></div>
-            <span class="prev" id="modalPrevBtn">&#10094;</span>
-            <span class="next" id="modalNextBtn">&#10095;</span>
-        </div>
-    </div>
     @include('sweetalert::alert')
 </body>
 
