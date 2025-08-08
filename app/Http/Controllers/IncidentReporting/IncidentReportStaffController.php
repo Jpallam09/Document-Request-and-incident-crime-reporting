@@ -27,7 +27,6 @@ class IncidentReportStaffController extends Controller
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
             'totalIncidentReports' => $totalIncidentReports,
-            'unreadNotifications' => $user->unreadNotifications,
         ]);
     }
     public function markNotificationRead($id)

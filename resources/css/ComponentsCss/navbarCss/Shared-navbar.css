@@ -64,37 +64,45 @@ body {
 }
 
 .notification-badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: red;
-    color: white;
-    border-radius: 50%;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    font-weight: 700;
+    width: 1.1rem;
+    height: 1.1rem;
+    font-size: 0.75rem;
     line-height: 1;
+    padding: 0;
+    text-align: center;
     user-select: none;
 }
-.dropdown__menu {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 0;
-    margin: 0;
-    list-style: none;
-    width: 300px;
+
+.notification-dropdown-menu {
+    min-width: 320px;
+    max-height: 300px;
+    overflow-y: auto;
 }
-.dropdown__item {
-    padding: 0.5rem 1rem;
-    color: #333;
+
+.submitted-by-text {
+    font-size: 0.85rem;
+}
+
+.notification-message {
+    margin-bottom: 0;
+    max-width: 260px;
     display: block;
-    text-decoration: none;
-    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.dropdown__item:hover {
-    background-color: #f5f5f5;
+
+.notification-time {
+    font-size: 0.75rem;
+}
+
+.dropdown-menu hr {
+    border: none;               /* Remove default border */
+    height: 1.5px;              /* Make the line a bit thicker */
+    background-color: #0000008d;  /* Use your primary blue (#2563eb) for visibility */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.7; 
 }
 
 /* ===== SIDEBAR ===== */
