@@ -13,6 +13,8 @@ use App\Models\IncidentReporting\EditRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use App\Models\IncidentReporting\DeleteRequest;
+use App\Models\User;
+use App\Notifications\NewReportNotification;
 use Illuminate\Support\Arr;
 
 class IncidentReportUserController extends Controller
@@ -67,7 +69,8 @@ class IncidentReportUserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */ public function store(Request $request)
+     */
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'report_title' => 'required|string|max:255',
@@ -77,30 +80,38 @@ class IncidentReportUserController extends Controller
             'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
+        // 1. Save the report
         $report = new IncidentReportUser();
         $report->report_title = $validated['report_title'];
         $report->report_date = $validated['report_date'];
         $report->report_type = $validated['report_type'];
         $report->report_description = $validated['report_description'];
-        $report->user_id = auth()->id(); // or set this as needed
+        $report->user_id = auth()->id();
         $report->save();
 
-        // Handle images
+        // 2. Save images
         if ($request->hasFile('report_image')) {
             foreach ($request->file('report_image') as $image) {
                 $path = $image->store('incident_images', 'public');
-
-                // Save to another table if needed, or store in a JSON column
                 $report->images()->create([
                     'file_path' => $path,
                 ]);
             }
         }
-        Alert::success('Submitted', 'Your report has been submitted successfully.');
-        return redirect()
-            ->route('user.report.userIncidentReporting.index');
-    }
 
+        // 3. Notify all staff/admin in incident_reporting
+        $staffMembers = User::whereHas('roles', function ($query) {
+            $query->where('app', 'incident_reporting')
+                ->whereIn('role', ['staff', 'admin']);
+        })->get();
+
+        foreach ($staffMembers as $staff) {
+            $staff->notify(new NewReportNotification($report));
+        }
+
+        Alert::success('Submitted', 'Your report has been submitted successfully.');
+        return redirect()->route('user.report.userIncidentReporting.index');
+    }
     public function images()
     {
         return $this->hasMany(IncidentReportImage::class);

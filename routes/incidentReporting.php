@@ -57,6 +57,19 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
                 ->name('reportType');
         });
 
+    Route::prefix('staffReporting')
+        ->middleware('check.role:incident_reporting,staff')
+        ->name('reporting.staff.')
+        ->group(function () {
+
+            // existing routes...
+
+            // Mark notification as read
+            Route::get('/notifications/mark-read/{id}', [IncidentReportStaffController::class, 'markNotificationRead'])
+                ->name('notifications.markRead');
+        });
+
+
     // Admin ROUTES
     Route::prefix('adminReporting')
         ->middleware(['auth', 'check.role:incident_reporting,admin']) // optional: add role check

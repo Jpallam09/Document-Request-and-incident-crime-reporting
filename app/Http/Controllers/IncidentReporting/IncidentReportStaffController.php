@@ -8,8 +8,8 @@ use App\Models\IncidentReporting\DeleteRequest;
 use App\Models\IncidentReporting\EditRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
 
 class IncidentReportStaffController extends Controller
 {
@@ -18,22 +18,29 @@ class IncidentReportStaffController extends Controller
      */
     public function dashboard()
     {
-        // Count all incident reports, regardless of status
         $totalIncidentReports = IncidentReportUser::count();
-        // Get the total count of all pending delete requests
-        $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')
-            ->count();
-        // Get the all pending edit request
-        $totalPendingEditRequests = EditRequest::where('status', 'pending')
-            ->count();
+        $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
+        $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
+        $user = Auth::user();
 
-        // Pass it to the dashboard view
         return view('incidentReporting.staffReport.staffDashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
             'totalIncidentReports' => $totalIncidentReports,
+            'unreadNotifications' => $user->unreadNotifications,
         ]);
     }
+    public function markNotificationRead($id)
+    {
+        $notification = Auth::user()->notifications->firstWhere('id', $id);
+        if (!$notification) {
+            abort(404);
+        }
+
+        $notification->markAsRead();
+        return back();
+    }
+
     /**
      * Get the monthly report trend.
      */
@@ -88,6 +95,17 @@ class IncidentReportStaffController extends Controller
             'labels' => $labels,
             'data' => $data,
         ]);
+    }
+
+    /**
+     * notification for new reports.
+     */
+    public function notifications()
+    {
+        $notifications = Auth::user()->notifications; // all notifications
+        $unread = Auth::user()->unreadNotifications;  // only unread
+
+        return view('incidentReporting.staffReport.notifications', compact('notifications', 'unread'));
     }
 
     /**
