@@ -5,9 +5,8 @@
         plugins: [
             laravel({
                 input: [// authCss
-                        'resources/css/authCss/login.css',
+                        'resources/css/authCss/forms.css',
                         'resources/css/authCss/index.css',
-                        'resources/css/authCss/register.css',
                         'resources/css/authCss/user-main-dashboard.css',
                         'resources/css/authCss/viewReports.css',
                         'resources/css/authCss/userMainDashboard.css',
@@ -30,15 +29,18 @@
                         'resources/css/componentsCss/navbarCss/navbar.css',
                         'resources/css/componentsCss/navbarCss/Shared-navbar.css',
                         'resources/css/componentsCss/ModalCss/viewRequestModal.css',
+                        'resources/css/componentsCss/ModalCss/form-modal.css',
 
                         //componentsJs
                         'resources/js/componentsJs/navbar.js',
                         'resources/js/componentsJs/shared-navbar.js',
                         'resources/js/componentsJs/viewRequestModal.js',
+                        'resources/js/componentsJs/form-modal.js',
 
                         //authJs
                         'resources/js/authJs/login.js',
                         'resources/js/authJs/register.js',
+                        'resources/js/authJs/index.js',
 
                         //userjs
                         'resources/js/userJs/userIncidentReporting.js',

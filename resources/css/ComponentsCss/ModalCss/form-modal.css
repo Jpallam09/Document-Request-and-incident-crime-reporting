@@ -16,7 +16,7 @@
 
 /* Small logos size */
 .d-flex.flex-column.align-items-center img {
-    max-width: 50px;
+    max-width: 40px; /* adjusted from original 50px to match inline style */
 }
 
 /* Text below small logos */
@@ -83,72 +83,7 @@ h1.display-5 {
     vertical-align: bottom;
 }
 
-/* === Login Card === */
-.login-card {
-    position: relative;
-    border-radius: 0.5rem;
-    padding: 2rem;
-    background: white;
-    overflow: hidden;
-    z-index: 0;
-    color: white; /* Makes all text inside white */
-}
-
-/* Glowing animated border behind login card */
-.login-card::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: linear-gradient(120deg, #4f46e5, #3b82f6, #06b6d4, #4f46e5);
-    background-size: 300% 300%;
-    animation: glowingBorder 5s ease infinite;
-    filter: blur(6px);
-    z-index: -1;
-}
-
-/* Specific color overrides inside login card */
-.login-card h2,
-.login-card label {
-    color: white;
-}
-
-/* Placeholder text color inside inputs */
-.login-card input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* === Register Button Styling === */
-.text-center a.btn {
-    background-color: #ffffff;  /* white background */
-    color: #3b82f6;             /* blue text for contrast */
-    border: none;
-}
-
-.text-center a.btn:hover {
-    background-color: #b8952f;  /* darker gold on hover */
-    color: white;
-    box-shadow: 0 0 8px #d4af37; /* subtle gold glow */
-}
-
-/* Error messages stay red */
-.glow-container .login-card .form-text.text-danger {
-    color: #ff4d4d !important;
-}
-
 /* === Animations === */
-@keyframes glowMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes glowingBorder {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 @keyframes glowBackground {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }

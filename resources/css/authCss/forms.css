@@ -1,0 +1,82 @@
+/* === Login Card === */
+.login-card {
+    position: relative;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    background: white;
+    overflow: hidden;
+    z-index: 0;
+    color: white; /* Makes all text inside white */
+}
+
+/* Glowing animated border behind login card */
+.login-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(120deg, #4f46e5, #3b82f6, #06b6d4, #4f46e5);
+    background-size: 300% 300%;
+    animation: glowingBorder 5s ease infinite;
+    filter: blur(6px);
+    z-index: -1;
+}
+
+.text-center a.btn {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600; /* keep constant */
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box; /* ensures padding+border included in width */
+}
+
+.text-center a.btn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* subtle overlay */
+    color: white;
+    text-decoration: none;
+    opacity: 0.8; /* visually thinner without changing font-weight */
+    /* font-weight remains 600, no change */
+}
+
+.btn-outline-light {
+    color: white;
+    border-color: white;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-outline-light:hover, 
+.btn-outline-light:focus {
+    background-color: white !important;
+    color: black !important;
+    text-decoration: none;
+    box-shadow: none;
+    padding: 0.25rem 0.5rem; /* keep padding same */
+    border: 1px solid white; /* keep border thickness same */
+    opacity: 0.9; /* slightly soften hover text */
+}
+
+/* Error messages stay red */
+.glow-container .login-card .form-text.text-danger {
+    color: #ff4d4d !important;
+}
+
+/* === Animations === */
+@keyframes glowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glowingBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

@@ -1,70 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>User Registration</title>
-   @vite('resources/css/authCss/register.css')
-   @vite('resources/js/authJs/register.js')
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Registration</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    @vite('resources/css/authCss/forms.css')
+    @vite('resources/css/componentsCss/ModalCss/form-modal.css')
+    @vite('resources/js/componentsJs/form-modal.js')
 </head>
+
 <body>
-  <nav class="navbar" role="navigation" aria-label="Site main navigation">
-    <div class="nav-left">
-      <a href="{{ route('index') }}" aria-label="Go to home page">Home</a>
-    </div>
-    <div class="nav-right">
-      <a href="{{ route('login') }}" aria-label="Go to login page">Log In</a>
-    </div>
-  </nav>
+    <main class="container-fluid vh-100">
+        <div class="row h-100">
+            <x-modals.form-modal />
+            <!-- Right Panel -->
+            <section class="col-md-7 d-flex align-items-center justify-content-center px-4"
+                style="background-color: hsl(210, 20%, 98%);" role="region" aria-labelledby="reg-heading">
 
-    @if ($errors->any())
-        <div style="color: red;">
-            {{ $errors->first() }}
+                <div class="login-card p-5" style="max-width: 480px; width: 100%;">
+
+                    <!-- Top nav inside card -->
+                    <div class="d-flex justify-content-between mb-4">
+                        <a href="{{ route('index') }}" class="btn btn-outline-light btn-sm"
+                            aria-label="Go to home page">Home</a>
+
+                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Log In</a>
+                    </div>
+
+                    <!-- Heading -->
+                    <h2 id="reg-heading" class="mb-4 text-center">Create Your Account</h2>
+
+                    <!-- Display first error if any -->
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+
+                    <!-- Registration Form -->
+                    <form action="{{ route('register.post') }}" method="POST" novalidate class="glow-container">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" name="user_name" class="form-control"
+                                    placeholder="Choose a username" required minlength="3" maxlength="20" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="you@example.com" required />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="first-name" class="form-label">First Name</label>
+                                <input type="text" id="first-name" name="first_name" class="form-control"
+                                    placeholder="Enter your First name" required minlength="3" maxlength="20" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <input type="text" id="last-name" name="last_name" class="form-control"
+                                    placeholder="Enter your Last name" required minlength="3" maxlength="20" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control"
+                                    placeholder="09xx xxxx xxx" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Create a password" required minlength="8" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="confirm-password" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="password_confirmation"
+                                    class="form-control" placeholder="Re-enter your password" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-light btn-sm w-100 mt-4"
+                            aria-label="Register new user">Register</button>
+                    </form>
+                </div>
+
+            </section>
         </div>
-    @endif
-  <main>
-    <section class="registration-card" role="region" aria-labelledby="reg-heading">
-      <h2 id="reg-heading">Create Your Account</h2>
-      <form action="{{ route('register.post') }}" method="POST" novalidate>
-        @csrf
-        <label for="userName">Username</label>
-        <input type="text" id="username" name="user_name" placeholder="Choose a username" autocomplete="username" required minlength="3"
-        maxlength="20" pattern="[\w\d_-]+" title="3-20 characters: letters, numbers, underscore or dash" aria-describedby="username-desc" />
-        <small id="username-desc">Invalid username format!</small>
+    </main>
 
-        <label for="userName">First name</label>
-        <input type="text" id="username" name="first_name" placeholder="Enter your First name" autocomplete="firstname" required minlength="3"
-        maxlength="20" pattern="[\w\d_-]+" title="3-20 characters: letters, numbers, underscore or dash" aria-describedby="firstname-desc" />
-        <small id="first-desc">Invalid First name format!</small>
-
-        <label for="userName">Last name</label>
-        <input type="text" id="username" name="last_name" placeholder="Enter your Last name" autocomplete="lastname" required minlength="3"
-        maxlength="20" pattern="[\w\d_-]+" title="3-20 characters: letters, numbers, underscore or dash" aria-describedby="lastname-desc" />
-        <small id="lastname-desc">Invalid Last name format!</small>
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email"
-        required aria-describedby="email-desc" />
-        <small id="email-desc">Please enter a valid email.</small>
-
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="09xx xxxx xxx" autocomplete="tel"
-        pattern="^\+?\d{1,3}?[- .]?\(?\d{1,4}?\)?[- .]?\d{1,4}[- .]?\d{1,9}$" aria-describedby="phone-desc" />
-        <small id="phone-desc">Enter a valid phone number.</small>
-
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password"
-        required minlength="8" aria-describedby="password-desc" />
-        <small id="password-desc">Password must be at least 8 characters.</small>
-
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirm-password" name="password_confirmation" placeholder="Re-enter your password"
-        autocomplete="new-password" required aria-describedby="confirm-password-desc" />
-        <small id="confirm-password-desc">Passwords do not match.</small>
-
-        <button type="submit" aria-label="Register new user">Register</button>
-      </form>
-    </section>
-  </main>
+    <!-- Bootstrap JS Bundle (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
