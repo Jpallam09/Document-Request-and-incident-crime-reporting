@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\IncidentReporting\DeleteRequest;
 use App\Models\User;
 use App\Notifications\NewReportNotification;
+use App\Notifications\EditRequestNotification;
+use App\Notifications\DeleteRequestNotification;
 use Illuminate\Support\Arr;
 
 class IncidentReportUserController extends Controller
@@ -130,22 +132,22 @@ class IncidentReportUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-public function edit($id)
-{
-    $report = IncidentReportUser::with(['images', 'editRequest'])->findOrFail($id);
+    public function edit($id)
+    {
+        $report = IncidentReportUser::with(['images', 'editRequest'])->findOrFail($id);
 
-    if (auth()->id() !== $report->user_id) {
-        abort(403);
+        if (auth()->id() !== $report->user_id) {
+            abort(403);
+        }
+
+        if ($report->editRequest && $report->editRequest->status === 'pending') {
+            Alert::error('Pending Request', 'You already have a pending edit request for this report.');
+            // Redirect to a safe page to avoid redirect loop
+            return redirect()->route('user.report.userIncidentReporting.index');
+        }
+
+        return view('user.report.editReports', compact('report'));
     }
-
-    if ($report->editRequest && $report->editRequest->status === 'pending') {
-        Alert::error('Pending Request', 'You already have a pending edit request for this report.');
-        // Redirect to a safe page to avoid redirect loop
-        return redirect()->route('user.report.userIncidentReporting.index');
-    }
-
-    return view('user.report.editReports', compact('report'));
-}
     /**
      * Request an edit to the report.
      */
@@ -170,73 +172,40 @@ public function edit($id)
             'incident_description' => 'required|string',
             'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        // Prepare image paths array
+
         $imagePaths = [];
-        // Handle image uploads (if any)
         if ($request->hasFile('requested_image')) {
             foreach ($request->file('requested_image') as $image) {
                 $path = $image->store('edit_request_images', 'public');
                 $imagePaths[] = $path;
             }
         }
-        // Create the edit request record
-        EditRequest::create([
+
+        // Create the edit request record and capture it
+        $editRequest = EditRequest::create([
             'incident_report_id' => $id,
             'requested_by' => auth()->id(),
             'requested_title' => $request->input('title'),
             'requested_description' => $request->input('incident_description'),
             'requested_type' => $request->input('incident_type'),
             'requested_report_date' => $request->input('requested_report_date'),
-            'requested_image' => $imagePaths, // ← Just pass the array directly
+            'requested_image' => $imagePaths,
             'status' => 'pending',
             'requested_at' => now(),
         ]);
+
+        // Notify staff/admin
+        $staffMembers = User::whereHas('roles', function ($query) {
+            $query->where('app', 'incident_reporting')
+                ->whereIn('role', ['staff', 'admin']);
+        })->get();
+
+        foreach ($staffMembers as $staff) {
+            $staff->notify(new EditRequestNotification($editRequest));
+        }
+
         Alert::success('Success', 'Update request sent successfully.');
         return back();
-    }
-    /**
-     * Update the specified resource in storage.
-     */    public function update(Request $request, IncidentReportUser $incidentReportUser)
-    {
-        $validated = $request->validate([
-            'report_title' => 'required|string|max:255',
-            'report_date' => 'required|date',
-            'report_type' => 'required|string',
-            'report_description' => 'required|string',
-            'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-            'remove_images' => 'array|nullable',
-            'remove_images.*' => 'integer|exists:incident_report_images,id',
-        ]);
-        // Update main fields
-        $incidentReportUser->update([
-            'report_title' => $validated['report_title'],
-            'report_date' => $validated['report_date'],
-            'report_type' => $validated['report_type'],
-            'report_description' => $validated['report_description'],
-        ]);
-        // Remove selected images
-        if ($request->filled('remove_images')) {
-            foreach ($request->remove_images as $imageId) {
-                $image = $incidentReportUser
-                    ->images()
-                    ->find($imageId);
-
-                if ($image) {
-                    Storage::disk('public')
-                        ->delete($image->file_path);
-                    $image->delete();
-                }
-            }
-        }
-        // Upload new images
-        if ($request->hasFile('report_image')) {
-            foreach ($request->file('report_image') as $image) {
-                $path = $image->store('incident_images', 'public');
-                $incidentReportUser->images()->create(['file_path' => $path]);
-            }
-        }
-        Alert::success('Updated', 'Report updated successfully.');
-        return redirect()->route('user.report.userIncidentReporting.edit', $incidentReportUser->id);
     }
     //handles delete requests
     public function requestDelete(IncidentReportUser $incidentReportUser): RedirectResponse
@@ -259,18 +228,28 @@ public function edit($id)
         }
 
         // Create a new delete request with snapshot data
-        DeleteRequest::create([
+        $deleteRequest = DeleteRequest::create([
             'user_id' => Auth::id(),
             'report_id' => $incidentReportUser->id,
             'report_title' => $incidentReportUser->report_title,
             'report_date' => $incidentReportUser->report_date,
             'report_type' => $incidentReportUser->report_type,
             'report_description' => $incidentReportUser->report_description,
-            'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(), // ← Optional: include image paths
+            'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(), // Optional: include image paths
             'reason' => 'User requested to delete the report.',
             'status' => 'pending',
             'requested_at' => now(),
         ]);
+
+        // Notify all staff/admin in incident_reporting about the delete request
+        $staffMembers = User::whereHas('roles', function ($query) {
+            $query->where('app', 'incident_reporting')
+                ->whereIn('role', ['staff', 'admin']);
+        })->get();
+
+        foreach ($staffMembers as $staff) {
+            $staff->notify(new DeleteRequestNotification($deleteRequest));
+        }
 
         Alert::success('Request Sent', 'Your delete request has been submitted.');
         return redirect()->back();
