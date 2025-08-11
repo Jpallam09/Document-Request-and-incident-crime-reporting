@@ -130,23 +130,22 @@ class IncidentReportUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-        $report = IncidentReportUser::with(['images', 'editRequest'])->findOrFail($id);
+public function edit($id)
+{
+    $report = IncidentReportUser::with(['images', 'editRequest'])->findOrFail($id);
 
-        // Make sure the current logged-in user owns this report
-        if (auth()->id() !== $report->user_id) {
-            abort(403);
-        }
-
-        // ⛔ Prevent access if there's a pending edit request
-        if ($report->editRequest && $report->editRequest->status === 'pending') {
-            Alert::error('Pending Request', 'You already have a pending edit request for this report.');
-            return redirect()->back();
-        }
-
-        return view('user.report.editReports', compact('report'));
+    if (auth()->id() !== $report->user_id) {
+        abort(403);
     }
+
+    if ($report->editRequest && $report->editRequest->status === 'pending') {
+        Alert::error('Pending Request', 'You already have a pending edit request for this report.');
+        // Redirect to a safe page to avoid redirect loop
+        return redirect()->route('user.report.userIncidentReporting.index');
+    }
+
+    return view('user.report.editReports', compact('report'));
+}
     /**
      * Request an edit to the report.
      */
