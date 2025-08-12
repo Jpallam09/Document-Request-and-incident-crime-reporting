@@ -25,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layouts.staff', function ($view) {
+        View::composer('*', function ($view) {
             $user = Auth::user();
             $view->with('unreadNotifications', $user ? $user->unreadNotifications : collect());
+            $view->with('notifications', $user ? $user->notifications : collect());
         });
     }
 }

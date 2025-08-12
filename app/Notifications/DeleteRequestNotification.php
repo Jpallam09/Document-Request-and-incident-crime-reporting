@@ -24,6 +24,7 @@ class DeleteRequestNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'delete_request_id' => $this->deleteRequest->id,
             'title' => 'Delete Request Submitted',
             'submitted_by' => $this->deleteRequest->user->first_name . ' ' . $this->deleteRequest->user->last_name,
             'message' => 'User requested to delete report #' . $this->deleteRequest->report_id,

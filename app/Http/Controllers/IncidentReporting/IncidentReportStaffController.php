@@ -16,22 +16,18 @@ class IncidentReportStaffController extends Controller
     /**
      * Show the staff dashboard.
      */
-public function dashboard()
-{
-    $totalIncidentReports = IncidentReportUser::count();
-    $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
-    $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
+    public function dashboard()
+    {
+        $totalIncidentReports = IncidentReportUser::count();
+        $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
+        $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
 
-    $user = Auth::user();
-
-    return view('incidentReporting.staffReport.staffDashboard', [
-        'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
-        'totalPendingEditRequests' => $totalPendingEditRequests,
-        'totalIncidentReports' => $totalIncidentReports,
-        'notifications' => $user->notifications, // ALL notifications
-        'unreadNotifications' => $user->unreadNotifications, // only unread
-    ]);
-}
+        return view('incidentReporting.staffReport.staffDashboard', [
+            'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
+            'totalPendingEditRequests' => $totalPendingEditRequests,
+            'totalIncidentReports' => $totalIncidentReports,
+        ]);
+    }
 
     public function markNotificationRead($id)
     {
@@ -41,7 +37,23 @@ public function dashboard()
         }
 
         $notification->markAsRead();
-        return back();
+
+        // Check notification data and redirect accordingly
+        $data = $notification->data;
+
+        if (isset($data['report_id'])) {
+            // New report notification — go to report details page
+            return redirect()->route('reporting.staff.staffViewReportsFullDetails', $data['report_id']);
+        } elseif (isset($data['edit_request_id'])) {
+            // Edit request notification — go to edit requests index
+            return redirect()->route('reporting.staff.staffUpdateRequests');
+        } elseif (isset($data['delete_request_id'])) {
+            // Delete request notification — go to delete requests index
+            return redirect()->route('reporting.staff.staffDeletionRequests');
+        }
+
+        // Default fallback redirect to dashboard
+        return redirect()->route('reporting.staff.dashboard');
     }
 
     /**
@@ -101,14 +113,12 @@ public function dashboard()
     }
 
     /**
-     * notification for new reports.
+     * Notification page (if used).
      */
     public function notifications()
     {
-        $notifications = Auth::user()->notifications; // all notifications
-        $unread = Auth::user()->notifications;  // only unread
-
-        return view('incidentReporting.staffReport.notifications', compact('notifications', 'unread'));
+        // If you have a specific notifications page
+        return view('incidentReporting.staffReport.notifications');
     }
 
     /**
@@ -131,9 +141,13 @@ public function dashboard()
         return view('incidentReporting.staffReport.staffViewReportsFullDetails', compact('report'));
     }
 
+    /**
+     * Show edit requests.
+     */
     public function staffUpdateRequests()
     {
         $reports = IncidentReportUser::latest()->get();
+
         return view('incidentReporting.staffReport.staffUpdateRequests', compact('reports'));
     }
 }
