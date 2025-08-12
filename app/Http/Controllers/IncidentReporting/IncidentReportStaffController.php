@@ -16,19 +16,23 @@ class IncidentReportStaffController extends Controller
     /**
      * Show the staff dashboard.
      */
-    public function dashboard()
-    {
-        $totalIncidentReports = IncidentReportUser::count();
-        $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
-        $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
-        $user = Auth::user();
+public function dashboard()
+{
+    $totalIncidentReports = IncidentReportUser::count();
+    $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
+    $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
 
-        return view('incidentReporting.staffReport.staffDashboard', [
-            'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
-            'totalPendingEditRequests' => $totalPendingEditRequests,
-            'totalIncidentReports' => $totalIncidentReports,
-        ]);
-    }
+    $user = Auth::user();
+
+    return view('incidentReporting.staffReport.staffDashboard', [
+        'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
+        'totalPendingEditRequests' => $totalPendingEditRequests,
+        'totalIncidentReports' => $totalIncidentReports,
+        'notifications' => $user->notifications, // ALL notifications
+        'unreadNotifications' => $user->unreadNotifications, // only unread
+    ]);
+}
+
     public function markNotificationRead($id)
     {
         $notification = Auth::user()->notifications->firstWhere('id', $id);
@@ -102,7 +106,7 @@ class IncidentReportStaffController extends Controller
     public function notifications()
     {
         $notifications = Auth::user()->notifications; // all notifications
-        $unread = Auth::user()->unreadNotifications;  // only unread
+        $unread = Auth::user()->notifications;  // only unread
 
         return view('incidentReporting.staffReport.notifications', compact('notifications', 'unread'));
     }

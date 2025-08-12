@@ -20,10 +20,11 @@
                         <i class="fas fa-info-circle"></i> No new notifications
                     </li>
                 @else
-                    @foreach ($unreadNotifications as $index => $notification)
+                    @foreach ($notifications as $index => $notification)
                         <li>
                             <a href="{{ route('reporting.staff.notifications.markRead', $notification->id) }}"
-                                class="dropdown-item d-flex align-items-start gap-2">
+                                class="dropdown-item d-flex align-items-start gap-2 
+                  {{ is_null($notification->read_at) ? 'fw-bold' : 'text-muted' }}">
                                 <i class="fas fa-info-circle mt-1"></i>
                                 <div>
                                     <strong>{{ $notification->data['title'] ?? 'Notification' }}</strong><br>
@@ -39,10 +40,11 @@
                                 </div>
                             </a>
                         </li>
-                        @if ($index !== $unreadNotifications->count() - 1)
+                        @if ($index !== $notifications->count() - 1)
                             <hr class="my-2 mx-3" />
                         @endif
                     @endforeach
+
                 @endif
             </ul>
         </li>

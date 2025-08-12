@@ -38,7 +38,8 @@ class NewReportNotification extends Notification
     {
         return [
             'report_id' => $this->report->id,
-            'title' => $this->report->report_title,
+            'title' => 'New Report Submitted',
+            'message' => 'titled: ' . $this->report->report_title . '"',
             'submitted_by' => $this->report->user->first_name . ' ' . $this->report->user->last_name,
             'created_at' => $this->report->created_at->toDateTimeString(),
         ];
