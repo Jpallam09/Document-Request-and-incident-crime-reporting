@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property \Illuminate\Notifications\DatabaseNotificationCollection $notifications
  * @property \Illuminate\Notifications\DatabaseNotificationCollection $unreadNotifications
  * @method \Illuminate\Notifications\DatabaseNotificationCollection notifications()
+ * @method \Illuminate\Notifications\DatabaseNotificationCollection unreadNotifications()
  */
 class User extends Authenticatable
 {

@@ -23,7 +23,8 @@ Route::prefix("auth")->group(function () {
         ->name('login.post');
 
     Route::get('/index', function () {
-        return view('auth.index');})
+        return view('auth.index');
+    })
         ->name("index");
 });
 
@@ -54,8 +55,12 @@ Route::prefix('user/report')
                 ->name('delete');
         });
         Route::get('/userProfileReporting', function () {
-            return view('user.report.userProfileReporting');})
+            return view('user.report.userProfileReporting');
+        })
             ->name("userProfileReporting");
+        //notification
+        Route::get('notifications/{id}/mark-read', [IncidentReportUserController::class, 'markAsRead'])
+            ->name('notifications.markRead');
     });
 // ------------------ USER MAIN DASHBOARD ------------------
 Route::get('user/userMainDashboard', function () {

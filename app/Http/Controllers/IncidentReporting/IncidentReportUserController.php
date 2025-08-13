@@ -26,12 +26,14 @@ class IncidentReportUserController extends Controller
      */
     public function dashboard(): View
     {
-        $reports = IncidentReportUser::where('user_id', auth()
-            ->id())
+        $reports = IncidentReportUser::where('user_id', auth()->id())
             ->latest()
             ->paginate(5);
 
-        return view('user.report.userDashboardReporting', compact('reports'));
+        // Fetch unread notifications for authenticated user
+        $unreadNotifications = auth()->user()->unreadNotifications;
+
+        return view('user.report.userDashboardReporting', compact('reports', 'unreadNotifications'));
     }
     /**
      * Display the details of a single report.
@@ -50,23 +52,14 @@ class IncidentReportUserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        $reports = IncidentReportUser::where('user_id', auth()
-            ->id())
-            ->latest()
-            ->get();
-        return view('user.report.userIncidentReporting', compact('reports'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
+     * Show the form for creating new report
      */
     public function create(): View
     {
-        return view('user.report.userIncidentReporting');
+        $unreadNotifications = auth()->user()->unreadNotifications;
+        $notifications = auth()->user()->notifications;
+        
+        return view('user.report.userIncidentReporting', compact('unreadNotifications', 'notifications'));
     }
 
     /**
@@ -117,16 +110,6 @@ class IncidentReportUserController extends Controller
     public function images()
     {
         return $this->hasMany(IncidentReportImage::class);
-    }
-
-    /**
-     * Display the specified resource (single-report fallback via resource route).
-     */
-    public function show(IncidentReportUser $userIncidentReporting): View
-    {
-        return view('user.report.userDashboardReporting', [
-            'reports' => collect([$userIncidentReporting]),
-        ]);
     }
 
     /**
@@ -253,5 +236,27 @@ class IncidentReportUserController extends Controller
 
         Alert::success('Request Sent', 'Your delete request has been submitted.');
         return redirect()->back();
+    }
+
+    public function markAsRead($id)
+    {
+        $notification = auth()->user()->notifications->firstWhere('id', $id);
+        if (!$notification) {
+            abort(404);
+        }
+        $notification->markAsRead();
+
+        // You can redirect based on notification data
+        $data = $notification->data;
+
+        // Example: redirect to a specific route based on notification type
+        if (isset($data['edit_request_id'])) {
+            return redirect()->route('user.report.editRequestStatus', $data['edit_request_id']);
+        }
+        if (isset($data['delete_request_id'])) {
+            return redirect()->route('user.report.deleteRequestStatus', $data['delete_request_id']);
+        }
+
+        return redirect()->route('user.report.userDashboardReporting'); // fallback
     }
 }

@@ -33,7 +33,7 @@
                                     </small><br>
                                     <small class="notification-message">
                                         {{ \Illuminate\Support\Str::limit($notification->data['message'] ?? '', 60) }}
-                                    </small><br>
+                                    </small>
                                     <small class="text-muted notification-time">
                                         {{ $notification->created_at->diffForHumans() }}
                                     </small>

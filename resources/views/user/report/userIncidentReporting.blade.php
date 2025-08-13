@@ -16,7 +16,7 @@
 <body>
     <main class="layout">
         @include('components.navbar.user-navbar')
-        <section class="page-content">
+        <section class="page-content mt-4">
             <section class="hero" role="banner" aria-label="Hero section">
                 <h1>Report Incidents Quickly &amp; Efficiently</h1>
                 <p>Streamline your incident reporting with our intuitive platform that makes logging, tracking, and
@@ -124,9 +124,11 @@
         </section>
     </main>
     @include('sweetalert::alert')
+    
     <footer>
         &copy; 2024 IncidentReport. All rights reserved.
     </footer>
+    <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

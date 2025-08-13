@@ -5,12 +5,13 @@ namespace App\Http\Controllers\IncidentReporting;
 use App\Http\Controllers\Controller;
 use App\Models\IncidentReporting\EditRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\ReportUser\EditRequestStatusNotification;
 
 class EditRequestController extends Controller
 {
     // Show all edit requests for staff
     public function index()
-    {   
+    {
         // Eager-load 'user' and 'report' relationships, return a collection
         $editrequests = EditRequest::with(['user', 'report'])
             ->whereIn('status', ['pending', 'rejected', 'approved'])
@@ -19,8 +20,8 @@ class EditRequestController extends Controller
 
         // Pass the collection to the view — you’ll loop over it in the Blade file
         return view('incidentReporting.staffReport.staffUpdateRequests', [
-            'requests'=> $editrequests,
-    ]);
+            'requests' => $editrequests,
+        ]);
     }
 
     /**
@@ -65,10 +66,13 @@ class EditRequestController extends Controller
         $editRequest->reviewed_at = now();
         $editRequest->save();
 
+        // After saving in accept()
+        $editRequest->user->notify(new EditRequestStatusNotification($editRequest, 'approved'));
+
+
         Alert::toast('Edit request accepted and applied successfully.', 'success')->autoClose(3000);
         return back();
     }
-
 
     public function reject($id)
     {
@@ -83,6 +87,9 @@ class EditRequestController extends Controller
         $editRequest->reviewed_by = auth()->id();
         $editRequest->reviewed_at = now();
         $editRequest->save();
+
+        // After saving in reject()
+        $editRequest->user->notify(new EditRequestStatusNotification($editRequest, 'rejected'));
 
         Alert::toast('Edit request rejected.', 'error')->autoClose(3000);
         return back();

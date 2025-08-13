@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\IncidentReporting\DeleteRequest;
 use App\Models\IncidentReporting\IncidentReportUser;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\ReportUser\DeleteRequestStatusNotification;
+
 
 class DeleteRequestController extends Controller
 {
@@ -68,6 +70,8 @@ class DeleteRequestController extends Controller
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 
+        $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'accepted'));
+
         Alert::success('Accepted', 'The delete request has been approved and the report deleted.');
         return redirect()->back();
     }
@@ -91,6 +95,8 @@ class DeleteRequestController extends Controller
         $deleteRequest->status = 'rejected';
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
+
+        $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'rejected'));
 
         Alert::info('Rejected', 'The delete request has been rejected.');
         return redirect()->back();
