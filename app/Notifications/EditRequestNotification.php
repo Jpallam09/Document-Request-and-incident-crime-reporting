@@ -24,6 +24,7 @@ class EditRequestNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'report_id' => $this->editRequest->incident_report_id,
             'edit_request_id' => $this->editRequest->id,
             'title' => 'Edit Request Submitted',
             'submitted_by' => $this->editRequest->user->first_name . ' ' . $this->editRequest->user->last_name,

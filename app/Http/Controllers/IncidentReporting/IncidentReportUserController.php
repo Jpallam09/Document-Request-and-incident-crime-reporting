@@ -58,7 +58,7 @@ class IncidentReportUserController extends Controller
     {
         $unreadNotifications = auth()->user()->unreadNotifications;
         $notifications = auth()->user()->notifications;
-        
+
         return view('user.report.userIncidentReporting', compact('unreadNotifications', 'notifications'));
     }
 
@@ -244,19 +244,29 @@ class IncidentReportUserController extends Controller
         if (!$notification) {
             abort(404);
         }
-        $notification->markAsRead();
 
-        // You can redirect based on notification data
+        $notification->markAsRead();
         $data = $notification->data;
 
-        // Example: redirect to a specific route based on notification type
         if (isset($data['edit_request_id'])) {
-            return redirect()->route('user.report.editRequestStatus', $data['edit_request_id']);
-        }
-        if (isset($data['delete_request_id'])) {
-            return redirect()->route('user.report.deleteRequestStatus', $data['delete_request_id']);
+            $editRequest = EditRequest::find($data['edit_request_id']);
+            if ($editRequest) {
+                return redirect()->route('user.report.viewReports', $editRequest->incident_report_id);
+            }
         }
 
-        return redirect()->route('user.report.userDashboardReporting'); // fallback
+        if (isset($data['delete_request_id'])) {
+            $deleteRequest = DeleteRequest::find($data['delete_request_id']);
+            if ($deleteRequest) {
+                if ($deleteRequest->status === 'accepted') {
+                    return redirect()->route('user.report.userDashboardReporting');
+                } elseif ($deleteRequest->status === 'rejected') {
+                    return redirect()->route('user.report.viewReports', $deleteRequest->report->id);
+                }
+            }
+        }
+
+        // Default fallback
+        return redirect()->route('user.report.userDashboardReporting');
     }
 }

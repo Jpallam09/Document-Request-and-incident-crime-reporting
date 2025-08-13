@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $user_id
  * @property int $report_id
+ * @property int $incident_report_id
  * @property string $reason
  * @property string $status
  * @property Carbon $requested_at

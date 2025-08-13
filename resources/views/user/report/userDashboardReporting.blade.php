@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         {{-- Vite Assets --}}
         @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
         @vite('resources/css/userCss/userDashboardReporting.css')

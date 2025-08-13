@@ -126,7 +126,7 @@
             </div>
         </main>
     </div>
-
+    <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     @include('sweetalert::alert')
 </body>
 
