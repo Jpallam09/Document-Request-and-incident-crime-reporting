@@ -15,7 +15,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end notification-dropdown-menu"
                 aria-labelledby="notificationDropdown">
-                @if (!isset($unreadNotifications) || $unreadNotifications->isEmpty())
+                @if (!isset($notifications) || $notifications->isEmpty())
                     <li class="dropdown-item text-muted small d-flex align-items-center gap-2">
                         <i class="fas fa-info-circle"></i> No new notifications
                     </li>
@@ -23,7 +23,7 @@
                     @foreach ($notifications as $index => $notification)
                         <li>
                             <a href="{{ route('reporting.staff.notifications.markRead', $notification->id) }}"
-                                class="dropdown-item d-flex align-items-start gap-2 
+                                class="dropdown-item d-flex align-items-start gap-2
                   {{ is_null($notification->read_at) ? 'fw-bold' : 'text-muted' }}">
                                 <i class="fas fa-info-circle mt-1"></i>
                                 <div>

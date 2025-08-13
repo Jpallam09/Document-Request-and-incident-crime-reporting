@@ -24,7 +24,7 @@ class IncidentReportUserController extends Controller
     /**
      * Display user dashboard with all reports.
      */
-    public function dashboard(): View
+    public function index(): View
     {
         $reports = IncidentReportUser::where('user_id', auth()->id())
             ->latest()
@@ -67,6 +67,7 @@ class IncidentReportUserController extends Controller
      */
     public function store(Request $request)
     {
+        // 1️⃣ Validate input
         $validated = $request->validate([
             'report_title' => 'required|string|max:255',
             'report_date' => 'required|date',
@@ -75,7 +76,7 @@ class IncidentReportUserController extends Controller
             'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        // 1. Save the report
+        // 2️⃣ Save the report
         $report = new IncidentReportUser();
         $report->report_title = $validated['report_title'];
         $report->report_date = $validated['report_date'];
@@ -84,17 +85,15 @@ class IncidentReportUserController extends Controller
         $report->user_id = auth()->id();
         $report->save();
 
-        // 2. Save images
+        // 3️⃣ Save images
         if ($request->hasFile('report_image')) {
-            foreach ($request->file('report_image') as $image) {
-                $path = $image->store('incident_images', 'public');
-                $report->images()->create([
-                    'file_path' => $path,
-                ]);
+            foreach ($request->file('report_image') as $imageFile) {
+                $path = $imageFile->store('incident_images', 'public');
+                $report->images()->create(['file_path' => $path]);
             }
         }
 
-        // 3. Notify all staff/admin in incident_reporting
+        // 4️⃣ Notify staff/admin
         $staffMembers = User::whereHas('roles', function ($query) {
             $query->where('app', 'incident_reporting')
                 ->whereIn('role', ['staff', 'admin']);
@@ -107,6 +106,7 @@ class IncidentReportUserController extends Controller
         Alert::success('Submitted', 'Your report has been submitted successfully.');
         return redirect()->route('user.report.userIncidentReporting.index');
     }
+
     public function images()
     {
         return $this->hasMany(IncidentReportImage::class);
@@ -134,9 +134,10 @@ class IncidentReportUserController extends Controller
     /**
      * Request an edit to the report.
      */
+
     public function requestUpdate(Request $request, $id)
     {
-        // Check if an edit request for this report already exists and is still pending
+        // Check existing pending request
         $existingEditRequest = EditRequest::where('incident_report_id', $id)
             ->where('requested_by', auth()->id())
             ->where('status', 'pending')
@@ -147,8 +148,8 @@ class IncidentReportUserController extends Controller
             return redirect()->back();
         }
 
-        // Validate form fields
-        $request->validate([
+        // Validate form
+        $validated = $request->validate([
             'title' => 'required|string',
             'requested_report_date' => 'required|date',
             'incident_type' => 'required|string',
@@ -156,22 +157,23 @@ class IncidentReportUserController extends Controller
             'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Handle images
         $imagePaths = [];
         if ($request->hasFile('requested_image')) {
-            foreach ($request->file('requested_image') as $image) {
-                $path = $image->store('edit_request_images', 'public');
+            foreach ($request->file('requested_image') as $imageFile) {
+                $path = $imageFile->store('edit_request_images', 'public');
                 $imagePaths[] = $path;
             }
         }
 
-        // Create the edit request record and capture it
+        // Create edit request
         $editRequest = EditRequest::create([
             'incident_report_id' => $id,
             'requested_by' => auth()->id(),
-            'requested_title' => $request->input('title'),
-            'requested_description' => $request->input('incident_description'),
-            'requested_type' => $request->input('incident_type'),
-            'requested_report_date' => $request->input('requested_report_date'),
+            'requested_title' => $validated['title'],
+            'requested_description' => $validated['incident_description'],
+            'requested_type' => $validated['incident_type'],
+            'requested_report_date' => $validated['requested_report_date'],
             'requested_image' => $imagePaths,
             'status' => 'pending',
             'requested_at' => now(),
@@ -190,6 +192,7 @@ class IncidentReportUserController extends Controller
         Alert::success('Success', 'Update request sent successfully.');
         return back();
     }
+
     //handles delete requests
     public function requestDelete(IncidentReportUser $incidentReportUser): RedirectResponse
     {

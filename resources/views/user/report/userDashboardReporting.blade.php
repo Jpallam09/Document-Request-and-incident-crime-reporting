@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     {{-- Reports Table --}}
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-12">
                             <div class="table-responsive shadow-sm rounded bg-white p-3">
                                 <table class="table table-bordered table-hover text-center align-middle report-table">

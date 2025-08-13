@@ -126,7 +126,8 @@ class IncidentReportStaffController extends Controller
      */
     public function staffReportView()
     {
-        $reports = IncidentReportUser::latest()->get();
+        $reports = IncidentReportUser::latest()
+            ->paginate(10);
 
         return view('incidentReporting.staffReport.staffReportView', compact('reports'));
     }

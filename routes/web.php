@@ -37,7 +37,7 @@ Route::prefix('user/report')
     ->group(function () {
         Route::middleware('auth')->group(function () {
             // User Dashboard for Incident Reporting
-            Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'dashboard'])
+            Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'index'])
                 ->name("userDashboardReporting");
             // User Make report
             Route::resource('userIncidentReporting', IncidentReportUserController::class);

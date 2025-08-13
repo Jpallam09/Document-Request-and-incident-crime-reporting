@@ -81,13 +81,13 @@
                 </div>
 
                 <!-- Pagination (optional, remove if unused) -->
-                {{-- 
+                
                 <div class="row mt-4">
                     <div class="col d-flex justify-content-center">
                         {{ $reports->links('vendor.pagination.default') }}
                     </div>
                 </div>
-                --}}
+               
             </div>
         </section>
     </main>

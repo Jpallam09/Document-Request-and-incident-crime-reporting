@@ -15,7 +15,7 @@
     <main class="layout">
         @include('components.navbar.Shared-navbar')
 
-        <section class="page-content">
+        <section class="page-content mt-5">
             <div class="report-details-container">
 
                 <!-- Header and Back Button -->
