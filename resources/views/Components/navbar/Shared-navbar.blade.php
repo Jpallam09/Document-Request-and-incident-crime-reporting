@@ -1,6 +1,12 @@
 <!-- Navbar -->
 <nav class="navbar d-flex justify-content-end align-items-center px-4 shadow-sm bg-white">
     <ul class="navbar__menu d-flex align-items-center gap-3 mb-0 list-unstyled">
+                                <!-- User info -->
+        <li class="d-flex align-items-center gap-2">
+            <span class="d-none d-md-inline">{{ auth()->user()->user_name }}</span>
+            <img src="{{ auth()->user()->profile_picture ?? asset('images/pfp.png') }}"
+                 class="rounded-circle" width="32" height="32" alt="User Avatar">
+        </li>
         <!-- Notification Dropdown -->
         <li class="nav-item dropdown position-relative">
             <a class="nav-link" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"

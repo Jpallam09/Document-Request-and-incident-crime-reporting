@@ -1,80 +1,66 @@
 <!-- Navbar (Icons only, aligned right) -->
 <nav class="navbar d-flex justify-content-end align-items-center px-4 shadow-sm">
     <ul class="navbar__menu d-flex align-items-center gap-3 mb-0 list-unstyled">
-
+                                <!-- User info -->
+        <li class="d-flex align-items-center gap-2">
+            <span class="d-none d-md-inline">{{ auth()->user()->user_name }}</span>
+            <img src="{{ auth()->user()->profile_picture ?? asset('images/pfp.png') }}"
+                 class="rounded-circle" width="32" height="32" alt="User Avatar">
+        </li>
         <!-- Notification Dropdown -->
-        <li class="nav-item dropdown position-relative">
-            <a class="nav-link" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false" aria-label="Notifications">
-                <i class="fas fa-bell"></i>
+        <li class="nav-item dropdown position-relative"> <a class="nav-link" href="#" id="notificationDropdown"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications"> <i
+                    class="fas fa-bell"></i>
                 @if (isset($unreadNotifications) && $unreadNotifications->count() > 0)
                     <span
                         class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1 notification-badge">
-                        {{ $unreadNotifications->count() }}
-                    </span>
-                @endif
+                        {{ $unreadNotifications->count() }} </span>
+                    @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end notification-dropdown-menu"
                 aria-labelledby="notificationDropdown">
                 @if (!isset($notifications) || $notifications->isEmpty())
-                    <li class="dropdown-item text-muted small d-flex align-items-center gap-2">
-                        <i class="fas fa-info-circle"></i> No notifications
-                    </li>
+                    <li class="dropdown-item text-muted small d-flex align-items-center gap-2"> <i
+                            class="fas fa-info-circle"></i> No notifications </li>
                 @else
                     @foreach ($notifications as $index => $notification)
-                        <li>
-                            <a href="{{ route('user.report.notifications.markRead', $notification->id) }}"
-                                class="dropdown-item d-flex align-items-start gap-2
-                        {{ is_null($notification->read_at) ? 'fw-bold' : 'text-muted' }}">
+                        <li> <a href="{{ route('user.report.notifications.markRead', $notification->id) }}"
+                                class="dropdown-item d-flex align-items-start gap-2 {{ is_null($notification->read_at) ? 'fw-bold' : 'text-muted' }}">
                                 <i class="fas fa-info-circle mt-1"></i>
                                 <div>
                                     <strong>{{ $notification->data['title'] ?? class_basename($notification->type) }}</strong><br>
-                                    <small class="text-muted submitted-by-text">
-                                        <strong>User:</strong> {{ $notification->data['submitted_by'] ?? 'Unknown' }}
-                                    </small><br>
-                                    <small class="notification-message">
+                                    <small class="text-muted submitted-by-text"> <strong>User:</strong>
+                                        {{ $notification->data['submitted_by'] ?? 'Unknown' }} </small><br> <small
+                                        class="notification-message">
                                         {{ \Illuminate\Support\Str::limit($notification->data['message'] ?? '', 60) }}
-                                    </small>
-                                    <small class="text-muted notification-time">
-                                        {{ $notification->created_at->diffForHumans() }}
-                                    </small>
-                                </div>
-                            </a>
-                        </li>
+                                    </small> <small class="text-muted notification-time">
+                                        {{ $notification->created_at->diffForHumans() }} </small> </div>
+                            </a> </li>
                         @if ($index !== $notifications->count() - 1)
                             <hr class="my-2 mx-3" />
                         @endif
                     @endforeach
                 @endif
             </ul>
-        </li>
-
-
-        <!-- Settings Dropdown -->
+        </li> <!-- Settings Dropdown -->
         <li class="navbar__item dropdown">
             <details>
-                <summary class="dropdown__toggle" aria-haspopup="true" aria-label="Settings">
-                    <i class="fas fa-cog"></i>
+                <summary class="dropdown__toggle" aria-haspopup="true" aria-label="Settings"> <i class="fas fa-cog"></i>
                 </summary>
                 <ul class="dropdown__menu" role="menu">
                     <li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown__item">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </button>
-                        </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"> @csrf <button
+                                type="submit" class="dropdown__item"> <i class="fas fa-sign-out-alt"></i> Logout
+                            </button> </form>
                     </li>
-                    <li>
-                        <a href="{{ route('user.report.show', auth()->id()) }}" class="dropdown__item">
-                            <i class="fas fa-user-circle"></i> Profile
-                        </a>
-                    </li>
+                    <li> <a href="{{ route('user.report.show', auth()->id()) }}" class="dropdown__item"> <i
+                                class="fas fa-user-circle"></i> Profile </a> </li>
                 </ul>
             </details>
         </li>
     </ul>
 </nav>
+
 
 <!-- Layout Container -->
 <div class="layout">
