@@ -36,9 +36,13 @@ Route::post('/logout', [LoginController::class, 'logout'])
 // ------------------ USER INCIDENT REPORT ROUTES ------------------
 Route::prefix('user/report')
     ->as('user.report.')
-    ->middleware('auth')
+    ->middleware(['auth', 'prevent-back-history'])
     ->group(function () {
         Route::middleware('auth')->group(function () {
+            // User Main Dashboard
+            Route::get('/userMainDashboard', function () {
+                return view('user.userMainDashboard');})
+                ->name("userMainDashboard");
             // User Dashboard for Incident Reporting
             Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'index'])
                 ->name("userDashboardReporting");
@@ -57,10 +61,6 @@ Route::prefix('user/report')
             Route::delete('/requestDelete/{incidentReportUser}', [IncidentReportUserController::class, 'requestDelete'])
                 ->name('delete');
         });
-        Route::get('/userProfileReporting', function () {
-            return view('user.report.userProfileReporting');
-        })
-            ->name("userProfileReporting");
         //notification
         Route::get('notifications/{id}/mark-read', [IncidentReportUserController::class, 'markAsRead'])
             ->name('notifications.markRead');
@@ -69,14 +69,10 @@ Route::prefix('user/report')
         Route::get('/userProfile', [UserProfileController::class, 'show'])
             ->name('user.profile.show');
         // Update current user's profile
-        Route::put('/userProfile/update', [UserProfileController::class, 'updateInfo'])
+        Route::post('/userProfile/update', [UserProfileController::class, 'updateInfo'])
             ->name('user.profile.update');
     });
-// ------------------ USER MAIN DASHBOARD ------------------
-Route::get('user/userMainDashboard', function () {
-    return view('user.userMainDashboard');
-})
-    ->name("userMainDashboard");
+
 // ------------------ IMPORT ROUTE FILES ------------------
 require __DIR__ . '/incidentReporting.php';
 require __DIR__ . '/documentRequest.php';

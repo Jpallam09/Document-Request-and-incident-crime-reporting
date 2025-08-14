@@ -81,8 +81,8 @@
         <!-- Navigation -->
         <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
             <li class="sidebar__item">
-                <a href="{{ route('userMainDashboard') }}"
-                    class="sidebar__link {{ request()->routeIs('userMainDashboard') ? 'active' : '' }}">
+                <a href="{{ route('user.report.userMainDashboard') }}"
+                    class="sidebar__link {{ request()->routeIs('user.report.userMainDashboard') ? 'active' : '' }}">
                     <i class="fas fa-chart-line me-2"></i>
                     <span>Dashboard</span>
                 </a>

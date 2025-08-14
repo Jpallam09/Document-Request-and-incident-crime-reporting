@@ -51,7 +51,7 @@ class LoginController extends Controller
             }
 
             // Default: Normal User
-            return redirect()->intended(route('user.report.userDashboardReporting'));
+            return redirect()->intended(route('user.report.userMainDashboard'));
         }
 
         // FAILED LOGIN
