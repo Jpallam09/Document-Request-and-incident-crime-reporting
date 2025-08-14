@@ -16,7 +16,7 @@
 
 <body>
     <div class="layout d-flex">
-        @include('components.navbar.user-navbar')
+        <x-navbar.user-navbar />
 
         <main class="page-content flex-grow-1 px-4">
             {{-- Header --}}

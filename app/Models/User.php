@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * /**
+ * @property string|null $profile_picture
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $user_name
+ * @property string|null $phone
  * @property \Illuminate\Notifications\DatabaseNotificationCollection $notifications
  * @property \Illuminate\Notifications\DatabaseNotificationCollection $unreadNotifications
  * @method \Illuminate\Notifications\DatabaseNotificationCollection notifications()
@@ -25,6 +31,7 @@ class User extends Authenticatable
         'phone',
         'role',
         'password',
+        'profile_picture',
     ];
     /* ------------------------------- RELATIONSHIPS ------------------------ */
 

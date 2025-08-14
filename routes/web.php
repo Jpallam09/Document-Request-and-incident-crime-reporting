@@ -32,9 +32,11 @@ Route::prefix("auth")->group(function () {
 // ------------------ GLOBAL LOGOUT ROUTE ------------------
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
+
 // ------------------ USER INCIDENT REPORT ROUTES ------------------
 Route::prefix('user/report')
     ->as('user.report.')
+    ->middleware('auth')
     ->group(function () {
         Route::middleware('auth')->group(function () {
             // User Dashboard for Incident Reporting
@@ -63,10 +65,13 @@ Route::prefix('user/report')
         Route::get('notifications/{id}/mark-read', [IncidentReportUserController::class, 'markAsRead'])
             ->name('notifications.markRead');
 
-            // Profile handlers
-            Route::get('/userProfile/{id}', [UserProfileController::class, 'show'])
-                ->name('show');
-    }); 
+        // Show current user's profile
+        Route::get('/userProfile', [UserProfileController::class, 'show'])
+            ->name('user.profile.show');
+        // Update current user's profile
+        Route::put('/userProfile/update', [UserProfileController::class, 'updateInfo'])
+            ->name('user.profile.update');
+    });
 // ------------------ USER MAIN DASHBOARD ------------------
 Route::get('user/userMainDashboard', function () {
     return view('user.userMainDashboard');

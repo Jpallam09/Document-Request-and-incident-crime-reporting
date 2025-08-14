@@ -17,7 +17,7 @@
 
 <body>
     <main class="layout d-flex">
-        @include('components.navbar.user-navbar')
+        <x-navbar.user-navbar />
 
         <section class="page-content flex-grow-1 px-4">
             <!-- Header -->

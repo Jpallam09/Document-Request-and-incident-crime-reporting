@@ -22,7 +22,7 @@
     <body>
         {{-- Navbar --}}
         <main class="layout d-flex">
-            @include('components.navbar.user-navbar')
+            <x-navbar.user-navbar />
 
             <section class="page-content flex-grow-1 pt-5 px-4">
                 <div class="container-fluid">

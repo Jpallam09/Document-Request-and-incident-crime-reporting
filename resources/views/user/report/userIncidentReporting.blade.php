@@ -15,7 +15,7 @@
 
 <body>
     <main class="layout">
-        @include('components.navbar.user-navbar')
+       <x-navbar.user-navbar />
         <section class="page-content mt-4">
             <section class="hero" role="banner" aria-label="Hero section">
                 <h1>Report Incidents Quickly &amp; Efficiently</h1>

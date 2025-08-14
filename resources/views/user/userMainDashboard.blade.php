@@ -21,7 +21,7 @@
 <body>
     <div class="layout d-flex">
         {{-- Shared Navbar (with sidebar inside it if included there) --}}
-        @include('components.navbar.user-navbar')
+        <x-navbar.user-navbar />
 
         <main class="page-content flex-grow-1">
             <section class="container-fluid py-4">
@@ -31,7 +31,7 @@
                         <i class="fas fa-user fa-lg"></i>
                     </div>
                     <div>
-                        <h1 class="mb-1 fw-bold">Hello, {{ Auth::user()->name }}!</h1>
+                        <h1 class="mb-1 fw-bold">Hello, {{ auth()->user()->user_name }}!</h1>
                         <p class="text-muted mb-0">Hope you're having a wonderful {{ now()->format('l') }}.</p>
                     </div>
                 </div>

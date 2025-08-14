@@ -1,11 +1,13 @@
 <!-- Navbar (Icons only, aligned right) -->
 <nav class="navbar d-flex justify-content-end align-items-center px-4 shadow-sm">
     <ul class="navbar__menu d-flex align-items-center gap-3 mb-0 list-unstyled">
-                                <!-- User info -->
+        <!-- User info -->
         <li class="d-flex align-items-center gap-2">
             <span class="d-none d-md-inline">{{ auth()->user()->user_name }}</span>
-            <img src="{{ auth()->user()->profile_picture ?? asset('images/pfp.png') }}"
-                 class="rounded-circle" width="32" height="32" alt="User Avatar">
+            <img src="{{ Auth::user()?->profile_picture 
+    ? asset('storage/profile_pictures/' . Auth::user()->profile_picture) 
+    : asset('images/pfp.png') }}"
+                class="rounded-circle" width="32" height="32" alt="User Avatar">
         </li>
         <!-- Notification Dropdown -->
         <li class="nav-item dropdown position-relative"> <a class="nav-link" href="#" id="notificationDropdown"
@@ -15,7 +17,7 @@
                     <span
                         class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1 notification-badge">
                         {{ $unreadNotifications->count() }} </span>
-                    @endif
+                @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end notification-dropdown-menu"
                 aria-labelledby="notificationDropdown">
@@ -34,7 +36,8 @@
                                         class="notification-message">
                                         {{ \Illuminate\Support\Str::limit($notification->data['message'] ?? '', 60) }}
                                     </small> <small class="text-muted notification-time">
-                                        {{ $notification->created_at->diffForHumans() }} </small> </div>
+                                        {{ $notification->created_at->diffForHumans() }} </small>
+                                </div>
                             </a> </li>
                         @if ($index !== $notifications->count() - 1)
                             <hr class="my-2 mx-3" />
@@ -53,8 +56,11 @@
                                 type="submit" class="dropdown__item"> <i class="fas fa-sign-out-alt"></i> Logout
                             </button> </form>
                     </li>
-                    <li> <a href="{{ route('user.report.show', auth()->id()) }}" class="dropdown__item"> <i
-                                class="fas fa-user-circle"></i> Profile </a> </li>
+                    <li>
+                        <a href="{{ route('user.report.user.profile.show') }}" class="dropdown__item">
+                            <i class="fas fa-user-circle"></i> Profile
+                        </a>
+                    </li>
                 </ul>
             </details>
         </li>
