@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\IncidentReporting\IncidentReportUserController;
+use App\Http\Controllers\ProfileControllers\UserProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -61,7 +62,11 @@ Route::prefix('user/report')
         //notification
         Route::get('notifications/{id}/mark-read', [IncidentReportUserController::class, 'markAsRead'])
             ->name('notifications.markRead');
-    });
+
+            // Profile handlers
+            Route::get('/userProfile/{id}', [UserProfileController::class, 'show'])
+                ->name('show');
+    }); 
 // ------------------ USER MAIN DASHBOARD ------------------
 Route::get('user/userMainDashboard', function () {
     return view('user.userMainDashboard');

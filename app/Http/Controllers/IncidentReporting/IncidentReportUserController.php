@@ -260,10 +260,14 @@ class IncidentReportUserController extends Controller
 
         if (isset($data['delete_request_id'])) {
             $deleteRequest = DeleteRequest::find($data['delete_request_id']);
+
             if ($deleteRequest) {
                 if ($deleteRequest->status === 'accepted') {
-                    return redirect()->route('user.report.userDashboardReporting');
+                    return redirect()->route('user.report.userDashboardReporting')
+                    ;
+
                 } elseif ($deleteRequest->status === 'rejected') {
+                     Alert::error('Rejected', 'Your delete request has been rejected.');
                     return redirect()->route('user.report.viewReports', $deleteRequest->report->id);
                 }
             }

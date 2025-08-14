@@ -21,7 +21,7 @@
                         // userCss
                         'resources/css/userCss/userIncidentReporting.css',
                         'resources/css/userCss/userDashboardReporting.css',
-                        'resources/css/userCss/userProfileReporting.css',
+                        'resources/css/userCss/userProfile.css',
                         'resources/css/userCss/viewReports.css',
                         'resources/css/userCss/editReports.css',
 
