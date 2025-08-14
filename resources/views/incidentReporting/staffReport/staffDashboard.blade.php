@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="layout d-flex">
-        @include('components.navbar.Shared-navbar')
+        <x-navbar.shared-navbar />
 
         <main class="page-content flex-grow-1">
             <section class="container-fluid py-4">

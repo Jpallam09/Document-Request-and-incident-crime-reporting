@@ -5,12 +5,13 @@ use App\Http\Controllers\IncidentReporting\IncidentReportStaffController;
 use App\Http\Controllers\IncidentReporting\IncidentReportAdminController;
 use App\Http\Controllers\IncidentReporting\EditRequestController;
 use App\Http\Controllers\IncidentReporting\DeleteRequestController;
+use App\Http\Controllers\ProfileControllers\ReportStaffProfileController;
 
 Route::prefix('incidentReporting')->middleware('auth')->group(function () {
 
     // STAFF ROUTES
     Route::prefix('staffReporting')
-        ->middleware('check.role:incident_reporting,staff')
+        ->middleware(['check.role:incident_reporting,staff', 'prevent-back-history'])
         ->name('reporting.staff.')
         ->group(function () {
 
@@ -55,6 +56,12 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             //chart Report Type Distribution
             Route::get('/reportType', [IncidentReportStaffController::class, 'getReportTypeChart'])
                 ->name('reportType');
+
+            //staff profile
+            Route::get('/profile', [ReportStaffProfileController::class, 'show'])
+                ->name('profile.show');
+            Route::post('/profile/update', [ReportStaffProfileController::class, 'updateInfo'])
+                ->name('profile.update');
         });
 
     Route::prefix('staffReporting')

@@ -13,7 +13,7 @@
 
 <body>
     <main class="layout">
-        @include('components.navbar.Shared-navbar')
+        <x-navbar.shared-navbar />
 
         <section class="page-content mt-5">
             <div class="report-details-container">

@@ -25,7 +25,7 @@
 
 <body>
     <main class="layout d-flex">
-        @include('components.navbar.shared-navbar')
+       <x-navbar.shared-navbar />
 
         <section class="page-content flex-grow-1 pt-5 px-4">
             <div class="container">

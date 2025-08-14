@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    {{-- Bootstrap & Icons --}}
+    <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    {{-- Vite CSS --}}
+    @vite('resources/css/staffCss/staffProfile.css')
+    @vite('resources/css/componentsCss/navbarCss/shared-navbar.css')
+    @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/js/userJs/userProfile.js') {{-- Reuse JS for image preview --}}
+</head>
+
+<body>
+    <div class="layout d-flex">
+        <x-navbar.shared-navbar />
+
+        <div class="page-content flex-grow-1 pt-5 px-4">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body p-4">
+                                <h2 class="card-title text-center mb-4">Edit Profile</h2>
+
+                                {{-- Profile Form --}}
+                                <form id="editProfileForm" method="POST"
+                                    action="{{ route('reporting.staff.profile.update') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+
+                                    {{-- Avatar --}}
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <div class="text-center">
+                                            <div class="rounded-circle overflow-hidden border border-3 border-primary mb-2 mx-auto"
+                                                style="width: 200px; height: 200px;">
+                                                <img id="profilePicture"
+                                                    src="{{ $staff->profile_picture ? asset('storage/profile_pictures/' . $staff->profile_picture) : asset('images/pfp.png') }}"
+                                                    data-default="{{ $staff->profile_picture ? asset('storage/profile_pictures/' . $staff->profile_picture) : asset('images/pfp.png') }}"
+                                                    alt="Staff Profile Picture" class="w-100 h-100 object-fit-cover">
+                                            </div>
+
+                                            <div class="d-flex gap-2 mt-1">
+                                                <input type="file" id="profilePictureInput" name="profile_picture"
+                                                    accept="image/*" class="form-control form-control-sm">
+                                                <button type="button" id="resetProfilePicture"
+                                                    class="btn btn-sm btn-outline-secondary d-none">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        {{-- First Name --}}
+                                        <div class="col-12 col-md-6">
+                                            <label for="first_name" class="form-label">First Name</label>
+                                            <input type="text" id="first_name" name="first_name"
+                                                value="{{ old('first_name', $staff->first_name) }}" class="form-control"
+                                                required>
+                                        </div>
+
+                                        {{-- Last Name --}}
+                                        <div class="col-12 col-md-6">
+                                            <label for="last_name" class="form-label">Last Name</label>
+                                            <input type="text" id="last_name" name="last_name"
+                                                value="{{ old('last_name', $staff->last_name) }}" class="form-control"
+                                                required>
+                                        </div>
+
+                                        {{-- Username --}}
+                                        <div class="col-12">
+                                            <label for="user_name" class="form-label">Username</label>
+                                            <input type="text" id="user_name" name="user_name"
+                                                value="{{ old('user_name', $staff->user_name) }}" class="form-control"
+                                                required>
+                                        </div>
+
+                                        {{-- Email (readonly) --}}
+                                        <div class="col-12">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" id="email" name="email"
+                                                value="{{ $staff->email }}" class="form-control" readonly>
+                                        </div>
+
+                                        {{-- Phone --}}
+                                        <div class="col-12">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <input type="text" id="phone" name="phone"
+                                                value="{{ old('phone', $staff->phone) }}" class="form-control">
+                                        </div>
+
+                                        {{-- Buttons --}}
+                                        <div class="d-flex justify-content-between mt-4 gap-2">
+                                            <button type="button" class="btn btn-outline-secondary flex-fill"
+                                                onclick="window.location.href='{{ route('reporting.staff.dashboard') }}'">
+                                                Back to Dashboard
+                                            </button>
+                                            <button type="submit" class="btn btn-primary flex-fill">
+                                                Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Bootstrap JS --}}
+            <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+            @include('sweetalert::alert')
+        </div>
+    </div>
+</body>
+
+</html>
