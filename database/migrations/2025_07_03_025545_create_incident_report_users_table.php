@@ -15,7 +15,6 @@ return new class extends Migration
             $table->date('report_date');
             $table->enum('report_type', ['Safety', 'Security', 'Operational', 'Environmental']);
             $table->text('report_description');
-            $table->string('report_image', 255)->nullable();
             $table->boolean('is_actioned')->default(false);
             $table->timestamps();
         });

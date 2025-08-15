@@ -34,7 +34,6 @@
                                     action="{{ route('user.report.user.profile.update') }}"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
 
                                     {{-- Avatar --}}
                                     <div class="d-flex justify-content-center mb-4">
