@@ -7,15 +7,18 @@
     <title>Incident Reporting Platform</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     @vite('resources/css/userCss/userIncidentReporting.css')
     @vite('resources/js/componentsJs/navbar.js')
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/js/userJs/userIncidentReporting.js')
+    @vite('resources/js/userJs/userIncidentReportingLocation.js')
 </head>
 
 <body>
     <main class="layout">
-       <x-navbar.user-navbar />
+        <x-navbar.user-navbar />
         <section class="page-content mt-4">
             <section class="hero" role="banner" aria-label="Hero section">
                 <h1>Report Incidents Quickly &amp; Efficiently</h1>
@@ -106,6 +109,44 @@
                             required aria-required="true">{{ old('report_description') }}</textarea>
                     </div>
 
+                    <div class="card mb-4 p-3 shadow-sm">
+                        <div class="row g-3 align-items-center">
+                            <!-- Controls: My Location + Barangay -->
+                            <div class="col-md-7">
+                                <label class="form-label">Incident Location</label>
+                                <div id="mapControls" class="w-100 h-100 rounded-3 border bg-light"></div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <button type="button" id="locateBtn" class="btn btn-outline-primary btn-sm">
+                                        <i class="fa-solid fa-location-crosshairs"></i> Use My Location
+                                    </button>
+                                    <small id="coordsHelpControls" class="text-muted mb-0">Optional</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="barangay" class="form-label">Barangay</label>
+                                <select id="barangay" name="barangay" class="form-select form-select-sm">
+                                    <option value="" disabled selected>Select Barangay</option>
+                                    <option value="Barangay 1">Barangay 1</option>
+                                    <option value="Barangay 2">Barangay 2</option>
+                                    <option value="Barangay 3">Barangay 3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Map Preview Row -->
+                        <div class="col-12 mt-3">
+                            <label class="form-label">Location Preview</label>
+                            <div id="mapPreview" class="w-100 rounded-3 border bg-light" style="height: 250px;">
+                            </div>
+                            <small id="coordsHelpPreview" class="text-muted">Latitude & Longitude will auto-fill
+                                here.</small>
+                        </div>
+
+                        <input type="hidden" name="latitude" id="latitude">
+                        <input type="hidden" name="longitude" id="longitude">
+                    </div>
+
                     <div>
                         <label for="incident-image">Attach Images (Max: 5)</label>
                         <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple>
@@ -124,11 +165,13 @@
         </section>
     </main>
     @include('sweetalert::alert')
-    
+
     <footer>
         &copy; 2024 IncidentReport. All rights reserved.
     </footer>
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 
 </html>

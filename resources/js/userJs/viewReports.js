@@ -4,6 +4,7 @@ let images = [];
 document.addEventListener("DOMContentLoaded", () => {
     images = document.querySelectorAll(".thumbnail");
 
+    // ---------- IMAGE MODAL ----------
     window.openImageModal = function (index) {
         if (!images.length) return;
 
@@ -11,15 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const modal = document.getElementById("imageModal");
         const img = images[currentImageIndex];
 
-        document.getElementById("expandedImg").src =
-            img.dataset.full || img.src;
+        document.getElementById("expandedImg").src = img.dataset.full || img.src;
         document.getElementById("caption").textContent = img.alt || "Image";
         modal.style.display = "flex";
 
-        document.querySelector(".prev").style.display =
-            images.length > 1 ? "block" : "none";
-        document.querySelector(".next").style.display =
-            images.length > 1 ? "block" : "none";
+        document.querySelector(".prev").style.display = images.length > 1 ? "block" : "none";
+        document.querySelector(".next").style.display = images.length > 1 ? "block" : "none";
     };
 
     window.closeModal = function () {
@@ -29,12 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.changeImage = function (step) {
         if (!images.length) return;
 
-        currentImageIndex =
-            (currentImageIndex + step + images.length) % images.length;
+        currentImageIndex = (currentImageIndex + step + images.length) % images.length;
         const img = images[currentImageIndex];
 
-        document.getElementById("expandedImg").src =
-            img.dataset.full || img.src;
+        document.getElementById("expandedImg").src = img.dataset.full || img.src;
         document.getElementById("caption").textContent = img.alt || "Image";
     };
 
@@ -46,8 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.addEventListener("keydown", function (e) {
-        const modalOpen =
-            document.getElementById("imageModal").style.display === "flex";
+        const modalOpen = document.getElementById("imageModal").style.display === "flex";
         if (!modalOpen) return;
 
         if (e.key === "ArrowRight") changeImage(1);
@@ -55,13 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === "Escape") closeModal();
     });
 
-    // ✅ DELETE REQUEST BUTTON LOGIC
+    // ---------- DELETE REQUEST ----------
     const deleteButtons = document.querySelectorAll(".btn-delete-request");
 
     deleteButtons.forEach((button) => {
         button.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent default form submission
-
+            e.preventDefault();
             const form = this.closest("form");
 
             Swal.fire({
@@ -80,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ✅ EDIT REQUEST HANDLER
+    // ---------- EDIT REQUEST ----------
     window.handleEditRequest = function (hasPendingRequest, editUrl) {
         if (hasPendingRequest === true || hasPendingRequest === 'true') {
             Swal.fire({
@@ -93,4 +87,23 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = editUrl;
         }
     };
+
+ // LEAFLET MAP
+const mapContainer = document.getElementById('reportMap');
+const lat = parseFloat(mapContainer.dataset.lat);
+const lng = parseFloat(mapContainer.dataset.lng);
+
+if (lat && lng) {
+    const map = L.map('reportMap').setView([lat, lng], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup("Incident Location")
+        .openPopup();
+}
+
 });

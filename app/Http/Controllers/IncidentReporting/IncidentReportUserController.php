@@ -73,6 +73,9 @@ class IncidentReportUserController extends Controller
             'report_date' => 'required|date',
             'report_type' => 'required|string',
             'report_description' => 'required|string',
+            'barangay' => 'nullable|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:40960', // 40MB max
         ]);
 
@@ -88,6 +91,9 @@ class IncidentReportUserController extends Controller
         $report->report_date = $validated['report_date'];
         $report->report_type = $validated['report_type'];
         $report->report_description = $validated['report_description'];
+        $report->barangay = $validated['barangay'] ?? null;
+        $report->latitude = $validated['latitude'] ?? null;
+        $report->longitude = $validated['longitude'] ?? null;
         $report->user_id = auth()->id();
         $report->save();
 

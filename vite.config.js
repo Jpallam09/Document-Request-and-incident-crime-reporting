@@ -44,6 +44,7 @@
 
                         //userjs
                         'resources/js/userJs/userIncidentReporting.js',
+                        'resources/js/userJs/userIncidentReportingLocation.js',
                         'resources/js/userJs/viewReports.js',
                         'resources/js/userJs/editReports.js',
                         'resources/js/userJs/userProfile.js',

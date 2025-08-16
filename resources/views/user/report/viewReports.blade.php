@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Incident Report Details</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -73,6 +75,27 @@
                         </div>
                     </div>
 
+                    {{-- Location Section --}}
+                    <div class="location-section mb-4">
+                        <h3 class="h5">Incident Location</h3>
+
+                        @if ($report->barangay)
+                            <p><strong>Barangay:</strong> {{ $report->barangay }}</p>
+                        @endif
+
+                        @if ($report->latitude && $report->longitude)
+                            <p><strong>Coordinates:</strong> {{ number_format($report->latitude, 6) }},
+                                {{ number_format($report->longitude, 6) }}</p>
+
+                            {{-- Map preview --}}
+                            <div id="reportMap" class="w-100 rounded-3 border bg-light" style="height: 250px;"
+                                data-lat="{{ $report->latitude ?? '' }}" data-lng="{{ $report->longitude ?? '' }}">
+                            </div>
+                        @else
+                            <p class="text-muted">No location provided.</p>
+                        @endif
+                    </div>
+
                     {{-- Attachments --}}
                     <div class="attachments-section mb-4">
                         <h3 class="h5">
@@ -127,6 +150,8 @@
         </main>
     </div>
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     @include('sweetalert::alert')
 </body>
 
