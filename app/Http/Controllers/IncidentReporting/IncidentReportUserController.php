@@ -73,8 +73,14 @@ class IncidentReportUserController extends Controller
             'report_date' => 'required|date',
             'report_type' => 'required|string',
             'report_description' => 'required|string',
-            'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'report_image.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:40960', // 40MB max
         ]);
+
+        // Check max 5 images
+        if ($request->hasFile('report_image') && count($request->file('report_image')) > 5) {
+            Alert::error('Too Many Images', 'You can upload a maximum of 5 images only.');
+            return redirect()->back()->withInput();
+        }
 
         // 2️⃣ Save the report
         $report = new IncidentReportUser();
@@ -102,6 +108,7 @@ class IncidentReportUserController extends Controller
         foreach ($staffMembers as $staff) {
             $staff->notify(new NewReportNotification($report));
         }
+
 
         Alert::success('Submitted', 'Your report has been submitted successfully.');
         return redirect()->route('user.report.userIncidentReporting.index');
@@ -154,8 +161,14 @@ class IncidentReportUserController extends Controller
             'requested_report_date' => 'required|date',
             'incident_type' => 'required|string',
             'incident_description' => 'required|string',
-            'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:40960', // 40MB max
         ]);
+
+        // ✅ Add SweetAlert max images check here
+        if ($request->hasFile('requested_image') && count($request->file('requested_image')) > 5) {
+            Alert::error('Too Many Images', 'You can upload a maximum of 5 images only.');
+            return redirect()->back()->withInput();
+        }
 
         // Handle images
         $imagePaths = [];
@@ -263,11 +276,9 @@ class IncidentReportUserController extends Controller
 
             if ($deleteRequest) {
                 if ($deleteRequest->status === 'accepted') {
-                    return redirect()->route('user.report.userDashboardReporting')
-                    ;
-
+                    return redirect()->route('user.report.userDashboardReporting');
                 } elseif ($deleteRequest->status === 'rejected') {
-                     Alert::error('Rejected', 'Your delete request has been rejected.');
+                    Alert::error('Rejected', 'Your delete request has been rejected.');
                     return redirect()->route('user.report.viewReports', $deleteRequest->report->id);
                 }
             }

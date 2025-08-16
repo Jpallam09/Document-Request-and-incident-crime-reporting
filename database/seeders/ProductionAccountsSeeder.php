@@ -11,7 +11,7 @@ class ProductionAccountsSeeder extends Seeder
 {
     public function run(): void
     {
-        // Pre‑made admin & staff accounts (one per app)
+        // Existing accounts
         $accounts = [
             [
                 'email'      => 'incident_admin@example.com',
@@ -43,15 +43,26 @@ class ProductionAccountsSeeder extends Seeder
             ],
         ];
 
+        // Add 5 extra staff accounts for incident_reporting
+        for ($i = 1; $i <= 5; $i++) {
+            $accounts[] = [
+                'email'      => "incident_staff{$i}@example.com",
+                'first_name' => "IncidentStaff{$i}",
+                'last_name'  => "User{$i}",
+                'role'       => 'staff',
+                'app'        => 'incident_reporting',
+            ];
+        }
+
         foreach ($accounts as $account) {
-            // create user if it doesn’t exist, otherwise keep existing data
+            // create user if it doesn’t exist
+            /** @var \App\Models\User $user */
             $user = User::firstOrCreate(
                 ['email' => $account['email']],
                 [
                     'first_name' => $account['first_name'],
                     'last_name'  => $account['last_name'],
-                    'user_name'       => $account['first_name'].' '.$account['last_name'],
-                        // 🔑 pulls from .env, falls back to Admin@123 if the key isn’t set
+                    'user_name'  => $account['first_name'].' '.$account['last_name'],
                     'password'   => Hash::make(env('DEFAULT_ADMIN_PASSWORD', 'Admin@123')),
                 ]
             );
