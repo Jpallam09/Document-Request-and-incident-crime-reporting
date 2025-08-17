@@ -8,12 +8,15 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('incident_report_users', function (Blueprint $table) {
-            // Optional geographic coordinates
-            $table->decimal('latitude', 10, 7)->nullable();
-            $table->decimal('longitude', 10, 7)->nullable();
-
-            // Optional barangay field
-            $table->string('barangay')->nullable();
+            if (!Schema::hasColumn('incident_report_users', 'latitude')) {
+                $table->decimal('latitude', 10, 7)->nullable();
+            }
+            if (!Schema::hasColumn('incident_report_users', 'longitude')) {
+                $table->decimal('longitude', 10, 7)->nullable();
+            }
+            if (!Schema::hasColumn('incident_report_users', 'barangay')) {
+                $table->string('barangay')->nullable();
+            }
         });
     }
 

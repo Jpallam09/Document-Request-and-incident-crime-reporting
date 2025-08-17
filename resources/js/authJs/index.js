@@ -1,18 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize carousel
+  // -----------------------------
+  // Carousel Initialization
+  // -----------------------------
   const introCarousel = document.querySelector('#introCarousel');
-  const carousel = new bootstrap.Carousel(introCarousel, {
-    interval: 3000,
-    ride: 'carousel',
-    wrap: true
-  });
-
-  // Navbar scroll behavior
-  const navbar = document.querySelector('.transparent-navbar');
-  function onScroll() {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  if (introCarousel) {
+    new bootstrap.Carousel(introCarousel, {
+      interval: 6000,   // Slide every 
+      ride: 'carousel', // Auto-start
+      wrap: true        // Loop slides
+    });
   }
 
-  window.addEventListener('scroll', onScroll);
-  onScroll(); // Initialize state on page load
+  // -----------------------------
+  // Navbar Scroll Behavior
+  // -----------------------------
+  const navbar = document.querySelector('.transparent-navbar');
+  if (navbar) {
+    const toggleNavbar = () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', toggleNavbar);
+    toggleNavbar(); // Run once on load
+  }
 });

@@ -167,6 +167,9 @@ class IncidentReportUserController extends Controller
             'requested_report_date' => 'required|date',
             'incident_type' => 'required|string',
             'incident_description' => 'required|string',
+            'barangay' => 'nullable|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'requested_image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:40960', // 40MB max
         ]);
 
@@ -193,6 +196,9 @@ class IncidentReportUserController extends Controller
             'requested_description' => $validated['incident_description'],
             'requested_type' => $validated['incident_type'],
             'requested_report_date' => $validated['requested_report_date'],
+            'requested_barangay' => $request->barangay ?? null,
+            'requested_latitude' => $request->latitude ?? null,
+            'requested_longitude' => $request->longitude ?? null,
             'requested_image' => $imagePaths,
             'status' => 'pending',
             'requested_at' => now(),

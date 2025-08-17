@@ -47,6 +47,7 @@
                         'resources/js/userJs/userIncidentReportingLocation.js',
                         'resources/js/userJs/viewReports.js',
                         'resources/js/userJs/editReports.js',
+                        'resources/js/userJs/editReportsLocation.js',
                         'resources/js/userJs/userProfile.js',
 
                         // staffjs
