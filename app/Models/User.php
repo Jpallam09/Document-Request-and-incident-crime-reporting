@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\IncidentReporting\StaffLocation;
+use App\Models\IncidentReporting\IncidentReportUser;
 
 /**
  * /**
@@ -40,7 +42,7 @@ class User extends Authenticatable
      */
     public function incidentReports()
     {
-        return $this->hasMany(\App\Models\IncidentReporting\IncidentReportUser::class);
+        return $this->hasMany(IncidentReportUser::class);
     }
 
     public function isReportingStaff(): bool
@@ -81,4 +83,11 @@ class User extends Authenticatable
             ->where('role', $role)
             ->exists();
     }
+
+    // A staff user can have many location records
+    public function staffLocation()
+    {
+        return $this->hasOne(StaffLocation::class);
+    }
+
 }

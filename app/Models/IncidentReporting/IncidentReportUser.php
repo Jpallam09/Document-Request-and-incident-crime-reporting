@@ -49,4 +49,11 @@ class IncidentReportUser extends Model
     {
         return $this->hasOne(DeleteRequest::class, 'report_id');
     }
+
+    // Track which staff locations are tied to this report
+    public function staffLocations()
+    {
+        return $this->hasMany(StaffLocation::class, 'report_id');
+    }
+
 }

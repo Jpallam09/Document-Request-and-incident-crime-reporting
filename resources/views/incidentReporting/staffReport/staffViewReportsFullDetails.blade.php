@@ -70,14 +70,8 @@
                     </div>
                 </div>
 
-                <!-- Track Report Button -->
-                <form action="#" method="POST" style="margin-top: 2rem;">
-                    @csrf
-                    <button type="submit" class="track-btn">
-                        <i class="fa-solid fa-check"></i> Track Report
-                    </button>
-                </form>
-
+            <a href="{{ route('reporting.staff.staffViewReports.track', $report->id) }}" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i> Track Report</a>
+            
             </div>
         </section>
     </main>

@@ -25,6 +25,13 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             Route::get('/staffViewReportsFullDetails/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])
                 ->name('staffViewReportsFullDetails');
 
+            // Show Track Report page for a specific report
+            Route::get('/staffViewReportsFullDetails/{id}/track', [IncidentReportStaffController::class, 'ShowTrackReport'])
+                ->name('staffViewReports.track');
+
+            Route::post('/trackReport', [IncidentReportStaffController::class, 'trackReport'])
+                ->name('trackReport');
+
             //----------edit group----------//
             // Route to view edit requests
             Route::get('/staffUpdateRequests', [EditRequestController::class, 'index'])

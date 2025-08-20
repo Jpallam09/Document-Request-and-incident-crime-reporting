@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\IncidentReporting\IncidentReportUser;
 use App\Models\IncidentReporting\DeleteRequest;
 use App\Models\IncidentReporting\EditRequest;
+use App\Models\IncidentReporting\StaffLocation;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +15,38 @@ use Carbon\Carbon;
 
 class IncidentReportStaffController extends Controller
 {
+
+    // Show the track report page
+    public function ShowTrackReport($id)
+    {
+        $report = IncidentReportUser::findOrFail($id);
+        return view('incidentReporting.staffReport.staffTrackReport', compact('report'));
+    }
+
+    // Receive AJAX location updates
+    public function trackReport(Request $request)
+    {
+        $request->validate([
+            'report_id' => 'required|exists:incident_report_users,id',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+        ]);
+
+        // Save or update staff location
+        StaffLocation::updateOrCreate(
+            [
+                'report_id' => $request->report_id,
+                'staff_id' => auth()->id()
+            ],
+            [
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]
+        );
+
+        return response()->json(['success' => true]);
+    }
+
     /**
      * Show the staff dashboard.
      */

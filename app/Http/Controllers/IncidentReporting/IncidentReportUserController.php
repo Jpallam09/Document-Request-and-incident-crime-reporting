@@ -120,11 +120,6 @@ class IncidentReportUserController extends Controller
         return redirect()->route('user.report.userIncidentReporting.index');
     }
 
-    public function images()
-    {
-        return $this->hasMany(IncidentReportImage::class);
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
