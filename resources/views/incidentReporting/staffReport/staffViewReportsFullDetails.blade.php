@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Staff - Report Details</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     @vite('resources/css/staffCss/staffViewReportsFullDetails.css')
     @vite('resources/js/staffJs/staffViewReportsFullDetails.js')
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
@@ -17,13 +18,14 @@
 
         <section class="page-content mt-5">
             <div class="report-details-container">
-
                 <!-- Header and Back Button -->
                 <div class="header">
                     <h1 class="report-title">{{ $report->report_title }}</h1>
-                    <a href="{{ route('reporting.staff.staffReportView') }}" class="back-link">
-                        <i class="fa-solid fa-arrow-left"></i> Back to List
-                    </a>
+                <!-- Back to List link -->
+                <a href="{{ route('reporting.staff.staffReportView') }}"
+                class="btn btn-outline-primary btn-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Back to List
+                </a>
                 </div>
 
                 <!-- Report Meta Info -->
@@ -47,10 +49,8 @@
                             <div class="attachments-grid">
                                 @foreach ($report->images as $index => $image)
                                     <div>
-                                        <img
-                                            src="{{ asset('storage/' . $image->file_path) }}"
-                                            alt="Attachment {{ $index + 1 }}"
-                                            class="thumbnail"
+                                        <img src="{{ asset('storage/' . $image->file_path) }}"
+                                            alt="Attachment {{ $index + 1 }}" class="thumbnail"
                                             onclick="openImageModal({{ $index }})">
                                     </div>
                                 @endforeach
@@ -70,12 +70,25 @@
                     </div>
                 </div>
 
-            <a href="{{ route('reporting.staff.staffViewReports.track', $report->id) }}" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i> Track Report</a>
-            
+                <div class="d-flex gap-2 mt-3">
+                    <a href="{{ route('reporting.staff.staffViewReports.track', $report->id) }}"
+                        class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-check"></i> Track Report
+                    </a>
+
+                    <a href="{{ route('reporting.staff.exportPdf', $report->id) }}"
+                        class="btn btn-outline-danger btn-sm">
+                        <i class="fa-solid fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+
+            </div>
+
             </div>
         </section>
     </main>
     @include('sweetalert::alert')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

@@ -25,6 +25,10 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             Route::get('/staffViewReportsFullDetails/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])
                 ->name('staffViewReportsFullDetails');
 
+            // Export report as PDF
+            Route::get('/staffViewReportsFullDetails/{id}/export-pdf', [IncidentReportStaffController::class, 'exportPdf'])
+                ->name('exportPdf');
+
             // Show Track Report page for a specific report
             Route::get('/staffViewReportsFullDetails/{id}/track', [IncidentReportStaffController::class, 'ShowTrackReport'])
                 ->name('staffViewReports.track');

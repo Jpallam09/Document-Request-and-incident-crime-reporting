@@ -157,6 +157,17 @@ return [
     'providers' => [
 
         /*
+     * Laravel Framework Service Providers...
+     */
+        Illuminate\Auth\AuthServiceProvider::class,
+        // ... other Laravel providers ...
+
+        /*
+     * Package Service Providers...
+     */
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+
+        /*
          * Laravel Framework Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,

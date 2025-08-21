@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class IncidentReportStaffController extends Controller
 {
@@ -45,6 +46,17 @@ class IncidentReportStaffController extends Controller
         );
 
         return response()->json(['success' => true]);
+    }
+
+        // Export report as PDF
+    public function exportPdf($id)
+    {
+        $report = IncidentReportUser::with('user', 'images')->findOrFail($id);
+
+        $pdf = Pdf::loadView('incidentReporting.staffReport.staffReportPdf', compact('report'));
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('report_'.$report->id.'.pdf');
     }
 
     /**
