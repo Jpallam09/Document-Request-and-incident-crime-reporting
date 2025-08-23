@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-    Schema::table('edit_requests', function (Blueprint $table) {
-        $table->json('requested_image')->nullable()->change();
-    });
+        Schema::table('edit_requests', function (Blueprint $table) {
+            $table->json('requested_image')->nullable()->change();
+        });
     }
 
     /**
@@ -25,9 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-    Schema::table('edit_requests', function (Blueprint $table) {
-        $table->string('requested_image')->nullable()->change();
-    });
-
+        Schema::table('edit_requests', function (Blueprint $table) {
+            $table->text('requested_image')->nullable()->change();
+        });
     }
 };

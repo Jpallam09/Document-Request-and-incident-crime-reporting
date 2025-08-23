@@ -144,21 +144,6 @@
   color: var(--text-light);
 }
 
-.report-form-section button[type="submit"] {
-  background-color: var(--primary);
-  color: white;
-  padding: 0.7rem 1.4rem;
-  border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.report-form-section button:hover {
-  background-color: var(--primary-light);
-}
-
 /* ============================
    Image Preview Grid + Modal
 =============================== */
@@ -222,6 +207,31 @@
 .drop-zone.drag-over {
   background-color: #e7f0ff;
   border-color: var(--primary-dark);
+}
+
+/* Drop-zone styled like Bootstrap outline primary button */
+.drop-zone {
+    display: inline-block;
+    font-size: 0.875rem;            /* smaller font */
+    padding: 0.25rem 0.5rem;        /* smaller height/width */
+    border-radius: 0.25rem;          /* rounded corners */
+    border: 1px solid #0d6efd;      /* Bootstrap primary outline */
+    background-color: transparent;   /* transparent like outline btn */
+    color: #0d6efd;                  /* Bootstrap primary text */
+    cursor: pointer;
+    text-align: center;
+    width: auto;                     /* shrink to content */
+    transition: all 0.2s ease;
+}
+
+.drop-zone:hover {
+    background-color: #0d6efd;       /* fill on hover */
+    color: #fff;                      /* white text on hover */
+}
+
+.drop-zone.drag-over {
+    background-color: #0b5ed7;       /* slightly darker on drag over */
+    color: #fff;
 }
 
 /* Image Modal */

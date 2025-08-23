@@ -8,12 +8,21 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('edit_requests', function (Blueprint $table) {
-            $table->string('requested_barangay')->nullable(); // Add barangay
-            $table->decimal('requested_latitude', 10, 7)->nullable(); // Add latitude
-            $table->decimal('requested_longitude', 10, 7)->nullable(); // Add longitude
-            $table->date('requested_report_date')->nullable(); // Add report date
+            if (!Schema::hasColumn('edit_requests', 'requested_barangay')) {
+                $table->string('requested_barangay')->nullable();
+            }
+            if (!Schema::hasColumn('edit_requests', 'requested_latitude')) {
+                $table->decimal('requested_latitude', 10, 7)->nullable();
+            }
+            if (!Schema::hasColumn('edit_requests', 'requested_longitude')) {
+                $table->decimal('requested_longitude', 10, 7)->nullable();
+            }
+            if (!Schema::hasColumn('edit_requests', 'requested_report_date')) {
+                $table->date('requested_report_date')->nullable();
+            }
         });
     }
+
 
     public function down(): void
     {

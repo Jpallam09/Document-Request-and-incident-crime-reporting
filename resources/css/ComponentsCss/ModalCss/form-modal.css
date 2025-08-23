@@ -70,6 +70,7 @@ h1.display-5 {
     flex-wrap: wrap;
     font-size: 3rem;
     line-height: 1.2;
+    letter-spacing: -2px;
 }
 
 /* Cursor blinking animation for typing effect */

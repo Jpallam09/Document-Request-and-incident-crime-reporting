@@ -14,13 +14,13 @@
 
 /* ===== Page Layout ===== */
 body {
-    font-family: sans-serif;
     background-color: var(--bg-light);
     margin: 0;
     padding: 0;
 }
 
 .page-content {
+    font-family: sans-serif;
     margin-left: var(--sidebar-width);
     margin-top: 2rem;
     padding: 1rem 2rem 2rem 2rem;

@@ -24,7 +24,7 @@
                 <h1>Report Incidents Quickly &amp; Efficiently</h1>
                 <p>Streamline your incident reporting with our intuitive platform that makes logging, tracking, and
                     resolving issues seamless and fast.</p>
-                <button class="btn-primary" id="report-button" aria-label="Scroll to report incident form">Report an
+                <button class="btn btn-outline-primary" id="report-button" aria-label="Scroll to report incident form">Report an
                     Incident</button>
             </section>
 
@@ -159,16 +159,14 @@
                         <img id="modalImage" class="modal-content" alt="Enlarged preview">
                     </div>
 
-                    <button type="submit" aria-label="Submit Incident Report">Submit Report</button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm" aria-label="Submit Incident Report">
+                        Submit Report
+                    </button>
                 </form>
             </section>
         </section>
     </main>
     @include('sweetalert::alert')
-
-    <footer>
-        &copy; 2024 IncidentReport. All rights reserved.
-    </footer>
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

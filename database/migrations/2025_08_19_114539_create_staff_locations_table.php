@@ -11,22 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('staff_locations', function (Blueprint $table) {
-            $table->id();
+        if (!Schema::hasTable('staff_locations')) {
+            Schema::create('staff_locations', function (Blueprint $table) {
+                $table->id();
 
-            // Staff user who is being tracked
-            $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
+                // Staff user who is being tracked
+                $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
 
-            // Link to the incident report being tracked
-            $table->foreignId('report_id')->constrained('incident_reports')->onDelete('cascade');
+                // Link to the incident report being tracked
+                $table->foreignId('report_id')->constrained('incident_report_users')->onDelete('cascade');
 
-            // Current latitude and longitude
-            $table->decimal('latitude', 10, 7);   // 10 total digits, 7 decimal places
-            $table->decimal('longitude', 10, 7);
+                // Current latitude and longitude
+                $table->decimal('latitude', 10, 7);
+                $table->decimal('longitude', 10, 7);
 
-            $table->timestamps(); // includes updated_at for live tracking refresh
-        });
+                $table->timestamps();
+            });
+        }
     }
+
+
 
     /**
      * Reverse the migrations.

@@ -4,8 +4,8 @@
         <!-- User info -->
         <li class="d-flex align-items-center gap-2">
             <span class="d-none d-md-inline">{{ auth()->user()->user_name }}</span>
-            <img src="{{ Auth::user()?->profile_picture 
-    ? asset('storage/profile_pictures/' . Auth::user()->profile_picture) 
+            <img src="{{ Auth::user()?->profile_picture
+    ? asset('storage/profile_pictures/' . Auth::user()->profile_picture)
     : asset('images/pfp.png') }}"
                 class="rounded-circle" width="32" height="32" alt="User Avatar">
         </li>

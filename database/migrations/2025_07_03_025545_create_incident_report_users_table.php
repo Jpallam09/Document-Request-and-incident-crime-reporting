@@ -13,9 +13,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('report_title', 150);
             $table->date('report_date');
-            $table->enum('report_type', ['Safety', 'Security', 'Operational', 'Environmental']);
+            $table->string('report_type', 50);
             $table->text('report_description');
-            $table->boolean('is_actioned')->default(false);
+            $table->string('report_status', 20)->default('pending')->index();
             $table->timestamps();
         });
     }

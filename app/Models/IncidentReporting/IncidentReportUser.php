@@ -12,12 +12,40 @@ class IncidentReportUser extends Model
      * The attributes that are mass assignable.
      * These fields can be set using create() or fill().
      */
+    // In IncidentReportUser.php
+
+    // Report types
+    const TYPE_SAFETY       = 'Safety';
+    const TYPE_SECURITY     = 'Security';
+    const TYPE_OPERATIONAL  = 'Operational';
+    const TYPE_ENVIRONMENT  = 'Environmental';
+    public static $types = [
+        self::TYPE_SAFETY,
+        self::TYPE_SECURITY,
+        self::TYPE_OPERATIONAL,
+        self::TYPE_ENVIRONMENT,
+    ];
+
+    // Report statuses
+    const STATUS_PENDING     = 'pending';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_SUCCESS     = 'success';
+    const STATUS_CANCELED    = 'canceled';
+
+    public static $statuses = [
+        self::STATUS_PENDING,
+        self::STATUS_IN_PROGRESS,
+        self::STATUS_SUCCESS,
+        self::STATUS_CANCELED,
+    ];
+
+
     protected $fillable = [
         'report_title',
         'report_date',
         'report_type',
         'report_description',
-        'is_actioned',
+        'report_status',
         'user_id',
     ];
 
@@ -55,5 +83,4 @@ class IncidentReportUser extends Model
     {
         return $this->hasMany(StaffLocation::class, 'report_id');
     }
-
 }

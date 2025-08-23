@@ -18,6 +18,8 @@ use App\Notifications\NewReportNotification;
 use App\Notifications\EditRequestNotification;
 use App\Notifications\DeleteRequestNotification;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
+
 
 class IncidentReportUserController extends Controller
 {
@@ -71,7 +73,7 @@ class IncidentReportUserController extends Controller
         $validated = $request->validate([
             'report_title' => 'required|string|max:255',
             'report_date' => 'required|date',
-            'report_type' => 'required|string',
+            'report_type'   => ['required', Rule::in(IncidentReportUser::$types)],
             'report_description' => 'required|string',
             'barangay' => 'nullable|string',
             'latitude' => 'nullable|numeric',
@@ -94,6 +96,7 @@ class IncidentReportUserController extends Controller
         $report->barangay = $validated['barangay'] ?? null;
         $report->latitude = $validated['latitude'] ?? null;
         $report->longitude = $validated['longitude'] ?? null;
+         $report->report_status      = 'pending';
         $report->user_id = auth()->id();
         $report->save();
 
