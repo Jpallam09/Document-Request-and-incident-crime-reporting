@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
     <!-- Custom CSS -->
@@ -70,8 +70,21 @@
                     </button>
                 </form>
 
-                <button type="button" class="btn btn-outline-primary btn-sm">Succes</button>
-                <button type="button" class="btn btn-outline-danger btn-sm">Cancel</button>
+                <!-- Success -->
+                <form id="successForm-{{ $report->id }}" action="{{ route('reporting.staff.trackReport.success', $report->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="button" class="btn btn-outline-success btn-sm btn-success-track" data-id="{{ $report->id }}">
+                        <i class="fa-solid fa-check"></i> Success
+                    </button>
+                </form>
+
+                <!-- Cancel -->
+                <form id="cancelForm-{{ $report->id }}" action="{{ route('reporting.staff.trackReport.cancel', $report->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="button" class="btn btn-outline-danger btn-sm btn-cancel-track" data-id="{{ $report->id }}">
+                        <i class="fa-solid fa-xmark"></i> Cancel
+                    </button>
+                </form>
 
                 <!-- Track URL for JS -->
                 <div id="trackUrlContainer" data-track-url="{{ route('reporting.staff.trackReport') }}"></div>

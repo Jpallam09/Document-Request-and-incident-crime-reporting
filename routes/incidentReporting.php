@@ -36,6 +36,12 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             Route::post('/trackReport', [IncidentReportStaffController::class, 'trackReport'])
                 ->name('trackReport');
 
+            Route::post('/trackReport/{id}/success', [IncidentReportStaffController::class, 'successTrack'])
+                ->name('trackReport.success');
+
+            Route::post('/trackReport/{id}/cancel', [IncidentReportStaffController::class, 'cancelTrack'])
+                ->name('trackReport.cancel');
+
             //----------edit group----------//
             // Route to view edit requests
             Route::get('/staffUpdateRequests', [EditRequestController::class, 'index'])

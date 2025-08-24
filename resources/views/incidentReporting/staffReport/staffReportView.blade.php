@@ -51,12 +51,19 @@
                                             <td>{{ $report->report_title }}</td>
                                             <td>{{ $report->report_type }}</td>
                                             <td>{{ \Carbon\Carbon::parse($report->report_date)->format('M d, Y') }}</td>
-                                            <td>
-                                                <span
-                                                    class="badge bg-{{ $report->is_actioned ? 'success' : 'warning' }}">
-                                                    {{ $report->is_actioned ? 'Resolved' : 'Pending' }}
-                                                </span>
-                                            </td>
+                                                <td>
+                                                    @php
+                                                        $statusColors = [
+                                                            'pending'     => 'bg-warning',
+                                                            'in_progress' => 'bg-primary',
+                                                            'success'     => 'bg-success',
+                                                            'canceled'    => 'bg-danger',
+                                                        ];
+                                                    @endphp
+                                                    <span class="badge {{ $statusColors[$report->report_status] ?? 'bg-secondary' }}">
+                                                        {{ ucfirst(str_replace('_', ' ', $report->report_status)) }}
+                                                    </span>
+                                                </td>
                                             <td style="width: 120px;">
                                                 <div class="d-grid">
                                                     <button type="button" class="btn btn-sm btn-outline-primary w-100"

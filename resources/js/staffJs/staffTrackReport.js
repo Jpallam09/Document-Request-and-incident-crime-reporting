@@ -133,4 +133,47 @@ document.addEventListener("DOMContentLoaded", () => {
             { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 } // increased timeout
         );
     });
+
+        // Success
+    document.querySelectorAll('.btn-success-track').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+            Swal.fire({
+                title: 'Mark as Success?',
+                text: "This will mark the report as successfully resolved.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, success',
+                cancelButtonText: 'No, cancel',
+                confirmButtonColor: '#198754',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`successForm-${id}`).submit();
+                }
+            });
+        });
+    });
+
+    // Cancel
+    document.querySelectorAll('.btn-cancel-track').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+            Swal.fire({
+                title: 'Cancel this report?',
+                text: "This will mark the report as canceled.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, cancel it',
+                cancelButtonText: 'No, keep it',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`cancelForm-${id}`).submit();
+                }
+            });
+        });
+    });
+
 });

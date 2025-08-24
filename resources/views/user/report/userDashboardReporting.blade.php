@@ -99,9 +99,16 @@
                                                 </td>
                                                 <td>{{ $report->report_type }}</td>
                                                 <td>
-                                                    <span
-                                                        class="badge {{ $report->is_actioned ? 'bg-success' : 'bg-warning' }}">
-                                                        {{ $report->is_actioned ? 'Actioned' : 'Pending' }}
+                                                    @php
+                                                        $statusColors = [
+                                                            'pending'     => 'bg-warning',
+                                                            'in_progress' => 'bg-primary',
+                                                            'success'     => 'bg-success',
+                                                            'canceled'    => 'bg-danger',
+                                                        ];
+                                                    @endphp
+                                                    <span class="badge {{ $statusColors[$report->report_status] ?? 'bg-secondary' }}">
+                                                        {{ ucfirst(str_replace('_', ' ', $report->report_status)) }}
                                                     </span>
                                                 </td>
                                                 <td class="request-status">

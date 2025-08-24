@@ -13,6 +13,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class IncidentReportStaffController extends Controller
 {
@@ -46,6 +48,26 @@ class IncidentReportStaffController extends Controller
         );
 
         return response()->json(['success' => true]);
+    }
+
+    public function successTrack($id)
+    {
+        $report = IncidentReportUser::findOrFail($id);
+        $report->report_status = IncidentReportUser::STATUS_SUCCESS; // 'success'
+        $report->save();
+
+        Alert::success('Success', 'Report marked as successful.');
+        return back();
+    }
+
+    public function cancelTrack($id)
+    {
+        $report = IncidentReportUser::findOrFail($id);
+        $report->report_status = IncidentReportUser::STATUS_CANCELED; // 'canceled'
+        $report->save();
+
+        Alert::warning('Canceled', 'Report has been canceled.');
+        return back();
     }
 
         // Export report as PDF
