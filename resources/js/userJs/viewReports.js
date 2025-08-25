@@ -106,4 +106,26 @@ if (lat && lng) {
         .openPopup();
 }
 
+const editBtn = document.getElementById("editBtn");
+    const deleteBtn = document.getElementById("deleteBtn");
+
+    // Hidden span with report status
+    const reportStatusEl = document.getElementById("reportStatus");
+    const reportStatus = reportStatusEl ? reportStatusEl.textContent.trim().toLowerCase() : '';
+
+    if (reportStatus === "success") {
+        // Hide buttons
+        if (editBtn) editBtn.style.display = "none";
+        if (deleteBtn) deleteBtn.style.display = "none";
+
+        // Show resolved badge
+        const actionContainer = editBtn.closest(".action-buttons");
+        if (actionContainer && !actionContainer.querySelector(".resolved-badge")) {
+            const badge = document.createElement("span");
+            badge.className = "badge bg-success resolved-badge";
+            badge.innerHTML = '<i class="fa-solid fa-check-circle me-1"></i> Report is resolved';
+            actionContainer.prepend(badge);
+        }
+    }
+
 });

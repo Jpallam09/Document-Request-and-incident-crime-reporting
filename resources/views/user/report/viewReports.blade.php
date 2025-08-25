@@ -24,7 +24,7 @@
             {{-- Header --}}
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 m-0">Report Details</h1>
-                <a href="#" onclick="window.history.back()" class="back-link">
+                <a href="#" onclick="window.history.back()" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to List
                 </a>
@@ -120,7 +120,7 @@
                     {{-- Action Buttons --}}
                     <div class="action-buttons d-flex gap-2">
                         <!-- Request Edit Button (no <form>) -->
-                        <button type="button" class="btn-primary"
+                        <button type="button" id="editBtn" class="btn btn-outline-primary btn-sm"
                             onclick="handleEditRequest({{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}, '{{ route('user.report.userIncidentReporting.edit', $report->id) }}')">
                             <i class="fa-solid fa-pen"></i> Request Edit
                         </button>
@@ -129,7 +129,7 @@
                         <form method="POST" action="{{ route('user.report.delete', $report->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-delete-request">
+                            <button type="submit" id="deleteBtn" class="btn btn-outline-danger btn-sm btn-delete-request">
                                 <i class="fa-solid fa-trash me-1"></i> Request Delete
                             </button>
                         </form>
@@ -138,6 +138,8 @@
             @else
                 <p class="text-danger">Report not found or data is missing.</p>
             @endisset
+
+            <span id="reportStatus" class="d-none">{{ $report->report_status }}</span>
 
             {{-- Image Modal --}}
             <div id="imageModal" class="image-modal" role="dialog" aria-modal="true">

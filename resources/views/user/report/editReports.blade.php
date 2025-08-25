@@ -25,7 +25,7 @@
             <!-- Header -->
             <div class="header d-flex justify-content-between align-items-center mb-4">
                 <h1>Edit Your Report</h1>
-                <a href="{{ route('user.report.viewReports', $report->id) }}" class="back-link">
+                <a href="{{ route('user.report.viewReports', $report->id) }}" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to List
                 </a>
@@ -137,17 +137,19 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2" id="updateReportBtn">
+
+                <button type="submit" class="btn btn-outline-primary btn-sm mb-2" id="updateReportBtn">
                     <i class="fas fa-check-circle me-1"></i>
                     Update Report
                 </button>
             </form>
             <!-- Cancel Editing Button -->
-            <button type="button" class="btn btn-danger w-auto" id="cancelEditButton"
+            <button type="button" class="btn btn-outline-danger btn-sm w-auto" id="cancelEditButton"
                 data-url="{{ route('user.report.viewReports', $report->id) }}">
                 <i class="fas fa-times-circle me-1"></i>
                 Cancel Editing
             </button>
+
             <!-- Modal Viewer -->
             <div id="imageModal" class="image-modal">
                 <span class="close" id="modalCloseBtn">&times;</span>
@@ -158,7 +160,7 @@
             </div>
     </main>
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- Leaflet JS -->
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     @include('sweetalert::alert')
 </body>
