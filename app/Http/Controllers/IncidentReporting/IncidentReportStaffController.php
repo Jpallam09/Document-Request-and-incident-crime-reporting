@@ -7,6 +7,7 @@ use App\Models\IncidentReporting\IncidentReportUser;
 use App\Models\IncidentReporting\DeleteRequest;
 use App\Models\IncidentReporting\EditRequest;
 use App\Models\IncidentReporting\StaffLocation;
+use App\Notifications\IncidentReportNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
@@ -56,6 +57,9 @@ class IncidentReportStaffController extends Controller
         $report->report_status = IncidentReportUser::STATUS_SUCCESS; // 'success'
         $report->save();
 
+        // 🔔 Notify the user
+        $report->user->notify(new IncidentReportNotification($report->id, 'success', auth()->user()->user_name));
+
         Alert::success('Success', 'Report marked as successful.');
         return back();
     }
@@ -65,6 +69,9 @@ class IncidentReportStaffController extends Controller
         $report = IncidentReportUser::findOrFail($id);
         $report->report_status = IncidentReportUser::STATUS_CANCELED; // 'canceled'
         $report->save();
+
+        // 🔔 Notify the user
+        $report->user->notify(new IncidentReportNotification($report->id, 'canceled', auth()->user()->user_name));
 
         Alert::warning('Canceled', 'Report has been canceled.');
         return back();

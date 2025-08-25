@@ -49,6 +49,22 @@ class IncidentReportUser extends Model
         'user_id',
     ];
 
+    // Check report status
+    public function isPending(): bool
+    {
+        return $this->report_status === self::STATUS_PENDING;
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->report_status === self::STATUS_SUCCESS;
+    }
+
+    public function isCanceled(): bool
+    {
+        return $this->report_status === self::STATUS_CANCELED;
+    }
+
     /**
      * Relationship: One incident report can have many attached images.
      * This assumes a separate table (incident_report_images) where each image belongs to a report.

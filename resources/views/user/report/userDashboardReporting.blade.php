@@ -31,7 +31,7 @@
                         <div class="col">
                             <h1 id="dashboard-title" class="mb-2">Your Report Lists</h1>
                             <p id="summary-text">
-                                You have <strong>{{ $reports->count() }}</strong> total reports.
+                                You have <strong>{{ $totalReports }}</strong> total reports.
                             </p>
                         </div>
                     </div>
@@ -41,15 +41,15 @@
                             <section class="widget" id="totalReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-file-alt"></i> Total Reports</h2>
-                                    <p>{{ $reports->count() }}</p>
+                                    <p>{{ $totalReports }}</p>
                                 </a>
                             </section>
                         </div>
                         <div class="col-md-3">
                             <section class="widget" id="openReportsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-envelope-open-text"></i> Open</h2>
-                                    <p>{{ $reports->where('is_actioned', false)->count() }}</p>
+                                    <h2><i class="fas fa-envelope-open-text"></i> Pending Reports</h2>
+                                    <p>{{ $pendingReports }}</p>
                                 </a>
                             </section>
                         </div>
@@ -57,7 +57,7 @@
                             <section class="widget" id="resolvedReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-check-circle"></i> Resolved</h2>
-                                    <p>{{ $reports->where('is_actioned', true)->count() }}</p>
+                                    <p>{{ $successReports }}</p>
                                 </a>
                             </section>
                         </div>
@@ -65,11 +65,7 @@
                             <section class="widget" id="pendingRequestsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-clock"></i> Pending Requests</h2>
-                                    <p>
-                                        {{ $reports->filter(function ($r) {
-                                                return $r->editRequest || $r->deleteRequest;
-                                            })->count() }}
-                                    </p>
+                                    <p>{{ $pendingRequests }}</p>
                                 </a>
                             </section>
                         </div>

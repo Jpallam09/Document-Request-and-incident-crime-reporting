@@ -26,17 +26,38 @@ class IncidentReportUserController extends Controller
     /**
      * Display user dashboard with all reports.
      */
-    public function index(): View
+        public function index(): View
     {
-        $reports = IncidentReportUser::where('user_id', auth()->id())
+        $userId = auth()->id();
+
+        // Fetch all reports for counts
+        $allReports = IncidentReportUser::where('user_id', $userId)->get();
+
+        // Counts for widgets
+        $totalReports    = $allReports->count();
+        $pendingReports  = $allReports->where('report_status', 'pending')->count();
+        $successReports  = $allReports->where('report_status', 'success')->count();
+        $canceledReports = $allReports->where('report_status', 'canceled')->count();
+        $pendingRequests = $allReports->filter(fn($r) => $r->editRequest || $r->deleteRequest)->count();
+
+        // Latest reports for table/pagination
+        $reports = IncidentReportUser::where('user_id', $userId)
             ->latest()
             ->paginate(5);
 
-        // Fetch unread notifications for authenticated user
         $unreadNotifications = auth()->user()->unreadNotifications;
 
-        return view('user.report.userDashboardReporting', compact('reports', 'unreadNotifications'));
+        return view('user.report.userDashboardReporting', compact(
+            'reports',
+            'unreadNotifications',
+            'totalReports',
+            'pendingReports',
+            'successReports',
+            'canceledReports',
+            'pendingRequests'
+        ));
     }
+
     /**
      * Display the details of a single report.
      */

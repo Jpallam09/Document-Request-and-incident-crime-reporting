@@ -73,22 +73,6 @@
                         </section>
                     </div>
                 </div>
-
-                <!-- Additional Charts -->
-                <div class="row g-3 mt-4">
-                    <div class="col-md-6">
-                        <section class="chart-card">
-                            <h3><i class="fas fa-building"></i> Reports by Barangay</h3>
-                            <canvas id="reportsByDepartmentChart"></canvas>
-                        </section>
-                    </div>
-                    <div class="col-md-6">
-                        <section class="chart-card">
-                            <h3><i class="fas fa-check-circle"></i> Report Completion Status</h3>
-                            <canvas id="completionStatusChart"></canvas>
-                        </section>
-                    </div>
-                </div>
             </section>
         </main>
     </div>

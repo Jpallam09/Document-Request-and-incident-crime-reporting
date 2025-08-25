@@ -3,59 +3,51 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class IncidentReportNotification extends Notification
 {
     use Queueable;
 
+    protected $reportId;
+    protected $status;
+    protected $submittedBy;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param int $reportId
+     * @param string $status
+     * @param string|null $submittedBy
      */
-    public function __construct()
+    public function __construct(int $reportId, string $status, ?string $submittedBy = null)
     {
-        //
+        $this->reportId = $reportId;
+        $this->status = $status;
+        $this->submittedBy = $submittedBy;
     }
 
     /**
      * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return ['database']; // Only store in DB for now
     }
 
     /**
      * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
+            'report_id'    => $this->reportId,
+            'status'       => $this->status,
+            'title'        => $this->status === 'success' ? 'Report Completed' : 'Report Canceled',
+            'message'      => $this->status === 'success'
+                                ? 'The report has been successfully resolved.'
+                                : 'The report has been canceled.',
+            'submitted_by' => $this->submittedBy,
         ];
     }
 }
