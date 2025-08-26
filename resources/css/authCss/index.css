@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .transparent-navbar {
   height: 50px;
   padding: 0.3rem 1rem;

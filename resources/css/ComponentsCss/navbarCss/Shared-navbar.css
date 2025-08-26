@@ -234,46 +234,115 @@ details > summary::-webkit-details-marker {
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
-@media (max-width: 768px) {
-  /* Sidebar becomes a slim, always-visible rail */
-  .sidebar {
-    width: var(--sidebar-collapsed-width);
-    transform: none;              /* stop fully sliding off-screen */
-    padding-top: var(--header-height);
-  }
 
-  /* Page content shifts by the slim rail width */
-  .page-content {
-    margin-left: var(--sidebar-collapsed-width);
-    padding: 1rem;
-  }
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .sidebar {
+        width: var(--sidebar-collapsed-width);
+        padding-top: var(--header-height);
+    }
 
-  /* Hide text labels, keep icons */
-  .sidebar__brand span,
-  .sidebar__link span {
-    display: none;
-  }
+    .page-content {
+        margin-left: var(--sidebar-collapsed-width);
+        padding: 1rem;
+    }
 
-  /* Center brand and nav icons */
-  .sidebar__brand {
-    justify-content: center;
-  }
+    .sidebar__brand span,
+    .sidebar__link span {
+        display: none;
+    }
 
-  .sidebar__link {
-    justify-content: center;
-    padding: 0.75rem 0;           /* tighter horizontal space */
-  }
+    .sidebar__brand {
+        justify-content: center;
+    }
 
-  /* Remove Bootstrap's me-2 gap on icons when text is hidden */
-  .sidebar__link i {
-    margin-right: 0 !important;
-    font-size: 1.1rem;
-  }
+    .sidebar__link {
+        justify-content: center;
+        padding: 0.75rem 0;
+    }
 
-  /* Optional: tighter navbar spacing on small screens */
-  .navbar__menu {
-    gap: 0.75rem;
-  }
+    .sidebar__link i {
+        margin-right: 0 !important;
+        font-size: 1.1rem;
+    }
+
+    .navbar__menu {
+        gap: 0.75rem;
+    }
+
+    /* Make buttons full width */
+    .btn,
+    .button-group-responsive {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Make tables scrollable */
+    .table-container {
+        overflow-x: auto;
+    }
+
+    /* Stack cards vertically */
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    /* Images scale to container */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .page-content {
+        padding: 1.25rem;
+    }
+    .button-group-responsive {
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    .table-container {
+        overflow-x: auto;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .page-content {
+        padding: 1.5rem;
+    }
+    .button-group-responsive {
+        flex-wrap: wrap;
+    }
+    .table-container {
+        overflow-x: auto;
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .page-content {
+        padding: 2rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .page-content {
+        padding: 2.5rem;
+    }
+}
+
 
 

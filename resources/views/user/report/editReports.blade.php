@@ -143,6 +143,7 @@
                     Update Report
                 </button>
             </form>
+            
             <!-- Cancel Editing Button -->
             <button type="button" class="btn btn-outline-danger btn-sm w-auto" id="cancelEditButton"
                 data-url="{{ route('user.report.viewReports', $report->id) }}">

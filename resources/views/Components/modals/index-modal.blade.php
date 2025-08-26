@@ -11,8 +11,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarExample01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Feature</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#top" id="homeLink">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hero" data-bs-toggle="tooltip" data-bs-placement="bottom" title="See Features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                 </ul>
@@ -21,38 +21,12 @@
                                 class="fab fa-facebook-f"></i></a></li>
                     <li class="nav-item"><a class="nav-link" href="https://twitter.com/municipality" target="_blank"><i
                                 class="fab fa-twitter"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://github.com/municipality" target="_blank"><i
-                                class="fab fa-github"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <section id="introSection" class="vh-100 d-flex flex-column bg-dark text-white">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top transparent-navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" aria-label="Homepage">
-                <img src="{{ asset('images/SMI_logo.png') }}" height="40" class="d-inline-block align-text-top" />
-                <strong>Municipality of San Mateo</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarExample01"
-                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Feature</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                </ul>
-                <ul class="navbar-nav list-inline">
-                    <li class="nav-item"><a class="nav-link" href="https://facebook.com/municipality" target="_blank"><i
-                                class="fab fa-facebook-f"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://twitter.com/municipality" target="_blank"><i
-                                class="fab fa-twitter"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://github.com/municipality" target="_blank"><i
-                                class="fab fa-github"></i></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link faq-link" href="#faq" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Go to FAQ">
+                            <i class="fas fa-question-circle"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -102,8 +76,8 @@
                         </div>
 
                         <div class="carousel-item vh-100">
-                            <img src="{{ asset('images/carousel3.jpg') }}" class="d-block w-100 h-100 object-fit-cover"
-                                alt="Slide 3">
+                            <img src="{{ asset('images/carousel3.jpg') }}"
+                                class="d-block w-100 h-100 object-fit-cover" alt="Slide 3">
                             <div class="carousel-caption d-none d-md-block text-white text-center">
                                 <h2 class="fw-bold">Secure, Fast, and Reliable</h2>
                             </div>

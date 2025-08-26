@@ -18,7 +18,7 @@
     <x-modals.index-modal />
 
     <main>
-        <section class="hero-section py-5 bg-light">
+        <section id="hero" class="hero-section py-5 bg-light">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -55,7 +55,7 @@
             </div>
         </section>
 
-        <section class="faq-section py-5">
+        <section class="faq-section py-5" id="faq">
             <div class="container">
                 <h2 class="text-center mb-5">Frequently Asked Questions</h2>
 
