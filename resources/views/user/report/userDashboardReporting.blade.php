@@ -30,46 +30,70 @@
                     <div class="row mb-4">
                         <div class="col">
                             <h1 id="dashboard-title" class="mb-2">Your Report Lists</h1>
-                            <p id="summary-text">
-                                You have <strong>{{ $totalReports }}</strong> total reports.
-                            </p>
                         </div>
                     </div>
+
                     <!-- Widgets Row -->
                     <div class="row g-3 widgets">
-                        <div class="col-md-3">
+                        <!-- Top row (3 widgets) -->
+                        <div class="col-md-4">
                             <section class="widget" id="totalReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-file-alt"></i> Total Reports</h2>
-                                    <p>{{ $totalReports }}</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total report counts</p>
+                                    <p id="count">{{ $totalReports }}</p>
                                 </a>
                             </section>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <section class="widget" id="openReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-envelope-open-text"></i> Pending Reports</h2>
-                                    <p>{{ $pendingReports }}</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total pending report counts</p>
+                                    <p id="count">{{ $pendingReports }}</p>
                                 </a>
                             </section>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <section class="widget" id="resolvedReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-check-circle"></i> Resolved</h2>
-                                    <p>{{ $successReports }}</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total resolved report counts</p>
+                                    <p id="count">{{ $successReports }}</p>
                                 </a>
                             </section>
                         </div>
-                        <div class="col-md-3">
-                            <section class="widget" id="pendingRequestsWidget">
+
+                        <!-- Bottom row (3 widgets) -->
+                        <div class="col-md-4">
+                            <section class="widget" id="cancelRequestsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-clock"></i> Pending Requests</h2>
-                                    <p>{{ $pendingRequests }}</p>
+                                    <h2><i class="fas fa-ban"></i> Report Canceled </h2>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total canceled report counts</p>
+                                    <p id="count">{{ $canceledReports }}</p>
+                                </a>
+                            </section>
+                        </div>
+                        <div class="col-md-4">
+                            <section class="widget" id="editRequestsWidget">
+                                <a href="#" class="widget-link">
+                                    <h2><i class="fas fa-edit"></i> Edit Requests</h2>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total edit requests report counts</p>
+                                    <p id="count">{{ $editRequest }}</p>
+                                </a>
+                            </section>
+                        </div>
+                        <div class="col-md-4">
+                            <section class="widget" id="deleteRequestsWidget">
+                                <a href="#" class="widget-link">
+                                    <h2><i class="fas fa-trash-alt"></i> Delete Requests</h2>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total delete requests report counts</p>
+                                    <p id="count">{{ $deleteRequest }}</p>
                                 </a>
                             </section>
                         </div>
                     </div>
+
                     {{-- Reports Table --}}
                     <div class="row mt-4">
                         <div class="col-12">
@@ -77,19 +101,17 @@
                                 <table class="table table-bordered table-hover text-center align-middle report-table">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th>ID</th>
                                             <th>Title</th>
                                             <th>Date</th>
                                             <th>Type</th>
-                                            <th>Status</th>
-                                            <th>Request</th>
+                                            <th>Report Status</th>
+                                            <th>Edit/Delete Requests</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($reports as $report)
                                             <tr>
-                                                <td>{{ $report->id }}</td>
                                                 <td>{{ $report->report_title }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($report->report_date)->format('F d, Y') }}
                                                 </td>
@@ -110,7 +132,7 @@
                                                 <td class="request-status">
                                                     @if ($report->editRequest)
                                                         <span
-                                                            class="badge 
+                                                            class="badge
                                                             {{ $report->editRequest->status === 'pending'
                                                                 ? 'bg-warning'
                                                                 : ($report->editRequest->status === 'approved'
@@ -120,7 +142,7 @@
                                                         </span>
                                                     @elseif ($report->deleteRequest)
                                                         <span
-                                                            class="badge 
+                                                            class="badge
                                                     {{ $report->deleteRequest->status === 'pending'
                                                         ? 'bg-warning'
                                                         : ($report->deleteRequest->status === 'approved' || $report->deleteRequest->status === 'accepted'

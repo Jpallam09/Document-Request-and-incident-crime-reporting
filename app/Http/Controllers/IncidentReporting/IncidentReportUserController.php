@@ -32,13 +32,16 @@ class IncidentReportUserController extends Controller
 
         // Fetch all reports for counts
         $allReports = IncidentReportUser::where('user_id', $userId)->get();
+        $editRequests = editRequest::where('requested_by', $userId)->get();
+        $deleteReports = deleteRequest::where('user_id', $userId)->get();
 
         // Counts for widgets
         $totalReports    = $allReports->count();
         $pendingReports  = $allReports->where('report_status', 'pending')->count();
         $successReports  = $allReports->where('report_status', 'success')->count();
         $canceledReports = $allReports->where('report_status', 'canceled')->count();
-        $pendingRequests = $allReports->filter(fn($r) => $r->editRequest || $r->deleteRequest)->count();
+        $editRequest = $editRequests->where('status', 'pending')->count();
+        $deleteRequest = $deleteReports->where('status', 'pending')->count();
 
         // Latest reports for table/pagination
         $reports = IncidentReportUser::where('user_id', $userId)
@@ -54,7 +57,9 @@ class IncidentReportUserController extends Controller
             'pendingReports',
             'successReports',
             'canceledReports',
-            'pendingRequests'
+            'editRequest',
+            'deleteRequest'
+
         ));
     }
 

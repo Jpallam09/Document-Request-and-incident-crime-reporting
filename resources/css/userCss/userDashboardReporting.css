@@ -4,6 +4,9 @@
     --danger:        #dc2626;
     --warning:       #f59e0b;
     --success:       #22c55e;
+    --info:          #0d9488;
+    --purple:        #7c3aed;  
+    --muted:         #6b7280;  
     --bg-white:      #ffffff;
     --bg-light:      #f9fafb;
     --text-dark:     #111827;
@@ -42,14 +45,16 @@ body {
     background: var(--bg-white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 2rem;
-    min-height: 10rem;
+    padding: .1rem;
+    min-height: .1rem;   /* smaller so both rows fit nicely */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: relative;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     border-top: 4px solid transparent;
+    text-align: center;
 }
 
 .widgets .widget:hover {
@@ -74,7 +79,7 @@ body {
     gap: 0.5rem;
 }
 
-.widget p {
+#count {
     font-size: 2.25rem;
     font-weight: bold;
     color: var(--primary);
@@ -92,6 +97,15 @@ body {
     border-top-color: var(--success);
 }
 #pendingRequestsWidget {
+    border-top-color: var(--muted);
+}
+#cancelRequestsWidget {
+    border-top-color: var(--info);
+}
+#editRequestsWidget {
+    border-top-color: var(--purple);
+}
+#deleteRequestsWidget {
     border-top-color: var(--danger);
 }
 
