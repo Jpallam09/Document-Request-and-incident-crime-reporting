@@ -5,8 +5,8 @@
         <li class="d-flex align-items-center gap-2">
             <span class="d-none d-md-inline">{{ auth()->user()->user_name }}</span>
             <img src="{{ Auth::user()?->profile_picture
-    ? asset('storage/profile_pictures/' . Auth::user()->profile_picture)
-    : asset('images/pfp.png') }}"
+                ? asset('storage/profile_pictures/' . Auth::user()->profile_picture)
+                : asset('images/pfp.png') }}"
                 class="rounded-circle" width="32" height="32" alt="User Avatar">
         </li>
         <!-- Notification Dropdown -->
@@ -67,11 +67,10 @@
     </ul>
 </nav>
 
-
 <!-- Layout Container -->
 <div class="layout">
     <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar py-3 px-2">
+    <aside id="sidebar" class="sidebar py-3 px-2 d-flex flex-column">
         <!-- Brand -->
         <div class="sidebar__brand d-flex align-items-center gap-2 px-3 mb-4">
             <i class="fas fa-shield-alt fs-5"></i>
@@ -91,7 +90,7 @@
                 <a href="{{ route('user.report.userDashboardReporting') }}"
                     class="sidebar__link {{ request()->routeIs('user.report.userDashboardReporting') ? 'active' : '' }}">
                     <i class="fas fa-file-alt me-2"></i>
-                    <span>Reports List</span>
+                    <span>My reports List</span>
                 </a>
             </li>
             <li class="sidebar__item">
@@ -99,6 +98,16 @@
                     class="sidebar__link {{ request()->routeIs('user.report.userIncidentReporting.create') ? 'active' : '' }}">
                     <i class="fas fa-edit me-2"></i>
                     <span>Create Report</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- FAQ (Pinned at bottom) -->
+        <ul class="sidebar__nav d-flex flex-column gap-2 mt-auto list-unstyled">
+            <li class="sidebar__item">
+                <a href="{{ route('user.report.userMainDashboard') }}#faq" class="sidebar__link">
+                    <i class="fas fa-question-circle me-2"></i>
+                    <span>FAQ</span>
                 </a>
             </li>
         </ul>

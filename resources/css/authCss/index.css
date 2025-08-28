@@ -25,13 +25,13 @@ html {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #000000; /* dark blue text */
+  color: #444444; /* dark blue text */
 }
 
 /* On scroll: update link and brand colors */
 .transparent-navbar.scrolled .navbar-brand,
 .transparent-navbar.scrolled .nav-link {
-  color: #000000;
+  color: #444444;
 }
 
 /* Hover effect on links */

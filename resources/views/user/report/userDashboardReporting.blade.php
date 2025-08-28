@@ -29,7 +29,8 @@
                     {{-- Hero Section --}}
                     <div class="row mb-4">
                         <div class="col">
-                            <h1 id="dashboard-title" class="mb-2">Your Report Lists</h1>
+                            <h1 id="dashboard-title" class="mb-2">Your report summaries</h1>
+                            <p class="text-start fw-light small text-muted mb-0">“Here you can quickly see your reports — how many edits or deletions you’ve requested, and whether your reports are still pending, already resolved, or canceled.”</p>
                         </div>
                     </div>
 
@@ -83,7 +84,7 @@
                                 </a>
                             </section>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-5">
                             <section class="widget" id="deleteRequestsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-trash-alt"></i> Delete Requests</h2>
@@ -91,6 +92,13 @@
                                     <p id="count">{{ $deleteRequest }}</p>
                                 </a>
                             </section>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <h1 id="dashboard-title" class="mb-2">Your Report Lists</h1>
+                            <p class="text-start fw-light small text-muted mb-0">"You can view, edit and delete you reports in this table."</p>
                         </div>
                     </div>
 

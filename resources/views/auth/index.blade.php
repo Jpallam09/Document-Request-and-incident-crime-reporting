@@ -41,8 +41,7 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex">
-                            <a href="#" class="btn btn-primary btn-lg me-md-2">Submit Report</a>
-                            <a href="#" class="btn btn-outline-primary btn-lg">Request Document</a>
+                            <a href="#" class="btn btn-outline-primary btn-lg me-md-2">Get started</a>
                         </div>
                     </div>
 
