@@ -41,6 +41,7 @@ class IncidentReportUser extends Model
 
 
     protected $fillable = [
+        'user_name',
         'report_title',
         'report_date',
         'report_type',
@@ -85,13 +86,13 @@ class IncidentReportUser extends Model
     // Edit request relationship
     public function editRequest()
     {
-        return $this->hasOne(EditRequest::class, 'incident_report_id');
+        return $this->hasOne(EditRequest::class, 'edit_report_id');
     }
 
     // Delete request relationship
     public function deleteRequest()
     {
-        return $this->hasOne(DeleteRequest::class, 'report_id');
+        return $this->hasOne(DeleteRequest::class, 'delete_report_id');
     }
 
     // Track which staff locations are tied to this report

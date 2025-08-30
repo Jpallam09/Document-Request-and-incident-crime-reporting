@@ -43,13 +43,13 @@
                                 <table class="table table-bordered table-hover align-middle text-center report-table">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th>#</th>
-                                            <th>User</th>
+                                            <th>Report id</th>
+                                            <th>Username</th>
                                             <th>Report Title</th>
                                             <th>Reason</th>
                                             <th>Date Requested</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <th>Report status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

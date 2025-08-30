@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('incident_report_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('user_name');
             $table->string('report_title', 150);
             $table->date('report_date');
             $table->string('report_type', 50);

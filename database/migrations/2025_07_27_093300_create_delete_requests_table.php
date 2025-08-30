@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
 
             // Which report they're requesting to delete
-            $table->unsignedBigInteger('report_id');
-
+            $table->unsignedBigInteger('delete_report_id');
+            $table->string('user_name');
             // Snapshot of the report at the time of request
             $table->string('report_title');
             $table->date('report_date');
@@ -51,7 +51,7 @@ return new class extends Migration
             // Foreign keys
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
-            $table->foreign('report_id')->references('id')
+            $table->foreign('delete_report_id')->references('id')
                 ->on('incident_report_users')->onDelete('cascade');
         });
     }

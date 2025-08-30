@@ -32,7 +32,7 @@
                 <div class="report-meta">
                     <p><strong>Type:</strong> {{ $report->report_type }}</p>
                     <p><strong>Date Submitted:</strong> {{ $report->created_at->format('Y-m-d') }}</p>
-                    <p><strong>Submitted by:</strong> {{ $report->user->username ?? 'Unknown' }}</p>
+                    <p><strong>Submitted by:</strong> {{ $report->user_name ?? 'Unknown' }}</p>
                 </div>
 
                 <!-- Description -->

@@ -52,7 +52,6 @@
                             <hr class="my-2 mx-3" />
                         @endif
                     @endforeach
-
                 @endif
             </ul>
         </li>

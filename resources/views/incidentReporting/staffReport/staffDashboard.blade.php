@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Staff Dashboard</title>
@@ -17,6 +18,7 @@
     @vite('resources/js/componentsJs/Shared-navbar.js')
     @vite('resources/js/staffJs/staffDashboard.js')
 </head>
+
 <body>
     <div class="layout d-flex">
         <x-navbar.shared-navbar />
@@ -30,8 +32,8 @@
                     </div>
                 </div>
 
-                <!-- Widgets Row -->
-                <div class="row g-3 widgets">
+                <!-- Top Row: 3 widgets -->
+                <div class="row g-3 widgets mb-3">
                     <div class="col-md-4">
                         <section class="widget">
                             <a href="#" class="widget-link">
@@ -53,6 +55,26 @@
                             <a href="#" class="widget-link">
                                 <h2><i class="fas fa-edit"></i> Pending Edit Requests</h2>
                                 <p id="pendingUpdatesCount">{{ $totalPendingEditRequests }}</p>
+                            </a>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: 2 widgets centered -->
+                <div class="row g-3 widgets justify-content-center">
+                    <div class="col-md-4">
+                        <section class="widget">
+                            <a href="#" class="widget-link">
+                                <h2><i class="fas fa-check-circle"></i> Resolved Reports</h2>
+                                <p id="resolvedReportsCount">{{ $totalResolvedReports }}</p>
+                            </a>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section class="widget">
+                            <a href="#" class="widget-link">
+                                <h2><i class="fas fa-times-circle"></i> Unsuccessful response</h2>
+                                <p id="unsuccessfulReportsCount">{{ $totalCanceledReports }}</p>
                             </a>
                         </section>
                     </div>
@@ -80,4 +102,5 @@
     <!-- Bootstrap Bundle -->
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

@@ -12,6 +12,12 @@ use App\Models\IncidentReporting\IncidentReportUser;
 
 /**
  * /**
+ * /**
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $user_name
+ * @property string $email
  * @property string|null $profile_picture
  * @property string $first_name
  * @property string $last_name

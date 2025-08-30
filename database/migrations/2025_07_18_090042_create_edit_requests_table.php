@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,19 +10,17 @@ return new class extends Migration {
         Schema::create('edit_requests', function (Blueprint $table) {
             $table->id();
 
+            // Who is requesting the delete
+            $table->unsignedBigInteger('user_id');
             // Foreign keys
-            $table->foreignId('incident_report_id')
-                  ->constrained('incident_report_users')
-                  ->onDelete('cascade');
-
-            $table->foreignId('requested_by')
-                  ->constrained('users')
-                  ->onDelete('cascade');
-
+            $table->foreignId('edit_report_id')
+                ->constrained('incident_report_users')
+                ->onDelete('cascade');
+            $table->string('user_name');
             // Add this under requested_by
             $table->foreignId('reviewed_by')
-                  ->nullable()->constrained('users')
-                  ->onDelete('set null');
+                ->nullable()->constrained('users')
+                ->onDelete('set null');
 
             // Fields that may be changed
             $table->string('requested_title', 150)->nullable();

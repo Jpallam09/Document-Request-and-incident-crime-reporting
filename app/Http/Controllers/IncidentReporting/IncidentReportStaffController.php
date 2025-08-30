@@ -96,11 +96,15 @@ class IncidentReportStaffController extends Controller
         $totalIncidentReports = IncidentReportUser::count();
         $totalPendingDeleteRequests = DeleteRequest::where('status', 'pending')->count();
         $totalPendingEditRequests = EditRequest::where('status', 'pending')->count();
+        $totalResolvedReports = IncidentReportUser::where('report_status', 'success')->count();
+        $totalCanceledReports = IncidentReportUser::where('report_status', 'canceled')->count();
 
         return view('incidentReporting.staffReport.staffDashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
             'totalIncidentReports' => $totalIncidentReports,
+            'totalResolvedReports' => $totalResolvedReports,
+            'totalCanceledReports' => $totalCanceledReports,
         ]);
     }
 

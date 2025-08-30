@@ -11,8 +11,7 @@ use Illuminate\Support\Carbon;
  * @property \Illuminate\Support\Carbon|null $reviewed_at
  * @property int $id
  * @property int $user_id
- * @property int $report_id
- * @property int $incident_report_id
+ * @property int $delete_report_id
  * @property string $reason
  * @property string $status
  * @property Carbon $requested_at
@@ -25,7 +24,8 @@ class DeleteRequest extends Model
 
     protected $fillable = [
         'user_id',
-        'report_id',
+        'delete_report_id',
+        'user_name',
         'report_title',
         'report_date',
         'report_type',
@@ -50,6 +50,6 @@ class DeleteRequest extends Model
 
     public function report()
     {
-        return $this->belongsTo(\App\Models\IncidentReporting\IncidentReportUser::class, 'report_id');
+        return $this->belongsTo(\App\Models\IncidentReporting\IncidentReportUser::class, 'delete_report_id');
     }
 }

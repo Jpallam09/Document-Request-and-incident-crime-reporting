@@ -8,7 +8,7 @@ use App\Models\User;
 
 /**
  * @property int $id
- * @property int $incident_report_id
+ * @property int $edit_report_id
  * @property int $requested_by
  * @property string|null $requested_title
  * @property string|null $requested_description
@@ -29,8 +29,9 @@ class EditRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'incident_report_id',
-        'requested_by',
+        'user_id',
+        'edit_report_id',
+        'user_name',
         'reviewed_by',
         'requested_title',
         'requested_description',
@@ -41,7 +42,7 @@ class EditRequest extends Model
         'requested_latitude',
         'requested_longitude',
         'status',
-        'requested_at',
+        'requested_at', 
         'reviewed_at',
     ];
     // This lets Laravel treat JSON image data as array automatically
@@ -54,7 +55,7 @@ class EditRequest extends Model
         // Relationships
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'requested_by');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
         public function reviewer()
@@ -64,6 +65,6 @@ class EditRequest extends Model
 
     public function report()
     {
-        return $this->belongsTo('App\Models\IncidentReporting\IncidentReportUser', 'incident_report_id');
+        return $this->belongsTo('App\Models\IncidentReporting\IncidentReportUser', 'edit_report_id');
     }
 }

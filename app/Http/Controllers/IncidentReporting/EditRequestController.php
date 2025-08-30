@@ -36,7 +36,7 @@ class EditRequestController extends Controller
         $editRequest = EditRequest::with('report')->findOrFail($id);
 
         if ($editRequest->status !== 'pending') {
-            Alert::toast('This request has already been processed.', 'error')->autoClose(3000);
+            Alert::warning('This request has already been processed.', 'error')->autoClose(3000);
             return back();
         }
 
@@ -70,7 +70,7 @@ class EditRequestController extends Controller
         $editRequest->user->notify(new EditRequestStatusNotification($editRequest, 'approved'));
 
 
-        Alert::toast('Edit request accepted and applied successfully.', 'success')->autoClose(3000);
+        Alert::success('Edit request accepted and applied successfully.', 'success')->autoClose(3000);
         return back();
     }
 
