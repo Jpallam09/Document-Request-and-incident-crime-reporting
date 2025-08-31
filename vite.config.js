@@ -18,6 +18,7 @@
                         'resources/css/staffCss/staffReportView.css',
                         'resources/css/staffCss/staffUpdateRequests.css',
                         'resources/css/staffCss/staffTrackReport.css',
+                        'resources/css/staffCss/staffShowEditRequest.css',
 
                         // userCss
                         'resources/css/userCss/userIncidentReporting.css',
@@ -59,6 +60,7 @@
                         'resources/js/staffJs/staffReportView.js',
                         'resources/js/staffJs/staffUpdateRequests.js',
                         'resources/js/staffJs/staffTrackReport.js',
+                        'resources/js/staffJs/staffShowEditRequest.js',
                         ],
                 refresh: true,
             }),

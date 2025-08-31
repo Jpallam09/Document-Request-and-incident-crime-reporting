@@ -20,7 +20,6 @@
     <!-- JS -->
     @vite('resources/js/staffJs/staffUpdateRequests.js')
     @vite('resources/js/componentsJs/navbar.js')
-    @vite('resources/js/componentsJs/viewRequestModal.js')
 </head>
 
 <body>
@@ -74,11 +73,10 @@
                                             </td>
                                             <td style="width: 120px;">
                                                 <div class="d-grid">
-                                                    <button
-                                                        class="btn btn-sm btn-outline-primary btn-view-request w-100"
-                                                        data-request-id="{{ $request->id }}">
-                                                        <i class="fas fa-eye"></i> View
-                                                    </button>
+                                            <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
+                                            class="btn btn-sm btn-outline-primary w-100">
+                                            <i class="fas fa-eye"></i> View
+                                            </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -106,18 +104,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Modals -->
-    <div class="modal-wrapper">
-        <section>
-            @foreach ($requests as $request)
-                @include('components.modals.request-modal', [
-                    'report' => $request->report,
-                    'request' => $request,
-                ])
-            @endforeach
-        </section>
-    </div>
 
     @include('sweetalert::alert')
 

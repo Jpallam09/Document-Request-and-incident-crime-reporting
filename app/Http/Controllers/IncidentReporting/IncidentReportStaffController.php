@@ -77,7 +77,7 @@ class IncidentReportStaffController extends Controller
         return back();
     }
 
-        // Export report as PDF
+    // Export report as PDF
     public function exportPdf($id)
     {
         $report = IncidentReportUser::with('user', 'images')->findOrFail($id);
@@ -85,7 +85,7 @@ class IncidentReportStaffController extends Controller
         $pdf = Pdf::loadView('incidentReporting.staffReport.staffReportPdf', compact('report'));
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('report_'.$report->id.'.pdf');
+        return $pdf->download('report_' . $report->id . '.pdf');
     }
 
     /**
@@ -120,15 +120,16 @@ class IncidentReportStaffController extends Controller
         // Check notification data and redirect accordingly
         $data = $notification->data;
 
+        // Redirect depending on type of notification
         if (isset($data['report_id'])) {
-            // New report notification — go to report details page
+            // Redirect to specific report details
             return redirect()->route('reporting.staff.staffViewReportsFullDetails', $data['report_id']);
         } elseif (isset($data['edit_request_id'])) {
-            // Edit request notification — go to edit requests index
-            return redirect()->route('reporting.staff.staffUpdateRequests');
+            // Redirect to specific edit request details
+            return redirect()->route('reporting.staff.editRequest.show', $data['edit_request_id']);
         } elseif (isset($data['delete_request_id'])) {
-            // Delete request notification — go to delete requests index
-            return redirect()->route('reporting.staff.staffDeletionRequests');
+            // Redirect to specific delete request details
+            return redirect()->route('reporting.staff.staffDeletionRequests.show', $data['delete_request_id']);
         }
 
         // Default fallback redirect to dashboard

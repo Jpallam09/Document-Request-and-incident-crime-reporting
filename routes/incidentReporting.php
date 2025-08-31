@@ -60,6 +60,8 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
             // View all delete requests
             Route::get('/staffDeletionRequests', [DeleteRequestController::class, 'index'])
                 ->name('staffDeletionRequests');
+            Route::get('/delete-request/{id}', [DeleteRequestController::class, 'show'])
+                ->name('staffDeletionRequests.show');
             // Create a delete request
             Route::post('/delete-request/{id}/accept', [DeleteRequestController::class, 'accept'])
                 ->name('staffDeletionRequests.accept');

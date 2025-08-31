@@ -9,7 +9,6 @@ use App\Models\IncidentReporting\IncidentReportUser;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\ReportUser\DeleteRequestStatusNotification;
 
-
 class DeleteRequestController extends Controller
 {
     /**
@@ -17,14 +16,13 @@ class DeleteRequestController extends Controller
      */
     public function index()
     {
-        // Count only delete requests where status is 'pending'
         $totalDeleteRequests = DeleteRequest::where('status', 'pending')->count();
-        // Fetch deletion requests with relationships and filtering
-        $deleteRequests = DeleteRequest::with(['user', 'report'])
+
+        $deleteRequests = DeleteRequest::with(['user', 'report.images'])
             ->whereIn('status', ['pending', 'rejected'])
             ->latest()
             ->paginate(10);
-        // Get count of all delete requests
+
         return view('incidentReporting.staffReport.staffDeletionRequests', [
             'deleteRequests' => $deleteRequests,
             'totalDeleteRequests' => $totalDeleteRequests,
@@ -32,28 +30,21 @@ class DeleteRequestController extends Controller
     }
 
     /**
-     * Show a single report related to a delete request.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View
+     * Show a single delete request (standalone page)
      */
-    public function view($id)
+    public function show($id)
     {
-        $report = IncidentReportUser::with(['user', 'images'])
-            ->findOrFail($id);
+        $request = DeleteRequest::with(['user', 'report.images'])->findOrFail($id);
 
-        return view('incidentReporting.staffReport.staffDeletionRequests', compact('report'));
+        return view('incidentReporting.staffReport.staffShowDeleteRequest', compact('request'));
     }
 
     /**
      * Accept a delete request and delete the associated report.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function accept($id)
     {
-        $deleteRequest = DeleteRequest::findOrFail($id);
+        $deleteRequest = DeleteRequest::with('report')->findOrFail($id);
 
         if ($deleteRequest->status !== 'pending') {
             Alert::warning('Already Reviewed', 'This request was already ' . $deleteRequest->status . '.');
@@ -61,27 +52,23 @@ class DeleteRequestController extends Controller
         }
 
         $report = $deleteRequest->report;
-
         if ($report) {
             $report->delete();
         }
 
-        $deleteRequest->status = 'accepted';
+        $deleteRequest->status = 'approved';
+        $deleteRequest->reviewed_by = auth()->id();
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 
-        $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'accepted'));
+        $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'approved'));
 
         Alert::success('Accepted', 'The delete request has been approved and the report deleted.');
         return redirect()->back();
     }
 
-
     /**
      * Reject a delete request without deleting the report.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function reject($id)
     {
@@ -93,6 +80,7 @@ class DeleteRequestController extends Controller
         }
 
         $deleteRequest->status = 'rejected';
+        $deleteRequest->reviewed_by = auth()->id();
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 

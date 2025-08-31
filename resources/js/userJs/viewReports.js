@@ -88,18 +88,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
- // LEAFLET MAP
+// LEAFLET MAP
 const mapContainer = document.getElementById('reportMap');
 const lat = parseFloat(mapContainer.dataset.lat);
 const lng = parseFloat(mapContainer.dataset.lng);
 
 if (lat && lng) {
-    const map = L.map('reportMap').setView([lat, lng], 15);
+    // Create map with disabled interactions
+    const map = L.map('reportMap', {
+        zoomControl: false,   // remove + / - buttons
+        dragging: false,      // disable dragging
+        scrollWheelZoom: false, // disable scroll zoom
+        doubleClickZoom: false, // disable double click zoom
+        boxZoom: false,         // disable shift+drag zoom
+        keyboard: false,        // disable keyboard controls
+        touchZoom: false        // disable pinch zoom on mobile
+    }).setView([lat, lng], 15);
 
+    // Add tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
+    // Add marker
     L.marker([lat, lng])
         .addTo(map)
         .bindPopup("Incident Location")

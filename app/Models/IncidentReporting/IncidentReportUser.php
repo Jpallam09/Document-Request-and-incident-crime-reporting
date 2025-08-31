@@ -50,6 +50,10 @@ class IncidentReportUser extends Model
         'user_id',
     ];
 
+    protected $casts = [
+    'requested_image' => 'array', // Laravel auto-decodes JSON into array
+];
+
     // Check report status
     public function isPending(): bool
     {
@@ -72,7 +76,7 @@ class IncidentReportUser extends Model
      */
     public function images()
     {
-        return $this->hasMany(IncidentReportImage::class);
+        return $this->hasMany(IncidentReportImage::class, 'incident_report_user_id');
     }
 
     /**
