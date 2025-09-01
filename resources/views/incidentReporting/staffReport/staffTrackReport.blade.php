@@ -49,7 +49,7 @@
                 <!-- Map -->
                 <div class="card mb-3">
                     <div class="card-body p-0">
-                        <div id="map" class="w-100" style="height: 500px;"></div>
+                        <div id="map" class="w-100" style="height: 400px;"></div>
                     </div>
                 </div>
 
@@ -69,22 +69,40 @@
                         <i class="fa-solid fa-location-dot"></i> Start Tracking
                     </button>
                 </form>
+@if ($report->report_status === 'success')
+    <!-- Already marked as success -->
+    <div class="alert alert-success mt-3" role="alert">
+        Report marked as <strong>Success</strong>
+    </div>
+@elseif ($report->report_status === 'canceled')
+    <!-- Already cancelled -->
+    <div class="alert alert-danger mt-3" role="alert">
+        Report has been <strong>Cancelled</strong>
+    </div>
+@else
+    <!-- Show action buttons if still pending -->
+    <!-- Success -->
+    <form id="successForm-{{ $report->id }}"
+          action="{{ route('reporting.staff.trackReport.success', $report->id) }}"
+          method="POST"
+          class="d-inline">
+        @csrf
+        <button type="button" class="btn btn-outline-success btn-sm btn-success-track" data-id="{{ $report->id }}">
+            <i class="fa-solid fa-check"></i> Success
+        </button>
+    </form>
 
-                <!-- Success -->
-                <form id="successForm-{{ $report->id }}" action="{{ route('reporting.staff.trackReport.success', $report->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    <button type="button" class="btn btn-outline-success btn-sm btn-success-track" data-id="{{ $report->id }}">
-                        <i class="fa-solid fa-check"></i> Success
-                    </button>
-                </form>
-
-                <!-- Cancel -->
-                <form id="cancelForm-{{ $report->id }}" action="{{ route('reporting.staff.trackReport.cancel', $report->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    <button type="button" class="btn btn-outline-danger btn-sm btn-cancel-track" data-id="{{ $report->id }}">
-                        <i class="fa-solid fa-xmark"></i> Cancel
-                    </button>
-                </form>
+    <!-- Cancel -->
+    <form id="cancelForm-{{ $report->id }}"
+          action="{{ route('reporting.staff.trackReport.cancel', $report->id) }}"
+          method="POST"
+          class="d-inline">
+        @csrf
+        <button type="button" class="btn btn-outline-danger btn-sm btn-cancel-track" data-id="{{ $report->id }}">
+            <i class="fa-solid fa-xmark"></i> Cancel
+        </button>
+    </form>
+@endif
 
                 <!-- Track URL for JS -->
                 <div id="trackUrlContainer" data-track-url="{{ route('reporting.staff.trackReport') }}"></div>

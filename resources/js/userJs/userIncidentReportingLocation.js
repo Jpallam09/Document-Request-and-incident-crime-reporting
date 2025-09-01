@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize map preview
-    const map = L.map('mapPreview').setView([14.5995, 120.9842], 13); // Default to Manila
+    const map = L.map('mapPreview').setView([16.88122, 121.5878223], 13);
 
     // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $requested_at
  * @property-read \App\Models\User $user
  * @property-read \App\Models\IncidentReporting\IncidentReportUser $report
+ * @property int|null $reviewed_by
  */
 class DeleteRequest extends Model
 {

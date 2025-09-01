@@ -34,10 +34,14 @@ class DeleteRequestController extends Controller
      */
     public function show($id)
     {
+        // Eager load relationships: 
+        // - user who submitted the delete request
+        // - the report itself + its images
         $request = DeleteRequest::with(['user', 'report.images'])->findOrFail($id);
 
         return view('incidentReporting.staffReport.staffShowDeleteRequest', compact('request'));
     }
+
 
     /**
      * Accept a delete request and delete the associated report.
@@ -57,7 +61,6 @@ class DeleteRequestController extends Controller
         }
 
         $deleteRequest->status = 'approved';
-        $deleteRequest->reviewed_by = auth()->id();
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 
@@ -80,7 +83,6 @@ class DeleteRequestController extends Controller
         }
 
         $deleteRequest->status = 'rejected';
-        $deleteRequest->reviewed_by = auth()->id();
         $deleteRequest->reviewed_at = now();
         $deleteRequest->save();
 

@@ -38,6 +38,7 @@
                         'resources/js/componentsJs/shared-navbar.js',
                         'resources/js/componentsJs/viewRequestModal.js',
                         'resources/js/componentsJs/form-modal.js',
+                        'resources/js/componentsJs/map.js',
 
                         //authJs
                         'resources/js/authJs/login.js',

@@ -74,11 +74,10 @@
                                                 </td>
                                                 <td class="action-col">
                                                     <div class="d-grid">
-                                                        <button
-                                                            class="btn btn-sm btn-outline-primary w-100 openModalBtn"
-                                                            data-modal="viewEditRequestModal-{{ $request->id }}">
-                                                            <i class="fas fa-eye"></i> View
-                                                        </button>
+                                                        <a href="{{ route('reporting.staff.staffDeletionRequests.show', $request->id) }}"
+                                                        class="btn btn-sm btn-outline-primary w-100">
+                                                        <i class="fas fa-eye"></i> View
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -100,17 +99,6 @@
         </section>
     </main>
 
-    <!-- Modal Wrapper -->
-    <div class="modal-wrapper">
-        <section>
-            @foreach ($deleteRequests as $request)
-                @include('components.modals.delete-modal', [
-                    'report' => $request->report,
-                    'request' => $request,
-                ])
-            @endforeach
-        </section>
-    </div>
 
     @include('sweetalert::alert')
 

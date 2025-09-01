@@ -140,7 +140,9 @@
                         </form>
                     </div>
                 @else
-                    <p class="text-muted mt-3">Edit Request {{ ucfirst($request->status) }}</p>
+                    <div class="alert alert-{{ $request->status === 'rejected' ? 'danger' : 'success' }} mt-4" role="alert">
+                        Edit Request {{ ucfirst($request->status) }}
+                    </div>
                 @endif
             </div>
         </div>
