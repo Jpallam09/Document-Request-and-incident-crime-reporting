@@ -138,7 +138,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-outline-primary btn-sm mb-2" id="updateReportBtn">
+                <button type="submit" class="btn btn-primary btn-sm mb-2" id="updateReportBtn">
                     <i class="fas fa-check-circle me-1"></i>
                     Update Report
                 </button>

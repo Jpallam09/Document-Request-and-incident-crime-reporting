@@ -1,4 +1,4 @@
-<section id="introSection" class="vh-100 d-flex flex-column bg-dark text-white">
+<section id="introSection" class="vh-100 d-flex flex-column bg-dark text-white mb-5">
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top transparent-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" aria-label="Homepage">
@@ -32,69 +32,58 @@
         </div>
     </nav>
 
-    <div class="flex-grow-1 d-flex align-items-center justify-content-center" data-bs-pause="false">
-        <div id="introCarousel" class="carousel slide carousel-fade w-100 h-100" data-bs-ride="carousel"
-            data-bs-interval="6000">
-
-            <!-- Indicators -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="2"></button>
-            </div>
-
-            <div class="flex-grow-1 d-flex align-items-center justify-content-center">
-                <div id="introCarousel" class="carousel slide carousel-fade w-100 h-90" data-bs-ride="carousel"
-                    data-bs-interval="6000" data-bs-pause="false">
-
-                    <!-- Indicators -->
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="0"
-                            class="active"></button>
-                        <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#introCarousel" data-bs-slide-to="2"></button>
-                    </div>
-
-                    <!-- Carousel items -->
-                    <div class="carousel-inner vh-100">
-                        <div class="carousel-item active vh-100">
-                            <img src="{{ asset('images/carousel1.jpg') }}" class="d-block w-100 h-100 object-fit-cover"
-                                alt="Slide 1">
-                            <div class="carousel-caption d-none d-md-block text-white text-center">
-                                <h1 class="fw-bold">Welcome to the Municipality Service Portal</h1>
-                                <h5>Document Requests and Incident Reporting Made Easy</h5>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item vh-100">
-                            <img src="{{ asset('images/carousel2.jpg') }}" class="d-block w-100 h-100 object-fit-cover"
-                                alt="Slide 2">
-                            <div class="carousel-caption d-none d-md-block text-white text-center">
-                                <h2 class="fw-bold">Your One-Stop Portal for Municipal Services</h2>
-                                <p>Submit document requests and report incidents anytime, anywhere.</p>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item vh-100">
-                            <img src="{{ asset('images/carousel3.jpg') }}"
-                                class="d-block w-100 h-100 object-fit-cover" alt="Slide 3">
-                            <div class="carousel-caption d-none d-md-block text-white text-center">
-                                <h2 class="fw-bold">Secure, Fast, and Reliable</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#introCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#introCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
+   <div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <section class="bg-dark text-white vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text Column -->
+                <div class="col-md-6 text-center text-md-start">
+                    <h1 class="display-4 fw-bold mb-3">Welcome to the Municipality Incident Reporting Portal</h1>
+                    <p class="lead mb-4">Report crimes and incidents quickly and securely.</p>
+                </div>
+                <!-- Image / Illustration Column -->
+                <div class="col-md-6 text-center">
+                    <img src="{{ asset('images/hero-incident.svg') }}" alt="Incident Reporting" class="img-fluid">
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm rounded-3 h-100 border-0">
+                        <div class="card-body">
+                            <img src="{{ asset('images/icons/secure.svg') }}" alt="Secure" class="mb-3" width="60">
+                            <h5 class="card-title fw-bold">Secure & Confidential</h5>
+                            <p class="card-text">Your reports are handled with full privacy and security.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm rounded-3 h-100 border-0">
+                        <div class="card-body">
+                            <img src="{{ asset('images/icons/fast.svg') }}" alt="Fast" class="mb-3" width="60">
+                            <h5 class="card-title fw-bold">Fast Reporting</h5>
+                            <p class="card-text">Submit incidents quickly without unnecessary delays.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm rounded-3 h-100 border-0">
+                        <div class="card-body">
+                            <img src="{{ asset('images/icons/support.svg') }}" alt="Support" class="mb-3" width="60">
+                            <h5 class="card-title fw-bold">24/7 Monitoring</h5>
+                            <p class="card-text">Our team monitors reports around the clock to take immediate action.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </section>
 

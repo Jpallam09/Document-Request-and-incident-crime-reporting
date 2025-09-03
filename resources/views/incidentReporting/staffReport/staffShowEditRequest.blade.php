@@ -23,25 +23,54 @@
     <div class="layout d-flex">
         <x-navbar.shared-navbar />
 
-        <div class="page-content flex-grow-1 pt-5 px-4 mt-4">
+        <div class="page-content flex-grow-1 pt-5 px-4 mt-4" >
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">Review Edit Request (Submitted by: {{ $request->user->user_name }})</h2>
+                    <h4 class="mb-2 text-primary">
+                        <i class="fa-solid fa-pen-to-square me-2"></i>
+                        Review Edit Request
+                        <small class="text-muted d-block mt-1" style="font-size: 0.875rem;">
+                            Submitted by: <strong>{{ $request->user->user_name }}</strong>
+                        </small>
+                    </h4>
                     <a href="{{ route('reporting.staff.staffUpdateRequests') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left me-2"></i> Back to All Edit Requests
                     </a>
                 </div>
+
                 <div class="row g-4">
                     <!-- Original Report -->
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <h6 class="text-primary">Original Report</h6>
-                                <p><strong>Title:</strong> {{ $request->report->report_title }}</p>
-                                <p><strong>Date:</strong>
-                                    {{ \Carbon\Carbon::parse($request->report->report_date)->format('M d, Y') }}</p>
-                                <p><strong>Type:</strong> {{ $request->report->report_type }}</p>
-                                <p><strong>Description:</strong><br>{{ $request->report->report_description }}</p>
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-header bg-primary text-white">
+                                        <i class="fa-solid fa-file-lines me-2"></i> Original Report
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-striped mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="w-25">Title</th>
+                                                    <td>{{ $request->report->report_title }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Date</th>
+                                                    <td>{{ \Carbon\Carbon::parse($request->report->report_date)->format('M d, Y') }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Type</th>
+                                                    <td>{{ $request->report->report_type }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Description</th>
+                                                    <td>{{ $request->report->report_description }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <!-- Original Report Location -->
                                 <p><strong>Original Location:</strong></p>
                                 @if (!empty($request->report->latitude) && !empty($request->report->longitude))
@@ -74,13 +103,34 @@
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <h6 class="text-danger">Requested Changes</h6>
-                                <p><strong>Title:</strong> {{ $request->requested_title ?? '—' }}</p>
-                                <p><strong>Date:</strong>
-                                    {{ $request->requested_report_date ? \Carbon\Carbon::parse($request->requested_report_date)->format('M d, Y') : '—' }}
-                                </p>
-                                <p><strong>Type:</strong> {{ $request->requested_type ?? '—' }}</p>
-                                <p><strong>Description:</strong><br>{{ $request->requested_description ?? '—' }}</p>
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-header bg-danger text-white">
+                                        <i class="fa-solid fa-pen-to-square me-2"></i> Requested Changes
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-striped mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="w-25">Title</th>
+                                                    <td>{{ $request->requested_title ?? '—' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Date</th>
+                                                    <td>{{ $request->requested_report_date ? \Carbon\Carbon::parse($request->requested_report_date)->format('M d, Y') : '—' }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Type</th>
+                                                    <td>{{ $request->requested_type ?? '—' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Description</th>
+                                                    <td>{{ $request->requested_description ?? '—' }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <!-- Requested Changes Location -->
                                 <p><strong>Edit Request Location:</strong></p>
                                 @if (!empty($request->requested_latitude) && !empty($request->requested_longitude))
@@ -140,7 +190,8 @@
                         </form>
                     </div>
                 @else
-                    <div class="alert alert-{{ $request->status === 'rejected' ? 'danger' : 'success' }} mt-4" role="alert">
+                    <div class="alert alert-{{ $request->status === 'rejected' ? 'danger' : 'success' }} mt-4"
+                        role="alert">
                         Edit Request {{ ucfirst($request->status) }}
                     </div>
                 @endif

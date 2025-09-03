@@ -24,7 +24,7 @@
                 <h1>Report Crime and Incident Quickly &amp; Efficiently</h1>
                 <p>Streamline your incident reporting with our intuitive platform that makes logging, tracking, and
                     resolving issues seamless and fast.</p>
-                <button class="btn btn-outline-primary" id="report-button" aria-label="Scroll to report incident form">Report an
+                <button class="btn btn-primary" id="report-button" aria-label="Scroll to report incident form">Report an
                     Incident</button>
             </section>
 

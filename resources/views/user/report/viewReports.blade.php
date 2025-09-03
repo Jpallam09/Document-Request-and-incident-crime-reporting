@@ -24,7 +24,7 @@
             {{-- Header --}}
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 m-0">Report Details</h1>
-                <a href="#" onclick="window.history.back()" class="btn btn-outline-secondary btn-sm">
+                <a href="#" onclick="window.history.back()" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to List
                 </a>
@@ -37,41 +37,42 @@
 
             @isset($report)
                 <div class="report-card bg-white p-4 rounded shadow-sm">
-                    {{-- Report Header --}}
-                    <div class="report-header d-flex flex-wrap justify-content-between mb-4">
-                        <div class="info-box flex-grow-1">
-                            <strong>{{ $report->report_title }}</strong>
-
-                            {{-- Status Badge --}}
-                            @if ($report->editRequest)
-                                @php $status = $report->editRequest->status; @endphp
-                                <span
-                                    class="badge {{ $status === 'pending' ? 'badge-pending' : ($status === 'accepted' ? 'badge-accepted' : 'badge-rejected') }}">
-                                    {{ ucfirst($status) }}
-                                </span>
-                            @endif
-
-                            {{-- Viewed Badge --}}
-                            @if ($report->editRequest && $report->editRequest->is_viewed)
-                                <span class="badge badge-viewed">Viewed</span>
-                            @endif
+                    <!-- Report Meta Info - Modern Table UI -->
+                    <div class="card mb-3 shadow-sm border-0">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fa-solid fa-info-circle me-2"></i> Report Information
                         </div>
-
-                        <div class="info-box">
-                            <i class="fa-regular fa-calendar-alt me-1"></i>
-                            {{ \Carbon\Carbon::parse($report->report_date)->format('F d, Y') }}
-                        </div>
-
-                        <div class="info-box highlight">
-                            <i class="fa-solid fa-tag me-1"></i> {{ $report->report_type }}
+                        <div class="card-body p-0">
+                            <table class="table table-striped mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="w-25">Report ID</th>
+                                        <td>{{ $report->id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Type</th>
+                                        <td>{{ $report->report_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date Submitted</th>
+                                        <td>{{ $report->created_at->format('Y-m-d') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Submitted by</th>
+                                        <td>{{ $report->user_name ?? 'Unknown' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    {{-- Description --}}
-                    <div class="description-section mb-4">
-                        <h3 class="h5">Description</h3>
-                        <div class="description-box">
-                            {{ $report->report_description }}
+                    <!-- Description - Modern Card -->
+                    <div class="card mb-3 shadow-sm border-0">
+                        <div class="card-header bg-secondary text-white">
+                            <i class="fa-solid fa-align-left me-2"></i> Description
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">{{ $report->report_description }}</p>
                         </div>
                     </div>
 
@@ -120,7 +121,7 @@
                     {{-- Action Buttons --}}
                     <div class="action-buttons d-flex gap-2">
                         <!-- Request Edit Button (no <form>) -->
-                        <button type="button" id="editBtn" class="btn btn-outline-primary btn-sm"
+                        <button type="button" id="editBtn" class="btn btn-primary btn-sm"
                             onclick="handleEditRequest({{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}, '{{ route('user.report.userIncidentReporting.edit', $report->id) }}')">
                             <i class="fa-solid fa-pen"></i> Request Edit
                         </button>

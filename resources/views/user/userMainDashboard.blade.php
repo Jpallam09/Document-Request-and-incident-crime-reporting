@@ -10,104 +10,9 @@
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Custom Styles -->  
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --primary: #1e40af;
-            --primary-light: #3b82f6;
-            --success: #22c55e;
-            --text-dark: #f2f2f2;
-            --text-light: #6b7280;
-            --bg-light: #f9fafb;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
-        }
-
-        /* Assuming navbar height is 70px and sidebar width is 250px */
-        main {
-            margin-top: 1rem;
-            /* push content below navbar */
-            margin-left: 250px;
-            /* push content away from sidebar */
-            padding: 1rem;
-            /* optional: spacing inside */
-        }
-
-        .hero {
-            background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 4rem 1rem;
-            text-align: center;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .tutorial-step {
-            background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);  
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .tutorial-step:hover {
-            transform: translateY(-5px);
-        }
-
-        .tutorial-step i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .about-section,
-        .faq-section,
-        .contact-section {
-            background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        @media (max-width: 768px) {
-            main {
-                margin-left: 0;
-                /* no sidebar offset on small screens */
-            }
-        }
-    </style>
-
     <!-- Vite Custom CSS -->
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
+    @vite('resources/css/authCss/userMainDashboard.css')
 </head>
 
 <body>
@@ -122,8 +27,8 @@
                     <h1>Welcome to the Incident Reporting System</h1>
                     <p>Your platform for safe, transparent, and accountable reporting.</p>
                     <a href="{{ route('user.report.userIncidentReporting.create') }}"
-                        class="btn btn-outline-primary btn-md">
-                        <i class="fa fa-plus-circle me-2"></i>Start Reporting
+                        class="btn btn-primary btn-md">
+                        <i class="me-2"></i>Start Reporting
                     </a>
                 </section>
 

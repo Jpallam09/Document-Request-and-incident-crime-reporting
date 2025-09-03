@@ -26,37 +26,40 @@
 
         <div class="page-content flex-grow-1 container py-5 mt-4">
             <!-- Header -->
-            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
-                <h2 class="h4 mb-0">
+            <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                <h4 class="mb-0 text-danger">
                     <i class="fa fa-trash me-2"></i> Delete Request Details
-                </h2>
+                    <small class="text-muted d-block mt-1" style="font-size: 0.875rem;">
+                        Submitted by: <strong>{{ $request->user->user_name }}</strong>
+                    </small>
+                </h4>
                 <a href="{{ route('reporting.staff.staffDeletionRequests') }}" class="btn btn-secondary btn-sm">
-                    <i class="fa fa-arrow-left me-1"></i> Back to delete requestList
+                    <i class="fa fa-arrow-left me-1"></i> Back to Delete Requests
                 </a>
             </div>
 
-            <!-- Report Info Section -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header fw-bold">
-                    Report Info
+            <!-- Report Info Section - Modern Card -->
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-header bg-danger text-white">
+                    <i class="fa-solid fa-info-circle me-2"></i> Report Information
                 </div>
-                <div class="card-body">
-                    <table class="table table-bordered mb-0">
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
                         <tbody>
                             <tr>
-                                <th>Title</th>
+                                <th scope="row" class="w-25">Title</th>
                                 <td>{{ $request->report->report_title }}</td>
                             </tr>
                             <tr>
-                                <th>Date</th>
+                                <th scope="row">Date</th>
                                 <td>{{ \Carbon\Carbon::parse($request->created_at)->format('M d, Y') }}</td>
                             </tr>
                             <tr>
-                                <th>Type</th>
+                                <th scope="row">Type</th>
                                 <td>{{ $request->report->report_type }}</td>
                             </tr>
                             <tr>
-                                <th>Description</th>
+                                <th scope="row">Description</th>
                                 <td>{{ $request->report->report_description }}</td>
                             </tr>
                         </tbody>
@@ -100,33 +103,35 @@
                 @endif
             </div>
 
-        <!-- Action Buttons -->
-        <div class="d-flex justify-content-end gap-2 mb-5">
-            @if ($request->status !== 'rejected')
-                <!-- Accept Button -->
-                <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
-                    class="confirm-form" data-action="accept">
-                    @csrf
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-check me-1"></i> Accept
-                    </button>
-                </form>
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-end gap-2 mb-5">
+                @if ($request->status !== 'rejected')
+                    <!-- Accept Button -->
+                    <form method="POST"
+                        action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
+                        class="confirm-form" data-action="accept">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-check me-1"></i> Accept
+                        </button>
+                    </form>
 
-                <!-- Reject Button -->
-                <form method="POST" action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
-                    class="confirm-form" data-action="reject">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="fa fa-times me-1"></i> Reject
-                    </button>
-                </form>
-            @else
-                <!-- Already Rejected -->
-                <div class="alert alert-danger w-100" role="alert">
-                Request rejected
-                </div>
-            @endif
-        </div>
+                    <!-- Reject Button -->
+                    <form method="POST"
+                        action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
+                        class="confirm-form" data-action="reject">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            <i class="fa fa-times me-1"></i> Reject
+                        </button>
+                    </form>
+                @else
+                    <!-- Already Rejected -->
+                    <div class="alert alert-danger w-100" role="alert">
+                        Request rejected
+                    </div>
+                @endif
+            </div>
 
         </div>
     </main>
