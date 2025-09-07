@@ -9,47 +9,79 @@
                 : asset('images/pfp.png') }}"
                 class="rounded-circle" width="32" height="32" alt="Staff Avatar">
         </li>
+
         <!-- Notification Dropdown -->
         <li class="nav-item dropdown position-relative">
-            <a class="nav-link" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false" aria-label="Notifications">
-                <i class="fas fa-bell"></i>
+            <a class="nav-link position-relative" href="#" id="notificationDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                <i class="fas fa-bell fa-lg"></i>
                 @if (isset($unreadNotifications) && $unreadNotifications->count() > 0)
-                    <span
-                        class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1 notification-badge">
+                    <span class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1">
                         {{ $unreadNotifications->count() }}
                     </span>
                 @endif
             </a>
-            <ul class="dropdown-menu dropdown-menu-end notification-dropdown-menu"
-                aria-labelledby="notificationDropdown">
+
+            <ul class="dropdown-menu dropdown-menu-end p-2"
+                style="max-height: 400px; overflow-y: auto; min-width: 350px;" aria-labelledby="notificationDropdown">
+
                 @if (!isset($notifications) || $notifications->isEmpty())
-                    <li class="dropdown-item text-muted small d-flex align-items-center gap-2">
-                        <i class="fas fa-info-circle"></i> No new notifications
+                    <li class="dropdown-item text-center text-muted small py-3">
+                        <i class="fas fa-info-circle me-1"></i> No new notifications
                     </li>
                 @else
                     @foreach ($notifications as $index => $notification)
+                        @php
+                            // Determine icon and color based on notification type
+                            $iconClass = 'fas fa-info-circle text-secondary';
+
+                            if (isset($notification->data['report_id']) && !isset($notification->data['comment'])) {
+                                $iconClass = 'fas fa-file-alt text-primary'; // New report
+                            } elseif (
+                                isset($notification->data['report_id']) &&
+                                isset($notification->data['comment'])
+                            ) {
+                                $iconClass = 'fas fa-comment-dots text-success'; // Feedback
+                            } elseif (isset($notification->data['edit_request_id'])) {
+                                $iconClass = 'fas fa-pencil-alt text-warning'; // Edit request
+                            } elseif (isset($notification->data['delete_request_id'])) {
+                                $iconClass = 'fas fa-trash-alt text-danger'; // Delete request
+                            }
+
+                            // Background for unread vs read
+                            if (is_null($notification->read_at)) {
+                                $bgClass = 'bg-primary bg-opacity-10'; // Highlight gray for unread
+                                $textClass = 'fw-bold text-dark'; // Bold for unread
+                            } else {
+                                // Zebra stripe for read notifications
+                                $bgClass = $index % 2 === 0 ? 'bg-white' : 'bg-light';
+                                $textClass = 'text-muted';
+                            }
+                        @endphp
+
                         <li>
                             <a href="{{ route('reporting.staff.notifications.markRead', $notification->id) }}"
-                                class="dropdown-item d-flex align-items-start gap-2
-                  {{ is_null($notification->read_at) ? 'fw-bold' : 'text-muted' }}">
-                                <i class="fas fa-info-circle mt-1"></i>
-                                <div>
-                                    <strong>{{ $notification->data['title'] ?? 'Notification' }}</strong><br>
-                                    <small class="text-muted submitted-by-text">
-                                        <strong>User:</strong> {{ $notification->data['submitted_by'] ?? 'Unknown' }}
-                                    </small><br>
-                                    <small class="notification-message">
-                                        {{ \Illuminate\Support\Str::limit($notification->data['message'] ?? '', 60) }}
+                                class="dropdown-item d-flex align-items-start gap-2 p-2 mb-1 rounded {{ $bgClass }} {{ $textClass }}">
+                                <i class="{{ $iconClass }} mt-1 fs-6"></i>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <strong>{{ $notification->data['title'] ?? 'User Feedback' }}</strong>
+                                        <small
+                                            class="text-muted ms-2">{{ $notification->created_at->diffForHumans() }}</small>
+                                    </div>
+                                    <small class="d-block mt-1">
+                                        <strong>User:</strong>
+                                        {{ $notification->data['user_name'] ?? ($notification->data['submitted_by'] ?? 'Unknown') }}
                                     </small>
-                                    <small class="text-muted notification-time">
-                                        {{ $notification->created_at->diffForHumans() }}
+                                    <small class="d-block text-truncate mt-1" style="max-width: 260px;">
+                                        {{ \Illuminate\Support\Str::limit($notification->data['comment'] ?? ($notification->data['message'] ?? ''), 60) }}
                                     </small>
                                 </div>
                             </a>
                         </li>
+
                         @if ($index !== $notifications->count() - 1)
-                            <hr class="my-2 mx-3" />
+                            <hr class="my-1 mx-2" />
                         @endif
                     @endforeach
                 @endif

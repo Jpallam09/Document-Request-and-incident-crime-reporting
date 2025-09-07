@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FeedbackComment;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\ReportUser\FeedbackSubmitted;
+use App\Models\User;
 
 class FeedbackCommentController extends Controller
 {
@@ -21,18 +23,28 @@ class FeedbackCommentController extends Controller
             'comment' => 'required|string|max:1000',
         ]);
 
-        FeedbackComment::create([
+        // Save feedback and assign to variable
+        $feedback = FeedbackComment::create([
             'user_id' => auth()->id(),
             'report_id' => $id,
             'comment' => $request->comment,
         ]);
 
-        // This will be caught by @include('sweetalert::alert')
-        Alert::success('Thank you!', 'Your feedback has been submitted successfully.');
+        // Notify all staff users
+        $staffUsers = User::whereHas('roles', fn($q) => $q->where('role', 'staff'))->get();
 
-        // Flash message: triggers SweetAlert2 in the view
+        foreach ($staffUsers as $staff) {
+            $staff->notify(new FeedbackSubmitted(
+                $feedback->report_id,
+                auth()->user()->user_name,
+                $feedback->comment
+            ));
+        }
+
+        Alert::success('Thank you!', 'Your feedback has been submitted successfully.');
         return redirect()->back();
     }
+
 
     /**
      * User views only their own feedback.

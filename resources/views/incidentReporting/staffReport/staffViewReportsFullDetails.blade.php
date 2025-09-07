@@ -6,6 +6,8 @@
     <title>Staff - Report Details</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     @vite('resources/css/staffCss/staffViewReportsFullDetails.css')
     @vite('resources/js/staffJs/staffViewReportsFullDetails.js')
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
@@ -26,6 +28,45 @@
                         <i class="fa-solid fa-arrow-left"></i> Back to List
                     </a>
                 </div>
+
+                <!-- Feedback Section for Staff -->
+                @if (in_array($report->report_status, [
+                        \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS,
+                        \App\Models\IncidentReporting\IncidentReportUser::STATUS_CANCELED,
+                    ]) && $report->feedbackComments->count())
+
+                    <div class="Feed_back card shadow-sm border-0 mt-4 mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4 d-flex align-items-center">
+                                <i class="bi bi-chat-square-text-fill text-success fs-4 me-2"></i>
+                                Feedbacks
+                            </h5>
+
+                            <div class="feedback-list d-flex flex-column gap-3">
+                                @foreach ($report->feedbackComments as $feedback)
+                                    <div class="p-3 rounded bg-light border-start border-4 border-success shadow-sm">
+                                        <div class="d-flex align-items-start gap-3">
+                                            <i class="bi bi-person-circle text-success fs-4"></i>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1 fw-bold text-success">
+                                                    {{ $feedback->user->user_name ?? 'Unknown User' }}
+                                                    <span class="fw-normal text-muted fs-7">
+                                                        ({{ $feedback->created_at->format('Y-m-d H:i') }})
+                                                    </span>
+                                                </h6>
+                                                <p class="mb-0 text-muted fst-italic">
+                                                    <i class="bi bi-chat-quote-fill me-1 text-secondary"></i>
+                                                    “{{ $feedback->comment }}”
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                @endif
 
                 <!-- Report Meta Info - Modern Table UI -->
                 <div class="card mb-3 shadow-sm border-0">
@@ -52,7 +93,7 @@
                                     <td>{{ $report->user_name ?? 'Unknown' }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Phonen number</th>
+                                    <th scope="row">Phone number</th>
                                     <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                 </tr>
                             </tbody>
