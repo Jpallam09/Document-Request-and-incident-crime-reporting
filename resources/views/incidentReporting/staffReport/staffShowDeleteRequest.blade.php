@@ -29,12 +29,12 @@
             <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
                 <h4 class="mb-0 text-danger">
                     <i class="fa fa-trash me-2"></i> Delete Request Details
-                    <small class="text-muted d-block mt-1" style="font-size: 0.875rem;">
+                    <small class="text-muted d-block mt-3" style="font-size: 1.2rem;">
                         Submitted by: <strong>{{ $request->user->user_name }}</strong>
                     </small>
                 </h4>
                 <a href="{{ route('reporting.staff.staffDeletionRequests') }}" class="btn btn-secondary btn-sm">
-                    <i class="fa fa-arrow-left me-1"></i> Back to Delete Requests
+                    <i class="fa fa-arrow-left me-1"></i> Back to Delete Requests table
                 </a>
             </div>
 
@@ -51,6 +51,10 @@
                                 <td>{{ $request->report->report_title }}</td>
                             </tr>
                             <tr>
+                                <th scope="row">Phone number</th>
+                                <td>{{ $request->user->phone ?? 'Unknown' }}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Date</th>
                                 <td>{{ \Carbon\Carbon::parse($request->created_at)->format('M d, Y') }}</td>
                             </tr>
@@ -58,12 +62,18 @@
                                 <th scope="row">Type</th>
                                 <td>{{ $request->report->report_type }}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">Description</th>
-                                <td>{{ $request->report->report_description }}</td>
-                            </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- Description - Modern Card -->
+            <div class="card mb-3 shadow-sm border-0">
+                <div class="card-header bg-secondary text-white">
+                    <i class="fa-solid fa-align-left me-2"></i> Description
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">{{ $request->report->report_description }}</p>
                 </div>
             </div>
 

@@ -219,6 +219,8 @@ class IncidentReportStaffController extends Controller
     {
         $report = IncidentReportUser::with('images', 'user')->findOrFail($id);
 
+        $phoneNumber = $report->user->phone;
+
         return view('incidentReporting.staffReport.staffViewReportsFullDetails', compact('report'));
     }
 

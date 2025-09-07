@@ -40,8 +40,6 @@
                     <ul class="navbar-nav list-inline mb-0">
                         <li class="nav-item"><a class="nav-link" href="https://facebook.com/municipality"
                                 target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="https://twitter.com/municipality" target="_blank"
-                                aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
                         <li class="nav-item"><a class="nav-link faq-link" href="#faq" title="Go to FAQ"
                                 aria-label="FAQ"><i class="fas fa-question-circle"></i></a></li>
                     </ul>
@@ -56,11 +54,11 @@
                     <div class="col-md-6 text-center text-md-start fade-in delay-1">
                         <h1 class="display-4 fw-bold mb-3">Welcome to the Municipal Disaster Risk Reduction and
                             Management Office Portal</h1>
-                        <p class="lead mb-4">Report crimes and incidents quickly and securely.</p>
+                        <p class="lead mb-4">Report incidents quickly and securely.</p>
                         <a href="{{ route('register') }}" class="btn btn-primary btn-lg shadow">Get Started</a>
                     </div>
                     <div class="col-md-6 text-center fade-in delay-2">
-                        <img src="{{ asset('images/carousel1.jpg') }}" alt="Incident Reporting"
+                        <img src="{{ asset('images/SMI_MDRRMO_01.jpg') }}" alt="Incident Reporting"
                             class="img-fluid rounded shadow-lg" />
                     </div>
                 </div>
@@ -134,7 +132,7 @@
                     </div>
 
                     <div class="col-lg-6 mt-4 mt-lg-0 fade-in delay-2">
-                        <img src="{{ asset('images/carousel2.jpg') }}"
+                        <img src="{{ asset('images/SMI_MDRRMO_02.jpg') }}"
                             alt="Modern workplace interface showing document management and reporting dashboard with clean design"
                             class="img-fluid rounded shadow" />
                     </div>

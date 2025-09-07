@@ -5,7 +5,7 @@ namespace App\Models\IncidentReporting;
 use App\Models\User;
 use App\Models\IncidentReporting\IncidentReportImage;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\FeedbackComment;
 class IncidentReportUser extends Model
 {
     /**
@@ -103,5 +103,10 @@ class IncidentReportUser extends Model
     public function staffLocations()
     {
         return $this->hasMany(StaffLocation::class, 'report_id');
+    }
+
+        public function feedbackComments()
+    {
+        return $this->hasMany(FeedbackComment::class, 'report_id');
     }
 }

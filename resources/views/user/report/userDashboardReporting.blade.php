@@ -30,7 +30,6 @@
                     <div class="row mb-4">
                         <div class="col">
                             <h1 id="dashboard-title" class="mb-2">Your report summaries</h1>
-                            <p class="text-start fw-light small text-muted mb-0">“Here you can quickly see your reports — how many edits or deletions you’ve requested, and whether your reports are still pending, already resolved, or canceled.”</p>
                         </div>
                     </div>
 
@@ -40,7 +39,7 @@
                         <div class="col-md-4">
                             <section class="widget" id="totalReportsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-file-alt"></i> Total Reports</h2>
+                                    <h2><i class="fas fa-file-alt"></i> Total reports</h2>
                                     <p class="text-start fw-light small text-muted mb-0">Your total report counts</p>
                                     <p id="count">{{ $totalReports }}</p>
                                 </a>
@@ -49,7 +48,7 @@
                         <div class="col-md-4">
                             <section class="widget" id="openReportsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-envelope-open-text"></i> Pending Reports</h2>
+                                    <h2><i class="fas fa-envelope-open-text"></i> Unresponded reports</h2>
                                     <p class="text-start fw-light small text-muted mb-0">Your total pending report counts</p>
                                     <p id="count">{{ $pendingReports }}</p>
                                 </a>
@@ -58,7 +57,7 @@
                         <div class="col-md-4">
                             <section class="widget" id="resolvedReportsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-check-circle"></i> Resolved</h2>
+                                    <h2><i class="fas fa-check-circle"></i> Resolved reports</h2>
                                     <p class="text-start fw-light small text-muted mb-0">Your total resolved report counts</p>
                                     <p id="count">{{ $successReports }}</p>
                                 </a>
@@ -69,8 +68,8 @@
                         <div class="col-md-4">
                             <section class="widget" id="cancelRequestsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-ban"></i> Report Canceled </h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Your total canceled report counts</p>
+                                    <h2><i class="fas fa-ban"></i> Unsuccessful reports </h2>
+                                    <p class="text-start fw-light small text-muted mb-0">Reports that failed to be resolved</p>
                                     <p id="count">{{ $canceledReports }}</p>
                                 </a>
                             </section>
@@ -78,7 +77,7 @@
                         <div class="col-md-4">
                             <section class="widget" id="editRequestsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-edit"></i> Edit Requests</h2>
+                                    <h2><i class="fas fa-edit"></i> Edit requests</h2>
                                     <p class="text-start fw-light small text-muted mb-0">Your total edit requests report counts</p>
                                     <p id="count">{{ $editRequest }}</p>
                                 </a>
@@ -87,7 +86,7 @@
                         <div class="col-md-4 mb-5">
                             <section class="widget" id="deleteRequestsWidget">
                                 <a href="#" class="widget-link">
-                                    <h2><i class="fas fa-trash-alt"></i> Delete Requests</h2>
+                                    <h2><i class="fas fa-trash-alt"></i> Delete requests</h2>
                                     <p class="text-start fw-light small text-muted mb-0">Your total delete requests report counts</p>
                                     <p id="count">{{ $deleteRequest }}</p>
                                 </a>
@@ -98,7 +97,6 @@
                     <div class="row mb-4">
                         <div class="col">
                             <h1 id="dashboard-title" class="mb-2">Your Report Lists</h1>
-                            <p class="text-start fw-light small text-muted mb-0">"You can view, edit and delete you reports in this table."</p>
                         </div>
                     </div>
 

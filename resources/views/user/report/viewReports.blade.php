@@ -26,13 +26,63 @@
                 <h1 class="h3 m-0">Report Details</h1>
                 <a href="#" onclick="window.history.back()" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
-                    Back to List
+                    Back to report List table
                 </a>
             </div>
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <p class="text-success">{{ session('success') }}</p>
+            <!-- Feedback Section -->
+            @if (in_array($report->report_status, [
+                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS,
+                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_CANCELED,
+                ]))
+                @php
+                    $userFeedback = $report->feedbackComments->where('user_id', auth()->id())->first();
+                @endphp
+
+                <div class="Feed_back card shadow-sm border-0 mt-4 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 d-flex align-items-center">
+                            <i class="bi bi-chat-square-heart-fill text-primary me-2"></i>
+                            We value your feedback
+                        </h5>
+
+                        @if ($userFeedback)
+                            <!-- Show submitted feedback -->
+                            <div class="p-3 rounded bg-light border-start border-4 border-success shadow-sm">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-emoji-smile-fill text-success fs-4 me-2"></i>
+                                    <div>
+                                        <h6 class="mb-1 fw-bold text-success">
+                                            <i class="bi bi-check-circle-fill me-1"></i>
+                                            Thank you for your feedback!
+                                        </h6>
+                                        <p class="mb-0 text-muted fst-italic">
+                                            <i class="bi bi-chat-quote-fill me-1 text-secondary"></i>
+                                            “{{ $userFeedback->comment }}”
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <!-- Feedback Form -->
+                            <form action="{{ route('user.report.feedback.store', $report->id) }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label fw-semibold">
+                                        <i class="bi bi-pencil-square me-1 text-primary"></i> Your Feedback
+                                    </label>
+                                    <textarea name="comment" id="comment" rows="3" class="form-control shadow-sm"
+                                        placeholder="Share your thoughts about this report..." required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                        <i class="bi bi-send-fill me-1"></i> Submit
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
+                    </div>
+                </div>
             @endif
 
             @isset($report)
@@ -118,23 +168,59 @@
                         @endif
                     </div>
 
-                    {{-- Action Buttons --}}
-                    <div class="action-buttons d-flex gap-2">
-                        <!-- Request Edit Button (no <form>) -->
-                        <button type="button" id="editBtn" class="btn btn-primary btn-sm"
-                            onclick="handleEditRequest({{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}, '{{ route('user.report.userIncidentReporting.edit', $report->id) }}')">
-                            <i class="fa-solid fa-pen"></i> Request Edit
-                        </button>
+                    {{-- Action Buttons / Status Notice --}}
+                    <div class="action-section mt-3">
+                        @if (
+                            !in_array($report->report_status, [
+                                \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS,
+                                \App\Models\IncidentReporting\IncidentReportUser::STATUS_CANCELED,
+                            ]))
+                            {{-- Buttons visible --}}
+                            <div class="action-buttons d-flex gap-2">
+                                <!-- Request Edit Button -->
+                                <button type="button" id="editBtn" class="btn btn-primary btn-sm"
+                                    onclick="handleEditRequest({{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}, '{{ route('user.report.userIncidentReporting.edit', $report->id) }}')">
+                                    <i class="fa-solid fa-pen me-1"></i> Request Edit
+                                </button>
 
-                        <!-- Delete Request Button (uses POST form) -->
-                        <form method="POST" action="{{ route('user.report.delete', $report->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" id="deleteBtn" class="btn btn-outline-danger btn-sm btn-delete-request">
-                                <i class="fa-solid fa-trash me-1"></i> Request Delete
-                            </button>
-                        </form>
+                                <!-- Delete Request Button -->
+                                <form method="POST" action="{{ route('user.report.delete', $report->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" id="deleteBtn"
+                                        class="btn btn-outline-danger btn-sm btn-delete-request">
+                                        <i class="fa-solid fa-trash me-1"></i> Request Delete
+                                    </button>
+                                </form>
+                            </div>
+                        @else
+                            {{-- Show notice when report is success or canceled --}}
+                            @php
+                                $alertClass =
+                                    $report->report_status ===
+                                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS
+                                        ? 'alert-success'
+                                        : 'alert-danger';
+                                $iconClass =
+                                    $report->report_status ===
+                                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS
+                                        ? 'fa-circle-check'
+                                        : 'fa-circle-xmark';
+                                $statusText = ucfirst($report->report_status);
+                            @endphp
+                            <div class="alert {{ $alertClass }} d-flex align-items-start shadow-sm">
+                                <i class="fa-solid {{ $iconClass }} fs-4 me-2"></i>
+                                <div>
+                                    <strong>Report is {{ $statusText }}</strong>
+                                    <p class="mb-0 mt-1">This report is <span
+                                            class="text-capitalize">{{ $statusText }}</span>. Editing or deletion is no
+                                        longer allowed.</p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
+
+
                 </div>
             @else
                 <p class="text-danger">Report not found or data is missing.</p>

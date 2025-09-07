@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentReporting\IncidentReportStaffController;
 use App\Http\Controllers\IncidentReporting\IncidentReportAdminController;
+use App\Http\Controllers\IncidentReporting\FeedbackCommentController;
 use App\Http\Controllers\IncidentReporting\EditRequestController;
 use App\Http\Controllers\IncidentReporting\DeleteRequestController;
 use App\Http\Controllers\ProfileControllers\ReportStaffProfileController;
@@ -81,6 +82,13 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
                 ->name('profile.show');
             Route::post('/profile/update', [ReportStaffProfileController::class, 'updateInfo'])
                 ->name('profile.update');
+
+            // Feedback and Comments
+            // Show a single feedback comment
+            Route::get('/staffViewReportsFullDetails/{report_id}/feedback/{feedback_id}', [FeedbackCommentController::class, 'show'])->name('feedback.show');
+            //delete feedback
+            Route::post('/staffViewReportsFullDetails/{id}/destroy', [FeedbackCommentController::class, 'destroy'])
+                ->name('feedback.destroy');
         });
 
     Route::prefix('staffReporting')

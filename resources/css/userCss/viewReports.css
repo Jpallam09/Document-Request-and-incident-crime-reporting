@@ -90,7 +90,8 @@ body {
 }
 
 /* ===== Report Card ===== */
-.report-card {
+.report-card
+.Feed_back {
     background: #fff;
     border: 1px solid var(--border);
     border-radius: 0.75rem;

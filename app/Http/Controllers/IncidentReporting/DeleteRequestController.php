@@ -42,7 +42,6 @@ class DeleteRequestController extends Controller
         return view('incidentReporting.staffReport.staffShowDeleteRequest', compact('request'));
     }
 
-
     /**
      * Accept a delete request and delete the associated report.
      */

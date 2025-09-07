@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\IncidentReporting\IncidentReportUserController;
 use App\Http\Controllers\ProfileControllers\UserProfileController;
+use App\Http\Controllers\IncidentReporting\FeedbackCommentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -71,6 +71,14 @@ Route::prefix('user/report')
         // Update current user's profile
         Route::post('/userProfile/update', [UserProfileController::class, 'updateInfo'])
             ->name('user.profile.update');
+
+        // Feedback and Comments
+        // Submit feedback
+        Route::post('/viewReports/{id}/feedback', [FeedbackCommentController::class, 'store'])
+            ->name('feedback.store');
+        // View my feedback
+        Route::get('/myFeedback', [FeedbackCommentController::class, 'myFeedback'])
+            ->name('feedback.myFeedback');
     });
 
 // ------------------ IMPORT ROUTE FILES ------------------

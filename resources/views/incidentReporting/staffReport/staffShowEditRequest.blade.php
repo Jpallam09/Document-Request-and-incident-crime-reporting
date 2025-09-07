@@ -23,18 +23,18 @@
     <div class="layout d-flex">
         <x-navbar.shared-navbar />
 
-        <div class="page-content flex-grow-1 pt-5 px-4 mt-4" >
+        <div class="page-content flex-grow-1 pt-5 px-4 mt-4">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h4 class="mb-2 text-primary">
                         <i class="fa-solid fa-pen-to-square me-2"></i>
                         Review Edit Request
-                        <small class="text-muted d-block mt-1" style="font-size: 0.875rem;">
+                        <small class="text-muted d-block mt-3" style="font-size: 1.2rem;">
                             Submitted by: <strong>{{ $request->user->user_name }}</strong>
                         </small>
                     </h4>
-                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left me-2"></i> Back to All Edit Requests
+                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Edit Requests table
                     </a>
                 </div>
 
@@ -55,6 +55,10 @@
                                                     <td>{{ $request->report->report_title }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <th scope="row" class="w-25">Phone number</th>
+                                                    <td>{{ $report->user->phone ?? 'Unknown' }}</td>
+                                                </tr>
+                                                <tr>
                                                     <th scope="row">Date</th>
                                                     <td>{{ \Carbon\Carbon::parse($request->report->report_date)->format('M d, Y') }}
                                                     </td>
@@ -64,11 +68,17 @@
                                                     <td>{{ $request->report->report_type }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Description</th>
-                                                    <td>{{ $request->report->report_description }}</td>
-                                                </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <!-- Description - Modern Card -->
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-header bg-secondary text-white">
+                                        <i class="fa-solid fa-align-left me-2"></i> Description
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-0">{{ $request->report->report_description }}</p>
                                     </div>
                                 </div>
                                 <!-- Original Report Location -->
@@ -115,6 +125,10 @@
                                                     <td>{{ $request->requested_title ?? '—' }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <th scope="row">Phone number</th>
+                                                    <td>{{ $report->user->phone ?? 'Unknown' }}</td>
+                                                </tr>
+                                                <tr>
                                                     <th scope="row">Date</th>
                                                     <td>{{ $request->requested_report_date ? \Carbon\Carbon::parse($request->requested_report_date)->format('M d, Y') : '—' }}
                                                     </td>
@@ -123,12 +137,17 @@
                                                     <th scope="row">Type</th>
                                                     <td>{{ $request->requested_type ?? '—' }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <th scope="row">Description</th>
-                                                    <td>{{ $request->requested_description ?? '—' }}</td>
-                                                </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <!-- Description - Modern Card -->
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-header bg-secondary text-white">
+                                        <i class="fa-solid fa-align-left me-2"></i> Description
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-0">{{ $request->requested_description ?? '—' }}</p>
                                     </div>
                                 </div>
                                 <!-- Requested Changes Location -->

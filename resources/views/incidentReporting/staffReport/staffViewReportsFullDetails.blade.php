@@ -36,16 +36,24 @@
                         <table class="table table-striped mb-0">
                             <tbody>
                                 <tr>
-                                    <th scope="row" class="w-25">Type</th>
+                                    <th scope="row" class="w-25">Report Type</th>
                                     <td>{{ $report->report_type }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone number</th>
+                                    <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Date Submitted</th>
                                     <td>{{ $report->created_at->format('Y-m-d') }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Submitted by</th>
+                                    <th scope="row">Report sender</th>
                                     <td>{{ $report->user_name ?? 'Unknown' }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phonen number</th>
+                                    <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                 </tr>
                             </tbody>
                         </table>
