@@ -38,7 +38,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive shadow-sm rounded bg-white p-3">
-                            <table class="table table-bordered table-hover align-middle text-center report-table">
+                            <table
+                                class="table table-bordered table-striped table-hover align-middle text-center report-table">
                                 <thead class="table-primary">
                                     <tr>
                                         <th>Report id</th>
@@ -73,10 +74,10 @@
                                             </td>
                                             <td style="width: 120px;">
                                                 <div class="d-grid">
-                                            <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
-                                            class="btn btn-sm btn-outline-primary w-100">
-                                            <i class="fas fa-eye"></i> View
-                                            </a>
+                                                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
+                                                        class="btn btn-sm btn-primary w-100">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

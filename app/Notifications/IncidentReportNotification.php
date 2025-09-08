@@ -43,7 +43,7 @@ class IncidentReportNotification extends Notification
         return [
             'report_id'    => $this->reportId,
             'status'       => $this->status,
-            'title'        => $this->status === 'success' ? 'Report Resolved' : 'Report Canceled',
+            'title'        => $this->status === 'success' ? 'Report is Resolved' : 'Report is Unsuccessful',
             'message'      => $this->status === 'success'
                                 ? 'The report has been successfully resolved.'
                                 : 'The report has been canceled.',

@@ -31,61 +31,61 @@
                 </a>
             </div>
 
-<!-- Feedback Section -->
-@if (in_array($report->report_status, [
-        \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS,
-        \App\Models\IncidentReporting\IncidentReportUser::STATUS_CANCELED,
-    ]))
-    @php
-        $userFeedback = $report->feedbackComments->where('user_id', auth()->id())->first();
-    @endphp
+            <!-- Feedback Section -->
+            @if (in_array($report->report_status, [
+                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS,
+                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_CANCELED,
+                ]))
+                @php
+                    $userFeedback = $report->feedbackComments->where('user_id', auth()->id())->first();
+                @endphp
 
-    <div class="Feed_back card shadow-sm border-0 mt-4 mb-4">
-        <div class="card-body">
-            <h5 class="card-title mb-4 d-flex align-items-center">
-                <i class="bi bi-chat-square-heart-fill text-danger fs-4 me-2"></i>
-                We value your feedback
-            </h5>
+                <div class="Feed_back card shadow-sm border-0 mt-4 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4 d-flex align-items-center">
+                            <i class="bi bi-chat-square-heart-fill text-danger fs-4 me-2"></i>
+                            We value your feedback
+                        </h5>
 
-            @if ($userFeedback)
-                <!-- Show submitted feedback -->
-                <div class="p-3 rounded bg-light border-start border-4 border-success shadow-sm">
-                    <div class="d-flex align-items-start gap-3">
-                        <i class="bi bi-emoji-smile-fill text-success fs-4"></i>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1 fw-bold text-success d-flex align-items-center gap-2">
-                                <i class="bi bi-check-circle-fill"></i>
-                                Thank you for your feedback!
-                            </h6>
-                            <p class="mb-0 text-muted fst-italic">
-                                <i class="bi bi-chat-quote-fill me-1 text-secondary"></i>
-                                “{{ $userFeedback->comment }}”
-                            </p>
-                        </div>
+                        @if ($userFeedback)
+                            <!-- Show submitted feedback -->
+                            <div class="p-3 rounded bg-light border-start border-4 border-success shadow-sm">
+                                <div class="d-flex align-items-start gap-3">
+                                    <i class="bi bi-emoji-smile-fill text-success fs-4"></i>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1 fw-bold text-success d-flex align-items-center gap-2">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                            Thank you for your feedback!
+                                        </h6>
+                                        <p class="mb-0 text-muted fst-italic">
+                                            <i class="bi bi-chat-quote-fill me-1 text-secondary"></i>
+                                            “{{ $userFeedback->comment }}”
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <!-- Feedback Form -->
+                            <form action="{{ route('user.report.feedback.store', $report->id) }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="comment"
+                                        class="form-label fw-semibold d-flex align-items-center gap-2">
+                                        <i class="bi bi-pencil-square text-primary"></i> Your Feedback
+                                    </label>
+                                    <textarea name="comment" id="comment" rows="3" class="form-control shadow-sm"
+                                        placeholder="Share your thoughts about this report..." required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                        <i class="bi bi-send-fill me-1"></i> Submit
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
-            @else
-                <!-- Feedback Form -->
-                <form action="{{ route('user.report.feedback.store', $report->id) }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="comment" class="form-label fw-semibold d-flex align-items-center gap-2">
-                            <i class="bi bi-pencil-square text-primary"></i> Your Feedback
-                        </label>
-                        <textarea name="comment" id="comment" rows="3"
-                            class="form-control shadow-sm"
-                            placeholder="Share your thoughts about this report..." required></textarea>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
-                            <i class="bi bi-send-fill me-1"></i> Submit
-                        </button>
-                    </div>
-                </form>
             @endif
-        </div>
-    </div>
-@endif
 
             @isset($report)
                 <div class="report-card bg-white p-4 rounded shadow-sm">
@@ -170,6 +170,8 @@
                         @endif
                     </div>
 
+                    {{-- ... keep the rest as is ... --}}
+
                     {{-- Action Buttons / Status Notice --}}
                     <div class="action-section mt-3">
                         @if (
@@ -198,17 +200,9 @@
                         @else
                             {{-- Show notice when report is success or canceled --}}
                             @php
-                                $alertClass =
-                                    $report->report_status ===
-                                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS
-                                        ? 'alert-success'
-                                        : 'alert-danger';
-                                $iconClass =
-                                    $report->report_status ===
-                                    \App\Models\IncidentReporting\IncidentReportUser::STATUS_SUCCESS
-                                        ? 'fa-circle-check'
-                                        : 'fa-circle-xmark';
-                                $statusText = ucfirst($report->report_status);
+                                $alertClass = $report->isSuccess() ? 'alert-success' : 'alert-danger';
+                                $iconClass = $report->isSuccess() ? 'fa-circle-check' : 'fa-circle-xmark';
+                                $statusText = $report->readableStatus(); // <-- use readableStatus()
                             @endphp
                             <div class="alert {{ $alertClass }} d-flex align-items-start shadow-sm">
                                 <i class="fa-solid {{ $iconClass }} fs-4 me-2"></i>
@@ -221,7 +215,6 @@
                             </div>
                         @endif
                     </div>
-
 
                 </div>
             @else

@@ -31,7 +31,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h3 mb-0">Track Report Location</h1>
                         <a href="{{ route('reporting.staff.staffReportView') }}" class="btn btn-secondary btn-sm">
-                            <i class="fa-solid fa-arrow-left"></i> Back to Reports
+                            <i class="fa-solid fa-arrow-left"></i> Back to Report list table
                         </a>
                     </div>
 
@@ -99,12 +99,12 @@
                     @if ($report->report_status === 'success')
                         <!-- Already marked as success -->
                         <div class="alert alert-success mt-3" role="alert">
-                            Report marked as <strong>Success</strong>
+                            The Report is <strong>Successful</strong>
                         </div>
                     @elseif ($report->report_status === 'canceled')
                         <!-- Already cancelled -->
                         <div class="alert alert-danger mt-3" role="alert">
-                            Report has been <strong>Cancelled</strong>
+                            The Report is <strong>Unsuccessful</strong>
                         </div>
                     @else
                         <!-- Show action buttons if still pending -->

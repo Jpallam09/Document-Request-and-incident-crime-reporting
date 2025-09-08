@@ -22,10 +22,10 @@
             <div class="report-details-container">
                 <!-- Header and Back Button -->
                 <div class="header">
-                    <h1 class="report-title">{{ $report->report_title }}</h1>
+                    <h1 class="report-title">   {{ $report->report_title }}</h1>
                     <!-- Back to List link -->
                     <a href="{{ route('reporting.staff.staffReportView') }}" class="btn btn-secondary btn-sm">
-                        <i class="fa-solid fa-arrow-left"></i> Back to List
+                        <i class="fa-solid fa-arrow-left"></i> Back to Report List table
                     </a>
                 </div>
 

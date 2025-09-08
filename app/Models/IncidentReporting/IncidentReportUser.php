@@ -6,13 +6,12 @@ use App\Models\User;
 use App\Models\IncidentReporting\IncidentReportImage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\FeedbackComment;
+
 class IncidentReportUser extends Model
 {
     /**
      * The attributes that are mass assignable.
-     * These fields can be set using create() or fill().
      */
-    // In IncidentReportUser.php
 
     // Report types
     const TYPE_SAFETY       = 'Safety';
@@ -29,8 +28,8 @@ class IncidentReportUser extends Model
     // Report statuses
     const STATUS_PENDING     = 'pending';
     const STATUS_IN_PROGRESS = 'in_progress';
-    const STATUS_SUCCESS     = 'success';
-    const STATUS_CANCELED    = 'canceled';
+    const STATUS_SUCCESS     = 'success';       // Keep DB value
+    const STATUS_CANCELED    = 'canceled';      // Keep DB value
 
     public static $statuses = [
         self::STATUS_PENDING,
@@ -38,7 +37,6 @@ class IncidentReportUser extends Model
         self::STATUS_SUCCESS,
         self::STATUS_CANCELED,
     ];
-
 
     protected $fillable = [
         'user_name',
@@ -51,8 +49,8 @@ class IncidentReportUser extends Model
     ];
 
     protected $casts = [
-    'requested_image' => 'array', // Laravel auto-decodes JSON into array
-];
+        'requested_image' => 'array', // Laravel auto-decodes JSON into array
+    ];
 
     // Check report status
     public function isPending(): bool
@@ -71,41 +69,46 @@ class IncidentReportUser extends Model
     }
 
     /**
-     * Relationship: One incident report can have many attached images.
-     * This assumes a separate table (incident_report_images) where each image belongs to a report.
+     * Return user-friendly readable status.
      */
+    public function readableStatus(): string
+    {
+        return match ($this->report_status) {
+            self::STATUS_SUCCESS => 'Successful',
+            self::STATUS_CANCELED => 'Unsuccessful',
+            self::STATUS_PENDING => 'Pending',
+            self::STATUS_IN_PROGRESS => 'In Progress',
+            default => ucfirst($this->report_status),
+        };
+    }
+
+    // Relationships
     public function images()
     {
         return $this->hasMany(IncidentReportImage::class, 'incident_report_user_id');
     }
 
-    /**
-     * Relationship: Each report is submitted by one user.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Edit request relationship
     public function editRequest()
     {
         return $this->hasOne(EditRequest::class, 'edit_report_id');
     }
 
-    // Delete request relationship
     public function deleteRequest()
     {
         return $this->hasOne(DeleteRequest::class, 'delete_report_id');
     }
 
-    // Track which staff locations are tied to this report
     public function staffLocations()
     {
         return $this->hasMany(StaffLocation::class, 'report_id');
     }
 
-        public function feedbackComments()
+    public function feedbackComments()
     {
         return $this->hasMany(FeedbackComment::class, 'report_id');
     }

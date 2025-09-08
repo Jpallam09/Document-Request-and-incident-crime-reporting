@@ -49,7 +49,8 @@
                             <section class="widget" id="openReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-envelope-open-text"></i> Unresponded reports</h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Your total pending report counts</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total pending report
+                                        counts</p>
                                     <p id="count">{{ $pendingReports }}</p>
                                 </a>
                             </section>
@@ -58,7 +59,8 @@
                             <section class="widget" id="resolvedReportsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-check-circle"></i> Resolved reports</h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Your total resolved report counts</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total resolved report
+                                        counts</p>
                                     <p id="count">{{ $successReports }}</p>
                                 </a>
                             </section>
@@ -69,7 +71,8 @@
                             <section class="widget" id="cancelRequestsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-ban"></i> Unsuccessful reports </h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Reports that failed to be resolved</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Reports that failed to be
+                                        resolved</p>
                                     <p id="count">{{ $canceledReports }}</p>
                                 </a>
                             </section>
@@ -78,7 +81,8 @@
                             <section class="widget" id="editRequestsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-edit"></i> Edit requests</h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Your total edit requests report counts</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total edit requests report
+                                        counts</p>
                                     <p id="count">{{ $editRequest }}</p>
                                 </a>
                             </section>
@@ -87,7 +91,8 @@
                             <section class="widget" id="deleteRequestsWidget">
                                 <a href="#" class="widget-link">
                                     <h2><i class="fas fa-trash-alt"></i> Delete requests</h2>
-                                    <p class="text-start fw-light small text-muted mb-0">Your total delete requests report counts</p>
+                                    <p class="text-start fw-light small text-muted mb-0">Your total delete requests
+                                        report counts</p>
                                     <p id="count">{{ $deleteRequest }}</p>
                                 </a>
                             </section>
@@ -104,7 +109,7 @@
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="table-responsive shadow-sm rounded bg-white p-3">
-                                <table class="table table-bordered table-hover text-center align-middle report-table">
+                                <table class="table table-bordered table-striped table-hover text-center align-middle report-table">
                                     <thead class="table-primary">
                                         <tr>
                                             <th>Title</th>
@@ -125,16 +130,27 @@
                                                 <td>
                                                     @php
                                                         $statusColors = [
-                                                            'pending'     => 'bg-warning',
+                                                            'pending' => 'bg-warning',
                                                             'in_progress' => 'bg-primary',
-                                                            'success'     => 'bg-success',
-                                                            'canceled'    => 'bg-danger',
+                                                            'success' => 'bg-success',
+                                                            'canceled' => 'bg-danger',
+                                                        ];
+
+                                                        // Map the label text
+                                                        $statusLabels = [
+                                                            'pending' => 'Pending',
+                                                            'in_progress' => 'In Progress',
+                                                            'success' => 'Successful',
+                                                            'canceled' => 'Unsuccessful',
                                                         ];
                                                     @endphp
-                                                    <span class="badge {{ $statusColors[$report->report_status] ?? 'bg-secondary' }}">
-                                                        {{ ucfirst(str_replace('_', ' ', $report->report_status)) }}
+
+                                                    <span
+                                                        class="badge {{ $statusColors[$report->report_status] ?? 'bg-secondary' }}">
+                                                        {{ $statusLabels[$report->report_status] ?? ucfirst(str_replace('_', ' ', $report->report_status)) }}
                                                     </span>
                                                 </td>
+
                                                 <td class="request-status">
                                                     @if ($report->editRequest)
                                                         <span
@@ -164,7 +180,7 @@
 
                                                 <td>
                                                     <a href="{{ url('user/report/viewReports/' . $report->id) }}"
-                                                        class="btn btn-sm btn-outline-primary d-inline-flex align-items-center">
+                                                        class="btn btn-sm btn-primary d-inline-flex align-items-center">
                                                         <i class="fas fa-eye me-1"></i> View
                                                     </a>
 

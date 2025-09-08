@@ -25,7 +25,7 @@
 
 <body>
     <main class="layout d-flex">
-       <x-navbar.shared-navbar />
+        <x-navbar.shared-navbar />
 
         <section class="page-content flex-grow-1 pt-5 px-4">
             <div class="container">
@@ -40,7 +40,8 @@
                     <div class="col-12">
                         <div class="table-container">
                             <div class="table-responsive bg-white p-3 less-rounded">
-                                <table class="table table-bordered table-hover align-middle text-center report-table">
+                                <table
+                                    class="table table-bordered table-hover table-striped align-middle text-center report-table">
                                     <thead class="table-primary">
                                         <tr>
                                             <th>Report id</th>
@@ -75,8 +76,8 @@
                                                 <td class="action-col">
                                                     <div class="d-grid">
                                                         <a href="{{ route('reporting.staff.staffDeletionRequests.show', $request->id) }}"
-                                                        class="btn btn-sm btn-outline-primary w-100">
-                                                        <i class="fas fa-eye"></i> View
+                                                            class="btn btn-sm btn-primary w-100">
+                                                            <i class="fas fa-eye"></i> View
                                                         </a>
                                                     </div>
                                                 </td>
