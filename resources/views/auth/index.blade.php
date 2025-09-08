@@ -38,7 +38,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                     </ul>
                     <ul class="navbar-nav list-inline mb-0">
-                        <li class="nav-item"><a class="nav-link" href="https://facebook.com/municipality"
+                        <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/gladys.tabag.5/"
                                 target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                         <li class="nav-item"><a class="nav-link faq-link" href="#faq" title="Go to FAQ"
                                 aria-label="FAQ"><i class="fas fa-question-circle"></i></a></li>
@@ -187,13 +187,14 @@
                         <i class="fa fa-envelope me-2"></i>
                         <a href="mailto:info@example.com" class="link-dark link-opacity-75-hover">info@example.com</a>
                     </p>
-                    <p class="mb-1"><i class="fa fa-phone me-2"></i>(123) 456-7890</p>
-                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>Demo address, Philippines</p>
+                    <p class="mb-1"><i class="fa fa-phone me-2"></i>Globe: 0926-280-3804</p>
+                    <p class="mb-1"><i class="fa fa-phone me-2"></i>SMART: 0961-541-7453</p>
+                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>RESCUE 309-SAN MATEO, ISABELA</p>
                     <p class="small text-muted">Mon – Fri, 9:00 AM – 5:00 PM</p>
 
                     <!-- Social Icons -->
                     <div class="d-flex justify-content-center justify-content-lg-end gap-3 mt-3">
-                        <a href="#"
+                        <a href="https://www.facebook.com/gladys.tabag.5/"
                             class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center"
                             style="width:40px; height:40px;" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>

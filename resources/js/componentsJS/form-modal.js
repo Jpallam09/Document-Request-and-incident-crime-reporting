@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!typingText) return;
 
   const phrases = [
-    'Manage your document requests seamlessly.',
-    'Report incidents quickly and securely.'
+    "Report incidents quickly and securely.",
+    "Safeguard your community through timely reporting.",
+    "Ensure transparency with every report submitted.",
+    "Building safer communities through accountability."
   ];
   const typingSpeed = 50;  // ms per character
   const deletingSpeed = 10; // ms per character when deleting
