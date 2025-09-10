@@ -191,6 +191,7 @@ class IncidentReportUserController extends Controller
             'title' => 'required|string',
             'requested_report_date' => 'required|date',
             'incident_type' => 'required|string',
+            'reason' => 'required|string|max:1000',
             'incident_description' => 'required|string',
             'barangay' => 'nullable|string',
             'latitude' => 'nullable|numeric',
@@ -219,6 +220,7 @@ class IncidentReportUserController extends Controller
             'user_id' => auth()->id(),
             'user_name' => auth()->user()->user_name,
             'requested_title' => $validated['title'],
+            'reason' => $validated['reason'],
             'requested_description' => $validated['incident_description'],
             'requested_type' => $validated['incident_type'],
             'requested_report_date' => $validated['requested_report_date'],
@@ -244,8 +246,7 @@ class IncidentReportUserController extends Controller
         return back();
     }
 
-    //handles delete requests
-    public function requestDelete(IncidentReportUser $incidentReportUser): RedirectResponse
+    public function requestDelete(Request $request, IncidentReportUser $incidentReportUser): RedirectResponse
     {
         // Ensure the report belongs to the currently authenticated user
         if ($incidentReportUser->user_id !== Auth::id()) {
@@ -253,12 +254,16 @@ class IncidentReportUserController extends Controller
             return redirect()->back();
         }
 
+        // Validate the reason input
+        $validated = $request->validate([
+            'reason' => 'required|string|max:1000',
+        ]);
+
         // Check if a delete request for this report already exists
-        $existingRequest = DeleteRequest::where('delete_report_id', $incidentReportUser->id) // instead of report_id
+        $existingRequest = DeleteRequest::where('delete_report_id', $incidentReportUser->id)
             ->where('user_id', Auth::id())
             ->where('status', 'pending')
             ->first();
-
 
         if ($existingRequest) {
             Alert::error('Duplicate Request', 'You already sent a delete request for this report.');
@@ -274,13 +279,13 @@ class IncidentReportUserController extends Controller
             'report_date' => $incidentReportUser->report_date,
             'report_type' => $incidentReportUser->report_type,
             'report_description' => $incidentReportUser->report_description,
-            'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(), // Optional: include image paths
-            'reason' => 'User requested to delete the report.',
+            'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(),
+            'reason' => $validated['reason'], // <-- use validated input
             'status' => 'pending',
             'requested_at' => now(),
         ]);
 
-        // Notify all staff/admin in incident_reporting about the delete request
+        // Notify all staff/admin
         $staffMembers = User::whereHas('roles', function ($query) {
             $query->where('app', 'incident_reporting')
                 ->whereIn('role', ['staff', 'admin']);

@@ -39,6 +39,7 @@
                         'resources/js/componentsJs/viewRequestModal.js',
                         'resources/js/componentsJs/form-modal.js',
                         'resources/js/componentsJs/map.js',
+                        'resources/js/componentsJs/user-tutorial.js',
 
                         //authJs
                         'resources/js/authJs/login.js',

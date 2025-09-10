@@ -14,7 +14,7 @@ class RegisterController extends Controller
     // Show registration form
     public function showRegistrationForm()
     {
-        return view('auth.register'); // resources/views/auth/register.blade.php
+        return view('auth.register');
     }
 
     /**
@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'last_name'  => 'required|string|max:255',
             'user_name'  => 'required|string|max:255|unique:users,user_name',
             'email'      => 'required|email|unique:users,email',
-            'phone'      => 'nullable|string|max:20',
+            'phone'      => 'required|string|max:20',
             'password'   => 'required|string|min:8|confirmed',
         ]);
 

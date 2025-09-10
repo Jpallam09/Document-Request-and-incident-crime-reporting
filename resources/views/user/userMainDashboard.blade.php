@@ -13,6 +13,8 @@
     <!-- Vite Custom CSS -->
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/css/authCss/userMainDashboard.css')
+
+    @vite('resources/js/componentsJs/user-tutorial.js')
 </head>
 
 <body>
@@ -26,8 +28,7 @@
                 <section class="hero">
                     <h1>Welcome to the Incident Reporting System</h1>
                     <p>Your platform for safe, transparent, and accountable reporting.</p>
-                    <a href="{{ route('user.report.userIncidentReporting.create') }}"
-                        class="btn btn-primary btn-md">
+                    <a href="{{ route('user.report.userIncidentReporting.create') }}" class="btn btn-primary btn-md">
                         <i class="me-2"></i>Start Reporting
                     </a>
                 </section>
@@ -37,28 +38,28 @@
                     <h2 class="section-title text-center">How It Works</h2>
                     <div class="row g-4">
                         <div class="col-md-3 col-sm-6">
-                            <div class="tutorial-step">
+                            <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#createReportModal">
                                 <i class="fa fa-file-alt"></i>
                                 <h5>Create a Report</h5>
                                 <p>Submit a new incident with details and attachments.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="tutorial-step">
+                            <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#viewReportsModal">
                                 <i class="fa fa-list"></i>
                                 <h5>View Reports</h5>
                                 <p>Check your submitted reports anytime.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="tutorial-step">
+                            <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#editDeleteModal">
                                 <i class="fa fa-edit"></i>
                                 <h5>Edit or Delete</h5>
                                 <p>Update or remove your reports when needed.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="tutorial-step">
+                            <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#trackStatusModal">
                                 <i class="fa fa-clock"></i>
                                 <h5>Track Status</h5>
                                 <p>Stay updated on the progress of your report.</p>
@@ -66,6 +67,8 @@
                         </div>
                     </div>
                 </section>
+
+                <x-modals.user-tutorial.user-tutorial/>
 
                 <!-- About -->
                 <section class="about-section">

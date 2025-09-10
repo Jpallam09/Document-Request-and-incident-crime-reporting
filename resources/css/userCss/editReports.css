@@ -54,19 +54,6 @@ body {
   margin: 0;
 }
 
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.875rem;
-  color: var(--primary);
-  text-decoration: none;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-.back-link:hover { background: #f0f4ff; }
-
 .badge {
   padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
@@ -213,15 +200,6 @@ body {
   color: var(--text-light);
 }
 
-.btn-primary { background: var(--primary); }
-.btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
-
-.btn-danger { background: var(--danger); }
-.btn-danger:hover { background: var(--danger-light); transform: translateY(-2px); }
-
-.btn-secondary { background: var(--secondary); }
-.btn-secondary:hover { opacity: 0.9; transform: translateY(-2px); }
-
 /* Modal Viewer */
 .image-modal {
   display: none;
@@ -274,15 +252,16 @@ body {
   margin-top: 1rem;
 }
 
+.reason-section textarea {
+  height: 100px;
+  min-height: 0;
+  padding: 4px 8px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .report-header { flex-direction: column; }
   .action-buttons { justify-content: center; }
-  .btn-primary,
-  .btn-danger,
-  .btn-secondary {
-    width: 100%;
-  }
   .attachment-item {
     width: 6rem;
     height: 6rem;

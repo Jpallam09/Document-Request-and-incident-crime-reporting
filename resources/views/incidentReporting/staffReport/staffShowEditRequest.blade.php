@@ -38,6 +38,15 @@
                     </a>
                 </div>
 
+                <div class="card mb-3 shadow-sm border-0">
+                    <div class="card-header bg-warning text-dark">
+                        <i class="fa-solid fa-circle-info me-2"></i> Reason for Edit Request
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">{{ $request->reason ?? '—' }}</p>
+                    </div>
+                </div>
+
                 <div class="row g-4">
                     <!-- Original Report -->
                     <div class="col-md-6">

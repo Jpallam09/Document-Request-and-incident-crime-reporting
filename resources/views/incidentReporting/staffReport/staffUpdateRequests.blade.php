@@ -42,47 +42,61 @@
                                 class="table table-bordered table-striped table-hover align-middle text-center report-table">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>Report id</th>
                                         <th>Username</th>
+                                        <th>Reason</th>
                                         <th>Original Title</th>
                                         <th>Requested Title</th>
                                         <th>Requested Description</th>
-                                        <th>Date Requested</th>
                                         <th>Report status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($requests as $index => $request)
-                                        <tr class="align-middle">
-                                            <td>{{ $index + 1 }}</td>
-                                            <td class="text-capitalize text-truncate" style="max-width: 120px;">
-                                                {{ $request->user->user_name ?? 'Unknown' }}</td>
-                                            <td class="text-truncate" style="max-width: 150px;">
-                                                {{ $request->report->report_title ?? 'No Title' }}</td>
-                                            <td class="text-truncate" style="max-width: 150px;">
-                                                {{ $request->requested_title ?? '—' }}</td>
-                                            <td class="text-truncate" style="max-width: 200px;">
-                                                {{ $request->requested_description ?? '—' }}</td>
-                                            <td>{{ $request->requested_at ? \Carbon\Carbon::parse($request->requested_at)->format('M d, Y') : 'N/A' }}
-                                            </td>
-                                            <td>
-                                                <span
-                                                    class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
-                                                    {{ ucfirst($request->status) }}
-                                                </span>
-                                            </td>
-                                            <td style="width: 120px;">
-                                                <div class="d-grid">
-                                                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
-                                                        class="btn btn-sm btn-primary w-100">
-                                                        <i class="fas fa-eye"></i> View
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+<tbody>
+    @foreach ($requests as $index => $request)
+        <tr class="align-middle">
+            <td class="text-capitalize text-truncate" style="max-width: 120px;">
+                {{ $request->user->user_name ?? 'Unknown' }}
+            </td>
+
+            <!-- Reason column -->
+            <td class="text-truncate" style="max-width: 200px;">
+                {{ $request->reason ?? '—' }}
+            </td>
+
+            <!-- Original Title -->
+            <td class="text-truncate" style="max-width: 150px;">
+                {{ $request->report->report_title ?? 'No Title' }}
+            </td>
+
+            <!-- Requested Title -->
+            <td class="text-truncate" style="max-width: 150px;">
+                {{ $request->requested_title ?? '—' }}
+            </td>
+
+            <!-- Requested Description -->
+            <td class="text-truncate" style="max-width: 200px;">
+                {{ $request->requested_description ?? '—' }}
+            </td>
+
+            <!-- Status -->
+            <td>
+                <span class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
+                    {{ ucfirst($request->status) }}
+                </span>
+            </td>
+
+            <!-- Action -->
+            <td style="width: 120px;">
+                <div class="d-grid">
+                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
+                       class="btn btn-sm btn-primary w-100">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
                             </table>
                             @if ($requests->isEmpty())
                                 <div class="text-center text-muted py-4">

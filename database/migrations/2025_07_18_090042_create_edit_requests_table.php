@@ -22,6 +22,8 @@ return new class extends Migration {
                 ->nullable()->constrained('users')
                 ->onDelete('set null');
 
+            $table->text('reason')->nullable();
+
             // Fields that may be changed
             $table->string('requested_title', 150)->nullable();
             $table->text('requested_description')->nullable();

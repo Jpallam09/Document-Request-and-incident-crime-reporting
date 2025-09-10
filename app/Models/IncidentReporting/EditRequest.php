@@ -36,13 +36,14 @@ class EditRequest extends Model
         'requested_title',
         'requested_description',
         'requested_type',
+        'reason',
         'requested_image',
         'requested_report_date',
         'requested_barangay',
         'requested_latitude',
         'requested_longitude',
         'status',
-        'requested_at', 
+        'requested_at',
         'reviewed_at',
     ];
     // This lets Laravel treat JSON image data as array automatically

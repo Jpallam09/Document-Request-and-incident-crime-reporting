@@ -139,8 +139,8 @@
             <li class="sidebar__item">
                 <a href="{{ route('user.report.userMainDashboard') }}"
                     class="sidebar__link {{ request()->routeIs('user.report.userMainDashboard') ? 'active' : '' }}">
-                    <i class="fas fa-chart-line me-2"></i>
-                    <span>Dashboard</span>
+                    <i class="fas fa-home me-2"></i>
+                    <span>Home</span>
                 </a>
             </li>
             <li class="sidebar__item">

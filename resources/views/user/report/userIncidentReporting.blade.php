@@ -20,56 +20,6 @@
     <main class="layout">
         <x-navbar.user-navbar />
         <section class="page-content mt-4">
-            <section class="hero" role="banner" aria-label="Hero section">
-                <h1>Report Crime and Incident Quickly &amp; Efficiently</h1>
-                <p>Streamline your incident reporting with our intuitive platform that makes logging, tracking, and
-                    resolving issues seamless and fast.</p>
-                <button class="btn btn-primary" id="report-button" aria-label="Scroll to report incident form">Report an
-                    Incident</button>
-            </section>
-
-            <section id="features" class="features" aria-label="Platform features">
-                <article class="feature-card" tabindex="0" aria-labelledby="feature1-title"
-                    aria-describedby="feature1-desc">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
-                        fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 8v4" stroke-linecap="round" stroke-linejoin="round" />
-                        <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none" />
-                    </svg>
-                    <h3 class="feature-title" id="feature1-title">Fast &amp; Easy Reporting</h3>
-                    <p class="feature-description" id="feature1-desc">Create detailed incident reports in seconds with
-                        an intuitive, user-friendly form.</p>
-                </article>
-
-                <article class="feature-card" tabindex="0" aria-labelledby="feature2-title"
-                    aria-describedby="feature2-desc">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
-                        fill="none" stroke="currentColor">
-                        <rect x="3" y="11" width="18" height="6" rx="1" ry="1" />
-                        <path d="M6 9v2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10 7v4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14 5v6" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M18 3v8" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <h3 class="feature-title" id="feature2-title">Track Progress</h3>
-                    <p class="feature-description" id="feature2-desc">Monitor incidents and get updates until they’re
-                        resolved.</p>
-                </article>
-
-                <article class="feature-card" tabindex="0" aria-labelledby="feature3-title"
-                    aria-describedby="feature3-desc">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
-                        fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
-                        <path
-                            d="M12 2a10 10 0 0 0-7.246 17.171l.746.579a6.002 6.002 0 0 1 8.628-8.628l.579.746A10 10 0 0 0 12 2Z" />
-                        <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
-                    </svg>
-                    <h3 class="feature-title" id="feature3-title">Secure &amp; Reliable</h3>
-                    <p class="feature-description" id="feature3-desc">Data is encrypted and securely stored with strict
-                        access controls.</p>
-                </article>
-            </section>
 
             <section id="report" class="report-form-section" aria-label="Incident report form">
                 <h2>Report an Incident</h2>
@@ -159,7 +109,7 @@
                         <img id="modalImage" class="modal-content" alt="Enlarged preview">
                     </div>
 
-                    <button type="submit" class="btn btn-outline-primary btn-sm" aria-label="Submit Incident Report">
+                    <button type="submit" class="btn btn-primary btn-sm" aria-label="Submit Incident Report">
                         Submit Report
                     </button>
                 </form>
