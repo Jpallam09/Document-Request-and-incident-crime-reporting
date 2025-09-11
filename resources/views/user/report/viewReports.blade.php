@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Incident Report Details</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -25,7 +27,7 @@
             {{-- Header --}}
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 m-0">Report Details</h1>
-                <a href="#" onclick="window.history.back()" class="btn btn-secondary btn-sm">
+                <a href="{{ route('user.report.userDashboardReporting') }}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to report List table
                 </a>
@@ -182,20 +184,25 @@
                             {{-- Buttons visible --}}
                             <div class="action-buttons d-flex gap-2">
                                 <!-- Request Edit Button -->
-                                <button type="button" id="editBtn" class="btn btn-primary btn-sm"
-                                    onclick="handleEditRequest({{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}, '{{ route('user.report.userIncidentReporting.edit', $report->id) }}')">
+                                <button type="button" class="btn btn-primary btn-sm btn-edit-request"
+                                    data-edit-pending="{{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}"
+                                    data-edit-url="{{ route('user.report.userIncidentReporting.edit', $report->id) }}">
                                     <i class="fa-solid fa-pen me-1"></i> Request Edit
                                 </button>
 
-                                <!-- Delete Request Button -->
-                                <form method="POST" action="{{ route('user.report.delete', $report->id) }}">
+
+                                <form method="POST" action="{{ route('user.report.delete', $report->id) }}"
+                                    class="delete-request-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" id="deleteBtn"
-                                        class="btn btn-outline-danger btn-sm btn-delete-request">
+                                    <!-- hidden input that JS will fill -->
+                                    <input type="hidden" name="reason" class="delete-reason">
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-delete-request">
                                         <i class="fa-solid fa-trash me-1"></i> Request Delete
                                     </button>
                                 </form>
+
+
                             </div>
                         @else
                             {{-- Show notice when report is success or canceled --}}

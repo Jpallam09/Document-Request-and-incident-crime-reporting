@@ -17,6 +17,7 @@
         @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
         @vite('resources/css/userCss/userDashboardReporting.css')
         @vite('resources/js/componentsJs/navbar.js')
+        @vite('resources/js/userJs/viewReports.js')
     </head>
 
     <body>
@@ -109,7 +110,8 @@
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="table-responsive shadow-sm rounded bg-white p-3">
-                                <table class="table table-bordered table-striped table-hover text-center align-middle report-table">
+                                <table
+                                    class="table table-bordered table-striped table-hover text-center align-middle report-table">
                                     <thead class="table-primary">
                                         <tr>
                                             <th>Title</th>
@@ -117,7 +119,7 @@
                                             <th>Type</th>
                                             <th>Report Status</th>
                                             <th>Edit/Delete Requests</th>
-                                            <th>Action</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -178,12 +180,36 @@
                                                     @endif
                                                 </td>
 
-                                                <td>
-                                                    <a href="{{ url('user/report/viewReports/' . $report->id) }}"
-                                                        class="btn btn-sm btn-primary d-inline-flex align-items-center">
-                                                        <i class="fas fa-eye me-1"></i> View
-                                                    </a>
+                                                <td class="text-center">
+                                                    <div class="d-flex gap-1 justify-content-center">
+                                                        {{-- View --}}
+                                                        <a href="{{ route('user.report.viewReports', $report->id) }}"
+                                                            class="btn btn-sm btn-primary d-inline-flex align-items-center">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
 
+                                                        {{-- Edit --}}
+                                                        <button type="button"
+                                                            class="btn btn-warning btn-sm text-white btn-edit-request"
+                                                            data-edit-pending="{{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}"
+                                                            data-edit-url="{{ route('user.report.userIncidentReporting.edit', $report->id) }}">
+                                                            <i class="fa-solid fa-pen"></i>
+                                                        </button>
+
+
+                                                        {{-- Delete --}}
+                                                        <form method="POST"
+                                                            action="{{ route('user.report.delete', $report->id) }}"
+                                                            class="delete-request-form d-inline"data-delete-pending="{{ $report->deleteRequest && $report->deleteRequest->status === 'pending' ? 'true' : 'false' }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="reason" class="delete-reason">
+                                                            <button type="button"
+                                                                class="btn btn-danger btn-sm btn-delete-request">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

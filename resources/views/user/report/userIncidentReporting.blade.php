@@ -55,8 +55,8 @@
 
                     <div>
                         <label for="incidentDescription">Description</label>
-                        <textarea id="incidentDescription" name="report_description" placeholder="Detailed description of the incident"
-                            required aria-required="true">{{ old('report_description') }}</textarea>
+                        <textarea id="incidentDescription" name="report_description" placeholder="Detailed description of the incident" required
+                            aria-required="true">{{ old('report_description') }}</textarea>
                     </div>
 
                     <div class="card mb-4 p-3 shadow-sm">

@@ -27,7 +27,7 @@
                 <h1>Edit Your Report</h1>
                 <a href="{{ route('user.report.viewReports', $report->id) }}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
-                    Back to List
+                    Back to report
                 </a>
             </div>
 

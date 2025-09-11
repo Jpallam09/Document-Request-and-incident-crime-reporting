@@ -38,6 +38,15 @@
                 </a>
             </div>
 
+            <div class="card mb-3 shadow-sm border-0">
+                <div class="card-header bg-warning text-dark">
+                    <i class="fa-solid fa-circle-info me-2"></i> Reason for Edit Request
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">{{ $request->reason ?? '—' }}</p>
+                </div>
+            </div>
+
             <!-- Report Info Section - Modern Card -->
             <div class="card shadow-sm mb-4 border-0">
                 <div class="card-header bg-danger text-white">

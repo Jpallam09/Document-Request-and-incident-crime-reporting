@@ -280,7 +280,7 @@ class IncidentReportUserController extends Controller
             'report_type' => $incidentReportUser->report_type,
             'report_description' => $incidentReportUser->report_description,
             'requested_image' => $incidentReportUser->images->pluck('file_path')->toArray(),
-            'reason' => $validated['reason'], // <-- use validated input
+            'reason' => $validated['reason'],
             'status' => 'pending',
             'requested_at' => now(),
         ]);
