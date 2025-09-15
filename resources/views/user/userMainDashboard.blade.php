@@ -28,7 +28,7 @@
                 <section class="hero">
                     <h1>Welcome to the Incident Reporting System</h1>
                     <p>Your platform for safe, transparent, and accountable reporting.</p>
-                    <a href="{{ route('user.report.userIncidentReporting.create') }}" class="btn btn-primary btn-md">
+                    <a href="{{ route(name: 'user.report.userIncidentReporting.create') }}" class="btn btn-primary btn-md">
                         <i class="me-2"></i>Start Reporting
                     </a>
                 </section>

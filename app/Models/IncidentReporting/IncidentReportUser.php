@@ -6,9 +6,22 @@ use App\Models\User;
 use App\Models\IncidentReporting\IncidentReportImage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\FeedbackComment;
+use Laravel\Scout\Searchable;
 
 class IncidentReportUser extends Model
 {
+    use Searchable;
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'report_title'       => $this->report_title,
+            'report_description' => $this->report_description,
+            'report_type'        => $this->report_type,
+            'user_name'          => $this->user_name,
+            'report_status'      => $this->report_status,
+        ];
+    }
     /**
      * The attributes that are mass assignable.
      */
@@ -28,8 +41,8 @@ class IncidentReportUser extends Model
     // Report statuses
     const STATUS_PENDING     = 'pending';
     const STATUS_IN_PROGRESS = 'in_progress';
-    const STATUS_SUCCESS     = 'success';       // Keep DB value
-    const STATUS_CANCELED    = 'canceled';      // Keep DB value
+    const STATUS_SUCCESS     = 'success';
+    const STATUS_CANCELED    = 'canceled';
 
     public static $statuses = [
         self::STATUS_PENDING,
@@ -49,7 +62,7 @@ class IncidentReportUser extends Model
     ];
 
     protected $casts = [
-        'requested_image' => 'array', // Laravel auto-decodes JSON into array
+        'requested_image' => 'array',
     ];
 
     // Check report status

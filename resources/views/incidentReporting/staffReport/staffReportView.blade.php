@@ -74,12 +74,16 @@
                                                     {{ $statusLabels[$report->report_status] ?? ucfirst(str_replace('_', ' ', $report->report_status)) }}
                                                 </span>
                                             </td>
-                                            <td style="width: 120px;">
-                                                <div class="d-grid">
-                                                    <button type="button" class="btn btn-sm btn-primary w-100"
+                                            <td>
+                                                <div class="d-flex gap-1 justify-content-center">
+                                                    <button type="button" class="btn btn-sm btn-primary bt-sm"
                                                         onclick="window.location='{{ route('reporting.staff.staffViewReportsFullDetails', $report->id) }}'">
                                                         <i class="fas fa-eye"></i> View
                                                     </button>
+                                                    <a href="{{ route('reporting.staff.exportPdf', $report->id) }}"
+                                                        class="btn btn-outline-danger btn-sm">
+                                                        <i class="fa-solid fa-file-pdf"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -112,5 +116,4 @@
     @include('sweetalert::alert')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
-
 </html>

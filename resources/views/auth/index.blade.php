@@ -117,8 +117,8 @@
 
                         <div class="row mb-4">
                             <div class="col-md-6 mb-3">
-                                <h5 class="fw-semibold">Document Request</h5>
-                                <p class="text-muted">A simple way for users to request and track documents.</p>
+                                <h5 class="fw-semibold">Track your Reports</h5>
+                                <p class="text-muted">A simple way for users to track report status.</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h5 class="fw-semibold">Incident Reporting</h5>

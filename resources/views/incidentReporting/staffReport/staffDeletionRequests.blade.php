@@ -44,10 +44,9 @@
                                     class="table table-bordered table-hover table-striped align-middle text-center report-table">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th>Report id</th>
                                             <th>Username</th>
-                                            <th>Report Title</th>
                                             <th>Reason</th>
+                                            <th>Report Title</th>
                                             <th>Date Requested</th>
                                             <th>Report status</th>
                                             <th>Action</th>
@@ -56,15 +55,14 @@
                                     <tbody>
                                         @foreach ($deleteRequests as $index => $request)
                                             <tr class="align-middle">
-                                                <td>{{ $index + 1 }}</td>
                                                 <td class="text-capitalize text-truncate table-col-user">
                                                     {{ $request->user->user_name ?? 'Unknown' }}
                                                 </td>
-                                                <td class="text-truncate table-col-title">
-                                                    {{ $request->report_title }}
-                                                </td>
                                                 <td class="text-truncate table-col-reason">
                                                     {{ $request->reason }}
+                                                </td>
+                                                <td class="text-truncate table-col-title">
+                                                    {{ $request->report_title }}
                                                 </td>
                                                 <td>{{ $request->created_at->format('Y-m-d') }}</td>
                                                 <td>
@@ -99,7 +97,6 @@
             </div>
         </section>
     </main>
-
 
     @include('sweetalert::alert')
 

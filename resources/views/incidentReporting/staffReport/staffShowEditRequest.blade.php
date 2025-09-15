@@ -198,12 +198,12 @@
 
                 <!-- Action Buttons -->
                 @if ($request->status === 'pending')
-                    <div class="mt-4 d-flex gap-2">
+                    <div class="mt-4 d-flex gap-2 justify-content-end">
                         <!-- Accept Form -->
                         <form action="{{ route('reporting.staff.updateRequest.accept', $request->id) }}"
                             method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success btn-sm">
                                 <i class="fa-solid fa-check me-1"></i> Accept
                             </button>
                         </form>
@@ -212,7 +212,7 @@
                         <form action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}"
                             method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
                                 <i class="fa-solid fa-xmark me-1"></i> Reject
                             </button>
                         </form>

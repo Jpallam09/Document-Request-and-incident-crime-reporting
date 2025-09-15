@@ -5,14 +5,18 @@
     --warning:       #f59e0b;
     --success:       #22c55e;
     --info:          #0d9488;
-    --purple:        #7c3aed;  
-    --muted:         #6b7280;  
+    --purple:        #7c3aed;
+    --muted:         #6b7280;
     --bg-white:      #ffffff;
     --bg-light:      #f9fafb;
     --text-dark:     #111827;
     --text-light:    #6b7280;
     --radius:        0.75rem;
     --shadow:        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* ===== Page Layout ===== */
@@ -25,7 +29,7 @@ body {
 .page-content {
     font-family: sans-serif;
     margin-left: var(--sidebar-width);
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding: 1rem 2rem 2rem 2rem;
     background-color: var(--bg-light);
     box-sizing: border-box;
@@ -33,7 +37,7 @@ body {
 
 /* ===== Dashboard Title ===== */
 #dashboard-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--text-dark);
     border-bottom: 2px solid #e5e7eb;
@@ -46,7 +50,7 @@ body {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: .1rem;
-    min-height: .1rem;   /* smaller so both rows fit nicely */
+    min-height: .1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,17 +74,17 @@ body {
 }
 
 .widget h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 550;
     color: var(--text-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 #count {
-    font-size: 2.25rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--primary);
     margin: 0;
@@ -110,11 +114,6 @@ body {
 }
 
 /* ===== Table Styling Consistency ===== */
-.report-table th,
-.report-table td {
-    vertical-align: middle;
-    text-align: center;
-}
 
 .report-table thead th {
     background-color: var(--primary);

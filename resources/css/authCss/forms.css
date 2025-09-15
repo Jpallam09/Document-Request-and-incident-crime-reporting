@@ -6,7 +6,7 @@
     background: white;
     overflow: hidden;
     z-index: 0;
-    color: white; /* Makes all text inside white */
+    color: white;
 }
 
 /* Glowing animated border behind login card */

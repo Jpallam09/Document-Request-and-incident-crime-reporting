@@ -130,7 +130,7 @@
                         action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
                         class="confirm-form" data-action="accept">
                         @csrf
-                        <button type="submit" class="btn btn-primary btn-sm">
+                        <button type="submit" class="btn btn-success btn-sm">
                             <i class="fa fa-check me-1"></i> Accept
                         </button>
                     </form>

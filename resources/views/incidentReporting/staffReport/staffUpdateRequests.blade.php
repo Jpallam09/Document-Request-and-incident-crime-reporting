@@ -51,52 +51,53 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-<tbody>
-    @foreach ($requests as $index => $request)
-        <tr class="align-middle">
-            <td class="text-capitalize text-truncate" style="max-width: 120px;">
-                {{ $request->user->user_name ?? 'Unknown' }}
-            </td>
+                                <tbody>
+                                    @foreach ($requests as $index => $request)
+                                        <tr class="align-middle">
+                                            <td class="text-capitalize text-truncate" style="max-width: 120px;">
+                                                {{ $request->user->user_name ?? 'Unknown' }}
+                                            </td>
 
-            <!-- Reason column -->
-            <td class="text-truncate" style="max-width: 200px;">
-                {{ $request->reason ?? '—' }}
-            </td>
+                                            <!-- Reason column -->
+                                            <td class="text-truncate" style="max-width: 200px;">
+                                                {{ $request->reason ?? '—' }}
+                                            </td>
 
-            <!-- Original Title -->
-            <td class="text-truncate" style="max-width: 150px;">
-                {{ $request->report->report_title ?? 'No Title' }}
-            </td>
+                                            <!-- Original Title -->
+                                            <td class="text-truncate" style="max-width: 150px;">
+                                                {{ $request->report->report_title ?? 'No Title' }}
+                                            </td>
 
-            <!-- Requested Title -->
-            <td class="text-truncate" style="max-width: 150px;">
-                {{ $request->requested_title ?? '—' }}
-            </td>
+                                            <!-- Requested Title -->
+                                            <td class="text-truncate" style="max-width: 150px;">
+                                                {{ $request->requested_title ?? '—' }}
+                                            </td>
 
-            <!-- Requested Description -->
-            <td class="text-truncate" style="max-width: 200px;">
-                {{ $request->requested_description ?? '—' }}
-            </td>
+                                            <!-- Requested Description -->
+                                            <td class="text-truncate" style="max-width: 200px;">
+                                                {{ $request->requested_description ?? '—' }}
+                                            </td>
 
-            <!-- Status -->
-            <td>
-                <span class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
-                    {{ ucfirst($request->status) }}
-                </span>
-            </td>
+                                            <!-- Status -->
+                                            <td>
+                                                <span
+                                                    class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
+                                                    {{ ucfirst($request->status) }}
+                                                </span>
+                                            </td>
 
-            <!-- Action -->
-            <td style="width: 120px;">
-                <div class="d-grid">
-                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
-                       class="btn btn-sm btn-primary w-100">
-                        <i class="fas fa-eye"></i> View
-                    </a>
-                </div>
-            </td>
-        </tr>
-    @endforeach
-</tbody>
+                                            <!-- Action -->
+                                            <td style="width: 120px;">
+                                                <div class="d-grid">
+                                                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
+                                                        class="btn btn-sm btn-primary w-100">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                             @if ($requests->isEmpty())
                                 <div class="text-center text-muted py-4">
@@ -121,7 +122,6 @@
     </main>
 
     @include('sweetalert::alert')
-
     <!-- Bootstrap JS -->
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>

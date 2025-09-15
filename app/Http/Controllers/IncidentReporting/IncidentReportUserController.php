@@ -23,44 +23,68 @@ use Illuminate\Validation\Rule;
 
 class IncidentReportUserController extends Controller
 {
-    /**
-     * Display user dashboard with all reports.
-     */
-    public function index(): View
+
+    public function index(Request $request): View
     {
         $userId = auth()->id();
+        // Precompute counts in a single query for performance
+        $reportCounts = IncidentReportUser::where('user_id', $userId)
+            ->selectRaw('
+            COUNT(*) as total,
+            SUM(report_status = "pending") as pending,
+            SUM(report_status = "success") as success,
+            SUM(report_status = "canceled") as canceled')
+            ->first();
 
-        // Fetch all reports for counts
-        $allReports = IncidentReportUser::where('user_id', $userId)->get();
-        $editRequests = editRequest::where('user_id', $userId)->get();
-        $deleteReports = deleteRequest::where('user_id', $userId)->get();
+        $editRequestCount   = EditRequest::where('user_id', $userId)->where('status', 'pending')->count();
+        $deleteRequestCount = DeleteRequest::where('user_id', $userId)->where('status', 'pending')->count();
 
-        // Counts for widgets
-        $totalReports    = $allReports->count();
-        $pendingReports  = $allReports->where('report_status', 'pending')->count();
-        $successReports  = $allReports->where('report_status', 'success')->count();
-        $canceledReports = $allReports->where('report_status', 'canceled')->count();
-        $editRequest = $editRequests->where('status', 'pending')->count();
-        $deleteRequest = $deleteReports->where('status', 'pending')->count();
+        // Base query for reports
+        $query = IncidentReportUser::where('user_id', $userId);
 
-        // Latest reports for table/pagination
-        $reports = IncidentReportUser::where('user_id', $userId)
-            ->latest()
-            ->paginate(5);
+        // Apply search filter
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('report_title', 'like', "%{$search}%")
+                    ->orWhere('report_description', 'like', "%{$search}%")
+                    ->orWhere('report_type', 'like', "%{$search}%")
+                    ->orWhere('report_status', 'like', "%{$search}%");
+            });
+        }
 
+        // Apply report status filter
+        if ($status = $request->input('status')) {
+            $query->where('report_status', $status);
+        }
+
+        // Unified request filter
+        if ($requestFilter = $request->input('requestFilter')) {
+            match ($requestFilter) {
+                'edit' => $query->whereHas('editRequest', fn($q) => $q->where('status', 'pending')),
+                'delete' => $query->whereHas('deleteRequest', fn($q) => $q->where('status', 'pending')),
+                'none' => $query->whereDoesntHave('editRequest')->whereDoesntHave('deleteRequest'),
+                default => null,
+            };
+        }
+
+        // Get paginated reports
+        $reports = $query->latest()->paginate(5)->appends($request->all());
         $unreadNotifications = auth()->user()->unreadNotifications;
 
-        return view('user.report.userDashboardReporting', compact(
-            'reports',
-            'unreadNotifications',
-            'totalReports',
-            'pendingReports',
-            'successReports',
-            'canceledReports',
-            'editRequest',
-            'deleteRequest'
+        return view('user.report.userDashboardReporting', [
+            'reports'             => $reports,
+            'unreadNotifications' => $unreadNotifications,
+            'totalReports'        => $reportCounts->total,
+            'pendingReports'      => $reportCounts->pending,
+            'successReports'      => $reportCounts->success,
+            'canceledReports'     => $reportCounts->canceled,
+            'editRequest'         => $editRequestCount,
+            'deleteRequest'       => $deleteRequestCount,
 
-        ));
+            'search'              => $request->input('search', ''),
+            'status'              => $request->input('status', ''),
+            'requestFilter'       => $request->input('requestFilter', ''),
+        ]);
     }
 
     /**

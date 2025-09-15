@@ -20,7 +20,7 @@
 
         .hero {
             background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 4rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
             border-radius: 1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -41,7 +41,7 @@
 
         .tutorial-step {
             background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 2rem;
+            padding: 1rem;
             border-radius: 1rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             text-align: center;
@@ -62,7 +62,7 @@
         .faq-section,
         .contact-section {
             background: linear-gradient(135deg, var(--bg-light), #ffffff14);
-            padding: 2rem;
+            padding: 1rem;
             border-radius: 1rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             margin-bottom: 2rem;
@@ -78,6 +78,5 @@
         @media (max-width: 768px) {
             main {
                 margin-left: 0;
-                /* no sidebar offset on small screens */
             }
         }

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Registration</title>
     <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     @vite('resources/css/authCss/forms.css')
     @vite('resources/css/componentsCss/ModalCss/form-modal.css')
     @vite('resources/js/componentsJs/form-modal.js')
@@ -16,13 +17,12 @@
     <main class="container-fluid vh-100">
         <div class="row h-100">
             <x-modals.form-modal />
-            <!-- Right Panel -->
+
             <section class="col-md-7 d-flex align-items-center justify-content-center px-4"
                 style="background-color: hsl(210, 20%, 98%);" role="region" aria-labelledby="reg-heading">
 
                 <div class="login-card p-5" style="max-width: 480px; width: 100%;">
 
-                    <!-- Top nav inside card -->
                     <div class="d-flex justify-content-between mb-4">
                         <a href="{{ route('index') }}" class="btn btn-outline-light btn-sm"
                             aria-label="Go to home page">Home</a>
@@ -30,10 +30,8 @@
                         <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Log In</a>
                     </div>
 
-                    <!-- Heading -->
                     <h2 id="reg-heading" class="mb-4 text-center">Create Your Account</h2>
 
-                    <!-- Display first error if any -->
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             {{ $errors->first() }}
@@ -96,7 +94,6 @@
         </div>
     </main>
 
-    <!-- Bootstrap JS Bundle (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

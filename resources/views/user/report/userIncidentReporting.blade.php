@@ -63,24 +63,12 @@
                         <div class="row g-3 align-items-center">
                             <!-- Controls: My Location + Barangay -->
                             <div class="col-md-7">
-                                <label class="form-label">Incident Location</label>
-                                <div id="mapControls" class="w-100 h-100 rounded-3 border bg-light"></div>
+                                <label class="form-label">Incident Location<small id="coordsHelpControls" class="text-muted mb-2 small">  (Optional)</small></label>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
                                     <button type="button" id="locateBtn" class="btn btn-outline-primary btn-sm">
                                         <i class="fa-solid fa-location-crosshairs"></i> Use My Location
                                     </button>
-                                    <small id="coordsHelpControls" class="text-muted mb-0">Optional</small>
                                 </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="barangay" class="form-label">Barangay</label>
-                                <select id="barangay" name="barangay" class="form-select form-select-sm">
-                                    <option value="" disabled selected>Select Barangay</option>
-                                    <option value="Barangay 1">Barangay 1</option>
-                                    <option value="Barangay 2">Barangay 2</option>
-                                    <option value="Barangay 3">Barangay 3</option>
-                                </select>
                             </div>
                         </div>
 
