@@ -81,7 +81,7 @@
                                     <td>{{ $report->report_type }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Phone number</th>
+                                    <th scope="row">Phone Number</th>
                                     <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                 </tr>
                                 <tr>
@@ -89,12 +89,8 @@
                                     <td>{{ $report->created_at->format('Y-m-d') }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Report sender</th>
+                                    <th scope="row">Report Sender</th>
                                     <td>{{ $report->user_name ?? 'Unknown' }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Phone number</th>
-                                    <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                 </tr>
                             </tbody>
                         </table>

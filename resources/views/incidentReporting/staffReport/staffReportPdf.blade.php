@@ -40,18 +40,12 @@
             text-align: justify;
         }
 
-        /* Center image section on page */
+        /* Space between description HR and images */
         .image-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem auto;
-            min-height: 400px;
-            /* reserve space */
-            width: 90%;
+            margin-top: 1.5rem;
         }
 
-        /* Image Section Grid */
+        /* Image section grid */
         .image-section {
             display: grid;
             gap: 0.8rem;
@@ -60,80 +54,71 @@
             width: 100%;
         }
 
-        /* All images smaller */
+        /* Standard image size (always centered) */
         .image-section img {
-            max-width: 70%;
-            /* smaller */
-            height: auto;
+            width: 220px;
+            /* fixed width */
+            height: 160px;
+            /* fixed height */
             object-fit: contain;
             display: block;
             margin: 0 auto;
+            border: 1px solid #ccc;
+            /* optional, helps see boundaries */
+            padding: 2px;
         }
 
-        /* Layout for 1 image */
+        /* Layouts based on image count */
         .image-section.one {
             grid-template-columns: 1fr;
         }
 
-        .image-section.one img {
-            max-height: 200px;
-        }
-
-        /* Layout for 2 images */
         .image-section.two {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        .image-section.two img {
-            max-height: 180px;
+        .image-section.three {
+            grid-template-columns: repeat(3, 1fr);
         }
 
-        /* Layout for 3 or 4 images */
-        .image-section.three,
         .image-section.four {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        .image-section.three img,
-        .image-section.four img {
-            max-height: 160px;
-        }
-
-        /* Layout for 5 images */
         .image-section.five {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
         }
 
-        .image-section.five img {
-            max-height: 150px;
-        }
-
+        .image-section.five img:nth-child(4),
         .image-section.five img:nth-child(5) {
-            grid-column: 1 / span 2;
-            justify-self: center;
+            grid-column: span 1;
         }
 
         .signature {
-    margin-top: 3rem;
-    padding-left: 3rem;   /* indent whole block */
-    text-align: left;
-    width: fit-content;   /* shrink to contents */
-}
+            margin-top: 3rem;
+            padding-left: 3rem;
+            /* indent whole block */
+            text-align: left;
+            width: fit-content;
+            /* shrink to contents */
+        }
 
-.signature-line {
-    width: 220px;          /* longer line */
-    border-top: 1px solid #000;
-    margin: 0.2rem 0;
-    position: relative;
-}
+        .signature-line {
+            width: 220px;
+            /* longer line */
+            border-top: 1px solid #000;
+            margin: 0.2rem 0;
+            position: relative;
+        }
 
-.signature .name,
-.signature .label {
-    margin: 0.2rem 0;
-    width: 220px;          /* same as line width */
-    text-align: center;    /* centers text on line */
-}
-
+        .signature .name,
+        .signature .label {
+            margin: 0.2rem 0;
+            width: 220px;
+            /* same as line width */
+            text-align: center;
+            /* centers text on line */
+        }
     </style>
 </head>
 
@@ -151,19 +136,43 @@
     <div class="title">Incident and Crime report</div>
 
     <div class="fields">
-        <p><strong>FOR:</strong> (Demo text)</p>
+        <p><strong>SENDER:</strong> {{ $report->user_name }}</p>
         <p><strong>SUBJECT:</strong> {{ $report->report_title }}</p>
         <p><strong>DATE:</strong> {{ $report->report_date }}</p>
-    </div>
+        <p>
+            <strong>STATUS:</strong>
+            @php
+                $status = strtolower($report->report_status);
+                $badgeColor = match ($status) {
+                    'approved' => '#16a34a', // green
+                    'rejected' => '#dc2626', // red
+                    'pending' => '#ca8a04', // yellow
+                    default => '#6b7280', // gray
+                };
+            @endphp
+            <span
+                style="
+        display:inline-block;
+        padding:1px 5px;
+        border-radius:100%;
+        background-color: {{ $badgeColor }};
+        color:#fff;
+        font-size:12px;
+        font-weight:600;
+    ">
+                {{ ucfirst($report->report_status) }}
+            </span>
+        </p>
 
+    </div>
     <hr>
 
     <div class="body-text">
         {!! nl2br(e($report->report_description)) !!}
     </div>
 
-    <br>
     <hr>
+
     <br>
 
     @if ($report->images->count())
@@ -184,7 +193,7 @@
     @endif
 
     <div class="signature">
-        <p class="name">John Doe</p>
+        <p class="name">MDRRMO</p>
         <div class="signature-line"></div>
         <p class="label"><strong>Signature</strong></p>
     </div>

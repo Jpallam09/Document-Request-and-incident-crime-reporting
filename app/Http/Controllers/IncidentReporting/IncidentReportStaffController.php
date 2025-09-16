@@ -108,6 +108,9 @@ class IncidentReportStaffController extends Controller
         ]);
     }
 
+    /**
+     * Mark a notification as read and redirect based on its type.
+     */
     public function markNotificationRead($id)
     {
         $notification = Auth::user()->notifications->firstWhere('id', $id);
@@ -202,14 +205,49 @@ class IncidentReportStaffController extends Controller
     }
 
     /**
-     * View all submitted reports.
+     * Display a paginated list of submitted reports with filtering options.
      */
-    public function staffReportView()
+    public function staffReportView(Request $request)
     {
-        $reports = IncidentReportUser::latest()
-            ->paginate(10);
+        // Extract filter inputs
+        $search        = $request->input('search');
+        $status        = $request->input('status');
+        $requestFilter = $request->input('requestFilter');
 
-        return view('incidentReporting.staffReport.staffReportView', compact('reports'));
+        // Shared filters for both Scout and normal queries
+        $applyFilters = function ($query) use ($status, $requestFilter) {
+            // Filter by status (pending, success, canceled)
+            if ($status) {
+                $query->where('report_status', $status);
+            }
+
+            // Filter by request type
+            if ($requestFilter === 'edit') {
+                $query->whereHas('editRequest');   // any edit request
+            } elseif ($requestFilter === 'delete') {
+                $query->whereHas('deleteRequest'); // any delete request
+            } elseif ($requestFilter === 'none') {
+                $query->whereDoesntHave('editRequest')
+                    ->whereDoesntHave('deleteRequest');
+            }
+
+            return $query->with(['user', 'images']);
+        };
+
+        // Build the query
+        $reports = $search
+            ? IncidentReportUser::search($search)->query($applyFilters)
+            : IncidentReportUser::with(['user', 'images'])->tap($applyFilters)->latest();
+
+        // Execute with pagination
+        $reports = $reports->paginate(10)->appends($request->query());
+
+        return view('incidentReporting.staffReport.staffReportView', [
+            'reports'       => $reports,
+            'search'        => $search,
+            'status'        => $status,
+            'requestFilter' => $requestFilter,
+        ]);
     }
 
     /**

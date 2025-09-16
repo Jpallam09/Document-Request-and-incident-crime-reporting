@@ -31,6 +31,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive shadow-sm rounded bg-white p-3">
+                            <x-modals.shared-search-bar :action="route('reporting.staff.staffReportView')" :search="request('search')" :status="request('status')"
+                                :requestFilter="request('requestFilter')" :statuses="['pending', 'success', 'canceled']" />
                             <table
                                 class="table table-bordered table-striped table-hover align-middle text-center report-table">
                                 <thead class="table-primary">
@@ -116,4 +118,5 @@
     @include('sweetalert::alert')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

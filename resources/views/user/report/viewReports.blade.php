@@ -100,12 +100,12 @@
                             <table class="table table-striped mb-0">
                                 <tbody>
                                     <tr>
-                                        <th scope="row" class="w-25">Report ID</th>
-                                        <td>{{ $report->id }}</td>
-                                    </tr>
-                                    <tr>
                                         <th scope="row">Type</th>
                                         <td>{{ $report->report_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone Number</th>
+                                        <td>{{ $report->user->phone ?? 'Unknown' }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Date Submitted</th>

@@ -13,7 +13,6 @@
 
     $statusLabels = [
         'pending' => 'Pending',
-        'in_progress' => 'In Progress',
         'success' => 'Successful',
         'canceled' => 'Unsuccessful',
     ];
@@ -43,6 +42,7 @@
                         $badgeClass = match ($key) {
                             'search' => 'bg-primary',
                             'status' => match ($value) {
+                                'pending'  => 'bg-warning',
                                 'success' => 'bg-success',
                                 'canceled' => 'bg-danger',
                             },

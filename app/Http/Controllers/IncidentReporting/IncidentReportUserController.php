@@ -267,7 +267,7 @@ class IncidentReportUserController extends Controller
         }
 
         Alert::success('Success', 'Update request sent successfully.');
-        return back();
+        return redirect()->route('user.report.viewReports', $id);
     }
 
     public function requestDelete(Request $request, IncidentReportUser $incidentReportUser): RedirectResponse
