@@ -107,48 +107,6 @@
   cursor: pointer;
 }
 
-/* Drop Zone Styling */
-.drop-zone {
-  border: 2px dashed var(--primary);
-  padding: 1rem;
-  text-align: center;
-  border-radius: var(--radius);
-  background: #fefefe;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-bottom: 1rem;
-}
-.drop-zone.drag-over {
-  background-color: #e7f0ff;
-  border-color: var(--primary-dark);
-}
-
-/* Drop-zone styled like Bootstrap outline primary button */
-.drop-zone {
-    display: inline-block;
-    font-size: 0.875rem;            /* smaller font */
-    padding: 0.25rem 0.5rem;        /* smaller height/width */
-    border-radius: 0.25rem;          /* rounded corners */
-    border: 1px solid #0d6efd;      /* Bootstrap primary outline */
-    background-color: transparent;   /* transparent like outline btn */
-    color: #0d6efd;                  /* Bootstrap primary text */
-    cursor: pointer;
-    text-align: center;
-    width: auto;                     /* shrink to content */
-    transition: all 0.2s ease;
-}
-
-.drop-zone:hover {
-    background-color: #0d6efd;       /* fill on hover */
-    color: #fff;                      /* white text on hover */
-}
-
-.drop-zone.drag-over {
-    background-color: #0b5ed7;       /* slightly darker on drag over */
-    color: #fff;
-}
-
 /* Image Modal */
 .image-modal {
   display: none;
@@ -165,12 +123,24 @@
   display: flex;
 }
 
+/* Modal Image */
 .modal-content {
-  max-width: 90%;
-  max-height: 80%;
+  max-width: 70%;      /* reduce width from 90% to 70% */
+  max-height: 80%;     /* keep height reasonable */
+  width: auto;         /* auto width to preserve aspect ratio */
+  height: auto;        /* auto height */
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   outline: 3px solid white;
+  object-fit: contain; /* scale image inside modal without cropping */
+}
+
+/* Smaller screens */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    max-height: 70%;
+  }
 }
 
 .close-modal {
