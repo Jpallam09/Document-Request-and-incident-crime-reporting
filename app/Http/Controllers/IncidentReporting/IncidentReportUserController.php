@@ -20,10 +20,8 @@ use App\Notifications\DeleteRequestNotification;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
-
 class IncidentReportUserController extends Controller
 {
-
     public function index(Request $request): View
     {
         $userId = auth()->id();

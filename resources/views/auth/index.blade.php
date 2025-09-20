@@ -185,11 +185,11 @@
                     <h6 class="fw-semibold mb-3">Get in Touch</h6>
                     <p class="mb-1">
                         <i class="fa fa-envelope me-2"></i>
-                        <a href="mailto:info@example.com" class="link-dark link-opacity-75-hover">info@example.com</a>
+                        <a href="mailto:info@example.com" class="link-dark link-opacity-75-hover">Sanmateomdrrmorescue309@gmail.com</a>
                     </p>
                     <p class="mb-1"><i class="fa fa-phone me-2"></i>Globe: 0926-280-3804</p>
                     <p class="mb-1"><i class="fa fa-phone me-2"></i>SMART: 0961-541-7453</p>
-                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>RESCUE 309-SAN MATEO, ISABELA</p>
+                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>-SAN MATEO, ISABELA</p>
                     <p class="small text-muted">Mon – Fri, 9:00 AM – 5:00 PM</p>
 
                     <!-- Social Icons -->
@@ -223,7 +223,7 @@
         <small>© 2025 Your System. All Rights Reserved.</small>
     </div>
     </footer>
-
+    @include('sweetalert::alert')
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

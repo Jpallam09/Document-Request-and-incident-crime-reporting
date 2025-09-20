@@ -7,6 +7,7 @@
     <title>Incident Reporting Platform</title>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     @vite('resources/css/userCss/userIncidentReporting.css')
@@ -28,22 +29,22 @@
                 <form action="{{ route('user.report.userIncidentReporting.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-
                     <div>
-                        <label for="incident-title">Incident Title</label>
+                        <label for="incident-title"> <i class="fa fa-file-signature text-muted"></i> Incident
+                            Title</label>
                         <input type="text" id="incident-title" name="report_title"
                             placeholder="Brief title describing the report" required aria-required="true"
                             value="{{ old('report_title') }}">
                     </div>
 
                     <div>
-                        <label for="incident-date">Date of Incident</label>
+                        <label for="incident-date"><i class="fa fa-calendar-day text-muted"></i>Date of Incident</label>
                         <input type="date" id="incident-date" name="report_date" required aria-required="true"
                             value="{{ old('report_date') }}">
                     </div>
 
                     <div>
-                        <label for="incident-type">Report Type</label>
+                        <label for="incident-type"><i class="fa-solid fa-list text-muted"></i>Report Type</label>
                         <select id="incident-type" name="report_type" required aria-required="true">
                             <option value="" disabled selected>Select type</option>
                             <option value="Safety">Safety</option>
@@ -54,16 +55,18 @@
                     </div>
 
                     <div>
-                        <label for="incidentDescription">Description</label>
-                        <textarea id="incidentDescription" name="report_description" placeholder="Detailed description of the incident" required
+                        <label for="incidentDescription"><i
+                                class="fa-solid fa-align-left text-muted"></i>Description</label>
+                        <textarea id="incidentDescription" name="report_description"
+                            placeholder="Detailed description of the incident (you can mannually include the incident Location here)" required
                             aria-required="true">{{ old('report_description') }}</textarea>
                     </div>
 
                     <div class="card mb-4 p-3 shadow-sm">
                         <div class="row g-3 align-items-center">
-                            <!-- Controls: My Location + Barangay -->
                             <div class="col-md-7">
-                                <label class="form-label">Incident Location<small id="coordsHelpControls" class="text-muted mb-2 small">  (Optional)</small></label>
+                                <label class="form-label">Incident Location<small id="coordsHelpControls"
+                                        class="text-muted mb-2 small"> (Optional)</small></label>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
                                     <button type="button" id="locateBtn" class="btn btn-outline-primary btn-sm">
                                         <i class="fa-solid fa-location-crosshairs"></i> Use My Location
@@ -72,7 +75,7 @@
                             </div>
                         </div>
 
-                        <!-- Map Preview Row -->
+                        <!-- Map Preview Row -->    
                         <div class="col-12 mt-3">
                             <label class="form-label">Location Preview</label>
                             <div id="mapPreview" class="w-100 rounded-3 border bg-light" style="height: 250px;">
@@ -85,10 +88,16 @@
                         <input type="hidden" name="longitude" id="longitude">
                     </div>
 
-                    <div>
-                        <label for="incident-image">Attach Images (Max: 5)</label>
-                        <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple>
-                        <small class="upload-guidance">Click or drag images to attach. Maximum of 5.</small>
+
+                    <!-- Upload New Images -->
+                    <div class="upload-section">
+                        <label for="form-label" class="form-label fw-semibold d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-upload text-success"></i>Add New
+                            Images</label>
+                        <input type="file" id="incident-image" name="report_image[]" accept="image/*" multiple
+                            class="form-control shadow-sm">
+                        <div class="form-text text-muted">Select one or more images (JPG, PNG, etc.)</div>
+                        <div id="previewContainer" class="d-flex flex-wrap gap-2 mt-2"></div>
                     </div>
 
                     <!-- Image Modal -->
@@ -97,17 +106,19 @@
                         <img id="modalImage" class="modal-content" alt="Enlarged preview">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-sm" aria-label="Submit Incident Report">
-                        Submit Report
-                    </button>
+                    <div calss="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-sm" aria-label="Submit Incident Report">
+                            Submit Report
+                        </button>
+                    </div>
                 </form>
             </section>
         </section>
     </main>
-    @include('sweetalert::alert')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    @include('sweetalert::alert')
 </body>
 
 </html>

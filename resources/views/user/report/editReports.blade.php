@@ -42,7 +42,7 @@
                         <div>
                             <div class="mb-3">
                                 <label for="title" class="form-label fw-semibold d-flex align-items-center gap-2">
-                                    <i class="fa-solid fa-file-signature text-primary"></i> Report Title
+                                    <i class="fa-solid fa-file-signature text-muted"></i> Report Title
                                 </label>
                                 <input type="text" id="title" name="title" class="form-control shadow-sm"
                                     value="{{ old('title', $report->report_title) }}"
@@ -50,7 +50,7 @@
                             </div>
 
 
-                            <div><i class="fa-solid fa-calendar-day text-primary"></i>
+                            <div><i class="fa-solid fa-calendar-day text-muted"></i>
                                 <label>Date</label>
                                 <input type="date" id="incidentDate" name="requested_report_date"
                                     class="form-control shadow-sm
@@ -60,7 +60,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="incidentType" class="form-label fw-semibold d-flex align-items-center gap-2">
-                                <i class="fa-solid fa-list text-primary"></i> Incident Type
+                                <i class="fa-solid fa-list text-muted"></i> Incident Type
                             </label>
                             <select id="incidentType" name="incident_type" class="form-select shadow-sm" required>
                                 <option disabled {{ old('incident_type', $report->incident_type) ? '' : 'selected' }}>
@@ -85,7 +85,7 @@
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="incidentDescription" class="form-label fw-semibold d-flex align-items-center gap-2">
-                            <i class="fa-solid fa-align-left text-primary"></i> Description
+                            <i class="fa-solid fa-align-left text-muted"></i> Description
                         </label>
                         <textarea class="form-control shadow-sm" id="incidentDescription" name="incident_description" rows="4"
                             class="form-control shadow-sm" placeholder="Describe the incident in detail..." required>{{ old('incident_description', $report->report_description) }}</textarea>
@@ -105,20 +105,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5">
-                                <label for="barangay" class="form-label">Barangay</label>
-                                <select id="barangay" name="barangay" class="form-select form-select-sm">
-                                    <option value="" disabled selected>Select Barangay</option>
-                                    <option value="Barangay 1"
-                                        {{ $report->barangay === 'Barangay 1' ? 'selected' : '' }}>Barangay 1</option>
-                                    <option value="Barangay 2"
-                                        {{ $report->barangay === 'Barangay 2' ? 'selected' : '' }}>Barangay 2</option>
-                                    <option value="Barangay 3"
-                                        {{ $report->barangay === 'Barangay 3' ? 'selected' : '' }}>Barangay 3</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <!-- Map Preview Row -->
                         <div class="col-12 mt-3">
                             <label class="form-label">Location Preview</label>
@@ -136,7 +122,7 @@
                     <!-- Attachments -->
                     <div class="attachments-section card shadow-sm p-3 mb-4">
                         <h3 class="h5 mb-3 d-flex align-items-center gap-2">
-                            <i class="fa-solid fa-paperclip text-primary"></i> Attachments
+                            <i class="fa-solid fa-paperclip text-muted"></i> Attachments
                         </h3>
 
                         <!-- Existing Images Grid -->
@@ -169,8 +155,8 @@
 
                     <div class="mb-3 mt-3 reason-section">
                         <label for="reason" class="form-label fw-semibold d-flex align-items-center gap-2">
-                            <i class="bi bi-pencil-square text-primary"><i
-                                    class="fa-solid fa-pen-to-square text-primary"></i></i> REASON FOR EDIT
+                            <i class="bi bi-pencil-square text-muted"><i
+                                    class="fa-solid fa-pen-to-square text-mute"></i></i> REASON FOR EDIT
                         </label>
                         <textarea name="reason" id="reason" rows="3" class="form-control shadow-sm"
                             placeholder="Explain why you want to edit this report..." required>{{ old('reason', $report->reason) }}</textarea>

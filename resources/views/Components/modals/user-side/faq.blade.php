@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <!-- Q2 --> 
+    <!-- Q2 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq2">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -27,27 +27,12 @@
       </h2>
       <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          Only authorized staff and administrators can see your reports. Other users cannot.
+          Only authorized staff can see your reports. Other users cannot.
         </div>
       </div>
     </div>
 
-    <!-- Q3 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="faq3">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapse3">
-          Do I need to finish my report in one sitting?
-        </button>
-      </h2>
-      <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          No, you can save your draft and continue later before submitting.
-        </div>
-      </div>
-    </div>
-
-    <!-- Q4 -->
+    <!-- Q3-->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq4">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -57,12 +42,12 @@
       </h2>
       <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          Yes, you can attach images or documents to support your report.
+          Yes, you can attach images to support your report.
         </div>
       </div>
     </div>
 
-    <!-- Q5 -->
+    <!-- Q4 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq5">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -77,7 +62,7 @@
       </div>
     </div>
 
-    <!-- Q6 -->
+    <!-- Q5 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq6">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -92,7 +77,7 @@
       </div>
     </div>
 
-    <!-- Q7 -->
+    <!-- Q6 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq7">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -107,7 +92,7 @@
       </div>
     </div>
 
-    <!-- Q8 -->
+    <!-- Q7 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq8">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -122,23 +107,7 @@
       </div>
     </div>
 
-    <!-- Q9 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="faq9">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapse9">
-          Can I report anonymously?
-        </button>
-      </h2>
-      <div id="collapse9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Depending on the policy, you may choose not to include personal details. However, providing
-          your info helps staff follow up if needed.
-        </div>
-      </div>
-    </div>
-
-    <!-- Q10 -->
+    <!-- Q8 -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="faq10">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -148,7 +117,7 @@
       </h2>
       <div id="collapse10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          After submitting, you’ll see a confirmation message and your report will appear in “My Reports”.
+          After submitting, you’ll see a confirmation alert message and your report will appear in “My Reports Lists”.
         </div>
       </div>
     </div>

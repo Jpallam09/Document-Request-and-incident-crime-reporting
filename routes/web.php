@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileControllers\UserProfileController;
 use App\Http\Controllers\IncidentReporting\FeedbackCommentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPassController;
 
 // ------------------ HOME ROUTE ------------------
 Route::get('/', function () {
@@ -25,8 +26,14 @@ Route::prefix("auth")->group(function () {
 
     Route::get('/index', function () {
         return view('auth.index');
-    })
-        ->name("index");
+    })->name("index");
+
+    Route::get('/forgot', [ForgotPassController::class, 'showForgot'])->name("forgot");
+    Route::post('/forgot', [ForgotPassController::class, 'sendResetLink'])->name('password.email');
+
+    // Reset Password
+    Route::get('/reset-password/{token}', [ForgotPassController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [ForgotPassController::class, 'resetPassword'])->name('password.update');
 });
 
 // ------------------ GLOBAL LOGOUT ROUTE ------------------
@@ -41,7 +48,8 @@ Route::prefix('user/report')
         Route::middleware('auth')->group(function () {
             // User Main Dashboard
             Route::get('/userMainDashboard', function () {
-                return view('user.userMainDashboard');})
+                return view('user.userMainDashboard');
+            })
                 ->name("userMainDashboard");
             // User Dashboard for Incident Reporting
             Route::get('/userDashboardReporting', [IncidentReportUserController::class, 'index'])

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>User Login</title>
+    <title>Forgot Password</title>
 
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -20,10 +20,10 @@
         <div class="row h-100">
             <x-modals.form-modal />
             <!-- Right Panel -->
-            <section class="col-md-7 d-flex align-items-center justify-content-center px-4"
+            <section class="col-md-7 d-flex align-items-center justify-content-center px-4 max-width"
                 style="background-color: #f9fafb;" role="region" aria-labelledby="login-heading">
                 <div class="login-card bg-white p-5 rounded shadow-sm" style="max-width: 420px; width: 100%;">
-                    <h2 id="login-heading" class="mb-4">Log In to Your Account</h2>
+                    <h2 id="login-heading" class="mb-4">Forgot Password</h2>
 
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
@@ -31,8 +31,17 @@
                         </div>
                     @endif
 
-                    <form class="glow-container" action="{{ route('login.post') }}" method="POST" novalidate>
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+
+                    <form class="glow-container" action="{{ route('password.email') }}" method="POST" novalidate>
                         @csrf
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" id="email" name="email" class="form-control"
@@ -40,15 +49,9 @@
                                 aria-describedby="email-desc" />
                         </div>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" name="password" class="form-control"
-                                placeholder="Enter your password" autocomplete="current-password" required
-                                minlength="8" aria-describedby="password-desc" />
-                        </div>
-
-                        <button type="submit" class="btn btn-outline-light btn-sm w-100" aria-label="Log in user">Log
-                            In</button>
+                        <button type="submit" class="btn btn-outline-light w-100">
+                            <i class="text-white fas fa-unlock-alt text me-1"></i> Reset Password
+                        </button>
                     </form>
                     <hr>
                     <div class="text-center mt-3">
@@ -57,7 +60,7 @@
                     </div>
 
                     <div class="text-center me-3 mt-1">
-                        <a class="text-white small" href="{{ route('forgot') }}">Forgot password?</a>
+                        <a class="text-white small" href="{{ route('login') }}">Login</a>
                     </div>
                 </div>
             </section>

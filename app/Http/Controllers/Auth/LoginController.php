@@ -30,24 +30,9 @@ class LoginController extends Controller
             $user = Auth::user(); // Explicit cast for Intelephense
             $user->load('roles'); // Now no more "undefined method" warning
 
-            // Admin
-            if ($user->hasRole('incident_reporting', 'admin')) {
-                return redirect()->intended(route('reporting.admin.dashboard'));
-            }
-
             // Staff
             if ($user->hasRole('incident_reporting', 'staff')) {
                 return redirect()->intended(route('reporting.staff.dashboard'));
-            }
-
-            // Admin
-            if ($user->hasRole('document_request', 'admin')) {
-                return redirect()->intended(route('request.admin.adminDashboard'));
-            }
-
-            // Staff
-            if ($user->hasRole('document_request', 'staff')) {
-                return redirect()->intended(route('request.staff.staffDashboard'));
             }
 
             // Default: Normal User
