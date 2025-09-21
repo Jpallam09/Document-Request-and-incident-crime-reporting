@@ -78,8 +78,7 @@
                                                 class="text-muted ms-2">{{ $notification->created_at->diffForHumans() }}</small>
                                         </div>
                                         <small class="d-block mt-1">
-                                            <strong>MDRRMO</strong>
-                                            {{ $notification->data['submitted_by'] ?? 'Unknown' }}
+                                            <strong>MDRRMO-San Mateo, Isabela</strong>
                                         </small>
                                         @if ($statusText)
                                             <small class="d-block mt-1 fw-semibold">

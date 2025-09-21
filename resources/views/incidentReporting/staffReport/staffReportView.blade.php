@@ -37,7 +37,7 @@
                                 class="table table-bordered table-striped table-hover align-middle text-center report-table">
                                 <thead class="table-primary">
                                     <tr>
-                                        <th>report_id</th>
+                                        <th>#</th>
                                         <th>Username</th>
                                         <th>Report Title</th>
                                         <th>Report Type</th>
@@ -50,10 +50,14 @@
                                     @foreach ($reports as $index => $report)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td class="text-capitalize">{{ $report->user->user_name ?? 'Unknown' }}</td>
-                                            <td>{{ $report->report_title }}</td>
-                                            <td>{{ $report->report_type }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($report->report_date)->format('M d, Y') }}</td>
+                                            <td class="text-capitalize text-truncate" style="max-width: 120px;">
+                                                {{ $report->user->user_name ?? 'Unknown' }}</td>
+                                            <td class="text-truncate" style="max-width: 180px;">
+                                                {{ $report->report_title }}</td>
+                                            <td class="text-truncate" style="max-width: 120px;">
+                                                {{ $report->report_type }}</td>
+                                            <td class="text-truncate" style="max-width: 120px;">
+                                                {{ \Carbon\Carbon::parse($report->report_date)->format('M d, Y') }}</td>
                                             <td>
                                                 @php
                                                     $statusColors = [
@@ -62,7 +66,6 @@
                                                         'success' => 'bg-success',
                                                         'canceled' => 'bg-danger',
                                                     ];
-
                                                     $statusLabels = [
                                                         'pending' => 'Pending',
                                                         'in_progress' => 'In Progress',
@@ -70,7 +73,6 @@
                                                         'canceled' => 'Unsuccessful',
                                                     ];
                                                 @endphp
-
                                                 <span
                                                     class="badge {{ $statusColors[$report->report_status] ?? 'bg-secondary' }}">
                                                     {{ $statusLabels[$report->report_status] ?? ucfirst(str_replace('_', ' ', $report->report_status)) }}
@@ -78,12 +80,12 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex gap-1 justify-content-center">
-                                                    <button type="button" class="btn btn-sm btn-primary bt-sm"
-                                                        onclick="window.location='{{ route('reporting.staff.staffViewReportsFullDetails', $report->id) }}'">
+                                                    <a href="{{ route('reporting.staff.staffViewReportsFullDetails', $report->id) }}"
+                                                        class="btn btn-sm btn-primary text-truncate">
                                                         <i class="fas fa-eye"></i> View
-                                                    </button>
+                                                    </a>
                                                     <a href="{{ route('reporting.staff.exportPdf', $report->id) }}"
-                                                        class="btn btn-outline-danger btn-sm">
+                                                        class="btn btn-sm btn-outline-danger text-truncate">
                                                         <i class="fa-solid fa-file-pdf"></i>
                                                     </a>
                                                 </div>
@@ -102,8 +104,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Pagination (optional, remove if unused) -->
 
                 <div class="row mt-4">
                     <div class="col d-flex justify-content-center">

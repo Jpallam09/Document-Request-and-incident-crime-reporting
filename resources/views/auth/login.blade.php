@@ -23,7 +23,12 @@
             <section class="col-md-7 d-flex align-items-center justify-content-center px-4"
                 style="background-color: #f9fafb;" role="region" aria-labelledby="login-heading">
                 <div class="login-card bg-white p-5 rounded shadow-sm" style="max-width: 420px; width: 100%;">
-                    <h2 id="login-heading" class="mb-4">Log In to Your Account</h2>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 id="login-heading" class="m-0">Log In to Your Account</h2>
+                <a href="{{ route('index') }}" class="btn btn-outline-light btn-sm"
+                    aria-label="Go to home page">Home
+                </a>
+            </div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">

@@ -28,7 +28,8 @@
                 <section class="hero">
                     <h1>Welcome to the Incident Reporting System</h1>
                     <p>Your platform for safe, transparent, and accountable reporting.</p>
-                    <a href="{{ route(name: 'user.report.userIncidentReporting.create') }}" class="btn btn-primary btn-md">
+                    <a href="{{ route(name: 'user.report.userIncidentReporting.create') }}"
+                        class="btn btn-primary btn-md">
                         <i class="me-2"></i>Start Reporting
                     </a>
                 </section>
@@ -36,6 +37,7 @@
                 <!-- Tutorial / Steps -->
                 <section class="mb-5">
                     <h2 class="section-title text-center">How It Works</h2>
+                    <p class="text-center text-muted">you can click the cards for tutorials</p>
                     <div class="row g-4">
                         <div class="col-md-3 col-sm-6">
                             <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#createReportModal">
@@ -54,21 +56,21 @@
                         <div class="col-md-3 col-sm-6">
                             <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#editDeleteModal">
                                 <i class="fa fa-edit"></i>
-                                <h5>Edit or Delete</h5>
-                                <p>Update or remove your reports when needed.</p>
+                                <h5>Edit Report</h5>
+                                <p>Update your reports when needed and wait for the review.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="tutorial-step" data-bs-toggle="modal" data-bs-target="#trackStatusModal">
-                                <i class="fa fa-clock"></i>
-                                <h5>Track Status</h5>
-                                <p>Stay updated on the progress of your report.</p>
+                                <i class="fa fa-trash"></i>
+                                <h5>Delete Report</h5>
+                                <p>Submit a request to remove your report and wait for the review.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <x-modals.user-tutorial.user-tutorial/>
+                <x-modals.user-tutorial.user-tutorial />
 
                 <!-- About -->
                 <section class="about-section">
@@ -86,7 +88,7 @@
                 <section class="contact-section text-center">
                     <h2 class="section-title">Need Help?</h2>
                     <p>If you need assistance, reach out to our support staff.</p>
-                    <a href="mailto:support@incidentreporting.com" class="btn btn-outline-primary">
+                    <a href="mailto:Sanmateomdrrmorescue309@gmail.com" class="btn btn-outline-primary">
                         <i class="fa fa-envelope me-2"></i>Contact Support
                     </a>
                 </section>

@@ -10,15 +10,11 @@
         <div id="createReportSteps">
           <div class="step" data-step="1">
             <h6>Step 1: Click "Create Report"in the sidebar to open the report form page</h6>
-            <img src="{{ asset('images/tutorials/create_tuts_2.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
+            <img src="{{ asset('images/tutorials/create_tuts.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
           </div>
           <div class="step d-none" data-step="2">
             <h6>Step 2: Fill in required details from the form</h6>
-            <img src="{{ asset('images/tutorials/create_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
-          </div>
-          <div class="step d-none" data-step="3">
-            <h6>Step 3: Click Submit to send your report for review</h6>
-            <img src="{{ asset('images/tutorials/create_tuts_3.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
+            <img src="{{ asset('images/tutorials/create_tuts_1.0.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
           </div>
         </div>
       </div>
@@ -46,7 +42,7 @@
           </div>
           <div class="step d-none" data-step="2">
             <h6>Step 2: Click on "view" button to see detailed information</h6>
-            <img src="{{ asset('images/tutorials/view_tuts_2.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
+            <img src="{{ asset('images/tutorials/view_tuts_2.0.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
           </div>
         </div>
       </div>
@@ -63,22 +59,22 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit or Delete Report</h5>
+        <h5 class="modal-title">Edit Report</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <div id="editDeleteSteps">
           <div class="step" data-step="1">
-            <h6>Step 1: Select the report you want to edit or delete</h6>
-            <img src="{{ asset('images/edit-delete-step1.jpg') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
+            <h6>Step 1: Select the Edit button</h6>
+            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
           </div>
           <div class="step d-none" data-step="2">
             <h6>Step 2: Make your edits or click "Request Delete"</h6>
-            <img src="{{ asset('images/edit-delete-step2.jpg') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
+            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
           </div>
           <div class="step d-none" data-step="3">
             <h6>Step 3: Submit changes. Staff will review your request</h6>
-            <img src="{{ asset('images/edit-delete-step3.jpg') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
+            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
           </div>
         </div>
       </div>

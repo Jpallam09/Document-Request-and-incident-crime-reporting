@@ -19,6 +19,7 @@
 
     <!-- JS -->
     @vite('resources/js/staffJs/staffUpdateRequests.js')
+    @vite('resources/js/staffJs/staffShowEditRequest.js')
     @vite('resources/js/componentsJs/navbar.js')
 </head>
 
@@ -42,18 +43,20 @@
                                 class="table table-bordered table-striped table-hover align-middle text-center report-table">
                                 <thead class="table-primary">
                                     <tr>
+                                        <th>#</th>
                                         <th>Username</th>
                                         <th>Reason</th>
                                         <th>Original Title</th>
                                         <th>Requested Title</th>
                                         <th>Requested Description</th>
                                         <th>Report status</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($requests as $index => $request)
                                         <tr class="align-middle">
+                                            <td>{{ $index + 1 }}</td>
                                             <td class="text-capitalize text-truncate" style="max-width: 120px;">
                                                 {{ $request->user->user_name ?? 'Unknown' }}
                                             </td>
@@ -86,15 +89,38 @@
                                                 </span>
                                             </td>
 
-                                            <!-- Action -->
-                                            <td style="width: 120px;">
-                                                <div class="d-grid">
+                                            <td class="action-col text-center" style="width: 140px;">
+                                                <div class="d-flex justify-content-center gap-2">
+                                                    <!-- View Button -->
                                                     <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
-                                                        class="btn btn-sm btn-primary w-100">
-                                                        <i class="fas fa-eye"></i> View
+                                                        class="btn btn-sm btn-primary" title="View Request">
+                                                        <i class="fas fa-eye"></i>
                                                     </a>
+
+                                                    <!-- Accept Button -->
+                                                    <form
+                                                        action="{{ route('reporting.staff.updateRequest.accept', $request->id) }}"
+                                                        method="POST" class="m-0 p-0 confirm-form">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success btn-sm"
+                                                            title="Accept Request">
+                                                            <i class="fas fa-check-circle"></i>
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Reject Button -->
+                                                    <form
+                                                        action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}"
+                                                        method="POST" class="m-0 p-0 confirm-form">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            title="Reject Request">
+                                                            <i class="fas fa-times-circle"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

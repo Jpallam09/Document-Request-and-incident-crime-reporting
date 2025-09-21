@@ -45,7 +45,8 @@
                             <div class="col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" id="username" name="user_name" class="form-control"
-                                    placeholder="Choose a username" required minlength="3" maxlength="20" />
+                                    placeholder="Choose a username" required minlength="3" maxlength="20" 
+                                    value="{{ old('user_name') }}"/>
                             </div>
 
                             <div class="col-md-6">

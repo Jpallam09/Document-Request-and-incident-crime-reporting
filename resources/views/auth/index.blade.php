@@ -22,7 +22,7 @@
                 <a class="navbar-brand d-flex align-items-center gap-2" href="#" aria-label="Homepage">
                     <img src="{{ asset('images/SMI_logo.png') }}" height="40" class="d-inline-block align-text-top"
                         alt="Municipality Logo" />
-                    <strong>Municipality of San Mateo Isabela</strong>
+                    <strong>MDRRMO San Mateo Isabela</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
@@ -189,8 +189,7 @@
                     </p>
                     <p class="mb-1"><i class="fa fa-phone me-2"></i>Globe: 0926-280-3804</p>
                     <p class="mb-1"><i class="fa fa-phone me-2"></i>SMART: 0961-541-7453</p>
-                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>-SAN MATEO, ISABELA</p>
-                    <p class="small text-muted">Mon – Fri, 9:00 AM – 5:00 PM</p>
+                    <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>BARANGAY 3-SAN MATEO, ISABELA</p>
 
                     <!-- Social Icons -->
                     <div class="d-flex justify-content-center justify-content-lg-end gap-3 mt-3">

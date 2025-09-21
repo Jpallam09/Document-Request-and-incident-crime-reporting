@@ -119,6 +119,7 @@
                                         class="table table-bordered table-striped table-hover text-center align-middle report-table">
                                         <thead class="table-primary">
                                             <tr>
+                                                <th>#</th>
                                                 <th>Title</th>
                                                 <th>Date</th>
                                                 <th>Type</th>
@@ -128,8 +129,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($reports as $report)
+                                            @foreach ($reports as $index => $report)
                                                 <tr>
+                                                    <td>{{ $index + 1 }}</td>
                                                     <td>{{ $report->report_title }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($report->report_date)->format('F d, Y') }}
                                                     </td>
@@ -249,4 +251,5 @@
             <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
             @stack('scripts')
         </body>
+
         </html>

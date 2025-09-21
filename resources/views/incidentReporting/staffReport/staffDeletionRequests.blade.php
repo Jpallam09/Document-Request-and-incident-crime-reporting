@@ -13,7 +13,6 @@
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Custom CSS -->
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
     @vite('resources/css/staffCss/staffDeletionRequests.css')
@@ -21,6 +20,7 @@
     <!-- JS -->
     @vite('resources/js/staffJs/staffDeletionRequest.js')
     @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/js/staffJs/staffDeletionRequest.js')
 </head>
 
 <body>
@@ -36,63 +36,81 @@
                     </div>
                 </div>
                 <!-- Table Section -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-container">
-                            <div class="table-responsive bg-white p-3 less-rounded">
-                                <table
-                                    class="table table-bordered table-hover table-striped align-middle text-center report-table">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Reason</th>
-                                            <th>Report Title</th>
-                                            <th>Date Requested</th>
-                                            <th>Report status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($deleteRequests as $index => $request)
-                                            <tr class="align-middle">
-                                                <td class="text-capitalize text-truncate table-col-user">
-                                                    {{ $request->user->user_name ?? 'Unknown' }}
-                                                </td>
-                                                <td class="text-truncate table-col-reason">
-                                                    {{ $request->reason }}
-                                                </td>
-                                                <td class="text-truncate table-col-title">
-                                                    {{ $request->report_title }}
-                                                </td>
-                                                <td>{{ $request->created_at->format('Y-m-d') }}</td>
-                                                <td>
-                                                    <span
-                                                        class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
-                                                        {{ ucfirst($request->status) }}
-                                                    </span>
-                                                </td>
-                                                <td class="action-col">
-                                                    <div class="d-grid">
-                                                        <a href="{{ route('reporting.staff.staffDeletionRequests.show', $request->id) }}"
-                                                            class="btn btn-sm btn-primary w-100">
-                                                            <i class="fas fa-eye"></i> View
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                <div class="table-responsive bg-white p-3 rounded-3">
+                    <table class="table table-bordered table-hover table-striped align-middle text-center report-table">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>#</th>
+                                <th class="text-truncate" style="max-width: 120px;">Username</th>
+                                <th class="text-truncate" style="max-width: 200px;">Reason</th>
+                                <th class="text-truncate" style="max-width: 180px;">Report Title</th>
+                                <th class="text-truncate" style="max-width: 120px;">Date Requested</th>
+                                <th>Report Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($deleteRequests as $index => $request)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td class="text-capitalize text-truncate" style="max-width: 120px;">
+                                        {{ $request->user->user_name ?? 'Unknown' }}
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 200px;">
+                                        {{ $request->reason }}
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 180px;">
+                                        {{ $request->report_title }}
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 120px;">
+                                        {{ $request->created_at->format('Y-m-d') }}
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
+                                            {{ ucfirst($request->status) }}
+                                        </span>
+                                    </td>
+                                    <td class="action-col">
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <!-- View Button -->
+                                            <a href="{{ route('reporting.staff.staffDeletionRequests.show', $request->id) }}"
+                                                class="btn btn-sm btn-primary">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
 
-                                @if ($deleteRequests->isEmpty())
-                                    <div class="text-center text-muted py-4">
-                                        <i class="fas fa-inbox fa-2x mb-2"></i>
-                                        <p class="mb-0">No deletion requests found.</p>
-                                    </div>
-                                @endif
-                            </div>
+                                            <!-- Accept Button -->
+                                            <form method="POST"
+                                                action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
+                                                class="m-0 p-0 confirm-form" data-action="accept">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <i class="fa-solid fa-circle-check"></i>
+                                                </button>
+                                            </form>
+
+                                            <!-- Reject Button -->
+                                            <form method="POST"
+                                                action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
+                                                class="m-0 p-0 confirm-form" data-action="reject">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    @if ($deleteRequests->isEmpty())
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-inbox fa-2x mb-2"></i>
+                            <p class="mb-0">No deletion requests found.</p>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </section>
