@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary btn-sm" aria-label="Submit Incident Report">
+                            <button type="submit" class="btn btn-primary btn-md" aria-label="Submit Incident Report">
                                 Submit Report
                             </button>
                         </div>

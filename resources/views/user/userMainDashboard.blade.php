@@ -9,6 +9,7 @@
     <!-- Bootstrap & Icons -->
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Vite Custom CSS -->
     @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
@@ -84,14 +85,14 @@
 
                 <x-modals.user-side.faq />
 
-                <!-- Contact -->
-                <section class="contact-section text-center">
-                    <h2 class="section-title">Need Help?</h2>
-                    <p>If you need assistance, reach out to our support staff.</p>
-                    <a href="mailto:Sanmateomdrrmorescue309@gmail.com" class="btn btn-outline-primary">
-                        <i class="fa fa-envelope me-2"></i>Contact Support
-                    </a>
-                </section>
+        <!-- Contact -->
+        <section class="contact-section text-center">
+            <h2 class="section-title">Need Help?</h2>
+            <p>If you need assistance, reach out to our support staff.</p>
+            <button id="contactSupportBtn" class="btn btn-outline-primary">
+                <i class="fa fa-envelope me-2"></i>Contact Support
+            </button>
+        </section>
 
             </div>
         </main>

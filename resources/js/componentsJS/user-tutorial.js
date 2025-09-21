@@ -1,3 +1,24 @@
+document.getElementById("contactSupportBtn").addEventListener("click", function () {
+        Swal.fire({
+            title: "Contact Support?",
+            text: "This will open Gmail to send us an email.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, proceed",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to Gmail compose
+                window.open(
+                    "https://mail.google.com/mail/?view=cm&fs=1&to=Sanmateomdrrmorescue309@gmail.com",
+                    "_blank"
+                );
+            }
+        });
+    });  
+  
   function initModalSteps(modalId) {
     const modal = document.getElementById(modalId);
     const steps = modal.querySelectorAll('.step');

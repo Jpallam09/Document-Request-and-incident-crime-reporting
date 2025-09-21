@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -54,8 +55,8 @@ class RegisterController extends Controller
         ]);
 
         // Log them in
-        Auth::login($user);
-
-        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+        // Auth::login($user);
+        Alert::success('Registration Successful!', 'Please login.');
+        return redirect()->route('login');
     }
 }

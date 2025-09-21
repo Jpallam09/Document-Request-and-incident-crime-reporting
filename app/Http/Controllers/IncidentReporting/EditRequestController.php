@@ -44,7 +44,7 @@ class EditRequestController extends Controller
         $editRequest = EditRequest::with('report.images', 'user')->findOrFail($id);
 
         if ($editRequest->status !== 'pending') {
-            Alert::warning('This request has already been processed.', 'Error')->autoClose(3000);
+            Alert::warning('Already Reviewed', 'This request has already been processed.')->autoClose(3000);
             return back();
         }
 
@@ -104,7 +104,7 @@ class EditRequestController extends Controller
         $editRequest = EditRequest::findOrFail($id);
 
         if ($editRequest->status !== 'pending') {
-            Alert::toast('This request has already been processed.', 'error')->autoClose(3000);
+            Alert::error('Already Reviewed', 'This request has already been processed.')->autoClose(3000);
             return back();
         }
 

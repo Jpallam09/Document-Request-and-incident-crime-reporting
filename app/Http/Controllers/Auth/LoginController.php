@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User; // Make sure this is imported
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
