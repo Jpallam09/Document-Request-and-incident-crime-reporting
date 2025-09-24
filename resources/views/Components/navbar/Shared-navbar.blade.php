@@ -124,12 +124,12 @@
                 height="40">
 
             <div class="d-flex flex-column lh-1">
-                <span class="fw-semibold fs-6 text-uppercase text-white"
-                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.5px;">
+                <span class="text-uppercase text-white"
+                    style="font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.5px;">
                     Incident
                 </span>
-                <span class="fw-bold fs-3 text-uppercase text-white"
-                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 1px;">
+                <span class="text-uppercase text-white"
+                    style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.4rem; letter-spacing: 1px;">
                     Reporting
                 </span>
             </div>
