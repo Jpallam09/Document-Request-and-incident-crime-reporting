@@ -42,7 +42,7 @@
                         $badgeClass = match ($key) {
                             'search' => 'bg-primary',
                             'status' => match ($value) {
-                                'pending'  => 'bg-warning',
+                                'pending' => 'bg-warning',
                                 'success' => 'bg-success',
                                 'canceled' => 'bg-danger',
                             },

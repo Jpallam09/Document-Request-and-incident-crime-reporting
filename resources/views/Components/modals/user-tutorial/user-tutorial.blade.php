@@ -66,15 +66,15 @@
         <div id="editDeleteSteps">
           <div class="step" data-step="1">
             <h6>Step 1: Select the Edit button</h6>
-            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
+            <img src="{{ asset('images/tutorials/edit_tuts_1.0.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
           </div>
           <div class="step d-none" data-step="2">
-            <h6>Step 2: Make your edits or click "Request Delete"</h6>
-            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
+            <h6>Step 2: Fill the form for editing the original report details"</h6>
+            <img src="{{ asset('images/tutorials/edit_tuts_2.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
           </div>
           <div class="step d-none" data-step="3">
-            <h6>Step 3: Submit changes. Staff will review your request</h6>
-            <img src="{{ asset('images/tutorials/edit_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
+            <h6>Step 3: Submit changes or cancel your editing process</h6>
+            <img src="{{ asset('images/tutorials/edit_tuts_3.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
           </div>
         </div>
       </div>
@@ -98,15 +98,11 @@
         <div id="trackStatusSteps">
           <div class="step" data-step="1">
             <h6>Step 1: Navigate to "View reports list" from your sidebar</h6>
-            <img src="{{ asset('images/tutorials/view_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
+            <img src="{{ asset('images/tutorials/dlt_tuts_1.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 1">
           </div>
           <div class="step d-none" data-step="2">
             <h6>Step 2: Check status updates displayed next to each report</h6>
-            <img src="{{ asset('images/track-status-step2.jpg') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
-          </div>
-          <div class="step d-none" data-step="3">
-            <h6>Step 3: Click on a report to see detailed progress</h6>
-            <img src="{{ asset('images/track-status-step3.jpg') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 3">
+            <img src="{{ asset('images/tutorials/dlt_tuts_2.png') }}" class="img-fluid rounded shadow-lg mb-3" alt="Step 2">
           </div>
         </div>
       </div>

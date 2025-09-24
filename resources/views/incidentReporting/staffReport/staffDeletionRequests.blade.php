@@ -63,7 +63,7 @@
                                         {{ $request->report_title }}
                                     </td>
                                     <td class="text-truncate" style="max-width: 120px;">
-                                        {{ $request->created_at->format('Y-m-d') }}
+                                        {{ \Carbon\Carbon::parse($request->report_date)->format('M d, Y') }}
                                     </td>
                                     <td>
                                         <span

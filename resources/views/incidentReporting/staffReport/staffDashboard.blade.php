@@ -36,7 +36,7 @@
                 <div class="row g-3 widgets mb-3">
                     <div class="col-md-4">
                         <section class="widget">
-                            <a href="#" class="widget-link">
+                            <a class="widget-link">
                                 <h2><i class="fas fa-file-alt"></i> Total Reports</h2>
                                 <p id="totalReportsCount">{{ $totalIncidentReports }}</p>
                             </a>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-4">
                         <section class="widget">
-                            <a href="#" class="widget-link">
+                            <a class="widget-link">
                                 <h2><i class="fas fa-trash-alt"></i> Pending Deletion Requests</h2>
                                 <p id="pendingDeletionsCount">{{ $totalPendingDeleteRequests }}</p>
                             </a>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-4">
                         <section class="widget">
-                            <a href="#" class="widget-link">
+                            <a class="widget-link">
                                 <h2><i class="fas fa-edit"></i> Pending Edit Requests</h2>
                                 <p id="pendingUpdatesCount">{{ $totalPendingEditRequests }}</p>
                             </a>
@@ -64,7 +64,7 @@
                 <div class="row g-3 widgets justify-content-center">
                     <div class="col-md-4">
                         <section class="widget">
-                            <a href="#" class="widget-link">
+                            <a class="widget-link">
                                 <h2><i class="fas fa-check-circle"></i> Resolved Reports</h2>
                                 <p id="resolvedReportsCount">{{ $totalResolvedReports }}</p>
                             </a>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-4">
                         <section class="widget">
-                            <a href="#" class="widget-link">
+                            <a class="widget-link">
                                 <h2><i class="fas fa-times-circle"></i> Unsuccessful response</h2>
                                 <p id="unsuccessfulReportsCount">{{ $totalCanceledReports }}</p>
                             </a>

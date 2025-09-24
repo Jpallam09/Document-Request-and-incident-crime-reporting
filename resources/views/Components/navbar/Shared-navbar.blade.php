@@ -118,12 +118,25 @@
 <div class="layout">
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar py-3 px-2">
-        <div class="sidebar__brand d-flex align-items-center gap-2 px-3 mb-4">
-            <i class="fas fa-shield-alt fs-5"></i>
-            <span class="fw-semibold fs-6">Incident Reporting</span>
+        <!-- Brand -->
+        <div class="d-flex align-items-center gap-2 px-3 mb-4">
+            <img src="{{ asset('images/SMI_logo.png') }}" alt="Logo" class="img-fluid" width="40"
+                height="40">
+
+            <div class="d-flex flex-column lh-1">
+                <span class="fw-semibold fs-6 text-uppercase text-white"
+                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.5px;">
+                    Incident
+                </span>
+                <span class="fw-bold fs-3 text-uppercase text-white"
+                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 1px;">
+                    Reporting
+                </span>
+            </div>
         </div>
 
         <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
+            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.dashboard') }}"
                     class="sidebar__link {{ request()->routeIs('reporting.staff.dashboard') ? 'active' : '' }}">
@@ -131,6 +144,7 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('reporting.staff.staffReportView') }}"
                     class="sidebar__link {{ request()->routeIs('reporting.staff.staffReportView') ? 'active' : '' }}">

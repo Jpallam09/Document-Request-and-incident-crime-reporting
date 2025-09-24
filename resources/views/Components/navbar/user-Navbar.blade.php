@@ -128,13 +128,25 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar py-3 px-2 d-flex flex-column">
         <!-- Brand -->
-        <div class="sidebar__brand d-flex align-items-center gap-2 px-3 mb-4">
-            <i class="fas fa-shield-alt fs-5"></i>
-            <span class="fw-semibold fs-6">Incident Reporting</span>
+        <div class="d-flex align-items-center gap-2 px-3 mb-4">
+            <img src="{{ asset('images/SMI_logo.png') }}" alt="Logo" class="img-fluid" width="40"
+                height="40">
+
+            <div class="d-flex flex-column lh-1">
+                <span class="fw-semibold fs-6 text-uppercase text-white"
+                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.5px;">
+                    Incident
+                </span>
+                <span class="fw-bold fs-3 text-uppercase text-white"
+                    style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; letter-spacing: 1px;">
+                    Reporting
+                </span>
+            </div>
         </div>
 
         <!-- Navigation -->
         <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
+            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('user.report.userMainDashboard') }}"
                     class="sidebar__link {{ request()->routeIs('user.report.userMainDashboard') ? 'active' : '' }}">
@@ -142,6 +154,7 @@
                     <span>Home</span>
                 </a>
             </li>
+            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('user.report.userDashboardReporting') }}"
                     class="sidebar__link {{ request()->routeIs('user.report.userDashboardReporting') ? 'active' : '' }}">
@@ -160,12 +173,14 @@
 
         <!-- FAQ (Pinned at bottom) -->
         <ul class="sidebar__nav d-flex flex-column gap-2 mt-auto list-unstyled">
+            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('user.report.userMainDashboard') }}#faq" class="sidebar__link">
                     <i class="fas fa-question-circle me-2"></i>
                     <span>FAQ</span>
                 </a>
             </li>
+            <hr class="m-0">
         </ul>
     </aside>
 </div>
