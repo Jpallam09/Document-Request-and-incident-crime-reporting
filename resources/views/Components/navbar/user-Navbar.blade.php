@@ -173,14 +173,12 @@
 
         <!-- FAQ (Pinned at bottom) -->
         <ul class="sidebar__nav d-flex flex-column gap-2 mt-auto list-unstyled">
-            <hr class="m-0">
             <li class="sidebar__item">
                 <a href="{{ route('user.report.userMainDashboard') }}#faq" class="sidebar__link">
                     <i class="fas fa-question-circle me-2"></i>
                     <span>FAQ</span>
                 </a>
             </li>
-            <hr class="m-0">
         </ul>
     </aside>
 </div>
