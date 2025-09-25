@@ -7,7 +7,7 @@
     <title>Incident Report Details</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -96,76 +96,85 @@
 
                     <div class="card mb-4 p-3 shadow-sm">
                         <div class="row g-3 align-items-center">
-                            <!-- Controls: My Location + Barangay -->
+
                             <div class="col-md-7">
-                                <label class="form-label">Incident Location</label>
-                                <div id="mapControls" class="w-100 h-100 rounded-3 border bg-light"></div>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <button type="button" id="locateBtn" class="btn btn-outline-primary btn-sm">
+                                <label class="form-label">Incident Location<small id="coordsHelpControls"
+                                        class="text-muted mb-0">(Optional)</small></label>
+                                <div id="mapControls" class="w-100 h-100 rounded-3 bg-light"></div>
+                                <div class="d-flex justify-content-start align-items-center mt-2 gap-2">
+                                    <button type="button" id="locateBtn" class="btn btn-primary btn-sm rounded-pill">
                                         <i class="fa-solid fa-location-crosshairs"></i> Use My Location
                                     </button>
-                                    <small id="coordsHelpControls" class="text-muted mb-0">Optional</small>
+
+                                    <a href="javascript:void(0);" id="resetButton"
+                                        class="btn btn-outline-secondary btn-sm rounded-pill px-3 d-none">
+                                        <i class="fa-solid fa-rotate-left"></i> Reset Location
+                                    </a>
                                 </div>
                             </div>
 
-                        <!-- Map Preview Row -->
-                        <div class="col-12 mt-3">
-                            <label class="form-label">Location Preview</label>
-                            <div id="mapPreview" class="w-100 rounded-3 border bg-light" style="height: 250px;"></div>
-                            <small id="coordsHelpPreview" class="text-muted">Latitude & Longitude will auto-fill
-                                here.</small>
-                        </div>
+                            <hr class="my-3">
 
-                        <input type="hidden" name="latitude" id="latitude"
-                            value="{{ old('latitude', $report->latitude) }}">
-                        <input type="hidden" name="longitude" id="longitude"
-                            value="{{ old('longitude', $report->longitude) }}">
-                    </div>
-
-                    <!-- Attachments -->
-                    <div class="attachments-section card shadow-sm p-3 mb-4">
-                        <h3 class="h5 mb-3 d-flex align-items-center gap-2">
-                            <i class="fa-solid fa-paperclip text-muted"></i> Attachments
-                        </h3>
-
-                        <!-- Existing Images Grid -->
-                        <div class="attachments-grid d-flex flex-wrap gap-3 mb-3" id="attachmentsGrid">
-                            @foreach ($report->images as $image)
-                                <div class="position-relative attachment-item border rounded shadow-sm p-1 bg-light">
-                                    <img src="{{ asset('storage/' . $image->file_path) }}" alt="Report Attachment"
-                                        class="attachment-thumb rounded">
-                                    <button type="button"
-                                        class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle shadow"
-                                        onclick="removeExistingImage({{ $image->id }}, this)">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
+                            <!-- Map Preview Row -->
+                            <div class="col-12 mt-3">
+                                <label class="form-label">Location Preview</label>
+                                <div id="mapPreview" class="w-100 rounded-3 border bg-light" style="height: 250px;">
                                 </div>
-                            @endforeach
+                                <small id="coordsHelpPreview" class="text-muted">Latitude & Longitude will auto-fill
+                                    here.</small>
+                            </div>
+
+                            <input type="hidden" name="latitude" id="latitude"
+                                value="{{ old('latitude', $report->latitude) }}">
+                            <input type="hidden" name="longitude" id="longitude"
+                                value="{{ old('longitude', $report->longitude) }}">
                         </div>
 
-                        <!-- Upload New Images -->
-                        <div class="upload-section">
-                            <label for="requested_image"
-                                class="form-label fw-semibold d-flex align-items-center gap-2">
-                                <i class="fa-solid fa-upload text-success"></i> Add New Images
+                        <!-- Attachments -->
+                        <div class="attachments-section card shadow-sm p-3 mb-4">
+                            <h3 class="h5 mb-3 d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-paperclip text-muted"></i> Attachments
+                            </h3>
+
+                            <!-- Existing Images Grid -->
+                            <div class="attachments-grid d-flex flex-wrap gap-3 mb-3" id="attachmentsGrid">
+                                @foreach ($report->images as $image)
+                                    <div
+                                        class="position-relative attachment-item border rounded shadow-sm p-1 bg-light">
+                                        <img src="{{ asset('storage/' . $image->file_path) }}"
+                                            alt="Report Attachment" class="attachment-thumb rounded">
+                                        <button type="button"
+                                            class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle shadow"
+                                            onclick="removeExistingImage({{ $image->id }}, this)">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Upload New Images -->
+                            <div class="upload-section">
+                                <label for="requested_image"
+                                    class="form-label fw-semibold d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-upload text-success"></i> Add New Images
+                                </label>
+                                <input type="file" name="requested_image[]" id="requested_image" accept="image/*"
+                                    multiple class="form-control shadow-sm">
+                                <div class="form-text text-muted">Select one or more images (JPG, PNG, etc.)</div>
+                                <div id="previewContainer" class="d-flex flex-wrap gap-2 mt-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 mt-3 reason-section">
+                            <label for="reason" class="form-label fw-semibold d-flex align-items-center gap-2">
+                                <i class="bi bi-pencil-square text-muted"><i
+                                        class="fa-solid fa-pen-to-square text-mute"></i></i> REASON FOR EDIT
                             </label>
-                            <input type="file" name="requested_image[]" id="requested_image" accept="image/*"
-                                multiple class="form-control shadow-sm">
-                            <div class="form-text text-muted">Select one or more images (JPG, PNG, etc.)</div>
-                            <div id="previewContainer" class="d-flex flex-wrap gap-2 mt-2"></div>
+                            <textarea name="reason" id="reason" rows="3" class="form-control shadow-sm"
+                                placeholder="Explain why you want to edit this report..." required>{{ old('reason', $report->reason) }}</textarea>
                         </div>
-                    </div>
 
-                    <div class="mb-3 mt-3 reason-section">
-                        <label for="reason" class="form-label fw-semibold d-flex align-items-center gap-2">
-                            <i class="bi bi-pencil-square text-muted"><i
-                                    class="fa-solid fa-pen-to-square text-mute"></i></i> REASON FOR EDIT
-                        </label>
-                        <textarea name="reason" id="reason" rows="3" class="form-control shadow-sm"
-                            placeholder="Explain why you want to edit this report..." required>{{ old('reason', $report->reason) }}</textarea>
                     </div>
-
-                </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-sm mb-2" id="updateReportBtn">

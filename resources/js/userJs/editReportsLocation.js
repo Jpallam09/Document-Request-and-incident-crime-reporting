@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const latitudeInput = document.getElementById('latitude');
     const longitudeInput = document.getElementById('longitude');
     const locateBtn = document.getElementById('locateBtn');
+    const resetBtn = document.getElementById('resetButton');
 
     // Parse initial coordinates
     const initialLat = parseFloat(latitudeInput.value);
     const initialLng = parseFloat(longitudeInput.value);
 
-    // Initialize maps (controls + preview)
+    // Initialize maps
     const controlsMap = L.map(mapControls).setView(
         initialLat && initialLng ? [initialLat, initialLng] : [14.5995, 120.9842],
         initialLat && initialLng ? 15 : 13
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initialLat && initialLng ? 15 : 13
     );
 
-    // Add OpenStreetMap tiles to both
+    // Add tiles
     [controlsMap, previewMap].forEach(m => {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
@@ -30,17 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let markerControls, markerPreview;
 
-    // Function to update everything when location changes
+    // Update markers and inputs
     const updateLocation = (lat, lng) => {
         latitudeInput.value = lat;
         longitudeInput.value = lng;
 
-        // Update markers
         if (markerControls) {
             markerControls.setLatLng([lat, lng]);
         } else {
             markerControls = L.marker([lat, lng], { draggable: true }).addTo(controlsMap);
-            // Add drag event once marker exists
             markerControls.on('dragend', (e) => {
                 const { lat, lng } = e.target.getLatLng();
                 updateLocation(lat, lng);
@@ -53,27 +52,27 @@ document.addEventListener('DOMContentLoaded', () => {
             markerPreview = L.marker([lat, lng]).addTo(previewMap);
         }
 
-        // Center preview map on new location
         previewMap.setView([lat, lng], 15);
-
-        // Update text
         coordsHelp.textContent = `Latitude: ${lat.toFixed(6)}, Longitude: ${lng.toFixed(6)}`;
+
+        // ✅ Show reset button
+        resetBtn.classList.remove('d-none');
     };
 
-    // If initial coords exist, place markers
+    // If location already exists, show it
     if (initialLat && initialLng) {
         updateLocation(initialLat, initialLng);
+        resetBtn.classList.remove('d-none');
     } else {
         coordsHelp.textContent = "No location provided";
     }
 
-    // Handle "Use My Location" button
+    // Use My Location
     locateBtn.addEventListener('click', () => {
         if (!navigator.geolocation) {
             alert('Geolocation is not supported by your browser.');
             return;
         }
-
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 updateLocation(position.coords.latitude, position.coords.longitude);
@@ -83,5 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Unable to get your location. Please allow location access.');
             }
         );
+    });
+
+    // ✅ Reset button functionality
+    resetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (markerControls) {
+            controlsMap.removeLayer(markerControls);
+            markerControls = null;
+        }
+        if (markerPreview) {
+            previewMap.removeLayer(markerPreview);
+            markerPreview = null;
+        }
+
+        latitudeInput.value = "";
+        longitudeInput.value = "";
+        coordsHelp.textContent = "No location provided";
+
+        controlsMap.setView([14.5995, 120.9842], 13);
+        previewMap.setView([14.5995, 120.9842], 13);
+
+        resetBtn.classList.add('d-none'); // 👈 Hide again
     });
 });

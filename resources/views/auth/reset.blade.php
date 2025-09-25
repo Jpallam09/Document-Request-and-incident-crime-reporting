@@ -49,13 +49,13 @@
                         <div class="mb-3">
                             <label for="password" class="form-label">New Password</label>
                             <input type="password" name="password" id="password" class="form-control" required
-                                minlength="8" placeholder="New Password">
+                                minlength="8" placeholder="New Password" value="{{ old('password') }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirm Password</label>
                             <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="form-control" required minlength="8" placeholder="Confirm Password">
+                                class="form-control" required minlength="8" placeholder="Confirm Password" value="{{ old('password_confirmation') }}">
                         </div>
 
                         <button type="submit" class="btn btn-outline-light w-100">

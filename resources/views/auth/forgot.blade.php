@@ -48,7 +48,7 @@
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" id="email" name="email" class="form-control"
                                 placeholder="you@example.com" autocomplete="email" required
-                                aria-describedby="email-desc" />
+                                aria-describedby="email-desc" value="{{ old('email') }}" />
                         </div>
 
                         <button type="submit" class="btn btn-outline-light w-100">

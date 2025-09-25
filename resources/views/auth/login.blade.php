@@ -5,8 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Login</title>
-    <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
-    <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
 
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -44,14 +42,14 @@
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" id="email" name="email" class="form-control"
                                 placeholder="you@example.com" autocomplete="email" required
-                                aria-describedby="email-desc" />
+                                aria-describedby="email-desc" value="{{ old('email') }}" />
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" name="password" class="form-control"
                                 placeholder="Enter your password" autocomplete="current-password" required
-                                minlength="8" aria-describedby="password-desc" />
+                                minlength="8" aria-describedby="password-desc" value="{{ old(  'password' ) }}"/>
                         </div>
 
                         <button type="submit" class="btn btn-outline-light btn-sm w-100" aria-label="Log in user">Log

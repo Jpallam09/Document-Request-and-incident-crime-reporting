@@ -91,7 +91,7 @@ class EditRequestController extends Controller
             $editRequest->user->notify(new EditRequestStatusNotification($editRequest, 'approved'));
         }
 
-        Alert::success('Edit request accepted and applied successfully.', 'Success')->autoClose(3000);
+        Alert::success('Edit Request Approved', 'The changes have been applied successfully.')->autoClose(3000);
 
         return redirect()->route('reporting.staff.staffUpdateRequests'); // go back to list instead of same page
     }

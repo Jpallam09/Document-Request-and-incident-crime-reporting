@@ -54,37 +54,37 @@
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email Address</label>
                                 <input type="email" id="email" name="email" class="form-control"
-                                    placeholder="you@example.com" required />
+                                    placeholder="you@example.com" required value="{{ old( 'email' ) }}" />
                             </div>
 
                             <div class="col-md-6">
                                 <label for="first-name" class="form-label">First Name</label>
                                 <input type="text" id="first-name" name="first_name" class="form-control"
-                                    placeholder="Enter your First name" required minlength="3" maxlength="20" />
+                                    placeholder="Enter your First name" required minlength="3" maxlength="20" value="{{  old( 'first_name' )  }}" />
                             </div>
 
                             <div class="col-md-6">
                                 <label for="last-name" class="form-label">Last Name</label>
                                 <input type="text" id="last-name" name="last_name" class="form-control"
-                                    placeholder="Enter your Last name" required minlength="3" maxlength="20" />
+                                    placeholder="Enter your Last name" required minlength="3" maxlength="20" value="{{ old( 'last_name' ) }}" />
                             </div>
 
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Phone Number</label>
                                 <input type="tel" id="phone" name="phone" class="form-control"
-                                    placeholder="09xx xxxx xxx" />
+                                    placeholder="09xx xxxx xxx" value="{{ old('phone' ) }}" />
                             </div>
 
                             <div class="col-md-6">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" name="password" class="form-control"
-                                    placeholder="Create a password" required minlength="8" />
+                                    placeholder="Create a password" required minlength="8" value="{{ old('password') }}" />
                             </div>
 
                             <div class="col-md-6">
                                 <label for="confirm-password" class="form-label">Confirm Password</label>
                                 <input type="password" id="confirm-password" name="password_confirmation"
-                                    class="form-control" placeholder="Re-enter your password" required />
+                                    class="form-control" placeholder="Re-enter your password" required value="{{ old('password') }}" />
                             </div>
                         </div>
 

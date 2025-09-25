@@ -46,7 +46,8 @@
                         </div>
 
                         <div>
-                            <label for="incident-date"><i class="fa fa-calendar-day text-muted"></i>Date of Incident</label>
+                            <label for="incident-date"><i class="fa fa-calendar-day text-muted"></i>Date of
+                                Incident</label>
                             <input type="date" id="incident-date" name="report_date" required aria-required="true"
                                 value="{{ old('report_date') }}">
                         </div>
@@ -75,13 +76,23 @@
                                 <div class="col-md-7">
                                     <label class="form-label">Incident Location<small id="coordsHelpControls"
                                             class="text-muted mb-2 small"> (Optional)</small></label>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
-                                        <button type="button" id="locateBtn" class="btn btn-outline-primary btn-sm">
+
+                                    <div class="d-flex justify-content-start align-items-center mt-2 gap-2">
+                                        <button type="button" id="locateBtn"
+                                            class="btn btn-primary btn-sm rounded-pill">
                                             <i class="fa-solid fa-location-crosshairs"></i> Use My Location
                                         </button>
+
+                                        <a href="javascript:void(0);" id="resetButton"
+                                            class="btn btn-outline-secondary btn-sm rounded-pill px-3 d-none">
+                                            <i class="fa-solid fa-rotate-left"></i> Reset Location
+                                        </a>
                                     </div>
+
                                 </div>
                             </div>
+
+                            <hr class="my-3">
 
                             <!-- Map Preview Row -->
                             <div class="col-12 mt-3">
@@ -112,7 +123,8 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary btn-md" aria-label="Submit Incident Report">
+                            <button type="submit" class="btn btn-primary btn-md"
+                                aria-label="Submit Incident Report">
                                 Submit Report
                             </button>
                         </div>

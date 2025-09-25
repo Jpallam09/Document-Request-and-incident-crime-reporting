@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPassController extends Controller
 {
@@ -45,7 +46,7 @@ class ForgotPassController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
-                $user->password = bcrypt($password);
+                $user->password = Hash::make($password);
                 $user->save();
             }
         );
