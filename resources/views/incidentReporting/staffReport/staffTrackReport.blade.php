@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Track Report</title>
+        <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">

@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Registration</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -45,7 +47,7 @@
                             <div class="col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" id="username" name="user_name" class="form-control"
-                                    placeholder="Choose a username" required minlength="3" maxlength="20" 
+                                    placeholder="Choose a username" required minlength="3" maxlength="20"
                                     value="{{ old('user_name') }}"/>
                             </div>
 

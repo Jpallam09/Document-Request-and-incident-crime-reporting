@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff - View All Reports</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 

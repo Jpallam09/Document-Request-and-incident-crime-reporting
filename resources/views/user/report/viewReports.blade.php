@@ -7,6 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Incident Report Details</title>
+    
+    <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
