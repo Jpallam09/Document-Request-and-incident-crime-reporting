@@ -82,6 +82,12 @@
                     </div>
                 </div>
 
+                <div class="row mb-4 mt-4">
+                    <div class="col">
+                        <h2 class="page-title">Report Charts</h2>
+                    </div>
+                </div>
+
                 <!-- Charts Section -->
                 <div class="row g-3 mt-4">
                     <div class="col-lg-8">
