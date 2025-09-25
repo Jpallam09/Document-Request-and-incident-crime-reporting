@@ -304,6 +304,91 @@ details > summary::-webkit-details-marker {
     }
 }
 
+/* ===== Bottom Navbar ===== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background: var(--bg-white);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-nav__menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.bottom-nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.bottom-nav__link i {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav__link span {
+    font-size: 0.7rem;
+}
+
+/* Modern Active Indicator */
+.bottom-nav__link.active {
+    color: var(--primary);
+}
+
+.bottom-nav__link.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: var(--radius);
+    transform: translateY(-100%);
+    left: 25%;
+}
+
+/* Hover Effects */
+.bottom-nav__link:hover {
+    color: var(--primary-light);
+}
+
+.bottom-nav__link:hover i {
+    transform: translateY(-3px);
+}
+
+/* Optional: Responsive Icon + Text Scaling */
+@media (max-width: 400px) {
+    .bottom-nav__link i {
+        font-size: 1.1rem;
+    }
+    .bottom-nav__link span {
+        font-size: 0.65rem;
+    }
+}
+
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     .page-content {
@@ -323,35 +408,46 @@ details > summary::-webkit-details-marker {
     }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .page-content {
-        padding: 1.5rem;
+/* ===== COLLAPSE SIDEBAR FOR MOBILE & TABLETS ===== */
+@media (max-width: 991.98px) {
+    .sidebar {
+        transform: translateX(-100%); /* Hide sidebar off-screen */
+        width: var(--sidebar-width);
+        position: fixed;
+        z-index: 90;
+        transition: transform 0.3s ease;
     }
-    .button-group-responsive {
-        flex-wrap: wrap;
-    }
-    .table-container {
-        overflow-x: auto;
-    }
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-}
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .page-content {
-        padding: 2rem;
+    /* Show sidebar when toggle is active */
+    .sidebar.show {
+        transform: translateX(0);
     }
-}
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
+    /* Page content full width */
     .page-content {
-        padding: 2.5rem;
+        margin-left: 0;
+        padding: 2rem 1rem;
     }
+
+    /* Optional: Add a sidebar toggle button */
+    .sidebar-toggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 100;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        cursor: pointer;
+    }
+
+    .sidebar-toggle i {
+        font-size: 1.2rem;
+    }
+
 }
 
 

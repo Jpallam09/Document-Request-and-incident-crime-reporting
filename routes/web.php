@@ -15,7 +15,7 @@ Route::get('/', function () {
 // ------------------ AUTH ROUTES ------------------
 Route::prefix("auth")->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
-        ->name('register'); // ✅ FIXED: Now GET
+        ->name('register');
     Route::post('/register', [RegisterController::class, 'register'])
         ->name('register.post');
 

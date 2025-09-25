@@ -7,8 +7,6 @@
                 input: [// authCss
                         'resources/css/authCss/forms.css',
                         'resources/css/authCss/index.css',
-                        'resources/css/authCss/user-main-dashboard.css',
-                        'resources/css/authCss/viewReports.css',
                         'resources/css/authCss/userMainDashboard.css',
 
                         // staffCss
@@ -18,7 +16,6 @@
                         'resources/css/staffCss/staffReportView.css',
                         'resources/css/staffCss/staffUpdateRequests.css',
                         'resources/css/staffCss/staffTrackReport.css',
-                        'resources/css/staffCss/staffShowEditRequest.css',
 
                         // userCss
                         'resources/css/userCss/userIncidentReporting.css',
@@ -35,7 +32,6 @@
 
                         //componentsJs
                         'resources/js/componentsJs/navbar.js',
-                        'resources/js/componentsJs/shared-navbar.js',
                         'resources/js/componentsJs/viewRequestModal.js',
                         'resources/js/componentsJs/form-modal.js',
                         'resources/js/componentsJs/map.js',
