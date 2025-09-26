@@ -12,6 +12,10 @@
   padding: 2rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 1200px; /* keeps form reasonable on very large screens */
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .report-form-section h2 {
@@ -125,22 +129,14 @@
 
 /* Modal Image */
 .modal-content {
-  max-width: 70%;      /* reduce width from 90% to 70% */
-  max-height: 80%;     /* keep height reasonable */
-  width: auto;         /* auto width to preserve aspect ratio */
-  height: auto;        /* auto height */
+  max-width: 70%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   outline: 3px solid white;
-  object-fit: contain; /* scale image inside modal without cropping */
-}
-
-/* Smaller screens */
-@media (max-width: 768px) {
-  .modal-content {
-    max-width: 90%;
-    max-height: 70%;
-  }
+  object-fit: contain;
 }
 
 .close-modal {
@@ -173,31 +169,120 @@
 .modal-prev:hover,
 .modal-next:hover { color: var(--primary-light); }
 
+/* ===== FORM LAYOUT RESPONSIVENESS ===== */
 
-/* ============================
-   Responsive Design
-=============================== */
-@media (max-width: 768px) {
-  .layout {
-    flex-direction: column;
-  }
+/* Form Inputs Grid for larger screens */
+@media (min-width: 768px) {
+    .report-form-section form .form-row {
+        display: flex;
+        gap: 1rem;
+    }
 
-  .page-content {
-    margin-left: 0;
-    padding: 1.5rem;
-  }
+    .report-form-section form .form-row > div {
+        flex: 1;
+    }
+}
 
-  .features {
-    grid-template-columns: 1fr;
-  }
+/* Stack inputs vertically on smaller screens */
+@media (max-width: 767.98px) {
+    .report-form-section {
+        padding: 1.5rem;
+    }
 
-  .preview-item img {
-    width: 5rem;
-    height: 5rem;
-  }
+    .report-form-section form .form-row {
+        display: block;
+    }
 
-  .modal-content {
-    max-width: 95%;
-    max-height: 75%;
-  }
+    .preview-grid {
+        justify-content: flex-start;
+    }
+
+    .preview-item img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .remove-image {
+        width: 1.2rem;
+        height: 1.2rem;
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+    }
+}
+
+/* IMAGE MODAL RESPONSIVENESS */
+@media (max-width: 992px) {
+    .modal-content {
+        max-width: 85%;
+        max-height: 75%;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-content {
+        max-width: 95%;
+        max-height: 70%;
+    }
+
+    .modal-prev,
+    .modal-next {
+        font-size: 2rem;
+    }
+
+    .close-modal {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.75rem;
+    }
+}
+
+/* BUTTONS & UPLOAD RESPONSIVENESS */
+.report-form-section .btn {
+    width: auto;
+    min-width: 120px;
+}
+
+@media (max-width: 575.98px) {
+    .report-form-section .btn {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+
+    .report-form-section small.upload-guidance {
+        font-size: 0.75rem;
+    }
+}
+
+/* FORM TEXTAREAS */
+@media (max-width: 575.98px) {
+    .report-form-section textarea {
+        min-height: 6rem;
+    }
+}
+
+/* PAGE CONTENT PADDING ADJUSTMENTS */
+@media (max-width: 767.98px) {
+    .page-content {
+        padding: 1rem;
+    }
+}
+
+/* SIDEBAR COLLAPSE FOR MOBILE */
+@media (max-width: 767.98px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: inline-flex;
+    }
+}
+
+/* FORM GRID ALIGNMENT (optional for better spacing) */
+.report-form-section form .form-row .form-group {
+    margin-bottom: 1rem;
 }

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const BREAKPOINT_MD = 768;
+    const BREAKPOINT_MOBILE = 768; // match CSS
     const toggleBtn = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
 
@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.contains('is-open') ? closeSidebar() : openSidebar();
 
     if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', toggleSidebar);
+        toggleBtn.addEventListener('click', () => {
+            if (window.innerWidth < BREAKPOINT_MOBILE) toggleSidebar();
+        });
+
         overlay.addEventListener('click', closeSidebar);
 
         window.addEventListener('keydown', e => {
@@ -32,15 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= BREAKPOINT_MD) {
-                closeSidebar();
+            if (window.innerWidth >= BREAKPOINT_MOBILE) {
+                closeSidebar(); // sidebar always visible on larger screens
             }
         });
     }
 
     /* ===== Dropdown auto-close behavior ===== */
     const dropdowns = document.querySelectorAll('details');
-
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener('toggle', () => {
             if (dropdown.open) {

@@ -42,7 +42,6 @@ body {
 .page-content h1.h3 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--primary);
 }
 
 /* ===== Badges ===== */

@@ -378,7 +378,10 @@ details > summary::-webkit-details-marker {
     transform: translateY(-3px);
 }
 
-/* Optional: Responsive Icon + Text Scaling */
+.bottom-nav {
+    display: none; 
+}
+
 @media (max-width: 400px) {
     .bottom-nav__link i {
         font-size: 1.1rem;
@@ -387,7 +390,6 @@ details > summary::-webkit-details-marker {
         font-size: 0.65rem;
     }
 }
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -408,8 +410,8 @@ details > summary::-webkit-details-marker {
     }
 }
 
-/* ===== COLLAPSE SIDEBAR FOR MOBILE & TABLETS ===== */
-@media (max-width: 991.98px) {
+/* ===== COLLAPSE SIDEBAR FOR TABLETS & MOBILE ===== */
+@media (max-width: 767.98px) {
     .sidebar {
         transform: translateX(-100%); /* Hide sidebar off-screen */
         width: var(--sidebar-width);
@@ -429,7 +431,7 @@ details > summary::-webkit-details-marker {
         padding: 2rem 1rem;
     }
 
-    /* Optional: Add a sidebar toggle button */
+    /* Sidebar toggle button */
     .sidebar-toggle {
         position: fixed;
         top: 1rem;
@@ -442,10 +444,20 @@ details > summary::-webkit-details-marker {
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         cursor: pointer;
+        display: inline-flex; /* always visible in mobile/tablet */
+        align-items: center;
+        justify-content: center;
     }
 
     .sidebar-toggle i {
         font-size: 1.2rem;
+    }
+}
+
+/* ===== BOTTOM NAVBAR ONLY FOR MOBILE (<576px) ===== */
+@media (max-width: 766.98px) {
+    .bottom-nav {
+        display: flex; /* show only on true mobile */
     }
 
 }

@@ -125,3 +125,91 @@ body {
 .text-muted i {
     color: var(--text-light);
 }
+
+@media (min-width: 768px) {
+    .page-content {
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
+    }
+
+    .widgets .col-md-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+}
+
+/* ---------------------- */
+/* Tablet (576px – 767px) */
+/* ---------------------- */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .page-content {
+        margin-left: 0;
+        padding: 1.5rem 1.5rem 4rem 1.5rem; /* leave space for optional bottom nav */
+    }
+
+    .widgets .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .bottom-nav {
+        display: flex; /* show bottom nav */
+    }
+}
+
+/* ---------------------- */
+/* Mobile (<576px) */
+/* ---------------------- */
+@media (max-width: 575.98px) {
+    .page-content {
+        margin-left: 0;
+        padding: 1rem 1rem 6rem 1rem; /* leave space for bottom nav */
+    }
+
+    .widgets .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .widget h2 {
+        font-size: 1rem;
+    }
+
+    #count {
+        font-size: 1.5rem;
+    }
+
+    .bottom-nav {
+        display: flex !important; /* force display */
+    }
+}
+
+/* ---------------------- */
+/* Table responsiveness */
+/* ---------------------- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Make table text fit better on small screens */
+@media (max-width: 575.98px) {
+    .report-table th,
+    .report-table td {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
+    }
+}
+
+/* Optional: truncate long table text on mobile */
+@media (max-width: 575.98px) {
+    .report-table td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+    }
+}
