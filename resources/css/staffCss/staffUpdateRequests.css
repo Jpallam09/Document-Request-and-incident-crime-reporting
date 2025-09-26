@@ -119,31 +119,76 @@ body {
   pointer-events: none;
 }
 
-/* ===== Responsive ===== */
+/* ===== Mobile Adjustments (≤768px) ===== */
 @media (max-width: 768px) {
+    /* Layout & page content */
     .layout {
-        flex-direction: column;
+        flex-direction: column !important;
+        min-height: auto !important; /* remove extra vertical space */
     }
 
     .page-content {
-        margin-left: 0;
-        padding: 1.5rem;
+        margin-left: 0 !important; /* remove sidebar offset */
+        padding-top: calc(var(--header-height) + 0.5rem) !important; /* only navbar space */
+        padding-bottom: 1rem !important;
     }
 
+    /* Page title smaller and centered */
     .page-title {
         font-size: 1.5rem;
-        padding-bottom: 0.5rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
     }
 
-    .table-container {
-        margin: 0;
-        padding: 1rem;
+    /* Table container adjustments */
+    .table-responsive {
+        overflow-x: auto;
+        padding: 0.5rem !important;
     }
 
-    .btn-view,
-    .btn-approve,
-    .btn-reject {
-        padding: 0.35rem 0.7rem;
-        font-size: 0.9rem;
+    .report-table {
+        font-size: 0.7rem !important; /* slightly smaller font */
+        min-width: 600px; /* prevent collapsing badly */
+        border-collapse: collapse; /* tighter borders */
+    }
+
+    .report-table th,
+    .report-table td {
+        white-space: normal !important; /* allow wrapping */
+        padding: 0.25rem 0.4rem !important; /* reduced vertical & horizontal padding */
+        text-align: left;
+        border-width: 1px !important; /* thinner borders */
+    }
+
+    .report-table thead th {
+        padding: 0.3rem 0.5rem !important;
+        font-weight: 600;
+    }
+
+    /* Stack action buttons vertically */
+    .action-col .d-flex {
+        flex-direction: column !important;
+        gap: 0.2rem;
+        justify-content: flex-start;
+    }
+
+    .action-col .btn {
+        width: 100% !important;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.35rem;
+        margin-bottom: 0 !important;
+    }
+
+    /* Pagination & wrapper full width */
+    .pagination-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    /* Adjust container padding */
+    .container-fluid {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 }

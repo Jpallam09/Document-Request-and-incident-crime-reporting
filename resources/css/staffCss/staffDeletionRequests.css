@@ -138,26 +138,42 @@ body {
     background-color: #dc2626;
 }
 
-/* Responsive */
+/* ===== Mobile Layout Fix ===== */
 @media (max-width: 768px) {
-    .page-title {
-        font-size: 1.5rem;
-    }
-
-    .btn-view,
-    .btn-mark,
-    .btn-approve,
-    .btn-reject {
-        padding: 0.35rem 0.7rem;
-        font-size: 0.9rem;
+    .layout {
+        flex-direction: column !important;
+        min-height: auto !important; /* remove huge space */
     }
 
     .page-content {
-        margin-left: 0;
-        padding: 1.5rem;
+        margin-left: 0 !important; /* no sidebar margin */
+        padding-top: calc(var(--header-height) + 0.5rem) !important; /* only navbar height + small gap */
+        padding-bottom: 1rem !important;
     }
 
-    .layout {
-        flex-direction: column;
+    /* Table adjustments */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .report-table th,
+    .report-table td {
+        font-size: 0.75rem;
+        white-space: normal;
+        padding: 0.35rem 0.5rem;
+        text-align: left;
+    }
+
+    /* Stack action buttons vertically */
+    .action-col .d-flex {
+        flex-direction: column !important;
+        gap: 0.25rem;
+    }
+
+    .action-col .btn {
+        width: 100% !important;
+        font-size: 0.7rem;
+        padding: 0.35rem 0.5rem;
+        margin-bottom: 0 !important;
     }
 }

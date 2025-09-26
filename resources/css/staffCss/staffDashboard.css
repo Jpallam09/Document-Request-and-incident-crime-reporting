@@ -189,20 +189,78 @@ body {
     }
 }
 
+/* ===== Responsive Mobile Layout ===== */
 @media (max-width: 768px) {
+    /* Page content fills screen (no sidebar) */
+    .page-content {
+        margin-left: 0;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Dashboard title smaller */
     .dashboard-title {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    /* Widgets stack vertically */
+    .widgets {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .widgets .widget {
+        padding: 1.5rem;
+        min-height: auto;
     }
 
     .widget h2 {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
 
     .widget p {
         font-size: 1.5rem;
     }
 
+    /* Chart cards stack and shrink */
+    .chart-card {
+        min-height: auto;
+        padding: 1rem;
+    }
+
     .chart-card h3 {
         font-size: 1.25rem;
+        text-align: center;
+    }
+
+    .chart-card canvas {
+        max-height: 10rem;
+    }
+
+    /* Ensure gradient top bar scales correctly */
+    .widget::before,
+    .chart-card::before {
+        height: 3px;
+    }
+}
+
+/* Extra small screens <576px */
+@media (max-width: 575.98px) {
+    .dashboard-title {
+        font-size: 1.25rem;
+    }
+
+    .widget h2 {
+        font-size: 1rem;
+    }
+
+    .widget p {
+        font-size: 1.25rem;
+    }
+
+    .chart-card h3 {
+        font-size: 1rem;
     }
 }
