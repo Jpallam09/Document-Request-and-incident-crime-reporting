@@ -136,4 +136,19 @@ h1.display-5 {
         font-size: 0.8rem;
         line-height: 1.3;
     }
+    @media (max-width: 768px) {
+    .about-section,
+    .banner-logos,
+    .banner-logos .logo-row,
+    .banner-logos img,
+    .banner-logos p,
+    h1.display-5,
+    .highlight,
+    .separator,
+    .lead,
+    .cursor {
+        display: none !important;
+    }
+}
+
 }

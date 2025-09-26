@@ -16,14 +16,16 @@
                     data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
                     <i class="fas fa-bell fa-lg"></i>
                     @if (isset($unreadNotifications) && $unreadNotifications->count() > 0)
-                        <span class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1">
+                        <span
+                            class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-1">
                             {{ $unreadNotifications->count() }}
                         </span>
                     @endif
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end p-2"
-                    style="max-height: 400px; overflow-y: auto; min-width: 350px;" aria-labelledby="notificationDropdown">
+                    style="max-height: 400px; overflow-y: auto; min-width: 350px;"
+                    aria-labelledby="notificationDropdown">
 
                     @if (!isset($notifications) || $notifications->isEmpty())
                         <li class="dropdown-item text-center text-muted small py-3">
@@ -168,4 +170,37 @@
                 </li>
             </ul>
         </aside>
+        <!-- Bottom Navbar (Mobile Only) -->
+        <nav class="bottom-nav d-lg-none fixed-bottom bg-white border-top shadow-sm">
+            <ul class="bottom-nav__menu d-flex justify-content-around m-0 p-0 list-unstyled">
+                <li>
+                    <a href="{{ route('reporting.staff.dashboard') }}"
+                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.dashboard') ? 'active' : '' }}">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reporting.staff.staffReportView') }}"
+                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffReportView') ? 'active' : '' }}">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reporting.staff.staffDeletionRequests') }}"
+                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffDeletionRequests') ? 'active' : '' }}">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Delete</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}"
+                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffUpdateRequests') ? 'active' : '' }}">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
