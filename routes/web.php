@@ -48,7 +48,7 @@ Route::prefix('user/report')
         Route::middleware('auth')->group(function () {
             // User Main Dashboard
             Route::get('/userMainDashboard', function () {
-                return view('user.userMainDashboard');
+                return view('user.user-home');
             })
                 ->name("userMainDashboard");
             // User Dashboard for Incident Reporting

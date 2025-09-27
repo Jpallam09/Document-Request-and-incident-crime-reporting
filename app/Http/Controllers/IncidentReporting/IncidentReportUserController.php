@@ -69,7 +69,7 @@ class IncidentReportUserController extends Controller
         $reports = $query->latest()->paginate(5)->appends($request->all());
         $unreadNotifications = auth()->user()->unreadNotifications;
 
-        return view('user.report.userDashboardReporting', [
+        return view('user.report.user-report-list', [
             'reports'             => $reports,
             'unreadNotifications' => $unreadNotifications,
             'totalReports'        => $reportCounts->total,
@@ -98,7 +98,7 @@ class IncidentReportUserController extends Controller
             abort(404, 'Report not found.');
         }
 
-        return view('user.report.viewReports', compact('report'));
+        return view('user.report.user-view-report', compact('report'));
     }
 
     /**
@@ -109,7 +109,7 @@ class IncidentReportUserController extends Controller
         $unreadNotifications = auth()->user()->unreadNotifications;
         $notifications = auth()->user()->notifications;
 
-        return view('user.report.userIncidentReporting', compact('unreadNotifications', 'notifications'));
+        return view('user.report.user-create', compact('unreadNotifications', 'notifications'));
     }
 
     /**
@@ -189,7 +189,7 @@ class IncidentReportUserController extends Controller
             return redirect()->route('user.report.viewReports', $id);
         }
 
-        return view('user.report.editReports', compact('report'));
+        return view('user.report.user-edit-report', compact('report'));
     }
     /**
      * Request an edit to the report.

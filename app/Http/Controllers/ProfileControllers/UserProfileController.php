@@ -12,7 +12,7 @@ class UserProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
-        return view('user.report.userProfile', compact('user'));
+        return view('user.report.user-profile', compact('user'));
     }
 
     public function updateInfo(Request $request)
