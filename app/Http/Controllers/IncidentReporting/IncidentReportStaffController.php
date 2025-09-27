@@ -24,7 +24,7 @@ class IncidentReportStaffController extends Controller
     public function ShowTrackReport($id)
     {
         $report = IncidentReportUser::findOrFail($id);
-        return view('incidentReporting.staffReport.staffTrackReport', compact('report'));
+        return view('incident-reporting.staff-report.staff-track-report', compact('report'));
     }
 
     // Receive AJAX location updates
@@ -82,7 +82,7 @@ class IncidentReportStaffController extends Controller
     {
         $report = IncidentReportUser::with('user', 'images')->findOrFail($id);
 
-        $pdf = Pdf::loadView('incidentReporting.staffReport.staffReportPdf', compact('report'));
+        $pdf = Pdf::loadView('incidentReporting.staffReport.staff-pdf', compact('report'));
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('report_' . $report->id . '.pdf');
@@ -99,7 +99,7 @@ class IncidentReportStaffController extends Controller
         $totalResolvedReports = IncidentReportUser::where('report_status', 'success')->count();
         $totalCanceledReports = IncidentReportUser::where('report_status', 'canceled')->count();
 
-        return view('incidentReporting.staffReport.staffDashboard', [
+        return view('incidentReporting.staffReport.staff-dashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
             'totalIncidentReports' => $totalIncidentReports,
@@ -201,7 +201,7 @@ class IncidentReportStaffController extends Controller
     public function notifications()
     {
         // If you have a specific notifications page
-        return view('incidentReporting.staffReport.notifications');
+        return view('incident-reporting.staff-report.notifications');
     }
 
     /**
@@ -242,7 +242,7 @@ class IncidentReportStaffController extends Controller
         // Execute with pagination
         $reports = $reports->paginate(10)->appends($request->query());
 
-        return view('incidentReporting.staffReport.staffReportView', [
+        return view('incident-reporting.staff-report.staff-report-lists', [
             'reports'       => $reports,
             'search'        => $search,
             'status'        => $status,
@@ -259,7 +259,7 @@ class IncidentReportStaffController extends Controller
 
         $phoneNumber = $report->user->phone;
 
-        return view('incidentReporting.staffReport.staffViewReportsFullDetails', compact('report'));
+        return view('incident-reporting.staff-report.staff-view-report', compact('report'));
     }
 
     /**
@@ -269,6 +269,6 @@ class IncidentReportStaffController extends Controller
     {
         $reports = IncidentReportUser::latest()->get();
 
-        return view('incidentReporting.staffReport.staffUpdateRequests', compact('reports'));
+        return view('incident-reporting.staff-report.staff-edit-tbl', compact('reports'));
     }
 }

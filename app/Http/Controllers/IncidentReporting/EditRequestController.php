@@ -20,7 +20,7 @@ class EditRequestController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('incidentReporting.staffReport.staffUpdateRequests', [
+        return view('incident-reporting.staff-report.staff-edit-tbl', [
             'requests' => $editRequests,
         ]);
     }
@@ -33,7 +33,7 @@ class EditRequestController extends Controller
         $request = EditRequest::with(['user', 'report'])->findOrFail($id);
         $report = $request->report; // original report
 
-        return view('incidentReporting.staffReport.staffShowEditRequest', compact('request', 'report'));
+        return view('incident-reporting.staff-report.staff-show-edit-request', compact('request', 'report'));
     }
 
     /**

@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class ReportStaffProfileController extends Controller
 {
     // Show staff profile
-    public function show() 
+    public function show()
     {
-        
+
         $staff = Auth::user(); // Correct: get currently logged-in staff
-        return view('incidentReporting.staffReport.staffProfile', compact('staff')); // pass $staff to view
+        return view('incident-reporting.staff-report.staff-profile', compact('staff')); // pass $staff to view
     }
 
     // Update staff profile info

@@ -23,7 +23,7 @@ class DeleteRequestController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('incidentReporting.staffReport.staffDeletionRequests', [
+        return view('incident-reporting.staff-report.staff-delete-tbl', [
             'deleteRequests' => $deleteRequests,
             'totalDeleteRequests' => $totalDeleteRequests,
         ]);
@@ -34,12 +34,12 @@ class DeleteRequestController extends Controller
      */
     public function show($id)
     {
-        // Eager load relationships: 
+        // Eager load relationships:
         // - user who submitted the delete request
         // - the report itself + its images
         $request = DeleteRequest::with(['user', 'report.images'])->findOrFail($id);
 
-        return view('incidentReporting.staffReport.staffShowDeleteRequest', compact('request'));
+        return view('incident-reporting.staff-report.staff-show-delete-request', compact('request'));
     }
 
     /**
