@@ -11,52 +11,76 @@ class ProductionAccountsSeeder extends Seeder
 {
     public function run(): void
     {
-        // Incident reporting admin & staff
-        $accounts = [
+        // Fixed staff accounts for incident reporting
+        $staffAccounts = [
             [
-                'email'      => 'incident_admin@example.com',
-                'first_name' => 'Incident',
-                'last_name'  => 'Admin',
-                'role'       => 'admin',
+                'email'      => 'MDRRMO-staff@gmail.com',
+                'first_name' => 'MDRRMO',
+                'last_name'  => 'Staff',
+                'user_name'  => 'mdrrmo.staff',
+                'password'   => 'sanmateoisabela@123!',
             ],
             [
-                'email'      => 'incident_staff@example.com',
-                'first_name' => 'Incident',
+                'email'      => 'MDRRMO-staff1@gmail.com',
+                'first_name' => 'MDRRMO',
+                'last_name'  => 'Staff1',
+                'user_name'  => 'mdrrmo.staff1',
+                'password'   => 'SanMateoStaff1@123!',
+            ],
+            [
+                'email'      => 'MDRRMO-staff2@gmail.com',
+                'first_name' => 'MDRRMO',
+                'last_name'  => 'Staff2',
+                'user_name'  => 'mdrrmo.staff2',
+                'password'   => 'SanMateoStaff2@123!',
+            ],
+            [
+                'email'      => 'MDRRMO-staff3@gmail.com',
+                'first_name' => 'MDRRMO',
+                'last_name'  => 'Staff3',
+                'user_name'  => 'mdrrmo.staff3',
+                'password'   => 'SanMateoStaff3@123!',
+            ],
+            [
+                'email'      => 'MDRRMO-staff4@gmail.com',
+                'first_name' => 'MDRRMO',
+                'last_name'  => 'Staff4',
+                'user_name'  => 'mdrrmo.staff4',
+                'password'   => 'SanMateoStaff4@123!',
+            ],
+            [
+                'email'      => 'info@example.com',
+                'first_name' => 'Info',
                 'last_name'  => 'Staff',
-                'role'       => 'staff',
+                'user_name'  => 'info.staff',
+                'password'   => 'InfoStaff@123!',
+            ],
+            [
+                'email'      => 'Sanmateomdrrmorescue309@gmail.com',
+                'first_name' => 'Rescue',
+                'last_name'  => 'Team',
+                'user_name'  => 'rescue.team',
+                'password'   => 'RescueTeam@309!',
             ],
         ];
 
-        // Add 5 extra staff accounts
-        for ($i = 1; $i <= 5; $i++) {
-            $accounts[] = [
-                'email'      => "incident_staff{$i}@example.com",
-                'first_name' => "IncidentStaff{$i}",
-                'last_name'  => "User{$i}",
-                'role'       => 'staff',
-            ];
-        }
-
-        foreach ($accounts as $account) {
-            // Generate an anonymized user_name
-            $handle = strtolower($account['first_name'][0] . $account['last_name'] . rand(100, 999));
-
+        foreach ($staffAccounts as $account) {
             // Create user if not exists
             $user = User::firstOrCreate(
                 ['email' => $account['email']],
                 [
                     'first_name' => $account['first_name'],
                     'last_name'  => $account['last_name'],
-                    'user_name'  => $handle,
-                    'password'   => Hash::make(env('DEFAULT_ADMIN_PASSWORD', 'Admin@123')),
+                    'user_name'  => $account['user_name'],
+                    'password'   => Hash::make($account['password']),
                 ]
             );
 
-            // Link role to user & incident_reporting app
+            // Assign staff role in incident_reporting
             UserRole::firstOrCreate([
                 'user_id' => $user->id,
                 'app'     => 'incident_reporting',
-                'role'    => $account['role'],
+                'role'    => 'staff',
             ]);
         }
     }
