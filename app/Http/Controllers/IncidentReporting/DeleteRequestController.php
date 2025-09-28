@@ -29,18 +29,27 @@ class DeleteRequestController extends Controller
         ]);
     }
 
-    /**
-     * Show a single delete request (standalone page)
-     */
     public function show($id)
     {
-        // Eager load relationships:
-        // - user who submitted the delete request
-        // - the report itself + its images
-        $request = DeleteRequest::with(['user', 'report.images'])->findOrFail($id);
+        $request = DeleteRequest::with(['user', 'report.images'])->find($id);
+
+        // If the delete request itself was deleted
+        if (!$request) {
+            Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
+            return redirect()->route('reporting.staff.staffDeletionRequests');
+        }
+
+        $report = $request->report;
+
+        // If the original report was deleted
+        if (!$report) {
+            Alert::error('Deleted', 'The report associated with this request has been deleted.')->autoClose(3000);
+            return redirect()->route('reporting.staff.staffDeletionRequests');
+        }
 
         return view('incident-reporting.staff-report.staff-show-delete-request', compact('request'));
     }
+
 
     /**
      * Accept a delete request and delete the associated report.
@@ -66,7 +75,7 @@ class DeleteRequestController extends Controller
         $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'approved'));
 
         Alert::success('Accepted', 'The delete request has been approved and the report deleted.');
-        return redirect()->back();
+        return redirect()->route('reporting.staff.staffDeletionRequests');
     }
 
     /**

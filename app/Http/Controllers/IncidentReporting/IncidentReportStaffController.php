@@ -238,12 +238,14 @@ class IncidentReportStaffController extends Controller
         ]);
     }
 
-    /**
-     * Show a single report.
-     */
     public function staffViewReportsFullDetails($id)
     {
-        $report = IncidentReportUser::with('images', 'user')->findOrFail($id);
+        $report = IncidentReportUser::with('images', 'user')->find($id);
+
+        if (!$report) {
+            Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
+            return redirect()->route('reporting.staff.dashboard');
+        }
 
         $phoneNumber = $report->user->phone;
 

@@ -7,6 +7,8 @@ use App\Models\IncidentReporting\IncidentReportImage;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\FeedbackComment;
 use Laravel\Scout\Searchable;
+use Illuminate\Support\Facades\DB;
+
 
 class IncidentReportUser extends Model
 {
@@ -64,6 +66,16 @@ class IncidentReportUser extends Model
     protected $casts = [
         'requested_image' => 'array',
     ];
+
+        protected static function booted()
+    {
+        static::deleting(function ($report) {
+            // Delete all notifications that reference this report
+            DB::table('notifications')
+                ->where('data', 'like', '%"report_id":'.$report->id.'%')
+                ->delete();
+        });
+    }
 
     // Check report status
     public function isPending(): bool

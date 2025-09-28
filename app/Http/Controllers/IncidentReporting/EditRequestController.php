@@ -25,13 +25,23 @@ class EditRequestController extends Controller
         ]);
     }
 
-    /**
-     * Show a single edit request (for standalone page)
-     */
     public function show($id)
     {
-        $request = EditRequest::with(['user', 'report'])->findOrFail($id);
-        $report = $request->report; // original report
+        $request = EditRequest::with(['user', 'report'])->find($id);
+
+        // If the edit request itself was deleted
+        if (!$request) {
+            Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
+            return redirect()->route('reporting.staff.staffUpdateRequests');
+        }
+
+        $report = $request->report;
+
+        // If the original report was deleted
+        if (!$report) {
+            Alert::error('Deleted', 'The report associated with this request has been deleted.')->autoClose(3000);
+            return redirect()->route('reporting.staff.staffUpdateRequests');
+        }
 
         return view('incident-reporting.staff-report.staff-show-edit-request', compact('request', 'report'));
     }
