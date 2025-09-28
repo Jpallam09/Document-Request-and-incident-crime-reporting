@@ -15,11 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use RealRashid\SweetAlert\Facades\Alert;
-
-
 class IncidentReportStaffController extends Controller
 {
-
     // Show the track report page
     public function ShowTrackReport($id)
     {
@@ -27,7 +24,7 @@ class IncidentReportStaffController extends Controller
         return view('incident-reporting.staff-report.staff-track-report', compact('report'));
     }
 
-    // Receive AJAX location updates
+
     public function trackReport(Request $request)
     {
         $request->validate([
@@ -82,7 +79,7 @@ class IncidentReportStaffController extends Controller
     {
         $report = IncidentReportUser::with('user', 'images')->findOrFail($id);
 
-        $pdf = Pdf::loadView('incidentReporting.staffReport.staff-pdf', compact('report'));
+        $pdf = Pdf::loadView('incident-reporting.staff-report.staff-pdf', compact('report'));
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('report_' . $report->id . '.pdf');
@@ -99,7 +96,7 @@ class IncidentReportStaffController extends Controller
         $totalResolvedReports = IncidentReportUser::where('report_status', 'success')->count();
         $totalCanceledReports = IncidentReportUser::where('report_status', 'canceled')->count();
 
-        return view('incidentReporting.staffReport.staff-dashboard', [
+        return view('incident-reporting.staff-report.staff-dashboard', [
             'totalPendingDeleteRequests' => $totalPendingDeleteRequests,
             'totalPendingEditRequests' => $totalPendingEditRequests,
             'totalIncidentReports' => $totalIncidentReports,
@@ -193,15 +190,6 @@ class IncidentReportStaffController extends Controller
             'labels' => $labels,
             'data' => $data,
         ]);
-    }
-
-    /**
-     * Notification page (if used).
-     */
-    public function notifications()
-    {
-        // If you have a specific notifications page
-        return view('incident-reporting.staff-report.notifications');
     }
 
     /**
