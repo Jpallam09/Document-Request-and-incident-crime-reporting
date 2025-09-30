@@ -88,7 +88,5 @@ Route::prefix('user/report')
         Route::get('/myFeedback', [FeedbackCommentController::class, 'myFeedback'])
             ->name('feedback.myFeedback');
     });
-
-// ------------------ IMPORT ROUTE FILES ------------------
+    
 require __DIR__ . '/incidentReporting.php';
-require __DIR__ . '/documentRequest.php';

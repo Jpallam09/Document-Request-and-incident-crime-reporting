@@ -24,7 +24,7 @@ class IncidentReportingSeeder extends Seeder
         $users = User::all();
 
         // Step 3: Create 500 reports, randomly distributed across users
-        for ($i = 1; $i <= 500; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $user = $users->random();
 
             // Create report (force status = "pending")

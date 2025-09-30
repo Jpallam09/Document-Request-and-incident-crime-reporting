@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidentReporting\IncidentReportStaffController;
-use App\Http\Controllers\IncidentReporting\IncidentReportAdminController;
 use App\Http\Controllers\IncidentReporting\FeedbackCommentController;
 use App\Http\Controllers\IncidentReporting\EditRequestController;
 use App\Http\Controllers\IncidentReporting\DeleteRequestController;
@@ -96,19 +95,8 @@ Route::prefix('incidentReporting')->middleware('auth')->group(function () {
         ->name('reporting.staff.')
         ->group(function () {
 
-            // existing routes...
-
-            // Mark notification as read
             Route::get('/notifications/mark-read/{id}', [IncidentReportStaffController::class, 'markNotificationRead'])
                 ->name('notifications.markRead');
         });
 
-
-    // Admin ROUTES
-    Route::prefix('adminReporting')
-        ->middleware(['auth', 'check.role:incident_reporting,admin']) // optional: add role check
-        ->name('reporting.admin.')
-        ->group(function () {
-            Route::get('/dashboard', [IncidentReportAdminController::class, 'dashboard'])->name('dashboard');
-        });
 });
