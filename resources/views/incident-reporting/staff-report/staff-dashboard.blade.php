@@ -102,6 +102,12 @@
             </section>
         </main>
     </div>
+    <script>
+        window.chartRoutes = {
+            monthlyTrend: "{{ route('staff.report.chart.monthlyTrend') }}",
+            reportType: "{{ route('staff.report.chart.reportType') }}"
+        };
+    </script>
     @include('sweetalert::alert')
     @vite(['resources/js/componentsjs/navbar.js', 'resources/js/staffjs/staff-dashboard.js'])
     <!-- Bootstrap Bundle -->
