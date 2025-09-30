@@ -169,7 +169,7 @@ class IncidentReportUserController extends Controller
 
 
         Alert::success('Submitted', 'Your report has been submitted successfully.');
-        return redirect()->route('user.report.userIncidentReporting.index');
+        return redirect()->route('user.report.list');
     }
 
     /**
@@ -186,7 +186,7 @@ class IncidentReportUserController extends Controller
         if ($report->editRequest && $report->editRequest->status === 'pending') {
             Alert::error('Pending Request', 'You already have a pending edit request for this report.');
             // Redirect to a safe page to avoid redirect loop
-            return redirect()->route('user.report.viewReports', $id);
+            return redirect()->route('user.report.view', $id);
         }
 
         return view('user.report.user-edit-report', compact('report'));
@@ -265,7 +265,7 @@ class IncidentReportUserController extends Controller
         }
 
         Alert::success('Success', 'Update request sent successfully.');
-        return redirect()->route('user.report.viewReports', $id);
+        return redirect()->route('user.report.view', $id);
     }
 
     public function requestDelete(Request $request, IncidentReportUser $incidentReportUser): RedirectResponse
@@ -334,7 +334,7 @@ class IncidentReportUserController extends Controller
         if (isset($data['edit_request_id'])) {
             $editRequest = EditRequest::find($data['edit_request_id']);
             if ($editRequest) {
-                return redirect()->route('user.report.viewReports', $editRequest->edit_report_id);
+                return redirect()->route('user.report.view', $editRequest->edit_report_id);
             }
         }
 
@@ -343,20 +343,20 @@ class IncidentReportUserController extends Controller
 
             if ($deleteRequest) {
                 if ($deleteRequest->status === 'accepted') {
-                    return redirect()->route('user.report.userDashboardReporting');
+                    return redirect()->route('user.report.home');
                 } elseif ($deleteRequest->status === 'rejected') {
                     Alert::error('Rejected', 'Your delete request has been rejected.');
-                    return redirect()->route('user.report.viewReports', $deleteRequest->delete_report_id);
+                    return redirect()->route('user.report.view', $deleteRequest->delete_report_id);
                 }
             }
         }
 
         // ✅ Redirect to report page if report_id exists
         if (isset($data['report_id'])) {
-            return redirect()->route('user.report.viewReports', $data['report_id']);
+            return redirect()->route('user.report.view', $data['report_id']);
         }
 
         // Last fallback (if absolutely no report found)
-        return redirect()->route('user.report.userDashboardReporting');
+        return redirect()->route('user.report.home');
     }
 }

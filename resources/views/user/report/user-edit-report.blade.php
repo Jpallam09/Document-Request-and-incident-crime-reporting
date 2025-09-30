@@ -26,7 +26,7 @@
             <!-- Header -->
             <div class="header d-flex justify-content-between align-items-center mb-4">
                 <h1>Edit Your Report</h1>
-                <a href="{{ route('user.report.viewReports', $report->id) }}" class="btn btn-secondary btn-sm">
+                <a href="{{ route('user.report.view', $report->id) }}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to report
                 </a>
@@ -183,7 +183,7 @@
 
             <!-- Cancel Editing Button -->
             <button type="button" class="btn btn-outline-danger btn-sm w-auto" id="cancelEditButton"
-                data-url="{{ route('user.report.viewReports', $report->id) }}">
+                data-url="{{ route('user.report.view', $report->id) }}">
                 <i class="fas fa-times-circle me-1"></i>
                 Cancel Editing
             </button>

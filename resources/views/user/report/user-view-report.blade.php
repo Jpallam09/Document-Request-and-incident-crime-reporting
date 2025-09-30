@@ -30,7 +30,7 @@
             {{-- Header --}}
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 m-0">Report Details</h1>
-                <a href="{{ route('user.report.userDashboardReporting') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ route('user.report.home') }}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i>
                     Back to report List table
                 </a>
@@ -189,7 +189,7 @@
                                 <!-- Request Edit Button -->
                                 <button type="button" class="btn btn-primary btn-sm btn-edit-request"
                                     data-edit-pending="{{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}"
-                                    data-edit-url="{{ route('user.report.userIncidentReporting.edit', $report->id) }}">
+                                    data-edit-url="{{ route('user.report.edit', $report->id) }}">
                                     <i class="fa-solid fa-pen me-1"></i> Request Edit
                                 </button>
 

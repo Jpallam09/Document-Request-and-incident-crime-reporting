@@ -30,7 +30,7 @@
 
                 <hr class="my-4 border-primary">
 
-                <form action="{{ route('user.report.userIncidentReporting.store') }}" method="POST"
+                <form action="{{ route('user.report.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 

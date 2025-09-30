@@ -113,7 +113,7 @@
                         <div class="row mt-2" id="reports-table">
                             <div class="col-12">
                                 <div class="table-responsive shadow-sm rounded bg-white p-1">
-                                    <x-modals.shared-search-bar :action="route('user.report.userDashboardReporting')" :search="$search ?? ''" :status="$status ?? ''"
+                                    <x-modals.shared-search-bar :action="route('user.report.home')" :search="$search ?? ''" :status="$status ?? ''"
                                         :requestFilter="$requestFilter ?? ''" :statuses="['success', 'canceled']" />
 
                                     <table
@@ -192,7 +192,7 @@
                                                     <td class="text-center">
                                                         <div class="d-flex gap-1 justify-content-center">
                                                             {{-- View --}}
-                                                            <a href="{{ route('user.report.viewReports', $report->id) }}"
+                                                            <a href="{{ route('user.report.view', $report->id) }}"
                                                                 class="btn btn-sm btn-primary d-inline-flex align-items-center">
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
@@ -201,7 +201,7 @@
                                                             <button type="button"
                                                                 class="btn btn-warning btn-sm text-white btn-edit-request"
                                                                 data-edit-pending="{{ $report->editRequest && $report->editRequest->status === 'pending' ? 'true' : 'false' }}"
-                                                                data-edit-url="{{ route('user.report.userIncidentReporting.edit', $report->id) }}">
+                                                                data-edit-url="{{ route('user.report.edit', $report->id) }}">
                                                                 <i class="fa-solid fa-pen"></i>
                                                             </button>
 

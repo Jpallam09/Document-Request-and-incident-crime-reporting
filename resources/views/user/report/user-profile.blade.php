@@ -34,7 +34,7 @@
 
                                 {{-- Profile Form --}}
                                 <form id="editProfileForm" method="POST"
-                                    action="{{ route('user.report.user.profile.update') }}"
+                                    action="{{ route('user.report.profile.update') }}"
                                     enctype="multipart/form-data">
                                     @csrf
 
@@ -106,7 +106,7 @@
                                         {{-- Buttons --}}
                                         <div class="d-flex justify-content-between mt-4 gap-2">
                                             <button type="button" class="btn btn-outline-secondary flex-fill"
-                                                onclick="window.location.href='{{ route('user.report.userDashboardReporting') }}'">
+                                                onclick="window.location.href='{{ route('user.report.home') }}'">
                                                 Back to Dashboard
                                             </button>
                                             <button type="submit" class="btn btn-primary flex-fill">Save

@@ -113,7 +113,7 @@
                                 </button> </form>
                         </li>
                         <li>
-                            <a href="{{ route('user.report.user.profile.show') }}" class="dropdown__item">
+                            <a href="{{ route('user.report.profile.show') }}" class="dropdown__item">
                                 <i class="fas fa-user-circle"></i> Profile
                             </a>
                         </li>
@@ -148,23 +148,23 @@
         <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
             <hr class="m-0">
             <li class="sidebar__item">
-                <a href="{{ route('user.report.userMainDashboard') }}"
-                    class="sidebar__link {{ request()->routeIs('user.report.userMainDashboard') ? 'active' : '' }}">
+                <a href="{{ route('user.report.home') }}"
+                    class="sidebar__link {{ request()->routeIs('user.report.home') ? 'active' : '' }}">
                     <i class="fas fa-home me-2"></i>
                     <span>Home</span>
                 </a>
             </li>
             <hr class="m-0">
             <li class="sidebar__item">
-                <a href="{{ route('user.report.userDashboardReporting') }}"
-                    class="sidebar__link {{ request()->routeIs('user.report.userDashboardReporting') ? 'active' : '' }}">
+                <a href="{{ route('user.report.list') }}"
+                    class="sidebar__link {{ request()->routeIs('user.report.list') ? 'active' : '' }}">
                     <i class="fas fa-file-alt me-2"></i>
                     <span>My reports List</span>
                 </a>
             </li>
             <li class="sidebar__item">
-                <a href="{{ route('user.report.userIncidentReporting.create') }}"
-                    class="sidebar__link {{ request()->routeIs('user.report.userIncidentReporting.create') ? 'active' : '' }}">
+                <a href="{{ route('user.report.create') }}"
+                    class="sidebar__link {{ request()->routeIs('user.report.create') ? 'active' : '' }}">
                     <i class="fas fa-edit me-2"></i>
                     <span>Create Report</span>
                 </a>
@@ -174,7 +174,7 @@
         <!-- FAQ (Pinned at bottom) -->
         <ul class="sidebar__nav d-flex flex-column gap-2 mt-auto list-unstyled">
             <li class="sidebar__item">
-                <a href="{{ route('user.report.userMainDashboard') }}#faq" class="sidebar__link">
+                <a href="{{ route('user.report.home') }}#faq" class="sidebar__link">
                     <i class="fas fa-question-circle me-2"></i>
                     <span>FAQ</span>
                 </a>
@@ -185,29 +185,29 @@
 <nav class="bottom-nav d-lg-none">
     <ul class="bottom-nav__menu">
         <li>
-            <a href="{{ route('user.report.userMainDashboard') }}"
-               class="bottom-nav__link {{ request()->routeIs('user.report.userMainDashboard*') ? 'active' : '' }}">
+            <a href="{{ route('user.report.home') }}"
+               class="bottom-nav__link {{ request()->routeIs('user.report.home*') ? 'active' : '' }}">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('user.report.userDashboardReporting') }}"
-               class="bottom-nav__link {{ request()->routeIs('user.report.userDashboardReporting*') ? 'active' : '' }}">
+            <a href="{{ route('user.report.list') }}"
+               class="bottom-nav__link {{ request()->routeIs('user.report.list*') ? 'active' : '' }}">
                 <i class="fas fa-file-alt"></i>
                 <span>Reports</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('user.report.userIncidentReporting.create') }}"
-               class="bottom-nav__link {{ request()->routeIs('user.report.userIncidentReporting.create*') ? 'active' : '' }}">
+            <a href="{{ route('user.report.create') }}"
+               class="bottom-nav__link {{ request()->routeIs('user.report.create*') ? 'active' : '' }}">
                 <i class="fas fa-edit"></i>
                 <span>Create</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('user.report.userMainDashboard', ['#faq']) }}"
-               class="bottom-nav__link {{ request()->is('userMainDashboard#faq') ? 'active' : '' }}">
+            <a href="{{ route('user.report.home', ['#faq']) }}"
+               class="bottom-nav__link {{ request()->is('home#faq') ? 'active' : '' }}">
                 <i class="fas fa-question-circle"></i>
                 <span>FAQ</span>
             </a>
