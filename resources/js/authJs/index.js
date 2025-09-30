@@ -5,31 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const introCarousel = document.querySelector("#introCarousel");
     if (introCarousel) {
         new bootstrap.Carousel(introCarousel, {
-            interval: 6000, // Slide every 6s
-            ride: "carousel", // Auto-start
-            wrap: true, // Loop slides
+            interval: 6000,
+            ride: "carousel",
+            wrap: true,
         });
     }
-
-    // -----------------------------
-    // Navbar Scroll Behavior
-    // -----------------------------
-    const navbar = document.querySelector(".transparent-navbar");
-    if (navbar) {
-        const toggleNavbar = () => {
-            navbar.classList.toggle("scrolled", window.scrollY > 50);
-        };
-        window.addEventListener("scroll", toggleNavbar);
-        toggleNavbar(); // Run once on load
-    }
-
-    // -----------------------------
-    // Bootstrap Tooltips
-    // -----------------------------
-    const tooltipTriggerList = [].slice.call(
-        document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
 
     // -----------------------------
     // Smooth Scrolling for Anchors
@@ -44,21 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-        const homeLink = document.querySelector("#homeLink");
-
-    if (homeLink) {
-        homeLink.addEventListener("click", (e) => {
-            e.preventDefault(); // stop reload
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth", // smooth scroll
-            });
-
-            // Set active class only on Home
-            document.querySelectorAll(".nav-link").forEach((link) =>
-                link.classList.remove("active")
-            );
-            homeLink.classList.add("active");
-        });
-    }
+    // Optional: Bootstrap tooltips if you use them
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
 });
