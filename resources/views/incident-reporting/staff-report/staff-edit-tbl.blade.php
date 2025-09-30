@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <!-- Custom CSS -->
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/css/staffCss/staffUpdateRequests.css')
-    @vite('resources/css/componentsCss/ModalCss/viewRequestModal.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+    @vite('resources/css/staffcss/staff-update-requests.css')
+    @vite('resources/css/componentscss/modalcss/view-request-modal.css')
 
     <!-- JS -->
-    @vite('resources/js/staffJs/staffUpdateRequests.js')
-    @vite('resources/js/staffJs/staffShowEditRequest.js')
-    @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/js/staffjs/staff-update-requests.js')
+    @vite('resources/js/staffjs/staff-show-edit-request.js')
+    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>

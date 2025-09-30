@@ -8,17 +8,16 @@
     <title>Main Dashboard</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-    
+
     <!-- Bootstrap & Icons -->
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Vite Custom CSS -->
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/css/authCss/userMainDashboard.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+    @vite('resources/css/authcss/user-main-dashboard.css')
 
-    @vite('resources/js/componentsJs/user-tutorial.js')
 </head>
 
 <body>
@@ -102,6 +101,7 @@
     </div>
 
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+    @vite('resources/js/componentsjs/user-tutorial.js')
     @include('sweetalert::alert')
 </body>
 

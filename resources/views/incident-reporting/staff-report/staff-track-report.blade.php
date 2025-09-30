@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
         <!-- Custom CSS -->
-        @vite('resources/css/staffCss/staffTrackReport.css')
-        @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
+        @vite('resources/css/staffcss/staff-track-report.css')
+        @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
     </head>
 
     <body>
@@ -148,8 +148,8 @@
         <!-- Bootstrap JS -->
         <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
         <!-- Custom JS -->
-        @vite('resources/js/staffJs/staffTrackReport.js')
-        @vite('resources/js/componentsJs/navbar.js')
+        @vite('resources/js/staffjs/staff-track-report.js')
+        @vite('resources/js/components-js/navbar.js')
         @include('sweetalert::alert')
     </body>
 

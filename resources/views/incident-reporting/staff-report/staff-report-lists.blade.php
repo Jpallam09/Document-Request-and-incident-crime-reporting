@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/css/staffCss/staffReportView.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+    @vite('resources/css/staffcss/staff-report-view.css')
 
-    @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>

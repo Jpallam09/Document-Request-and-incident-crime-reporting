@@ -22,7 +22,6 @@
     <!-- JS -->
     @vite('resources/js/staffJs/staffDeletionRequest.js')
     @vite('resources/js/componentsJs/navbar.js')
-    @vite('resources/js/staffJs/staffDeletionRequest.js')
 </head>
 
 <body>

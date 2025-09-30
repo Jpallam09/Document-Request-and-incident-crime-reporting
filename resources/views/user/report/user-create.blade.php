@@ -12,11 +12,9 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Leaflet CSS -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-        @vite('resources/css/userCss/userIncidentReporting.css')
-        @vite('resources/js/componentsJs/navbar.js')
-        @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-        @vite('resources/js/userJs/userIncidentReporting.js')
-        @vite('resources/js/userJs/userIncidentReportingLocation.js')
+        @vite('resources/css/usercss/user-incident-reporting.css')
+        @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+
     </head>
 
     <body>
@@ -134,6 +132,9 @@
         </main>
         <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        @vite('resources/js/userjs/user-incident-reporting.js')
+        @vite('resources/js/componentsjs/navbar.js')
+        @vite('resources/js/userjs/user-incident-reporting-location.js')
         @include('sweetalert::alert')
     </body>
 

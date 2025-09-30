@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Incident Report Details</title>
-    
+
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
     <!-- Leaflet CSS -->
@@ -16,10 +16,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    @vite('resources/css/userCss/viewReports.css')
-    @vite('resources/js/userJs/viewReports.js')
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/js/componentsJs/navbar.js')
+
+    @vite('resources/css/usercss/view-reports.css')
+    @vite('resources/css/componentscss/navbarCss/shared-navbar.css')
+
 </head>
 
 <body>
@@ -246,6 +246,8 @@
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    @vite('resources/js/componentsjs/navbar.js')
+    @vite('resources/js/userjs/view-reports.js')
     @include('sweetalert::alert')
 </body>
 

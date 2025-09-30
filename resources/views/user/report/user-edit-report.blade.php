@@ -13,11 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @vite('resources/css/userCss/editReports.css')
-    @vite('resources/js/userJs/editReports.js')
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/js/componentsJs/navbar.js')
-    @vite('resources/js/userJs/editReportsLocation.js')
+    @vite('resources/css/usercss/edit-reports.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+
 </head>
 
 <body>
@@ -202,6 +200,9 @@
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    @vite('resources/js/userJs/edit-reports.js')
+    @vite('resources/js/componentsjs/navbar.js')
+    @vite('resources/js/userjs/edit-reports-location.js')
     @include('sweetalert::alert')
 </body>
 

@@ -7,7 +7,7 @@
     <title>Edit Request Details</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -16,9 +16,9 @@
 
 
     @vite([
-        'resources/css/componentsCss/navbarCss/Shared-navbar.css',
+        'resources/css/componentscss/navbarcss/shared-navbar.css',
         // 'resources/css/staffCss/staffShowEditRequest.css',
-        'resources/js/staffJs/staffShowEditRequest.js',
+        'resources/js/staffjs/staff-show-edit-request.js',
     ])
 
 <body>

@@ -5,8 +5,8 @@
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>Report Lists</title>
-                <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
-                <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
+            <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
+            <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
 
             {{-- Bootstrap and Icons --}}
             <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
@@ -16,10 +16,9 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
             {{-- Vite Assets --}}
-            @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-            @vite('resources/css/userCss/userDashboardReporting.css')
-            @vite('resources/js/componentsJs/navbar.js')
-            @vite('resources/js/userJs/viewReports.js')
+            @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+            @vite('resources/css/usercss/user-dashboard-reporting.css')
+
         </head>
 
         <body>
@@ -45,7 +44,7 @@
                                         <h2><i class="fas fa-file-alt"></i> Total reports</h2>
                                         <p class="text-start fw-light small text-muted mb-0">Your total report counts
                                         </p>
-                                        <p id="count">{{ $totalReports }}</p>
+                                        <p class="count">{{ $totalReports }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -55,7 +54,7 @@
                                         <h2><i class="fas fa-envelope-open-text"></i> Unresponded reports</h2>
                                         <p class="text-start fw-light small text-muted mb-0">Your total pending report
                                             counts</p>
-                                        <p id="count">{{ $pendingReports }}</p>
+                                        <p class="count">{{ $pendingReports }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -65,7 +64,7 @@
                                         <h2><i class="fas fa-check-circle"></i> Successful reports</h2>
                                         <p class="text-start fw-light small text-muted mb-0">Your total resolved report
                                             counts</p>
-                                        <p id="count">{{ $successReports }}</p>
+                                        <p class="count">{{ $successReports }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -77,7 +76,7 @@
                                         <h2><i class="fas fa-ban"></i> Unsuccessful reports </h2>
                                         <p class="text-start fw-light small text-muted mb-0">Reports that failed to be
                                             resolved</p>
-                                        <p id="count">{{ $canceledReports }}</p>
+                                        <p class="count">{{ $canceledReports }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -88,7 +87,7 @@
                                         <p class="text-start fw-light small text-muted mb-0">Your total edit requests
                                             report
                                             counts</p>
-                                        <p id="count">{{ $editRequest }}</p>
+                                        <p class="count">{{ $editRequest }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -98,7 +97,7 @@
                                         <h2><i class="fas fa-trash-alt"></i>Pending delete requests</h2>
                                         <p class="text-start fw-light small text-muted mb-0">Your total delete requests
                                             report counts</p>
-                                        <p id="count">{{ $deleteRequest }}</p>
+                                        <p class="count">{{ $deleteRequest }}</p>
                                     </a>
                                 </section>
                             </div>
@@ -206,11 +205,11 @@
                                                                 <i class="fa-solid fa-pen"></i>
                                                             </button>
 
-
                                                             {{-- Delete --}}
                                                             <form method="POST"
                                                                 action="{{ route('user.report.delete', $report->id) }}"
-                                                                class="delete-request-form d-inline"data-delete-pending="{{ $report->deleteRequest && $report->deleteRequest->status === 'pending' ? 'true' : 'false' }}">
+                                                                class="delete-request-form d-inline"
+                                                                data-delete-pending="{{ $report->deleteRequest && $report->deleteRequest->status === 'pending' ? 'true' : 'false' }}">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <input type="hidden" name="reason"
@@ -248,7 +247,8 @@
             </main>
 
             @include('sweetalert::alert')
-
+            @vite('resources/js/componentsjs/navbar.js')
+            @vite('resources/js/userjs/view-reports.js')
             {{-- Bootstrap JS (Optional) --}}
             <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
             @stack('scripts')

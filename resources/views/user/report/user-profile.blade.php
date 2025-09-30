@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     {{-- Vite CSS --}}
-    @vite('resources/css/userCss/userProfile.css')
-    @vite('resources/css/componentsCss/navbarCss/shared-navbar.css')
-    @vite('resources/js/componentsJs/navbar.js')
-    @vite('resources/js/userJs/userProfile.js')
+    @vite('resources/css/usercss/user-profile.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+
+    @vite('resources/js/componentsjs/navbar.js')
+    @vite('resources/js/userjs/user-profile.js')
 </head>
 
 <body>
@@ -122,6 +123,8 @@
 
             {{-- Bootstrap JS --}}
             <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+            @vite('resources/js/componentsjs/navbar.js')
+            @vite('resources/js/userjs/user-profile.js')
             @include('sweetalert::alert')
         </div>
     </div>

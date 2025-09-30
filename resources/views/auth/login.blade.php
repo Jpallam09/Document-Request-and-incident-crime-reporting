@@ -23,12 +23,12 @@
             <section class="col-md-7 d-flex align-items-center justify-content-center px-4"
                 style="background-color: #f9fafb;" role="region" aria-labelledby="login-heading">
                 <div class="login-card bg-white p-5 rounded shadow-sm" style="max-width: 420px; width: 100%;">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 id="login-heading" class="m-0">Log In to Your Account</h2>
-                <a href="{{ route('index') }}" class="btn btn-outline-light btn-sm"
-                    aria-label="Go to home page">Home
-                </a>
-            </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 id="login-heading" class="m-0">Log In to Your Account</h2>
+                        <a href="{{ route('index') }}" class="btn btn-outline-light btn-sm"
+                            aria-label="Go to home page">Home
+                        </a>
+                    </div>
 
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
@@ -36,22 +36,28 @@
                         </div>
                     @endif
 
-                    <form class="glow-container" action="{{ route('login.post') }}" method="POST" novalidate>
+                    <form class="glow-container" id="loginForm" action="{{ route('login.post') }}" method="POST"
+                        novalidate>
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" id="email" name="email" class="form-control"
                                 placeholder="you@example.com" autocomplete="email" required
                                 aria-describedby="email-desc" value="{{ old('email') }}" />
+                            <span id="email-desc" class="text-danger small" style="display:none;">
+                                Please enter a valid email.
+                            </span>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" name="password" class="form-control"
                                 placeholder="Enter your password" autocomplete="current-password" required
-                                minlength="8" aria-describedby="password-desc" value="{{ old(  'password' ) }}"/>
+                                minlength="8" aria-describedby="password-desc" value="{{ old('password') }}" />
+                            <span id="password-desc" class="text-danger small" style="display:none;">
+                                Password must be at least 8 characters.
+                            </span>
                         </div>
-
                         <button type="submit" class="btn btn-outline-light btn-sm w-100" aria-label="Log in user">Log
                             In</button>
                     </form>

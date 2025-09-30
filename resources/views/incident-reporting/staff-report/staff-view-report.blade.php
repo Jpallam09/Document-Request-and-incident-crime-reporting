@@ -7,15 +7,16 @@
     <title>Staff - Report Details</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-    
+
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    @vite('resources/css/staffCss/staffViewReportsFullDetails.css')
-    @vite('resources/js/staffJs/staffViewReportsFullDetails.js')
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/css/staffcss/staff-view-reports-full-details.css')
+    @vite('resources/css/componentscss/navbarCss/Shared-navbar.css')
+
+    @vite('resources/js/staffjs/staff-view-reports-full-details.js')
+    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>

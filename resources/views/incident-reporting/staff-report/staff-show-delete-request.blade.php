@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/js/componentsJs/navbar.js')
-    @vite('resources/js/staffJs/staffDeletionRequest.js')
-    @vite('resources/js/componentsJs/map.js')
+    @vite('resources/css/componentsjss/navbarcss/shared-navbar.css')
+
+    @vite('resources/js/componentsjs/navbar.js')
+    @vite('resources/js/staffjs/staff-deletion-request.js')
+    @vite('resources/js/componentsjs/map.js')
 </head>
 
 <body class="bg-light">

@@ -14,12 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Vite Custom CSS (Hybrid: design layer only) -->
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/css/staffCss/staffDashboard.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+    @vite('resources/css/staffcss/staff-dashboard.css')
 
     <!-- Vite Custom JS -->
-    @vite('resources/js/componentsJs/Shared-navbar.js')
-    @vite('resources/js/staffJs/staffDashboard.js')
+    @vite('resources/js/componentsjs/shared-navbar.js')
+    @vite('resources/js/staffjs/staff-dashboard.js')
 </head>
 
 <body>
