@@ -13,10 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     @vite('resources/css/staffcss/staff-view-reports-full-details.css')
-    @vite('resources/css/componentscss/navbarCss/Shared-navbar.css')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
 
-    @vite('resources/js/staffjs/staff-view-reports-full-details.js')
-    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>
@@ -161,6 +159,8 @@
         </section>
     </main>
     @include('sweetalert::alert')
+    @vite('resources/js/staffjs/staff-view-reports-full-details.js')
+    @vite('resources/js/componentsjs/navbar.js')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 

@@ -144,12 +144,11 @@
 
         <!-- Leaflet JS -->
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
         <!-- Bootstrap JS -->
         <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
         <!-- Custom JS -->
         @vite('resources/js/staffjs/staff-track-report.js')
-        @vite('resources/js/components-js/navbar.js')
+        @vite('resources/js/componentsjs/navbar.js')
         @include('sweetalert::alert')
     </body>
 

@@ -1,8 +1,10 @@
-      const mapContainer = document.getElementById('reportMap');
+    const mapContainer = document.getElementById('reportMap');
+
+    if (mapContainer) {
         const lat = parseFloat(mapContainer.dataset.lat);
         const lng = parseFloat(mapContainer.dataset.lng);
 
-        if (lat && lng) {
+        if (!isNaN(lat) && !isNaN(lng)) {
             const map = L.map('reportMap', {
                 zoomControl: false,
                 dragging: false,
@@ -22,3 +24,4 @@
                 .bindPopup("Incident Location")
                 .openPopup();
         }
+    }

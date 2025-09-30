@@ -13,7 +13,6 @@
     @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
     @vite('resources/css/staffcss/staff-report-view.css')
 
-    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>
@@ -119,6 +118,7 @@
     </main>
 
     @include('sweetalert::alert')
+    @vite('resources/js/componentsjs/navbar.js')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 

@@ -8,21 +8,17 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
 
     @vite([
         'resources/css/componentscss/navbarcss/shared-navbar.css',
-        // 'resources/css/staffCss/staffShowEditRequest.css',
         'resources/js/staffjs/staff-show-edit-request.js',
     ])
+</head>
 
 <body>
-
     <div class="layout d-flex">
         <x-navbar.shared-navbar />
 
@@ -120,8 +116,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Requested Changes -->
+                    
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
@@ -153,7 +148,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                <!-- Description - Modern Card -->
                                 <div class="card mb-3 shadow-sm border-0">
                                     <div class="card-header bg-secondary text-white">
                                         <i class="fa-solid fa-align-left me-2"></i> Description
@@ -162,7 +156,6 @@
                                         <p class="mb-0">{{ $request->requested_description ?? '—' }}</p>
                                     </div>
                                 </div>
-                                <!-- Requested Changes Location -->
                                 <p><strong>Edit Request Location:</strong></p>
                                 @if (!empty($request->requested_latitude) && !empty($request->requested_longitude))
                                     <div id="requestedMap" class="w-100 mb-3 border rounded" style="height:250px;">
@@ -183,7 +176,6 @@
                                 <!-- Requested Images -->
                                 <p><strong>Edit Request Images:</strong></p>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <!-- Requested Images -->
                                     @if (!empty($request->requested_image) && is_array($request->requested_image))
                                         @foreach ($request->requested_image as $img)
                                             <img src="{{ asset('storage/' . $img) }}" alt="Requested Image"
@@ -199,8 +191,6 @@
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <!-- Action Buttons -->
                 @if ($request->status === 'pending')
                     <div class="mt-4 d-flex gap-2 justify-content-end">
                         <!-- Accept Form -->
@@ -213,8 +203,8 @@
                         </form>
 
                         <!-- Reject Form -->
-                        <form action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}" method="POST"
-                            class="confirm-form">
+                        <form action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}"
+                            method="POST" class="confirm-form">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">
                                 <i class="fa-solid fa-xmark me-1"></i> Reject
@@ -232,7 +222,6 @@
         </div>
     </div>
     @include('sweetalert::alert')
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.reportData = {
@@ -242,8 +231,6 @@
             requestedLng: @json($request->requested_longitude),
         };
     </script>
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
-
 </html>

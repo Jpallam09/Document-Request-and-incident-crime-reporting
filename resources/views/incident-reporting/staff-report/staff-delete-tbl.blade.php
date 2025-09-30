@@ -8,20 +8,13 @@
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Bootstrap & FontAwesome -->
+    -
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Custom CSS -->
-    @vite('resources/css/componentsCss/navbarCss/Shared-navbar.css')
-    @vite('resources/css/staffCss/staffDeletionRequests.css')
-
-    <!-- JS -->
-    @vite('resources/js/staffJs/staffDeletionRequest.js')
-    @vite('resources/js/componentsJs/navbar.js')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+    @vite('resources/css/staffcss/staff-deletion-requests.css')
 </head>
 
 <body>
@@ -118,8 +111,8 @@
     </main>
 
     @include('sweetalert::alert')
-
-    <!-- Bootstrap JS -->
+    @vite('resources/js/staffjs/staff-deletion-request.js')
+    @vite('resources/js/componentsjs/navbar.js')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 

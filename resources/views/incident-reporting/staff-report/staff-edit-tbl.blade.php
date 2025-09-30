@@ -10,20 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Custom CSS -->
     @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
     @vite('resources/css/staffcss/staff-update-requests.css')
     @vite('resources/css/componentscss/modalcss/view-request-modal.css')
-
-    <!-- JS -->
-    @vite('resources/js/staffjs/staff-update-requests.js')
-    @vite('resources/js/staffjs/staff-show-edit-request.js')
-    @vite('resources/js/componentsjs/navbar.js')
 </head>
 
 <body>
@@ -32,13 +25,13 @@
 
         <section class="page-content flex-grow-1 pt-5 px-4">
             <div class="container-fluid">
-                <!-- Page Title -->
+
                 <div class="row mt-4 mb-4">
                     <div class="col">
                         <h1 class="page-title">Edit Requests</h1>
                     </div>
                 </div>
-                <!-- Table Section -->
+
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive shadow-sm rounded bg-white p-3">
@@ -63,28 +56,18 @@
                                             <td class="text-capitalize text-truncate" style="max-width: 120px;">
                                                 {{ $request->user->user_name ?? 'Unknown' }}
                                             </td>
-
-                                            <!-- Reason column -->
                                             <td class="text-truncate" style="max-width: 200px;">
                                                 {{ $request->reason ?? '—' }}
                                             </td>
-
-                                            <!-- Original Title -->
                                             <td class="text-truncate" style="max-width: 150px;">
                                                 {{ $request->report->report_title ?? 'No Title' }}
                                             </td>
-
-                                            <!-- Requested Title -->
                                             <td class="text-truncate" style="max-width: 150px;">
                                                 {{ $request->requested_title ?? '—' }}
                                             </td>
-
-                                            <!-- Requested Description -->
                                             <td class="text-truncate" style="max-width: 200px;">
                                                 {{ $request->requested_description ?? '—' }}
                                             </td>
-
-                                            <!-- Status -->
                                             <td>
                                                 <span
                                                     class="badge bg-{{ strtolower($request->status) === 'pending' ? 'warning' : (strtolower($request->status) === 'approved' ? 'success' : 'danger') }}">
@@ -151,7 +134,9 @@
     </main>
 
     @include('sweetalert::alert')
-    <!-- Bootstrap JS -->
+    @vite('resources/js/staffjs/staff-update-requests.js')
+    @vite('resources/js/staffjs/staff-show-edit-request.js')
+    @vite('resources/js/componentsjs/navbar.js')
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 

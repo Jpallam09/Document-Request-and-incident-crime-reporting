@@ -13,13 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Vite Custom CSS (Hybrid: design layer only) -->
-    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
-    @vite('resources/css/staffcss/staff-dashboard.css')
+    @vite(['resources/css/componentscss/navbarcss/shared-navbar.css', 'resources/css/staffcss/staff-dashboard.css'])
 
-    <!-- Vite Custom JS -->
-    @vite('resources/js/componentsjs/shared-navbar.js')
-    @vite('resources/js/staffjs/staff-dashboard.js')
 </head>
 
 <body>
@@ -108,6 +103,7 @@
         </main>
     </div>
     @include('sweetalert::alert')
+    @vite(['resources/js/componentsjs/navbar.js', 'resources/js/staffjs/staff-dashboard.js'])
     <!-- Bootstrap Bundle -->
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>

@@ -5,22 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Request Details</title>
+
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @vite('resources/css/componentsjss/navbarcss/shared-navbar.css')
-
-    @vite('resources/js/componentsjs/navbar.js')
-    @vite('resources/js/staffjs/staff-deletion-request.js')
-    @vite('resources/js/componentsjs/map.js')
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
 </head>
 
 <body class="bg-light">
@@ -28,7 +21,7 @@
         <x-navbar.shared-navbar />
 
         <div class="page-content flex-grow-1 container py-5 mt-4">
-            <!-- Header -->
+
             <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
                 <h4 class="mb-0 text-danger">
                     <i class="fa fa-trash me-2"></i> Delete Request Details
@@ -50,7 +43,6 @@
                 </div>
             </div>
 
-            <!-- Report Info Section - Modern Card -->
             <div class="card shadow-sm mb-4 border-0">
                 <div class="card-header bg-danger text-white">
                     <i class="fa-solid fa-info-circle me-2"></i> Report Information
@@ -79,7 +71,6 @@
                 </div>
             </div>
 
-            <!-- Description - Modern Card -->
             <div class="card mb-3 shadow-sm border-0">
                 <div class="card-header bg-secondary text-white">
                     <i class="fa-solid fa-align-left me-2"></i> Description
@@ -89,17 +80,23 @@
                 </div>
             </div>
 
-            <!-- Map Section -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header fw-bold">Location</div>
                 <div class="card-body">
-                    <div id="reportMap" class="w-100" style="height: 200px;"
-                        data-lat="{{ $request->report->latitude }}" data-lng="{{ $request->report->longitude }}">
-                    </div>
+                    @if (!empty($request->report->latitude) && !empty($request->report->longitude))
+                        <div id="reportMap" class="w-100 rounded border" style="height: 200px;"
+                            data-lat="{{ $request->report->latitude }}" data-lng="{{ $request->report->longitude }}">
+                        </div>
+                    @else
+                        <div class="d-flex flex-column align-items-center justify-content-center text-muted border rounded"
+                            style="height: 200px;">
+                            <i class="fa-solid fa-map-location-dot fa-2x mb-2"></i>
+                            <span>No location provided</span>
+                        </div>
+                    @endif
                 </div>
             </div>
 
-            {{-- Attachments --}}
             <div class="attachments-section mb-4">
                 <h3 class="h5 mb-3">
                     <i class="fa-solid fa-paperclip me-1"></i> Report Images
@@ -125,10 +122,8 @@
                 @endif
             </div>
 
-            <!-- Action Buttons -->
             <div class="d-flex justify-content-end gap-2 mb-5">
                 @if ($request->status !== 'rejected')
-                    <!-- Accept Button -->
                     <form method="POST"
                         action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
                         class="confirm-form" data-action="accept">
@@ -138,7 +133,6 @@
                         </button>
                     </form>
 
-                    <!-- Reject Button -->
                     <form method="POST"
                         action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
                         class="confirm-form" data-action="reject">
@@ -148,7 +142,6 @@
                         </button>
                     </form>
                 @else
-                    <!-- Already Rejected -->
                     <div class="alert alert-danger w-100" role="alert">
                         Request rejected
                     </div>
@@ -158,11 +151,11 @@
         </div>
     </main>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    @vite('resources/js/componentsjs/navbar.js')
+    @vite('resources/js/staffjs/staff-deletion-request.js')
+    @vite('resources/js/componentsjs/map.js')
     @include('sweetalert::alert')
 </body>
 

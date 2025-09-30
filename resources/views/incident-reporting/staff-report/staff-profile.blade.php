@@ -8,16 +8,10 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
 
-    {{-- Bootstrap & Icons --}}
     <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    {{-- Vite CSS --}}
-    @vite('resources/css/staffcss/staff-profile.css')
     @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
-
-    @vite('resources/js/componentsjs/navbar.js')
-    @vite('resources/js/userjs/user-profile.js')
 </head>
 
 <body>
@@ -118,8 +112,9 @@
                 </div>
             </div>
 
-            {{-- Bootstrap JS --}}
             <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
+            @vite('resources/js/componentsjs/navbar.js')
+            @vite('resources/js/userjs/user-profile.js')
             @include('sweetalert::alert')
         </div>
     </div>
