@@ -1,36 +1,55 @@
-/* Root layout container */
-.layout {
-  display: flex;
-  flex-direction: row;
-  min-height: calc(100vh - var(--header-height));
-  background-color: #f4f4f4;
+:root {
+  --radius: 0.5rem;
+  --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  --primary-light: #3b82f6;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
 }
 
-/* Report Form */
-.report-form-section {
-  background: white;
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  width: 100%;
-  max-width: 1200px; /* keeps form reasonable on very large screens */
-  margin: 0 auto;
+html, body {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-.report-form-section h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: var(--text-dark);
+.layout {
+    margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.page-content {
+  padding: 1.5rem 1rem 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto; 
+  width: 100%;
+}
+
+.page-content {
+  padding: 1.5rem 1rem 2rem 1rem;
+  width: 100%;      
+  margin: 0;        
+  max-width: none;  
+  box-sizing: border-box;
+}
+
+.report-form-section {
+  background: #fff;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;       
+  max-width: none;  
+  margin: 0;        
+  box-sizing: border-box;
 }
 
 .report-form-section p {
   margin-bottom: 2rem;
   color: var(--text-light);
-}
-
-.report-form-section form > div {
-  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .report-form-section label {
@@ -40,14 +59,13 @@
   color: var(--text-dark);
 }
 
-.report-form-section input[type="text"],
-.report-form-section input[type="date"],
+.report-form-section input,
 .report-form-section select,
 .report-form-section textarea {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid #ccc;
   border-radius: var(--radius);
+  border: 1px solid #ccc;
   font-size: 1rem;
   box-sizing: border-box;
 }
@@ -57,17 +75,10 @@
   resize: vertical;
 }
 
-.report-form-section small.upload-guidance {
-  display: block;
-  margin-top: 0.25rem;
-  color: var(--text-light);
+.report-form-section .btn {
+  min-width: 120px;
 }
 
-/* ============================
-   Image Preview Grid + Modal
-=============================== */
-
-/* Preview Grid Layout */
 .preview-grid {
   display: flex;
   flex-wrap: wrap;
@@ -75,12 +86,6 @@
   margin-top: 1rem;
 }
 
-/* Each Thumbnail Container */
-.preview-item {
-  position: relative;
-}
-
-/* Image Thumbnail */
 .preview-item img {
   width: 6rem;
   height: 6rem;
@@ -90,17 +95,17 @@
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
+
 .preview-item img:hover {
   transform: scale(1.05);
 }
 
-/* Remove Image Button */
 .remove-image {
   position: absolute;
   top: -0.45rem;
   right: -0.45rem;
   background: crimson;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 50%;
   width: 1.25rem;
@@ -111,7 +116,6 @@
   cursor: pointer;
 }
 
-/* Image Modal */
 .image-modal {
   display: none;
   position: fixed;
@@ -127,7 +131,6 @@
   display: flex;
 }
 
-/* Modal Image */
 .modal-content {
   max-width: 70%;
   max-height: 80%;
@@ -148,6 +151,7 @@
   color: #fff;
   cursor: pointer;
 }
+
 .close-modal:hover {
   color: var(--primary-light);
 }
@@ -169,120 +173,68 @@
 .modal-prev:hover,
 .modal-next:hover { color: var(--primary-light); }
 
-/* ===== FORM LAYOUT RESPONSIVENESS ===== */
-
-/* Form Inputs Grid for larger screens */
-@media (min-width: 768px) {
-    .report-form-section form .form-row {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .report-form-section form .form-row > div {
-        flex: 1;
-    }
+#mapPreview {
+  height: 250px;
+  width: 100%;
+  border-radius: var(--radius);
 }
 
-/* Stack inputs vertically on smaller screens */
 @media (max-width: 767.98px) {
-    .report-form-section {
-        padding: 1.5rem;
-    }
-
-    .report-form-section form .form-row {
-        display: block;
-    }
-
-    .preview-grid {
-        justify-content: flex-start;
-    }
-
-    .preview-item img {
-        width: 5rem;
-        height: 5rem;
-    }
-
-    .remove-image {
-        width: 1.2rem;
-        height: 1.2rem;
-        font-size: 0.85rem;
-        line-height: 1.2rem;
-    }
-}
-
-/* IMAGE MODAL RESPONSIVENESS */
-@media (max-width: 992px) {
-    .modal-content {
-        max-width: 85%;
-        max-height: 75%;
-    }
-}
-
-@media (max-width: 576px) {
-    .modal-content {
-        max-width: 95%;
-        max-height: 70%;
-    }
-
-    .modal-prev,
-    .modal-next {
-        font-size: 2rem;
-    }
-
-    .close-modal {
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.75rem;
-    }
-}
-
-/* BUTTONS & UPLOAD RESPONSIVENESS */
-.report-form-section .btn {
-    width: auto;
-    min-width: 120px;
-}
-
-@media (max-width: 575.98px) {
-    .report-form-section .btn {
-        width: 100%;
-        margin-bottom: 0.75rem;
-    }
-
-    .report-form-section small.upload-guidance {
-        font-size: 0.75rem;
-    }
-}
-
-/* FORM TEXTAREAS */
-@media (max-width: 575.98px) {
-    .report-form-section textarea {
-        min-height: 6rem;
-    }
-}
-
-/* PAGE CONTENT PADDING ADJUSTMENTS */
-@media (max-width: 767.98px) {
-    .page-content {
-        padding: 1rem;
-    }
-}
-
-/* SIDEBAR COLLAPSE FOR MOBILE */
-@media (max-width: 767.98px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .sidebar.show {
-        transform: translateX(0);
-    }
-
-    .sidebar-toggle {
-        display: inline-flex;
-    }
-}
-
-/* FORM GRID ALIGNMENT (optional for better spacing) */
-.report-form-section form .form-row .form-group {
+  .page-content {
+    padding: 1rem;
+    margin-top: .5rem;
     margin-bottom: 1rem;
+  }
+
+  .report-form-section {
+    padding: 1.5rem;
+  }
+
+  .preview-item img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .remove-image {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+  }
+
+  .modal-content {
+    max-width: 85%;
+    max-height: 75%;
+  }
+
+  .close-modal {
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.75rem;
+  }
+
+  .modal-prev,
+  .modal-next {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .report-form-section textarea {
+    min-height: 6rem;
+  }
+
+  .report-form-section .btn {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .report-form-section small.upload-guidance {
+    font-size: 0.75rem;
+  }
+
+  .modal-content {
+    max-width: 95%;
+    max-height: 70%;
+  }
 }
