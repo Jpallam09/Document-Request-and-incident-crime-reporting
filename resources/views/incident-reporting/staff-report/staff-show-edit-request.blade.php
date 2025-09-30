@@ -32,7 +32,7 @@
                             Submitted by: <strong>{{ $request->user->user_name }}</strong>
                         </small>
                     </h4>
-                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}" class="btn btn-secondary btn-sm">
+                    <a href="{{ route('staff.report.edit.index') }}" class="btn btn-secondary btn-sm">
                         <i class="fas fa-arrow-left me-2"></i> Back to Edit Requests table
                     </a>
                 </div>
@@ -194,7 +194,7 @@
                 @if ($request->status === 'pending')
                     <div class="mt-4 d-flex gap-2 justify-content-end">
                         <!-- Accept Form -->
-                        <form action="{{ route('reporting.staff.updateRequest.accept', $request->id) }}" method="POST"
+                        <form action="{{ route('staff.report.edit.accept', $request->id) }}" method="POST"
                             class="confirm-form">
                             @csrf
                             <button type="submit" class="btn btn-success btn-sm">
@@ -203,7 +203,7 @@
                         </form>
 
                         <!-- Reject Form -->
-                        <form action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}"
+                        <form action="{{ route('staff.report.edit.reject', $request->id) }}"
                             method="POST" class="confirm-form">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">

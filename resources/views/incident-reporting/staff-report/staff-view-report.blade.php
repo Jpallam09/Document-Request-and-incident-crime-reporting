@@ -27,7 +27,7 @@
                 <div class="header">
                     <h1 class="report-title">   {{ $report->report_title }}</h1>
                     <!-- Back to List link -->
-                    <a href="{{ route('reporting.staff.staffReportView') }}" class="btn btn-secondary btn-sm">
+                    <a href="{{ route('staff.report.list') }}" class="btn btn-secondary btn-sm">
                         <i class="fa-solid fa-arrow-left"></i> Back to Report List table
                     </a>
                 </div>
@@ -142,12 +142,12 @@
 
                 <div class="d-flex gap-2 mt-3">
                     <span id="reportStatus" class="d-none bt">{{ $report->report_status }}</span>
-                    <a href="{{ route('reporting.staff.staffViewReports.track', $report->id) }}"
+                    <a href="{{ route('staff.report.track.show', $report->id) }}"
                         class="btn btn-primary btn-sm" id="trackReportBtn">
                         <i class="fa-solid fa-check"></i> Track Report
                     </a>
 
-                    <a href="{{ route('reporting.staff.exportPdf', $report->id) }}"
+                    <a href="{{ route('staff.report.exportPdf', $report->id) }}"
                         class="btn btn-outline-danger btn-sm">
                         <i class="fa-solid fa-file-pdf"></i> PDF
                     </a>

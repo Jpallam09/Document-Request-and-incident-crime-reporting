@@ -32,7 +32,7 @@ class EditRequestController extends Controller
         // If the edit request itself was deleted
         if (!$request) {
             Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
-            return redirect()->route('reporting.staff.staffUpdateRequests');
+            return redirect()->route('staff.reporting.edit.index');
         }
 
         $report = $request->report;
@@ -40,7 +40,7 @@ class EditRequestController extends Controller
         // If the original report was deleted
         if (!$report) {
             Alert::error('Deleted', 'The report associated with this request has been deleted.')->autoClose(3000);
-            return redirect()->route('reporting.staff.staffUpdateRequests');
+            return redirect()->route('staff.reporting.edit.index');
         }
 
         return view('incident-reporting.staff-report.staff-show-edit-request', compact('request', 'report'));
@@ -103,7 +103,7 @@ class EditRequestController extends Controller
 
         Alert::success('Edit Request Approved', 'The changes have been applied successfully.')->autoClose(3000);
 
-        return redirect()->route('reporting.staff.staffUpdateRequests'); // go back to list instead of same page
+        return redirect()->route('staff.reporting.edit.index');
     }
 
     /**

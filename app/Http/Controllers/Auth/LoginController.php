@@ -33,7 +33,7 @@ class LoginController extends Controller
 
             // Staff
             if ($user->hasRole('incident_reporting', 'staff')) {
-                return redirect()->intended(route('reporting.staff.dashboard'));
+                return redirect()->intended(route('staff.report.dashboard'));
             }
 
             // Default: Normal User

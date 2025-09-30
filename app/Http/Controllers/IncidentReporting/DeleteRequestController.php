@@ -36,7 +36,7 @@ class DeleteRequestController extends Controller
         // If the delete request itself was deleted
         if (!$request) {
             Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
-            return redirect()->route('reporting.staff.staffDeletionRequests');
+            return redirect()->route('staff.report.delete.index');
         }
 
         $report = $request->report;
@@ -44,7 +44,7 @@ class DeleteRequestController extends Controller
         // If the original report was deleted
         if (!$report) {
             Alert::error('Deleted', 'The report associated with this request has been deleted.')->autoClose(3000);
-            return redirect()->route('reporting.staff.staffDeletionRequests');
+            return redirect()->route('staff.report.delete.index');
         }
 
         return view('incident-reporting.staff-report.staff-show-delete-request', compact('request'));
@@ -75,7 +75,7 @@ class DeleteRequestController extends Controller
         $deleteRequest->user->notify(new DeleteRequestStatusNotification($deleteRequest, 'approved'));
 
         Alert::success('Accepted', 'The delete request has been approved and the report deleted.');
-        return redirect()->route('reporting.staff.staffDeletionRequests');
+        return redirect()->route('staff.report.delete.index');
     }
 
     /**

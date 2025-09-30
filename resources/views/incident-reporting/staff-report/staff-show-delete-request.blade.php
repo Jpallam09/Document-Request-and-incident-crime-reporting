@@ -29,7 +29,7 @@
                         Submitted by: <strong>{{ $request->user->user_name }}</strong>
                     </small>
                 </h4>
-                <a href="{{ route('reporting.staff.staffDeletionRequests') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ route('staff.report.delete.index') }}" class="btn btn-secondary btn-sm">
                     <i class="fa fa-arrow-left me-1"></i> Back to Delete Requests table
                 </a>
             </div>
@@ -125,7 +125,7 @@
             <div class="d-flex justify-content-end gap-2 mb-5">
                 @if ($request->status !== 'rejected')
                     <form method="POST"
-                        action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
+                        action="{{ route('staff.report.delete.accept', $request->id) }}"
                         class="confirm-form" data-action="accept">
                         @csrf
                         <button type="submit" class="btn btn-success btn-sm">
@@ -134,7 +134,7 @@
                     </form>
 
                     <form method="POST"
-                        action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
+                        action="{{ route('staff.report.delete.reject', $request->id) }}"
                         class="confirm-form" data-action="reject">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger btn-sm">

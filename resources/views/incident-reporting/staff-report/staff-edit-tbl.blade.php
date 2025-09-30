@@ -78,14 +78,14 @@
                                             <td class="action-col text-center" style="width: 140px;">
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <!-- View Button -->
-                                                    <a href="{{ route('reporting.staff.editRequest.show', $request->id) }}"
+                                                    <a href="{{ route('staff.report.edit.show', $request->id) }}"
                                                         class="btn btn-sm btn-primary" title="View Request">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
 
                                                     <!-- Accept Button -->
                                                     <form
-                                                        action="{{ route('reporting.staff.updateRequest.accept', $request->id) }}"
+                                                        action="{{ route('staff.report.edit.accept', $request->id) }}"
                                                         method="POST" class="m-0 p-0 confirm-form">
                                                         @csrf
                                                         <button type="submit" class="btn btn-success btn-sm"
@@ -96,7 +96,7 @@
 
                                                     <!-- Reject Button -->
                                                     <form
-                                                        action="{{ route('reporting.staff.updateRequest.reject', $request->id) }}"
+                                                        action="{{ route('staff.report.edit.reject', $request->id) }}"
                                                         method="POST" class="m-0 p-0 confirm-form">
                                                         @csrf
                                                         <button type="submit" class="btn btn-danger btn-sm"

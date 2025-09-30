@@ -7,96 +7,82 @@ use App\Http\Controllers\IncidentReporting\EditRequestController;
 use App\Http\Controllers\IncidentReporting\DeleteRequestController;
 use App\Http\Controllers\ProfileControllers\ReportStaffProfileController;
 
-Route::prefix('incidentReporting')->middleware('auth')->group(function () {
+Route::prefix('incidentReporting')
+    ->middleware('auth')
+    ->group(function () {
 
-    // STAFF ROUTES
-    Route::prefix('staffReporting')
-        ->middleware(['check.role:incident_reporting,staff', 'prevent-back-history'])
-        ->name('reporting.staff.')
-        ->group(function () {
+        // STAFF ROUTES
+        Route::prefix('staffReporting')
+            ->middleware(['check.role:incident_reporting,staff', 'prevent-back-history'])
+            ->as('staff.report.')
+            ->group(function () {
 
-            //redirect to dashboard
-            Route::get('/dashboard', [IncidentReportStaffController::class, 'dashboard'])
-                ->name('dashboard');
-            // View all reports
-            Route::get('/staffReportView', [IncidentReportStaffController::class, 'staffReportView'])
-                ->name('staffReportView');
-            // View a single report
-            Route::get('/staffViewReportsFullDetails/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])
-                ->name('staffViewReportsFullDetails');
+                // Dashboard
+                Route::get('/dashboard', [IncidentReportStaffController::class, 'dashboard'])
+                    ->name('dashboard');
 
-            // Export report as PDF
-            Route::get('/staffViewReportsFullDetails/{id}/export-pdf', [IncidentReportStaffController::class, 'exportPdf'])
-                ->name('exportPdf');
+                // View all reports
+                Route::get('/report-lists', [IncidentReportStaffController::class, 'staffReportView'])
+                    ->name('list');
 
-            // Show Track Report page for a specific report
-            Route::get('/staffViewReportsFullDetails/{id}/track', [IncidentReportStaffController::class, 'ShowTrackReport'])
-                ->name('staffViewReports.track');
+                // View a single report
+                Route::get('/view/{id}', [IncidentReportStaffController::class, 'staffViewReportsFullDetails'])
+                    ->name('view');
 
-            Route::post('/trackReport', [IncidentReportStaffController::class, 'trackReport'])
-                ->name('trackReport');
+                // Export report as PDF
+                Route::get('/view/{id}/export-pdf', [IncidentReportStaffController::class, 'exportPdf'])
+                    ->name('exportPdf');
 
-            Route::post('/trackReport/{id}/success', [IncidentReportStaffController::class, 'successTrack'])
-                ->name('trackReport.success');
+                // Track Report
+                Route::get('/view/{id}/track', [IncidentReportStaffController::class, 'ShowTrackReport'])
+                    ->name('track.show');
+                Route::post('/trackReport', [IncidentReportStaffController::class, 'trackReport'])
+                    ->name('track.create');
+                Route::post('/trackReport/{id}/success', [IncidentReportStaffController::class, 'successTrack'])
+                    ->name('track.success');
+                Route::post('/trackReport/{id}/cancel', [IncidentReportStaffController::class, 'cancelTrack'])
+                    ->name('track.cancel');
 
-            Route::post('/trackReport/{id}/cancel', [IncidentReportStaffController::class, 'cancelTrack'])
-                ->name('trackReport.cancel');
+                // ---------- Edit Requests ----------
+                Route::get('/edit-requests', [EditRequestController::class, 'index'])
+                    ->name('edit.index');
+                Route::get('/edit-requests/{id}', [EditRequestController::class, 'show'])
+                    ->name('edit.show');
+                Route::post('/edit-requests/{id}/accept', [EditRequestController::class, 'accept'])
+                    ->name('edit.accept');
+                Route::post('/edit-requests/{id}/reject', [EditRequestController::class, 'reject'])
+                    ->name('edit.reject');
 
-            //----------edit group----------//
-            // Route to view edit requests
-            Route::get('/staffUpdateRequests', [EditRequestController::class, 'index'])
-                ->name('staffUpdateRequests');
-            // Route to view a specific edit request
-            Route::get('/edit-request/{id}', [EditRequestController::class, 'show'])
-                ->name('editRequest.show');
-            // Accept edit requests
-            Route::post('/edit-request/{id}/accept', [EditRequestController::class, 'accept'])
-                ->name('updateRequest.accept');
-            //reject edit requests
-            Route::post('/edit-request/{id}/reject', [EditRequestController::class, 'reject'])
-                ->name('updateRequest.reject');
+                // ---------- Delete Requests ----------
+                Route::get('/delete-requests', [DeleteRequestController::class, 'index'])
+                    ->name('delete.index');
+                Route::get('/delete-requests/{id}', [DeleteRequestController::class, 'show'])
+                    ->name('delete.show');
+                Route::post('/delete-requests/{id}/accept', [DeleteRequestController::class, 'accept'])
+                    ->name('delete.accept');
+                Route::post('/delete-requests/{id}/reject', [DeleteRequestController::class, 'reject'])
+                    ->name('delete.reject');
 
-            //----------deletion group----------//
-            // View all delete requests
-            Route::get('/staffDeletionRequests', [DeleteRequestController::class, 'index'])
-                ->name('staffDeletionRequests');
-            Route::get('/delete-request/{id}', [DeleteRequestController::class, 'show'])
-                ->name('staffDeletionRequests.show');
-            // Create a delete request
-            Route::post('/delete-request/{id}/accept', [DeleteRequestController::class, 'accept'])
-                ->name('staffDeletionRequests.accept');
-            // Discard a delete request
-            Route::post('/delete-request/{id}/reject', [DeleteRequestController::class, 'reject'])
-                ->name('staffDeletionRequests.reject');
+                // Charts
+                Route::get('/monthly-trend', [IncidentReportStaffController::class, 'getMonthlyReportTrend'])
+                    ->name('chart.monthlyTrend');
+                Route::get('/report-type', [IncidentReportStaffController::class, 'getReportTypeChart'])
+                    ->name('chart.reportType');
 
-            //chart dashboard
-            Route::get('/monthlyTrend', [IncidentReportStaffController::class, 'getMonthlyReportTrend'])
-                ->name('monthlyTrend');
-            //chart Report Type Distribution
-            Route::get('/reportType', [IncidentReportStaffController::class, 'getReportTypeChart'])
-                ->name('reportType');
+                // Profile
+                Route::get('/profile', [ReportStaffProfileController::class, 'show'])
+                    ->name('profile.show');
+                Route::post('/profile/update', [ReportStaffProfileController::class, 'updateInfo'])
+                    ->name('profile.update');
 
-            //staff profile
-            Route::get('/profile', [ReportStaffProfileController::class, 'show'])
-                ->name('profile.show');
-            Route::post('/profile/update', [ReportStaffProfileController::class, 'updateInfo'])
-                ->name('profile.update');
+                // Feedback
+                Route::get('/view/{report_id}/feedback/{feedback_id}', [FeedbackCommentController::class, 'show'])
+                    ->name('feedback.show');
+                Route::post('/view/{id}/feedback/destroy', [FeedbackCommentController::class, 'destroy'])
+                    ->name('feedback.destroy');
 
-            // Feedback and Comments
-            // Show a single feedback comment
-            Route::get('/staffViewReportsFullDetails/{report_id}/feedback/{feedback_id}', [FeedbackCommentController::class, 'show'])->name('feedback.show');
-            //delete feedback
-            Route::post('/staffViewReportsFullDetails/{id}/destroy', [FeedbackCommentController::class, 'destroy'])
-                ->name('feedback.destroy');
-        });
-
-    Route::prefix('staffReporting')
-        ->middleware('check.role:incident_reporting,staff')
-        ->name('reporting.staff.')
-        ->group(function () {
-
-            Route::get('/notifications/mark-read/{id}', [IncidentReportStaffController::class, 'markNotificationRead'])
-                ->name('notifications.markRead');
-        });
-
-});
+                // Notifications
+                Route::get('/notifications/mark-read/{id}', [IncidentReportStaffController::class, 'markNotificationRead'])
+                    ->name('notifications.markRead');
+            });
+    });

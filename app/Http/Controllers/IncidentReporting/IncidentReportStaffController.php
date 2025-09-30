@@ -123,17 +123,17 @@ class IncidentReportStaffController extends Controller
         // Redirect depending on type of notification
         if (isset($data['report_id'])) {
             // Redirect to specific report details
-            return redirect()->route('reporting.staff.staffViewReportsFullDetails', $data['report_id']);
+            return redirect()->route('staff.report.view', $data['report_id']);
         } elseif (isset($data['edit_request_id'])) {
             // Redirect to specific edit request details
-            return redirect()->route('reporting.staff.editRequest.show', $data['edit_request_id']);
+            return redirect()->route('staff.report.edit.show', $data['edit_request_id']);
         } elseif (isset($data['delete_request_id'])) {
             // Redirect to specific delete request details
-            return redirect()->route('reporting.staff.staffDeletionRequests.show', $data['delete_request_id']);
+            return redirect()->route('staff.report.delete.show', $data['delete_request_id']);
         }
 
         // Default fallback redirect to dashboard
-        return redirect()->route('reporting.staff.dashboard');
+        return redirect()->route('staff.report.dashboard');
     }
 
     /**
@@ -244,7 +244,7 @@ class IncidentReportStaffController extends Controller
 
         if (!$report) {
             Alert::error('Deleted', 'The report you are trying to view has been deleted.')->autoClose(3000);
-            return redirect()->route('reporting.staff.dashboard');
+            return redirect()->route('staff.report.dashboard');
         }
 
         $phoneNumber = $report->user->phone;

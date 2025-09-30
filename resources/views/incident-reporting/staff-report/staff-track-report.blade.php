@@ -7,17 +7,12 @@
         <title>Track Report</title>
         <link rel="icon" type="image/png" href="{{ asset('favicon/SMI_logo.png') }}">
         <link rel="shortcut icon" href="{{ asset('favicon/SMI_logo.png') }}">
-
-        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset('bootstrap-5.3.7-dist/css/bootstrap.min.css') }}">
-        <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-        <!-- Leaflet CSS -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
-        <!-- Custom CSS -->
         @vite('resources/css/staffcss/staff-track-report.css')
         @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
     </head>
@@ -32,7 +27,7 @@
                     <!-- Header -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h3 mb-0">Track Report Location</h1>
-                        <a href="{{ route('reporting.staff.staffReportView') }}" class="btn btn-secondary btn-sm">
+                        <a href="{{ route('staff.report.list') }}" class="btn btn-secondary btn-sm">
                             <i class="fa-solid fa-arrow-left"></i> Back to Report list table
                         </a>
                     </div>
@@ -109,10 +104,8 @@
                             The Report is <strong>Unsuccessful</strong>
                         </div>
                     @else
-                        <!-- Show action buttons if still pending -->
-                        <!-- Success -->
                         <form id="successForm-{{ $report->id }}"
-                            action="{{ route('reporting.staff.trackReport.success', $report->id) }}" method="POST"
+                            action="{{ route('staff.report.track.success', $report->id) }}" method="POST"
                             class="d-inline">
                             @csrf
                             <button type="button" class="btn btn-success btn-sm btn-success-track"
@@ -123,7 +116,7 @@
 
                         <!-- Cancel -->
                         <form id="cancelForm-{{ $report->id }}"
-                            action="{{ route('reporting.staff.trackReport.cancel', $report->id) }}" method="POST"
+                            action="{{ route('staff.report.track.cancel', $report->id) }}" method="POST"
                             class="d-inline">
                             @csrf
                             <button type="button" class="btn btn-outline-danger btn-sm btn-cancel-track"
@@ -134,7 +127,8 @@
                     @endif
 
                     <!-- Track URL for JS -->
-                    <div id="trackUrlContainer" data-track-url="{{ route('reporting.staff.trackReport') }}"></div>
+                    <div id="trackUrlContainer" data-track-url="{{ route('staff.report.track.create') }}">
+                    </div>
                     <!-- Response -->
                     <div id="responseMessage" class="text-center"></div>
 
@@ -144,6 +138,7 @@
 
         <!-- Leaflet JS -->
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
         <!-- Bootstrap JS -->
         <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
         <!-- Custom JS -->

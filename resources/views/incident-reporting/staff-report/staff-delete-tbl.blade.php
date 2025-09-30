@@ -68,14 +68,14 @@
                                     <td class="action-col">
                                         <div class="d-flex justify-content-center gap-2">
                                             <!-- View Button -->
-                                            <a href="{{ route('reporting.staff.staffDeletionRequests.show', $request->id) }}"
+                                            <a href="{{ route('staff.report.delete.show', $request->id) }}"
                                                 class="btn btn-sm btn-primary">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
 
                                             <!-- Accept Button -->
                                             <form method="POST"
-                                                action="{{ route('reporting.staff.staffDeletionRequests.accept', $request->id) }}"
+                                                action="{{ route('staff.report.delete.accept', $request->id) }}"
                                                 class="m-0 p-0 confirm-form" data-action="accept">
                                                 @csrf
                                                 <button type="submit" class="btn btn-success btn-sm">
@@ -85,7 +85,7 @@
 
                                             <!-- Reject Button -->
                                             <form method="POST"
-                                                action="{{ route('reporting.staff.staffDeletionRequests.reject', $request->id) }}"
+                                                action="{{ route('staff.report.delete.reject', $request->id) }}"
                                                 class="m-0 p-0 confirm-form" data-action="reject">
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">

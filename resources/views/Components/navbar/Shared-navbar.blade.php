@@ -62,7 +62,7 @@
                             @endphp
 
                             <li>
-                                <a href="{{ route('reporting.staff.notifications.markRead', $notification->id) }}"
+                                <a href="{{ route('staff.report.notifications.markRead', $notification->id) }}"
                                     class="dropdown-item d-flex align-items-start gap-2 p-2 mb-1 rounded {{ $bgClass }} {{ $textClass }}">
                                     <i class="{{ $iconClass }} mt-1 fs-6"></i>
                                     <div class="flex-grow-1">
@@ -106,7 +106,7 @@
                         </form>
                     </li>
                     <li>
-                        <a href="{{ route('reporting.staff.profile.show') }}"
+                        <a href="{{ route('staff.report.profile.show') }}"
                             class="dropdown-item d-flex align-items-center gap-2">
                             <i class="fas fa-user-circle"></i> Profile
                         </a>
@@ -140,30 +140,30 @@
             <ul class="sidebar__nav d-flex flex-column gap-2 mb-0 list-unstyled">
                 <hr class="m-0">
                 <li class="sidebar__item">
-                    <a href="{{ route('reporting.staff.dashboard') }}"
-                        class="sidebar__link {{ request()->routeIs('reporting.staff.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.dashboard') }}"
+                        class="sidebar__link {{ request()->routeIs('staff.report.dashboard') ? 'active' : '' }}">
                         <i class="fas fa-chart-line me-2"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <hr class="m-0">
                 <li class="sidebar__item">
-                    <a href="{{ route('reporting.staff.staffReportView') }}"
-                        class="sidebar__link {{ request()->routeIs('reporting.staff.staffReportView') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.list') }}"
+                        class="sidebar__link {{ request()->routeIs('staff.report.list') ? 'active' : '' }}">
                         <i class="fas fa-file-alt me-2"></i>
                         <span>Reports List</span>
                     </a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="{{ route('reporting.staff.staffDeletionRequests') }}"
-                        class="sidebar__link {{ request()->routeIs('reporting.staff.staffDeletionRequests') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.delete.index') }}"
+                        class="sidebar__link {{ request()->routeIs('staff.report.delete.index') ? 'active' : '' }}">
                         <i class="fas fa-trash-alt me-2"></i>
                         <span>Delete Requests</span>
                     </a>
                 </li>
                 <li class="sidebar__item">
-                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}"
-                        class="sidebar__link {{ request()->routeIs('reporting.staff.staffUpdateRequests') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.edit.index') }}"
+                        class="sidebar__link {{ request()->routeIs('reporting.staff.edit.index') ? 'active' : '' }}">
                         <i class="fas fa-edit me-2"></i>
                         <span>Edit Requests</span>
                     </a>
@@ -174,29 +174,29 @@
         <nav class="bottom-nav d-lg-none fixed-bottom bg-white border-top shadow-sm">
             <ul class="bottom-nav__menu d-flex justify-content-around m-0 p-0 list-unstyled">
                 <li>
-                    <a href="{{ route('reporting.staff.dashboard') }}"
-                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.dashboard') }}"
+                        class="bottom-nav__link {{ request()->routeIs('staff.report.dashboard') ? 'active' : '' }}">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('reporting.staff.staffReportView') }}"
-                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffReportView') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.list') }}"
+                        class="bottom-nav__link {{ request()->routeIs('staff.report.list') ? 'active' : '' }}">
                         <i class="fas fa-file-alt"></i>
                         <span>Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('reporting.staff.staffDeletionRequests') }}"
-                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffDeletionRequests') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.delete.index') }}"
+                        class="bottom-nav__link {{ request()->routeIs('staff.report.delete.index') ? 'active' : '' }}">
                         <i class="fas fa-trash-alt"></i>
                         <span>Delete</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('reporting.staff.staffUpdateRequests') }}"
-                        class="bottom-nav__link {{ request()->routeIs('reporting.staff.staffUpdateRequests') ? 'active' : '' }}">
+                    <a href="{{ route('staff.report.edit.index') }}"
+                        class="bottom-nav__link {{ request()->routeIs('staff.report.edit.index') ? 'active' : '' }}">
                         <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
