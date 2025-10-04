@@ -15,9 +15,6 @@
     {{-- Vite CSS --}}
     @vite('resources/css/usercss/user-profile.css')
     @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
-
-    @vite('resources/js/componentsjs/navbar.js')
-    @vite('resources/js/userjs/user-profile.js')
 </head>
 
 <body>

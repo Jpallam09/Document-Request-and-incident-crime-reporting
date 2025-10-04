@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     @vite('resources/css/authCss/forms.css')
     @vite('resources/css/componentsCss/ModalCss/form-modal.css')
-    @vite('resources/js/componentsJs/form-modal.js')
 </head>
 
 <body>
@@ -97,6 +96,7 @@
         </div>
     </main>
 
+    @vite('resources/js/componentsJs/form-modal.js')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

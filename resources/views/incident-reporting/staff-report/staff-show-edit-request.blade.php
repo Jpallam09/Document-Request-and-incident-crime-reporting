@@ -12,10 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    @vite([
-        'resources/css/componentscss/navbarcss/shared-navbar.css',
-        'resources/js/staffjs/staff-show-edit-request.js',
-    ])
+    @vite('resources/css/componentscss/navbarcss/shared-navbar.css')
+
 </head>
 
 <body>
@@ -116,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
@@ -203,8 +201,8 @@
                         </form>
 
                         <!-- Reject Form -->
-                        <form action="{{ route('staff.report.edit.reject', $request->id) }}"
-                            method="POST" class="confirm-form">
+                        <form action="{{ route('staff.report.edit.reject', $request->id) }}" method="POST"
+                            class="confirm-form">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">
                                 <i class="fa-solid fa-xmark me-1"></i> Reject
@@ -222,6 +220,7 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @vite('resources/js/staffjs/staff-show-edit-request.js')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.reportData = {
@@ -233,4 +232,5 @@
     </script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
+
 </html>

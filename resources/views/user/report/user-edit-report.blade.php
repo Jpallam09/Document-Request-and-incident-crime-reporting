@@ -54,8 +54,8 @@
                             <div><i class="fa-solid fa-calendar-day text-muted"></i>
                                 <label>Date</label>
                                 <input type="date" id="incidentDate" name="requested_report_date"
-                                    class="form-control shadow-sm
-    value="{{ old('requested_report_date', $report->report_date) }}"
+                                    class="form-control shadow-sm"
+                                    value="{{ old('requested_report_date', $report->report_date) }}"
                                     required>
                             </div>
                         </div>
@@ -165,8 +165,7 @@
 
                         <div class="mb-3 mt-3 reason-section">
                             <label for="reason" class="form-label fw-semibold d-flex align-items-center gap-2">
-                                <i class="bi bi-pencil-square text-muted"><i
-                                        class="fa-solid fa-pen-to-square text-mute"></i></i> REASON FOR EDIT
+                                <i class="fa-solid fa-pen-to-square text-muted"></i> REASON FOR EDIT
                             </label>
                             <textarea name="reason" id="reason" rows="3" class="form-control shadow-sm"
                                 placeholder="Explain why you want to edit this report..." required>{{ old('reason', $report->reason) }}</textarea>
@@ -200,7 +199,7 @@
     <script src="{{ asset('bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    @vite('resources/js/userJs/edit-reports.js')
+    @vite('resources/js/userjs/edit-reports.js')
     @vite('resources/js/componentsjs/navbar.js')
     @vite('resources/js/userjs/edit-reports-location.js')
     @include('sweetalert::alert')
