@@ -106,8 +106,14 @@
                         </div>
                     @endif
                 </div>
+                <div class="pagination row mt-4">
+                    <div class="col d-flex justify-content-center">
+                        {{ $deleteRequests->links('vendor.pagination.default') }}
+                    </div>
+                </div>
             </div>
         </section>
+
     </main>
 
     @include('sweetalert::alert')

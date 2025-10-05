@@ -89,10 +89,14 @@
                         <input type="hidden" name="report_id" value="{{ $report->id }}">
                         <input type="hidden" id="incidentLat" value="{{ $report->latitude }}">
                         <input type="hidden" id="incidentLng" value="{{ $report->longitude }}">
-                        <button type="submit" class="btn btn-outline-primary btn-sm">
-                            <i class="fa-solid fa-location-dot"></i> Start Tracking
-                        </button>
+
+                        @if ($report->report_status !== 'success' && $report->report_status !== 'canceled')
+                            <button type="submit" class="btn btn-outline-primary btn-sm">
+                                <i class="fa-solid fa-location-dot"></i> Start Tracking
+                            </button>
+                        @endif
                     </form>
+
                     @if ($report->report_status === 'success')
                         <!-- Already marked as success -->
                         <div class="alert alert-success mt-3" role="alert">

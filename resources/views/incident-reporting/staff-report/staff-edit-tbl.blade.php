@@ -121,8 +121,7 @@
                     </div>
                 </div>
 
-                <!-- Pagination -->
-                <div class="row mt-4">
+                <div class="pagination row mt-4">
                     <div class="col d-flex justify-content-center">
                         <div class="pagination-wrapper">
                             {{ $requests->links('vendor.pagination.default') }}

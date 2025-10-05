@@ -108,7 +108,6 @@ body {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
         padding: 0.5rem;
-        margin-bottom: 6rem;
     }
 
     .report-table th,
@@ -136,6 +135,10 @@ body {
         flex-direction: column;
         align-items: stretch;
         gap: 0.5rem;
+    }
+
+    .pagination{
+       margin-bottom: 2rem;
     }
 
     #searchForm input,

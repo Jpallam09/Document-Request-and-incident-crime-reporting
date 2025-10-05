@@ -25,13 +25,13 @@ class IncidentReportUserController extends Controller
     public function index(Request $request): View
     {
         $userId = auth()->id();
-        // Precompute counts in a single query for performance
+
         $reportCounts = IncidentReportUser::where('user_id', $userId)
             ->selectRaw('
-            COUNT(*) as total,
-            SUM(report_status = "pending") as pending,
-            SUM(report_status = "success") as success,
-            SUM(report_status = "canceled") as canceled')
+        COUNT(*) as total,
+        COALESCE(SUM(report_status = "pending"), 0) as pending,
+        COALESCE(SUM(report_status = "success"), 0) as success,
+        COALESCE(SUM(report_status = "canceled"), 0) as canceled')
             ->first();
 
         $editRequestCount   = EditRequest::where('user_id', $userId)->where('status', 'pending')->count();
@@ -72,10 +72,10 @@ class IncidentReportUserController extends Controller
         return view('user.report.user-report-list', [
             'reports'             => $reports,
             'unreadNotifications' => $unreadNotifications,
-            'totalReports'        => $reportCounts->total,
-            'pendingReports'      => $reportCounts->pending,
-            'successReports'      => $reportCounts->success,
-            'canceledReports'     => $reportCounts->canceled,
+            'totalReports'        => $reportCounts->total ?? 0,
+            'pendingReports'      => $reportCounts->pending ?? 0,
+            'successReports'      => $reportCounts->success ?? 0,
+            'canceledReports'     => $reportCounts->canceled ?? 0,
             'editRequest'         => $editRequestCount,
             'deleteRequest'       => $deleteRequestCount,
 

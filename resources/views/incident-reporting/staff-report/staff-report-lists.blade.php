@@ -107,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-4">
+                <div class="pagination row mt-4">
                     <div class="col d-flex justify-content-center">
                         {{ $reports->links('vendor.pagination.default') }}
                     </div>
